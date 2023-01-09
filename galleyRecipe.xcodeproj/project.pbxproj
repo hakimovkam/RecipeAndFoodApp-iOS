@@ -3,16 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */; };
 		9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */; };
 		9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF0296AF9EF0006EECF /* ViewController.swift */; };
-		9E7C2EF4296AF9EF0006EECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF2296AF9EF0006EECF /* Main.storyboard */; };
 		9E7C2EF6296AF9F00006EECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF5296AF9F00006EECF /* Assets.xcassets */; };
 		9E7C2EF9296AF9F00006EECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */; };
+		9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */; };
+		9E7C2F09296AFCFD0006EECF /* alarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */; };
+		9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */; };
+		9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */; };
+		9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F11296B22F30006EECF /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +24,14 @@
 		9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9E7C2EF0296AF9EF0006EECF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9E7C2EF3296AF9EF0006EECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E7C2EF5296AF9F00006EECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E7C2EF8296AF9F00006EECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E7C2EFA296AF9F00006EECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarmSound.mp3; sourceTree = "<group>"; };
+		9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +67,40 @@
 				9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */,
 				9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */,
 				9E7C2EF0296AF9EF0006EECF /* ViewController.swift */,
-				9E7C2EF2296AF9EF0006EECF /* Main.storyboard */,
+				9E7C2F0C296B16E60006EECF /* Model */,
+				9E7C2F0A296B16D00006EECF /* View */,
+				9E7C2F0B296B16D50006EECF /* Presenter */,
 				9E7C2EF5296AF9F00006EECF /* Assets.xcassets */,
 				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
 				9E7C2EFA296AF9F00006EECF /* Info.plist */,
+				9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */,
 			);
 			path = galleyRecipe;
+			sourceTree = "<group>";
+		};
+		9E7C2F0A296B16D00006EECF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */,
+				9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */,
+				9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */,
+				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9E7C2F0B296B16D50006EECF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		9E7C2F0C296B16E60006EECF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,7 +139,7 @@
 				};
 			};
 			buildConfigurationList = 9E7C2EE4296AF9EF0006EECF /* Build configuration list for PBXProject "galleyRecipe" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -125,9 +161,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E7C2F09296AFCFD0006EECF /* alarmSound.mp3 in Resources */,
 				9E7C2EF9296AF9F00006EECF /* LaunchScreen.storyboard in Resources */,
 				9E7C2EF6296AF9F00006EECF /* Assets.xcassets in Resources */,
-				9E7C2EF4296AF9EF0006EECF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */,
+				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
+				9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */,
+				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
 				9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +187,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9E7C2EF2296AF9EF0006EECF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9E7C2EF3296AF9EF0006EECF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,9 +324,9 @@
 				INFOPLIST_FILE = galleyRecipe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,9 +352,9 @@
 				INFOPLIST_FILE = galleyRecipe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
