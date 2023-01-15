@@ -17,6 +17,7 @@
 		9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */; };
 		9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */; };
 		9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F11296B22F30006EECF /* SearchViewController.swift */; };
+		EB6F3183296F3F4E00A7813E /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6F3182296F3F4E00A7813E /* RecipeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EB6F3182296F3F4E00A7813E /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		9E7C2F0C296B16E60006EECF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EB6F3182296F3F4E00A7813E /* RecipeManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */,
+				EB6F3183296F3F4E00A7813E /* RecipeManager.swift in Sources */,
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,

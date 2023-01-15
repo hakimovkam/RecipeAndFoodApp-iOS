@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  galleyRecipe
+//  galleyRecipes
 //
-//  Created by garpun on 08.01.2023.
+//  Created by garpun on 27.12.2022.
 //
 
 import UIKit
