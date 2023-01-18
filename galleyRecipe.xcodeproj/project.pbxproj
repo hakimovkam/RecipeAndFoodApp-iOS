@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */; };
 		9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */; };
-		9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF0296AF9EF0006EECF /* ViewController.swift */; };
 		9E7C2EF6296AF9F00006EECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF5296AF9F00006EECF /* Assets.xcassets */; };
 		9E7C2EF9296AF9F00006EECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */; };
 		9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */; };
@@ -17,14 +16,17 @@
 		9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */; };
 		9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */; };
 		9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F11296B22F30006EECF /* SearchViewController.swift */; };
-		EB6F3183296F3F4E00A7813E /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6F3182296F3F4E00A7813E /* RecipeManager.swift */; };
+		EB26277129781728002B8924 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277029781728002B8924 /* Router.swift */; };
+		EB262773297817FF002B8924 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB262772297817FF002B8924 /* NetworkService.swift */; };
+		EB26277529782CDF002B8924 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277429782CDF002B8924 /* Builder.swift */; };
+		EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB262776297868EA002B8924 /* FavoritePresenter.swift */; };
+		EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277B29786942002B8924 /* FavoriteModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9E7C2EE9296AF9EF0006EECF /* galleyRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = galleyRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9E7C2EF0296AF9EF0006EECF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9E7C2EF5296AF9F00006EECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E7C2EF8296AF9F00006EECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E7C2EFA296AF9F00006EECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,7 +35,11 @@
 		9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		EB6F3182296F3F4E00A7813E /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
+		EB26277029781728002B8924 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		EB262772297817FF002B8924 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = SOURCE_ROOT; };
+		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = SOURCE_ROOT; };
+		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = galleyRecipe/FavoriteModule/Presenter/FavoritePresenter.swift; sourceTree = SOURCE_ROOT; };
+		EB26277B29786942002B8924 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +56,7 @@
 		9E7C2EE0296AF9EF0006EECF = {
 			isa = PBXGroup;
 			children = (
+				EB26277029781728002B8924 /* Router.swift */,
 				9E7C2EEB296AF9EF0006EECF /* galleyRecipe */,
 				9E7C2EEA296AF9EF0006EECF /* Products */,
 			);
@@ -66,12 +73,13 @@
 		9E7C2EEB296AF9EF0006EECF /* galleyRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				EB26277429782CDF002B8924 /* Builder.swift */,
+				EB262772297817FF002B8924 /* NetworkService.swift */,
 				9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */,
 				9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */,
-				9E7C2EF0296AF9EF0006EECF /* ViewController.swift */,
+				EB26277929786902002B8924 /* FavoriteModule */,
 				9E7C2F0C296B16E60006EECF /* Model */,
 				9E7C2F0A296B16D00006EECF /* View */,
-				9E7C2F0B296B16D50006EECF /* Presenter */,
 				9E7C2EF5296AF9F00006EECF /* Assets.xcassets */,
 				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
 				9E7C2EFA296AF9F00006EECF /* Info.plist */,
@@ -84,24 +92,49 @@
 			isa = PBXGroup;
 			children = (
 				9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */,
-				9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */,
 				9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */,
 				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		9E7C2F0B296B16D50006EECF /* Presenter */ = {
+		9E7C2F0C296B16E60006EECF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EB262778297868F9002B8924 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EB262776297868EA002B8924 /* FavoritePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		9E7C2F0C296B16E60006EECF /* Model */ = {
+		EB26277929786902002B8924 /* FavoriteModule */ = {
 			isa = PBXGroup;
 			children = (
-				EB6F3182296F3F4E00A7813E /* RecipeManager.swift */,
+				EB26277D29786948002B8924 /* Model */,
+				EB26277A29786934002B8924 /* View */,
+				EB262778297868F9002B8924 /* Presenter */,
+			);
+			path = FavoriteModule;
+			sourceTree = "<group>";
+		};
+		EB26277A29786934002B8924 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EB26277D29786948002B8924 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB26277B29786942002B8924 /* FavoriteModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,13 +210,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
 				9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */,
-				EB6F3183296F3F4E00A7813E /* RecipeManager.swift in Sources */,
+				EB26277529782CDF002B8924 /* Builder.swift in Sources */,
+				EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */,
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
-				9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */,
+				EB26277129781728002B8924 /* Router.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
 				9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
+				EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */,
 				9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

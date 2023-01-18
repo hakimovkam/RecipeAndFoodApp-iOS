@@ -9,6 +9,8 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
+    var presenter: FavoriteViewPresenterProtocol!
+    
     private var data = ["C++", "C", "C#", "Objective C", "Swift", "Python", "Kotlin", "Java", "JavaScrypt", "PHP", "1", "2", "3", "4", "5", "6", "7", "8", "9"] // testing data
     
     let button = UIButton()
