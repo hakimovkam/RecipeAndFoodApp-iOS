@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FavoriteViewProtocol: AnyObject {
-    func didUpdateCharacters()
+    func didUpdate()
     func didFailWithError(error: Error)
 }
 

@@ -21,6 +21,7 @@
 		EB26277529782CDF002B8924 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277429782CDF002B8924 /* Builder.swift */; };
 		EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB262776297868EA002B8924 /* FavoritePresenter.swift */; };
 		EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277B29786942002B8924 /* FavoriteModel.swift */; };
+		EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* UIExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = SOURCE_ROOT; };
 		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = galleyRecipe/FavoriteModule/Presenter/FavoritePresenter.swift; sourceTree = SOURCE_ROOT; };
 		EB26277B29786942002B8924 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		EBFDB1FE297957A700CA0084 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,6 @@
 		9E7C2EE0296AF9EF0006EECF = {
 			isa = PBXGroup;
 			children = (
-				EB26277029781728002B8924 /* Router.swift */,
 				9E7C2EEB296AF9EF0006EECF /* galleyRecipe */,
 				9E7C2EEA296AF9EF0006EECF /* Products */,
 			);
@@ -73,7 +74,9 @@
 		9E7C2EEB296AF9EF0006EECF /* galleyRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				EBFDB1FE297957A700CA0084 /* UIExtension.swift */,
 				EB26277429782CDF002B8924 /* Builder.swift */,
+				EB26277029781728002B8924 /* Router.swift */,
 				EB262772297817FF002B8924 /* NetworkService.swift */,
 				9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */,
 				9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */,
@@ -217,6 +220,7 @@
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				EB26277129781728002B8924 /* Router.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
+				EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */,
 				9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
 				EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */,

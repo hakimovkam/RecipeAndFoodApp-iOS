@@ -29,18 +29,15 @@ class Router: RouterProtocol {
         self.tabBarController = tabBarController
         self.builder = builder
         
-//        self.tabBarController.tabBar.tintColor = #colorLiteral(red: 0.1540856957, green: 0.1691044867, blue: 0.1987410784, alpha: 1)
-        self.tabBarController.tabBar.unselectedItemTintColor = #colorLiteral(red: 0.1540856957, green: 0.1691044867, blue: 0.1987410784, alpha: 1)
-
-        self.tabBarController.tabBar.isTranslucent = false
-        
     }
     
     func setupTabBarController() {
-        let characterViewController = UINavigationController(rootViewController: builder.createCharecterModule(router: self, networkService: networkService))
-        let locationViewController = UINavigationController(rootViewController: builder.createLocationModule(router: self, networkService: networkService))
+        /* иницилизирууем NavigationController для каждой вкладочки на TabBar */
+        let favoriteViewController = UINavigationController(rootViewController: builder.createFavoriteViewController(router: self, networkService: networkService))
+
         
-        tabBarController.setViewControllers([generateVC(viewController: characterViewController, title: "Characters", image: UIImage(systemName: "person")), generateVC(viewController: locationViewController, title: "Location", image: UIImage(systemName: "globe.asia.australia.fill"))], animated: true)
+        /* добавляем Item на TabBar и задаём картиночку на иконку  */
+        tabBarController.setViewControllers([generateVC(viewController: favoriteViewController, image: UIImage(systemName: "person"))], animated: true)
         setTabBarApperance()
     }
     
@@ -50,13 +47,15 @@ class Router: RouterProtocol {
     //MARK: - cusstomize TabBarController
     /* Установка иконок и надписей на бэйджики */
     private func generateVC(viewController: UIViewController,
-                            title: String, image: UIImage?) -> UIViewController {
-        viewController.tabBarItem.title = title
+                            image: UIImage?) -> UIViewController {
         viewController.tabBarItem.image = image
         return viewController
     }
     
-    /* Кастомизация TabBarControllera*/
+    /* Кастомизация TabBarControllera
+     Тут нужно будет поиграться с размерами, закруглениями и тд. для того чтоб сделать всё такое же как и в дизайне
+     + подобрать цвета
+     */
     private func setTabBarApperance() {
         let positionOnX: CGFloat = 0
         let positionOnY: CGFloat = 10
@@ -77,9 +76,9 @@ class Router: RouterProtocol {
         tabBarController.tabBar.itemPositioning = .centered
         
         
-        
+        /* цвета для кастома TabBarControllera задаются тут */
         rounderLayer.fillColor = UIColor.mainWhite.cgColor
-        tabBarController.tabBar.tintColor = UIColor.tabBarItemAccent
-        tabBarController.tabBar.unselectedItemTintColor = UIColor.tabBarItemLight
+//        tabBarController.tabBar.tintColor = UIColor.tabBarItemAccent
+//        tabBarController.tabBar.unselectedItemTintColor = UIColor.tabBarItemLight
     }
 }

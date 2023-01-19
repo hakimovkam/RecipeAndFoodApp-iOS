@@ -11,13 +11,15 @@ class FavoritesViewController: UIViewController {
     
     var presenter: FavoriteViewPresenterProtocol!
     
-    private var data = ["C++", "C", "C#", "Objective C", "Swift", "Python", "Kotlin", "Java", "JavaScrypt", "PHP", "1", "2", "3", "4", "5", "6", "7", "8", "9"] // testing data
+    private var data = ["Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
     let button = UIButton()
     let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Favorite"
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -76,6 +78,18 @@ extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+
+extension FavoritesViewController: FavoriteViewProtocol {
+    func didUpdate() {
+        print("didUpdate")
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    
 }
 
 extension FavoritesViewController {
