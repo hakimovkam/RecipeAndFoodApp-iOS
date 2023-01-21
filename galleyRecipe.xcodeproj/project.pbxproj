@@ -21,6 +21,8 @@
 		EB26277529782CDF002B8924 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277429782CDF002B8924 /* Builder.swift */; };
 		EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB262776297868EA002B8924 /* FavoritePresenter.swift */; };
 		EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277B29786942002B8924 /* FavoriteModel.swift */; };
+		EB3899C8297BCCCC00705344 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899C7297BCCCC00705344 /* TableViewCell.swift */; };
+		EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899CF297BD9E000705344 /* CustomTabBarController.swift */; };
 		EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* UIExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,11 +39,13 @@
 		9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EB26277029781728002B8924 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		EB262772297817FF002B8924 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = SOURCE_ROOT; };
-		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = SOURCE_ROOT; };
-		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = galleyRecipe/FavoriteModule/Presenter/FavoritePresenter.swift; sourceTree = SOURCE_ROOT; };
+		EB262772297817FF002B8924 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = galleyRecipe/NetworkService.swift; sourceTree = SOURCE_ROOT; };
+		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = galleyRecipe/Routing/Builder.swift; sourceTree = SOURCE_ROOT; };
+		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = "galleyRecipe/Favorites Module/FavoritePresenter.swift"; sourceTree = SOURCE_ROOT; };
 		EB26277B29786942002B8924 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
-		EBFDB1FE297957A700CA0084 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = SOURCE_ROOT; };
+		EB3899C7297BCCCC00705344 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = galleyRecipe/View/CustomTabBarController.swift; sourceTree = SOURCE_ROOT; };
+		EBFDB1FE297957A700CA0084 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIExtension.swift; path = galleyRecipe/Extension/UIExtension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,16 +78,14 @@
 		9E7C2EEB296AF9EF0006EECF /* galleyRecipe */ = {
 			isa = PBXGroup;
 			children = (
-				EBFDB1FE297957A700CA0084 /* UIExtension.swift */,
-				EB26277429782CDF002B8924 /* Builder.swift */,
-				EB26277029781728002B8924 /* Router.swift */,
-				EB262772297817FF002B8924 /* NetworkService.swift */,
+				EB3899CC297BCE2100705344 /* Routing */,
+				EB3899D3297C031F00705344 /* Extension */,
+				EB3899D1297C02CB00705344 /* Favorites Module */,
+				EB3899D2297C031600705344 /* CustomViews */,
 				9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */,
 				9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */,
-				EB26277929786902002B8924 /* FavoriteModule */,
-				9E7C2F0C296B16E60006EECF /* Model */,
+				EB262772297817FF002B8924 /* NetworkService.swift */,
 				9E7C2F0A296B16D00006EECF /* View */,
-				9E7C2EF5296AF9F00006EECF /* Assets.xcassets */,
 				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
 				9E7C2EFA296AF9F00006EECF /* Info.plist */,
 				9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */,
@@ -94,52 +96,48 @@
 		9E7C2F0A296B16D00006EECF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EB3899CF297BD9E000705344 /* CustomTabBarController.swift */,
 				9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */,
 				9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */,
 				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
+				9E7C2EF5296AF9F00006EECF /* Assets.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		9E7C2F0C296B16E60006EECF /* Model */ = {
+		EB3899CC297BCE2100705344 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
+				EB26277429782CDF002B8924 /* Builder.swift */,
+				EB26277029781728002B8924 /* Router.swift */,
 			);
-			path = Model;
+			path = Routing;
 			sourceTree = "<group>";
 		};
-		EB262778297868F9002B8924 /* Presenter */ = {
+		EB3899D1297C02CB00705344 /* Favorites Module */ = {
 			isa = PBXGroup;
 			children = (
 				EB262776297868EA002B8924 /* FavoritePresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		EB26277929786902002B8924 /* FavoriteModule */ = {
-			isa = PBXGroup;
-			children = (
-				EB26277D29786948002B8924 /* Model */,
-				EB26277A29786934002B8924 /* View */,
-				EB262778297868F9002B8924 /* Presenter */,
-			);
-			path = FavoriteModule;
-			sourceTree = "<group>";
-		};
-		EB26277A29786934002B8924 /* View */ = {
-			isa = PBXGroup;
-			children = (
+				EB26277B29786942002B8924 /* FavoriteModel.swift */,
 				9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */,
 			);
-			path = View;
+			path = "Favorites Module";
 			sourceTree = "<group>";
 		};
-		EB26277D29786948002B8924 /* Model */ = {
+		EB3899D2297C031600705344 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				EB26277B29786942002B8924 /* FavoriteModel.swift */,
+				EB3899C7297BCCCC00705344 /* TableViewCell.swift */,
 			);
-			path = Model;
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		EB3899D3297C031F00705344 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EBFDB1FE297957A700CA0084 /* UIExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,9 +211,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB3899C8297BCCCC00705344 /* TableViewCell.swift in Sources */,
 				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
 				9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */,
 				EB26277529782CDF002B8924 /* Builder.swift in Sources */,
+				EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */,
 				EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */,
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				EB26277129781728002B8924 /* Router.swift in Sources */,

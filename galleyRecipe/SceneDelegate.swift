@@ -20,10 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let builder: BuilderProtocol = Builder()
-        let tabBarController = UITabBarController()
+        let tabBarController = CustomTabBarController()
         let router = Router(tabBarController: tabBarController, builder: builder)
         router.setupTabBarController()
         
+        window?.backgroundColor = .white
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
