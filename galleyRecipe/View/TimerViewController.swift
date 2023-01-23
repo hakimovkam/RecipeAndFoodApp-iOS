@@ -132,8 +132,8 @@ extension TimerViewController {
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
-        return button
         
+        return button
     }
 
     private func setConstraints() {
