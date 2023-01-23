@@ -42,7 +42,7 @@ class Router: RouterProtocol {
                                              generateVC(viewController: SearchViewController(),
                                                         image: UIImage(named: ImageConstant.recipeOutline),
                                                         selectedImage: UIImage(named: ImageConstant.recipeFilled)),
-                                             generateVC(viewController: UIViewController(),
+                                             generateVC(viewController: TimerViewController(),
                                                         image: UIImage(named: ImageConstant.clockOutline),
                                                         selectedImage: nil)], animated: true)
     }
