@@ -14,7 +14,7 @@ protocol FavoriteViewProtocol: AnyObject {
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
     init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func getCharacterList()
+//    func getCharacterList()
 }
 
 class FavoritePresenter: FavoriteViewPresenterProtocol {
@@ -24,7 +24,7 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
     let networkService: NetworkServiceProtocol!
     
     /* Через презентер обращаемся к networkService и вытаскиваем список Characters */
-    func getCharacterList() {
+//    func getCharacterList() {
 //        networkService.getCharactersList { [weak self] result in
 //            guard let self = self else { return }
 //            DispatchQueue.main.async {
@@ -37,13 +37,13 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
 //                }
 //            }
 //        }
-    }
+//    }
     
     required init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
         self.networkService = networkService
         self.router = router
-        getCharacterList()
+//        getCharacterList()
     }
     
     
