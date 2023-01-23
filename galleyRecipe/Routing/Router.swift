@@ -37,15 +37,17 @@ class Router: RouterProtocol {
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
         tabBarController?.setViewControllers([generateVC(viewController: favoriteViewController,
-                                                        image: UIImage(named: "SavedOutline"),
-                                                        selectedImage: UIImage(named: "SavedFilled")),
+                                                         image: UIImage(named: ImageConstant.savedOutline),
+                                                        selectedImage: UIImage(named: ImageConstant.savedFilled)),
                                              generateVC(viewController: SearchViewController(),
-                                                        image: UIImage(named: "RecipeOutline"),
-                                                        selectedImage: UIImage(named: "RecipeFilled")),
+                                                        image: UIImage(named: ImageConstant.recipeOutline),
+                                                        selectedImage: UIImage(named: ImageConstant.recipeFilled)),
                                              generateVC(viewController: UIViewController(),
-                                                        image: UIImage(named: "ClockOutline"),
+                                                        image: UIImage(named: ImageConstant.clockOutline),
                                                         selectedImage: nil)], animated: true)
     }
+    
+    /* по возможности функцию выше setupTabBarController нужно перенести в builder */
     //MARK: - cusstomize TabBarController
     /* Установка иконок и надписей на бэйджики */
     func generateVC(viewController: UIViewController,

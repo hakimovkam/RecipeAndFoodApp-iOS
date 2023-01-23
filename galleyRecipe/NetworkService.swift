@@ -1,4 +1,4 @@
-//
+ //
 //  NetworkService.swift
 //  galleyRecipe
 //
@@ -19,5 +19,5 @@ class NetworkService: NetworkServiceProtocol {
 }
 
 
-//api key "997ced0c82834e24a3a3290f8123f2b5"
-//urlString ""
+//api key "?apiKey=997ced0c82834e24a3a3290f8123f2b5"
+//urlString "https://api.spoonacular.com/recipes/complexSearch?apiKey=997ced0c82834e24a3a3290f8123f2b5"
