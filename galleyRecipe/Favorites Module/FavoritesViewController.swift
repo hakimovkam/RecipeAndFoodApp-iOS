@@ -88,6 +88,7 @@ extension FavoritesViewController: UITableViewDelegate {
         
         let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52))
         
+        //MARK: - label
         let label = UILabel()
         label.backgroundColor = .clear
         label.frame = CGRect.init(x: 16, y: 14, width: tableView.frame.width, height: 24)
@@ -95,18 +96,11 @@ extension FavoritesViewController: UITableViewDelegate {
         label.font = UIFont(name: "Poppins-Bold", size: 24)
         label.textColor = .black
         
-        let blurView: LightBlurEffectView = {
-            let view = LightBlurEffectView()
-            view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52)
-            view.clipsToBounds = true
-            view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-            
-            view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-            return view
-        }()
-        blurView.effect = UIBlurEffect(style: .light)
+        //MARK: - blurEffect
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = LightBlurEffectView(effect: blurEffect, intensity: 0.2)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        blurView.frame = headerView.frame
         
         let additionalView: UIView = {
             let view = UIView()
@@ -114,12 +108,27 @@ extension FavoritesViewController: UITableViewDelegate {
             view.backgroundColor = .white
             view.alpha = 0.7
             view.translatesAutoresizingMaskIntoConstraints = false
-            
+
             return view
         }()
-
-        headerView.addSubview(additionalView)
+        
+        //MARK: - gradient
+        let gradientView: UIView = {
+            let view = UIView()
+            view.frame = headerView.frame
+            view.backgroundColor = .white
+            let gradient = CAGradientLayer()
+            gradient.frame = headerView.frame
+            gradient.colors = [UIColor.white.cgColor, UIColor.clear.cgColor]
+            gradient.locations = [0, 1]
+            view.layer.mask = gradient
+            return view
+        }()
+        //MARK: - added view components to the table view header
+        
         headerView.addSubview(blurView)
+        headerView.addSubview(additionalView)
+        headerView.addSubview(gradientView)
         headerView.addSubview(label)
         
         return headerView

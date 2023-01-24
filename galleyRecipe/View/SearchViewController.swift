@@ -5,37 +5,6 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        
-        let blurView: LightBlurEffectView = {
-            let view = LightBlurEffectView()
-            view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 52)
-            view.clipsToBounds = true
-            view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-            
-            view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
-            view.translatesAutoresizingMaskIntoConstraints = false
-            
-            return view
-        }()
-        blurView.effect = UIBlurEffect(style: .light)
-        
-        let customView: UIView = {
-            let view = UIView.init(frame: CGRect.init(x: view.frame.midX, y: view.frame.midY, width: 400, height: 400))
-            view.backgroundColor = .white
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        
-        let text: UILabel = UILabel()
-        text.text = "adfsvfbdgfsdas"
-        text.font = UIFont(name: "Poppins", size: 24)
-        text.frame = CGRect(x: view.frame.midX, y: view.frame.midY, width: 400, height: 50)
-        
-        
-        view.addSubview(blurView)
-        view.addSubview(customView)
-        view.addSubview(text)
-        
     }
 }
 
