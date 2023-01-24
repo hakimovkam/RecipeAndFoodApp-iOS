@@ -31,7 +31,6 @@ class CustomTableViewCell: UITableViewCell {
     var recipeDescriptionLabel: UILabel = {
         let label = UILabel()
         
-        label.numberOfLines = 2
         label.font = UIFont(name: "Poppins-Medium", size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7

@@ -69,7 +69,6 @@ extension FavoritesViewController: UITableViewDataSource {
         cell.timerButton.addTarget(self, action: #selector(timerButtonPressed(sender: )), for: .touchUpInside)
         
         return cell
-        
     }
 
     
@@ -84,6 +83,51 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52))
+        
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.frame = CGRect.init(x: 16, y: 14, width: tableView.frame.width, height: 24)
+        label.text = "Favorites"
+        label.font = UIFont(name: "Poppins-Bold", size: 24)
+        label.textColor = .black
+        
+        let blurView: LightBlurEffectView = {
+            let view = LightBlurEffectView()
+            view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52)
+            view.clipsToBounds = true
+            view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            
+            view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
+            view.translatesAutoresizingMaskIntoConstraints = false
+            
+            return view
+        }()
+        blurView.effect = UIBlurEffect(style: .light)
+        
+        let additionalView: UIView = {
+            let view = UIView()
+            view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52)
+            view.backgroundColor = .white
+            view.alpha = 0.7
+            view.translatesAutoresizingMaskIntoConstraints = false
+            
+            return view
+        }()
+
+        headerView.addSubview(additionalView)
+        headerView.addSubview(blurView)
+        headerView.addSubview(label)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 52
+        }
 }
 
 extension FavoritesViewController: FavoriteViewProtocol {
@@ -107,7 +151,6 @@ extension FavoritesViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
-        navigationItem.title = "Favorite"
         
         gradient = CAGradientLayer()
         gradient.frame = view.bounds

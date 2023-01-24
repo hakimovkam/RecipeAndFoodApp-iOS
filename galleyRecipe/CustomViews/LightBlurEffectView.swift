@@ -1,15 +1,15 @@
 //
-//  BlurEffectView.swift
+//  LightBlurEffectView.swift
 //  galleyRecipe
 //
-//  Created by Камиль Хакимов on 22.01.2023.
+//  Created by Камиль Хакимов on 23.01.2023.
 //
 
 import UIKit
 
-class BlurEffectView: UIVisualEffectView {
+class LightBlurEffectView: UIVisualEffectView {
     
-    var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+    var animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
     
     override func didMoveToSuperview() {
         guard let superview = superview else { return }
@@ -23,9 +23,9 @@ class BlurEffectView: UIVisualEffectView {
         effect = nil
 
         animator.addAnimations { [weak self] in
-            self?.effect = UIBlurEffect(style: .dark)
+            self?.effect = UIBlurEffect(style: .light)
         }
-        animator.fractionComplete = 0.7   //This is your blur intensity in range 0 - 1
+        animator.fractionComplete = 0  //This is your blur intensity in range 0 - 1
     }
     
     deinit {
