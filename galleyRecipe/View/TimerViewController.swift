@@ -12,14 +12,15 @@ final class TimerViewController: UIViewController {
 
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
-    private var secondsRemain = 5
+    private var secondsRemain = 10
 
     private var soundEnabled = true
     private var isTimerRunning = false
     private var resumeTapped = false
-
-    private var  timerProgressBarView: TimerProgressBarView!
-    private var circularViewDuration: TimeInterval = 2
+    
+    private let timerProgressView = TimerProgressView(
+        frame: CGRect(x: 0.0, y: 0.0, width: 160, height: 160)
+    )
     
     private lazy var pauseButton: UIButton = {
         createButton(
@@ -49,7 +50,7 @@ final class TimerViewController: UIViewController {
         let label = UILabel()
         label.text = timeString(time: TimeInterval(secondsRemain))
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 80, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 70, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,9 +58,11 @@ final class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupSubviews(pauseButton, startButton, resetButton, counterLabel)
+        setupSubviews(pauseButton, startButton, resetButton, counterLabel, timerProgressView)
         setConstraints()
         pauseButton.isEnabled = false
+        timerProgressView.progressColor = UIColor.systemGreen
+        timerProgressView.center = self.view.center
     }
 }
 
@@ -75,7 +78,7 @@ extension TimerViewController {
     }
 
     private func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
         self.startButton.isEnabled = false
         pauseButton.isEnabled = true
     }
@@ -113,11 +116,10 @@ extension TimerViewController {
     }
 
     private func timeString(time: CFTimeInterval) -> String {
-        let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
 
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        return String(format:"%02i:%02i", minutes, seconds)
     }
 }
 
@@ -133,30 +135,31 @@ extension TimerViewController {
         let button = UIButton(type:.system, primaryAction: action)
         button.setTitle(title, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }
 
     private func setConstraints() {
+
         NSLayoutConstraint.activate([
             counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            counterLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            counterLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 270)
         ])
 
         NSLayoutConstraint.activate([
-            pauseButton.topAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 20),
+            pauseButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
             pauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
 
         NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 20),
+            startButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            resetButton.topAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 20),
+            resetButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
             resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }

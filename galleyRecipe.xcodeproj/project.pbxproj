@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6CF70A27297FF0BC006F8C54 /* TimerProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF70A26297FF0BC006F8C54 /* TimerProgressBarView.swift */; };
+		6CF70A27297FF0BC006F8C54 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF70A26297FF0BC006F8C54 /* TimerProgressView.swift */; };
 		9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */; };
 		9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */; };
 		9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF0296AF9EF0006EECF /* ViewController.swift */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6CF70A26297FF0BC006F8C54 /* TimerProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressBarView.swift; sourceTree = "<group>"; };
+		6CF70A26297FF0BC006F8C54 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		9E7C2EE9296AF9EF0006EECF /* galleyRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = galleyRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */,
-				6CF70A26297FF0BC006F8C54 /* TimerProgressBarView.swift */,
+				6CF70A26297FF0BC006F8C54 /* TimerProgressView.swift */,
 				9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */,
 				9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */,
 				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
@@ -180,7 +180,7 @@
 				9E7C2F05296AFC4B0006EECF /* TimerViewController.swift in Sources */,
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				9E7C2EF1296AF9EF0006EECF /* ViewController.swift in Sources */,
-				6CF70A27297FF0BC006F8C54 /* TimerProgressBarView.swift in Sources */,
+				6CF70A27297FF0BC006F8C54 /* TimerProgressView.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
 				9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
