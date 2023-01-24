@@ -18,6 +18,9 @@ final class TimerViewController: UIViewController {
     private var isTimerRunning = false
     private var resumeTapped = false
 
+    private var  timerProgressBarView: TimerProgressBarView!
+    private var circularViewDuration: TimeInterval = 2
+    
     private lazy var pauseButton: UIButton = {
         createButton(
             withTitle: "Pause",
