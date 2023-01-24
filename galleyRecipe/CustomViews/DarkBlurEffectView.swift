@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlurEffectView: UIVisualEffectView {
+class DarkBlurEffectView: UIVisualEffectView {
     
     var animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
     

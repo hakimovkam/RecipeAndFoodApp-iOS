@@ -61,8 +61,8 @@ class CustomTableViewCell: UITableViewCell {
         return imageView
     }()
   
-    let additionalBlurView: BlurEffectView = {
-        let view = BlurEffectView()
+    let additionalBlurView: DarkBlurEffectView = {
+        let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
@@ -75,7 +75,7 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     let additionalView: UIView = {
-        let view = BlurEffectView()
+        let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
         view.layer.cornerRadius = 20
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)

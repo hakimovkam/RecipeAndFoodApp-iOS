@@ -53,6 +53,7 @@ class FavoritesViewController: UIViewController {
     }
 }
 
+//MARK: - TableViewDelegate and TableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return 50 }
     
@@ -124,6 +125,7 @@ extension FavoritesViewController: UITableViewDelegate {
             view.layer.mask = gradient
             return view
         }()
+        
         //MARK: - added view components to the table view header
         
         headerView.addSubview(blurView)
@@ -134,11 +136,13 @@ extension FavoritesViewController: UITableViewDelegate {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 52
-        }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return 52 }
 }
-
+//MARK: - SearchResultsUpdate
+extension FavoritesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) { tableView.reloadData() }
+}
+//MARK: - View protocol
 extension FavoritesViewController: FavoriteViewProtocol {
     func didUpdate() {
         print("didUpdate")
@@ -151,15 +155,26 @@ extension FavoritesViewController: FavoriteViewProtocol {
     
 }
 
+
+//MARK: - ViewLayout
 extension FavoritesViewController {
+    
+    func configureSearchController() {
+//        searchController = UISearchController(searchResultsController: nil)
+//        searchController.searchResultsUpdater = self
+//        searchController.dimsBackgroundDuringPresentation = false
+//        searchController.searchBar.placeholder = "Search here..."
+//        searchController.searchBar.delegate = self
+//        searchController.searchBar.sizeToFit()
+//         
+//            // Place the search bar view to the tableview headerview.
+//            tblSearchResults.tableHeaderView = searchController.searchBar
+    }
+    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(tableView)
-        view.addSubview(searchBar)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
+//        view.addSubview(searchBar)
         
         gradient = CAGradientLayer()
         gradient.frame = view.bounds
@@ -168,7 +183,6 @@ extension FavoritesViewController {
         view.layer.mask = gradient
         
         tableView.separatorStyle = .none
-
     }
     
     func setConstraint() {
