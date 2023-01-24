@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false // не прозрачная
         navigationController?.navigationBar.barStyle = .black // строка состояния белая
         navigationController?.navigationBar.tintColor = .white // цвет лупы белый
+
         showSearchBarButton(shouldShow: true)
         view.addSubview(tableView) // вью таблицы
         tableView.pin(to: view) // 2.1 появление и расположение таблицы
