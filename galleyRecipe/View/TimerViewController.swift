@@ -22,28 +22,21 @@ final class TimerViewController: UIViewController {
         frame: CGRect(x: 0.0, y: 0.0, width: 160, height: 160)
     )
     
-    private lazy var pauseButton: UIButton = {
-        createButton(
-            withTitle: "Pause",
-            action: UIAction { [unowned self] _ in
+    private lazy var timerButton: UIButton = {
+        createTimerButton(action: UIAction { [unowned self] _ in
             pauseTimer()
         })
     }()
 
-    private lazy var startButton: UIButton = {
-        createButton(
-            withTitle: "Start",
-            action: UIAction { [unowned self] _ in
-            runTimer()
-        })
-    }()
-
     private lazy var resetButton: UIButton = {
-        createButton(
-            withTitle: "Reset",
-            action: UIAction { [unowned self] _ in
-            resetTimer()
-        })
+        let button = UIButton(type:.system)
+        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
     }()
 
     private lazy var counterLabel: UILabel = {
@@ -58,11 +51,10 @@ final class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupSubviews(pauseButton, startButton, resetButton, counterLabel, timerProgressView)
+        setupSubviews(resetButton, counterLabel, timerProgressView, timerButton)
         setConstraints()
-        pauseButton.isEnabled = false
-        timerProgressView.progressColor = UIColor.systemGreen
-        timerProgressView.center = self.view.center
+        
+        setProgressView()
     }
 }
 
@@ -79,8 +71,6 @@ extension TimerViewController {
 
     private func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
-        self.startButton.isEnabled = false
-        pauseButton.isEnabled = true
     }
 
     @objc private func updateTimer() {
@@ -88,7 +78,6 @@ extension TimerViewController {
             timer.invalidate()
             playSound()
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            pauseButton.isEnabled = false
         } else {
             secondsRemain -= 1
             counterLabel.text = timeString(time: TimeInterval(secondsRemain))
@@ -97,22 +86,24 @@ extension TimerViewController {
 
     private func pauseTimer() {
         if self.resumeTapped == false {
-            pauseButton.setTitle("Resume", for: .normal)
+            let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
+            let image = UIImage(systemName: "play.fill", withConfiguration: imageConfig)
+            timerButton.setImage(image, for: .normal)
             timer.invalidate()
             self.resumeTapped = true
         } else {
-            pauseButton.setTitle("Pause", for: .normal)
+            let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
+            let image = UIImage(systemName: "pause.fill", withConfiguration: imageConfig)
+            timerButton.setImage(image, for: .normal)
             runTimer()
             self.resumeTapped = false
         }
     }
 
-    private func resetTimer() {
+    @objc private func resetTimer() {
         timer.invalidate()
-        secondsRemain = 5
+        secondsRemain = 10
         counterLabel.text = timeString(time: TimeInterval(secondsRemain))
-        pauseButton.isEnabled = false
-        startButton.isEnabled = true
     }
 
     private func timeString(time: CFTimeInterval) -> String {
@@ -141,26 +132,36 @@ extension TimerViewController {
         return button
     }
 
-    private func setConstraints() {
+    private func createTimerButton(action: UIAction) -> UIButton {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
+        let image = UIImage(systemName: "play.fill", withConfiguration: imageConfig)
 
+        let button = UIButton(type: .custom, primaryAction: action)
+        button.setImage(image, for: .normal)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }
+                        
+    private func setProgressView() {
+        timerProgressView.progressColor = UIColor.systemGreen
+        timerProgressView.center = self.view.center
+    }
+
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
         NSLayoutConstraint.activate([
             counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             counterLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 270)
         ])
 
         NSLayoutConstraint.activate([
-            pauseButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
-            pauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-
-        NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
-            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
             resetButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
-            resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }

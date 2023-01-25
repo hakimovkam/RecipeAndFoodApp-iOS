@@ -76,6 +76,6 @@ extension TimerProgressView {
         shapeLayer.lineCap = .round
         layer.addSublayer(shapeLayer)
         
-        return CAShapeLayer()
+        return shapeLayer
     }
 }
