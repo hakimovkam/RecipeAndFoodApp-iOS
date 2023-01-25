@@ -9,11 +9,14 @@ import UIKit
 
 class TimerProgressView: UIView {
     
+    private let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
     
     private var startPoint = CGFloat(-Double.pi / 2)
     private var endPoint = CGFloat(3 * Double.pi / 2)
+    
+    private var isAnimationStarted = false
     
     var progressColor = UIColor.white {
         didSet {
@@ -49,7 +52,7 @@ extension TimerProgressView {
        
         progressLayer = createShapeLayer(
             lineWidth: 20.0,
-            strokeEnd: 0.8,
+            strokeEnd: 1.0,
             strokeColor: progressColor.cgColor
         )
     }
@@ -77,5 +80,46 @@ extension TimerProgressView {
         layer.addSublayer(shapeLayer)
         
         return shapeLayer
+    }
+    
+     func startProgress(duration: TimeInterval) {
+        circularProgressAnimation.duration = duration
+        circularProgressAnimation.toValue = 0.0
+        circularProgressAnimation.fillMode = .forwards
+        circularProgressAnimation.isRemovedOnCompletion = false
+        progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
+        isAnimationStarted = true
+    }
+    
+    func resetProgress() {
+        progressLayer.speed = 1.0
+        progressLayer.timeOffset = 0.0
+        progressLayer.beginTime = 0.0
+        progressLayer.strokeEnd = 1.0
+        isAnimationStarted = false
+    }
+    
+    func resumeProgress() {
+        let pausedTime = progressLayer.timeOffset
+        progressLayer.speed = 1.0
+        progressLayer.timeOffset = 0.0
+        progressLayer.beginTime = 0.0
+        let timeSincePaused = progressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        progressLayer.beginTime = timeSincePaused
+    }
+    
+    func pauseProgress() {
+        let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
+        progressLayer.speed = 0.0
+        progressLayer.timeOffset = pausedTime
+    }
+    
+    func stopProgress() {
+        progressLayer.speed = 1.0
+        progressLayer.timeOffset = 0.0
+        progressLayer.beginTime = 0.0
+        progressLayer.strokeEnd = 0.0
+        progressLayer.removeAllAnimations()
+        isAnimationStarted = false
     }
 }

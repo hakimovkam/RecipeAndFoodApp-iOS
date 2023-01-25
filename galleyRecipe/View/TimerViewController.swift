@@ -12,11 +12,9 @@ final class TimerViewController: UIViewController {
 
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
-    private var secondsRemain = 10
+    private var secondsRemain = 20
 
-    private var soundEnabled = true
-    private var isTimerRunning = false
-    private var resumeTapped = false
+    private var onPause = true
     
     private let timerProgressView = TimerProgressView(
         frame: CGRect(x: 0.0, y: 0.0, width: 160, height: 160)
@@ -53,7 +51,6 @@ final class TimerViewController: UIViewController {
         view.backgroundColor = .white
         setupSubviews(resetButton, counterLabel, timerProgressView, timerButton)
         setConstraints()
-        
         setProgressView()
     }
 }
@@ -71,6 +68,10 @@ extension TimerViewController {
 
     private func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
+        let image = largerImager(name: "pause.fill")
+        timerButton.setImage(image, for: .normal)
+        timerProgressView.startProgress(
+            duration: TimeInterval(secondsRemain))
     }
 
     @objc private func updateTimer() {
@@ -85,25 +86,25 @@ extension TimerViewController {
     }
 
     private func pauseTimer() {
-        if self.resumeTapped == false {
-            let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
-            let image = UIImage(systemName: "play.fill", withConfiguration: imageConfig)
+        if self.onPause == false {
+            let image = largerImager(name: "play.fill")
             timerButton.setImage(image, for: .normal)
             timer.invalidate()
-            self.resumeTapped = true
+            self.onPause = true
         } else {
-            let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
-            let image = UIImage(systemName: "pause.fill", withConfiguration: imageConfig)
+            let image = largerImager(name: "pause.fill")
             timerButton.setImage(image, for: .normal)
             runTimer()
-            self.resumeTapped = false
+            self.onPause = false
         }
     }
 
     @objc private func resetTimer() {
         timer.invalidate()
-        secondsRemain = 10
+        secondsRemain = 20
         counterLabel.text = timeString(time: TimeInterval(secondsRemain))
+        let image = largerImager(name: "play.fill")
+        timerButton.setImage(image, for: .normal)
     }
 
     private func timeString(time: CFTimeInterval) -> String {
@@ -142,7 +143,13 @@ extension TimerViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
-                        
+                 
+    private func largerImager(name: String) -> UIImage {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
+        let image = UIImage(systemName: name, withConfiguration: imageConfig) ?? UIImage()
+        return image
+    }
+    
     private func setProgressView() {
         timerProgressView.progressColor = UIColor.systemGreen
         timerProgressView.center = self.view.center
