@@ -12,9 +12,9 @@ final class TimerViewController: UIViewController {
 
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
-    private var secondsRemain = 20
+    private var secondsRemain = 5
 
-    private var onPause = true
+    private var isTimerStarted = false
     
     private let timerProgressView = TimerProgressView(
         frame: CGRect(x: 0.0, y: 0.0, width: 160, height: 160)
@@ -66,12 +66,11 @@ extension TimerViewController {
         audioPlayer?.play()
     }
 
-    private func runTimer() {
+    private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
         let image = largerImager(name: "pause.fill")
         timerButton.setImage(image, for: .normal)
-        timerProgressView.startProgress(
-            duration: TimeInterval(secondsRemain))
+        print("run")
     }
 
     @objc private func updateTimer() {
@@ -86,25 +85,32 @@ extension TimerViewController {
     }
 
     private func pauseTimer() {
-        if self.onPause == false {
-            let image = largerImager(name: "play.fill")
-            timerButton.setImage(image, for: .normal)
-            timer.invalidate()
-            self.onPause = true
-        } else {
+        if !isTimerStarted {
             let image = largerImager(name: "pause.fill")
             timerButton.setImage(image, for: .normal)
-            runTimer()
-            self.onPause = false
+            startTimer()
+            timerProgressView.startResumeAnimation()
+            isTimerStarted = true
+            print("start")
+        } else {
+            timerProgressView.pauseAnimation()
+            let image = largerImager(name: "play.fill")
+            timerButton.setImage(image, for: .normal)
+            isTimerStarted = false
+            timer.invalidate()
+            print("startResume")
         }
     }
 
     @objc private func resetTimer() {
         timer.invalidate()
-        secondsRemain = 20
+        timerProgressView.stopAnimation()
+        isTimerStarted = false
+        secondsRemain = 5
         counterLabel.text = timeString(time: TimeInterval(secondsRemain))
         let image = largerImager(name: "play.fill")
         timerButton.setImage(image, for: .normal)
+        print("reset")
     }
 
     private func timeString(time: CFTimeInterval) -> String {
