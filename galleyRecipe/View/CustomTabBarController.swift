@@ -16,10 +16,7 @@ class CustomTabBarController: UITabBarController {
     
     //MARK: - cusstomize TabBarController
 
-    /* Кастомизация TabBarControllera
-     Тут нужно будет поиграться с размерами, закруглениями и тд. для того чтоб сделать всё такое же как и в дизайне
-     + подобрать цвета
-     */
+    /* Кастомизация TabBarControllera */
     func setTabBarApperance() {
         let positionOnX: CGFloat = 80
         let positionOnY: CGFloat = 1
@@ -41,15 +38,6 @@ class CustomTabBarController: UITabBarController {
         /* Цвета для кастома TabBarControllera задаются тут */
         rounderLayer.fillColor = UIColor.white.cgColor
         tabBar.tintColor = UIColor.black
-
-        /* Задник за TabBarController делается прозрачным */
-//        let appearance = UITabBarAppearance()
-//        appearance.configureWithTransparentBackground()
-//        tabBarController.tabBar.standardAppearance = appearance
-
-        let itemAppearance = UITabBarItemAppearance()
-        itemAppearance.configureWithDefault(for: .compactInline)
-
 
         /* В блоке кода ниже задаётся линия вокргу TabBarController */
         tabBar.layer.shadowColor = UIColor.darkGray.cgColor

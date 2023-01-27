@@ -31,7 +31,6 @@ class CustomTableViewCell: UITableViewCell {
     var recipeDescriptionLabel: UILabel = {
         let label = UILabel()
         
-        label.numberOfLines = 2
         label.font = UIFont(name: "Poppins-Medium", size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7
@@ -41,7 +40,7 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
-    let foodImage: UIImageView = {
+    var foodImage: UIImageView = {
         let image = UIImage(named: "no available image")
         let imageView = UIImageView(image: image!)
         imageView.contentMode = .scaleAspectFill // эта штука не шакалит картинку
@@ -62,8 +61,8 @@ class CustomTableViewCell: UITableViewCell {
         return imageView
     }()
   
-    let additionalBlurView: BlurEffectView = {
-        let view = BlurEffectView()
+    private let additionalBlurView: DarkBlurEffectView = {
+        let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
@@ -75,8 +74,8 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
     
-    let additionalView: UIView = {
-        let view = BlurEffectView()
+    private let additionalView: UIView = {
+        let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
         view.layer.cornerRadius = 20
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)

@@ -33,7 +33,7 @@ class Router: RouterProtocol {
     /* Заполняем TabBarController вкладками */
     func setupTabBarController() {
         /* иницилизирууем NavigationController для каждой вкладочки на TabBar */
-        let favoriteViewController = UINavigationController(rootViewController: builder.createFavoriteViewController(router: self, networkService: networkService))
+        let favoriteViewController = builder.createFavoriteViewController(router: self, networkService: networkService)
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
         tabBarController?.setViewControllers([generateVC(viewController: favoriteViewController,
