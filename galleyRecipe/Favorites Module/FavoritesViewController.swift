@@ -116,7 +116,7 @@ extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let detailVC = DescriptionViewController()
+        let detailVC = IngredientsViewController()
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
