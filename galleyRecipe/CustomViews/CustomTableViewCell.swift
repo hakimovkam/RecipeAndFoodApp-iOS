@@ -40,7 +40,7 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
     
-    let foodImage: UIImageView = {
+    var foodImage: UIImageView = {
         let image = UIImage(named: "no available image")
         let imageView = UIImageView(image: image!)
         imageView.contentMode = .scaleAspectFill // эта штука не шакалит картинку
@@ -61,7 +61,7 @@ class CustomTableViewCell: UITableViewCell {
         return imageView
     }()
   
-    let additionalBlurView: DarkBlurEffectView = {
+    private let additionalBlurView: DarkBlurEffectView = {
         let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
         view.layer.cornerRadius = 20
@@ -74,7 +74,7 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
     
-    let additionalView: UIView = {
+    private let additionalView: UIView = {
         let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
         view.layer.cornerRadius = 20

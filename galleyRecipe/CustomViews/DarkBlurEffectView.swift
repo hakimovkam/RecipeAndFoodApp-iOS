@@ -25,7 +25,7 @@ class DarkBlurEffectView: UIVisualEffectView {
         animator.addAnimations { [weak self] in
             self?.effect = UIBlurEffect(style: .dark)
         }
-        animator.fractionComplete = 0.7   //This is your blur intensity in range 0 - 1
+        animator.fractionComplete = 1   //This is your blur intensity in range 0 - 1
     }
     
     deinit {
