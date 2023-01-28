@@ -36,13 +36,13 @@ class Router: RouterProtocol {
         let favoriteViewController = builder.createFavoriteViewController(router: self, networkService: networkService)
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
-        tabBarController?.setViewControllers([generateVC(viewController: favoriteViewController,
+        tabBarController?.setViewControllers([generateVC(viewController: TimerListViewController(),
                                                          image: UIImage(named: ImageConstant.savedOutline),
                                                         selectedImage: UIImage(named: ImageConstant.savedFilled)),
                                              generateVC(viewController: SearchViewController(),
                                                         image: UIImage(named: ImageConstant.recipeOutline),
                                                         selectedImage: UIImage(named: ImageConstant.recipeFilled)),
-                                             generateVC(viewController: TimerViewController(),
+                                             generateVC(viewController: TimerListViewController(),
                                                         image: UIImage(named: ImageConstant.clockOutline),
                                                         selectedImage: nil)], animated: true)
     }

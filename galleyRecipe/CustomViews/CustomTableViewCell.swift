@@ -6,9 +6,12 @@
 //
 
 import UIKit
-import CoreImage
-import Metal
-import MetalKit
+
+
+/*
+ смущает момент с шириной ячейки в 23 строчке
+ как правильно можно опрокинуть ширину экрана? 
+ */
 
 class CustomTableViewCell: UITableViewCell {
 
@@ -41,21 +44,15 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     var foodImage: UIImageView = {
-        let image = UIImage(named: "no available image")
+        let image = UIImage(named: ImageConstant.noImage)
         let imageView = UIImageView(image: image!)
         imageView.contentMode = .scaleAspectFill // эта штука не шакалит картинку
         
         
         imageView.frame = CGRect(x: 0, y: 0, width: 358, height: 120) // размеры окна куда помещается картинка
         
-        let layer = CALayer()
-        layer.contents = imageView
-        layer.bounds = imageView.bounds
-        layer.position = imageView.center
-        
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 30
-        imageView.layer.addSublayer(layer)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -120,9 +117,8 @@ extension CustomTableViewCell {
         foodImage.addSubview(favoriteButton)
         foodImage.addSubview(timerButton)
         
-        
-        let blurEffect = UIBlurEffect(style: .dark)
-        additionalBlurView.effect = blurEffect
+//        let blurEffect = UIBlurEffect(style: .dark)
+//        additionalBlurView.effect = blurEffect
         
     }
     
