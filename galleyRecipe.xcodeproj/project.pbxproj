@@ -50,6 +50,8 @@
 		EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29F3A4297E80BB002F74BD /* ImageConstant.swift */; };
 		EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */; };
 		EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899CF297BD9E000705344 /* CustomTabBarController.swift */; };
+		EB3F3A9C2984772800B36D62 /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F3A9B2984772800B36D62 /* TimerListViewController.swift */; };
+		EB3F3A9E2984789500B36D62 /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F3A9D2984789500B36D62 /* TimerListCell.swift */; };
 		EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */; };
 		EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* UIExtension.swift */; };
 /* End PBXBuildFile section */
@@ -100,6 +102,8 @@
 		EB29F3A4297E80BB002F74BD /* ImageConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageConstant.swift; sourceTree = "<group>"; };
 		EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = galleyRecipe/View/CustomTabBarController.swift; sourceTree = SOURCE_ROOT; };
+		EB3F3A9B2984772800B36D62 /* TimerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = SOURCE_ROOT; };
+		EB3F3A9D2984789500B36D62 /* TimerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = SOURCE_ROOT; };
 		EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBlurEffectView.swift; sourceTree = "<group>"; };
 		EBFDB1FE297957A700CA0084 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIExtension.swift; path = galleyRecipe/Extension/UIExtension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -154,6 +158,7 @@
 		9E7C2F0A296B16D00006EECF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EB3F3A9B2984772800B36D62 /* TimerListViewController.swift */,
 				9E7C2F04296AFC4B0006EECF /* TimerViewController.swift */,
 				9E7C2F0F296B20140006EECF /* DescriptionViewController.swift */,
 				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
@@ -230,6 +235,7 @@
 		EB3899D2297C031600705344 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				EB3F3A9D2984789500B36D62 /* TimerListCell.swift */,
 				EB29D8182982A4EB00F5740E /* GradientViewController.swift */,
 				EB3899CF297BD9E000705344 /* CustomTabBarController.swift */,
 				EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */,
@@ -338,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB3F3A9C2984772800B36D62 /* TimerListViewController.swift in Sources */,
 				E7463D382980512500A4C54F /* IngredientsViewController.swift in Sources */,
 				9EE1F66C29858D50006B5F28 /* RecipeManager.swift in Sources */,
 				9EE1F67029858DA4006B5F28 /* CookBookRecipes.swift in Sources */,
@@ -354,6 +361,7 @@
 				EB26277129781728002B8924 /* Router.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
 				EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */,
+				EB3F3A9E2984789500B36D62 /* TimerListCell.swift in Sources */,
 				9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */,
 				EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
