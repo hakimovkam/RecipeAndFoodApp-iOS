@@ -9,9 +9,40 @@ import UIKit
 
 class TimerListViewController: GradientViewController {
 
-    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
+//    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
-//    private var data: [String] = []
+    private var data: [String] = []
+    
+    private let headerLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.text = "There are no timers here yet"
+        label.font = UIFont(name: "Poppins-Bold", size: 24)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let textLabel: UILabel = {
+        let textLabel = UILabel()
+        textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
+        textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
+        textLabel.text = "Add timers for your recipes here \nby pressing the timer button \non the recipe"
+        textLabel.adjustsFontSizeToFitWidth = true
+        textLabel.textAlignment = .center
+        textLabel.numberOfLines = 0
+        textLabel.lineBreakMode = .byWordWrapping
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        return textLabel
+    }()
+    
+    private let characterLabel: UILabel = {
+        let characterLabel = UILabel()
+        characterLabel.text = "⏱️"
+        characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
+        characterLabel.textAlignment = .center
+        characterLabel.translatesAutoresizingMaskIntoConstraints = false
+        return characterLabel
+    }()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -21,13 +52,8 @@ class TimerListViewController: GradientViewController {
             tableView.sectionHeaderTopPadding = 0.0
         }
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
         return tableView
     }()
-    
-    private let emptyStackView = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +67,10 @@ class TimerListViewController: GradientViewController {
             setupTableView()
         }
     }
-
 }
 
 extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { data.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as! TimerListCell
@@ -97,47 +120,24 @@ extension TimerListViewController {
     
     func setupEmptyView() {
         
-        view.addSubview(tableView)
+        view.addSubview(headerLabel)
+        view.addSubview(characterLabel)
+        view.addSubview(textLabel)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
+            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            
+            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
+            characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
+            textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
         ])
         
-        emptyStackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(emptyStackView)
-        
-        
-        let charecterLabel = UILabel()
-        charecterLabel.text = "⏱️"
-        charecterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
-        charecterLabel.textAlignment = .center
-//        charecterLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-
-        let textLabel = UILabel()
-        textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
-        textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
-        textLabel.text = "Add timers for your recipes here by pressing the timer button on the recipe"
-        textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.textAlignment = .center
-        textLabel.numberOfLines = 5
-        textLabel.lineBreakMode = .byWordWrapping
-        textLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 60)
 
 
-        emptyStackView.axis = .vertical
-        emptyStackView.distribution = .fillEqually
-        emptyStackView.spacing = 0
-        emptyStackView.addArrangedSubview(charecterLabel)
-        emptyStackView.addArrangedSubview(textLabel)
 
-        NSLayoutConstraint.activate([
-            emptyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            emptyStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            emptyStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
     }
 }
