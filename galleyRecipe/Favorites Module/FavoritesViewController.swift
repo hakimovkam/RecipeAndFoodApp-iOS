@@ -9,8 +9,7 @@ import UIKit
 
 /*
  - 1. тут необходимо осуществить навигацию на следующий экран через Router
- - 2. попробовать перебрать constraint без отрицательных значений
- - 3. пофиксить поведение поисковой строки, как будто бы при скролле наверх, когда она прячется, она должна быть неактивна + на данный момент она просто прячется за блюром, а по хорошему как будто бы должна именно уходить вверх и быть неактивной
+ - 2. пофиксить поведение поисковой строки, как будто бы при скролле наверх, когда она прячется, она должна быть неактивна + на данный момент она просто прячется за блюром, а по хорошему как будто бы должна именно уходить вверх и быть неактивной
     3.1 возможно можно реализовать адекватную работу поисковой строки через search сontroller и тогда поведение будет таким, каким я его описал выше. пока что через search controller происходит какая ерунда.x
  */
 
@@ -18,9 +17,9 @@ class FavoritesViewController: GradientViewController {
     
     var presenter: FavoriteViewPresenterProtocol!
     
-//    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
+    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
-    private var data: [String] = []
+//    private var data: [String] = []
     
     private let textLabel: UILabel = {
         let textLabel = UILabel()
@@ -72,7 +71,7 @@ class FavoritesViewController: GradientViewController {
         searchBar.searchTextField.borderStyle = .none
         searchBar.searchTextPositionAdjustment.horizontal = 10
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.backgroundColor = .white
+        searchBar.backgroundColor = .clear
         searchBar.layer.cornerRadius = 16
         searchBar.layer.borderWidth = 1
         searchBar.layer.borderColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1).cgColor

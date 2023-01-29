@@ -9,15 +9,18 @@ import UIKit
 
 class TimerListViewController: GradientViewController {
 
-//    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
+    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
-    private var data: [String] = []
+//    private var data: [String] = []
     
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.text = "There are no timers here yet"
         label.font = UIFont(name: "Poppins-Bold", size: 24)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -71,6 +74,9 @@ class TimerListViewController: GradientViewController {
 
 extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { data.count }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as! TimerListCell
@@ -112,7 +118,7 @@ extension TimerListViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
+            view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: 16)
         ])
         
     
@@ -127,6 +133,8 @@ extension TimerListViewController {
         NSLayoutConstraint.activate([
             headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            headerLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            headerLabel.heightAnchor.constraint(equalToConstant: 52),
             
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

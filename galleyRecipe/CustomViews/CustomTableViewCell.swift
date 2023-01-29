@@ -19,11 +19,8 @@ class CustomTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.frame = CGRect(x: 0, y: 0, width: 390, height: 184)
         self.setupViews()
         self.setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -33,13 +30,11 @@ class CustomTableViewCell: UITableViewCell {
     //MARK: - UI Components
     var recipeDescriptionLabel: UILabel = {
         let label = UILabel()
-        
         label.font = UIFont(name: "Poppins-Medium", size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
-      
         return label
     }()
     
@@ -47,14 +42,10 @@ class CustomTableViewCell: UITableViewCell {
         let image = UIImage(named: ImageConstant.noImage)
         let imageView = UIImageView(image: image!)
         imageView.contentMode = .scaleAspectFill // эта штука не шакалит картинку
-        
-        
         imageView.frame = CGRect(x: 0, y: 0, width: 358, height: 120) // размеры окна куда помещается картинка
-        
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 30
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
   
@@ -64,10 +55,8 @@ class CustomTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        
         view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
@@ -77,10 +66,8 @@ class CustomTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 20
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         view.alpha = 0
-        
         view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
         
@@ -91,7 +78,6 @@ class CustomTableViewCell: UITableViewCell {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
     
@@ -102,7 +88,6 @@ class CustomTableViewCell: UITableViewCell {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
-    
         return button
     }()
 }
@@ -116,28 +101,24 @@ extension CustomTableViewCell {
         foodImage.addSubview(additionalView)
         foodImage.addSubview(favoriteButton)
         foodImage.addSubview(timerButton)
-        
-//        let blurEffect = UIBlurEffect(style: .dark)
-//        additionalBlurView.effect = blurEffect
-        
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            recipeDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            contentView.bottomAnchor.constraint(equalTo: recipeDescriptionLabel.bottomAnchor, constant: 8),
             recipeDescriptionLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: 8),
             recipeDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            recipeDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            contentView.trailingAnchor.constraint(equalTo: recipeDescriptionLabel.trailingAnchor, constant: 8),
             
-            foodImage.bottomAnchor.constraint(equalTo: recipeDescriptionLabel.topAnchor, constant: -8),
+            recipeDescriptionLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: 8),
             foodImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             foodImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
             foodImage.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8),
             
             additionalBlurView.widthAnchor.constraint(equalToConstant: 40),
             additionalBlurView.heightAnchor.constraint(equalToConstant: 80),
-            additionalBlurView.trailingAnchor.constraint(equalTo: foodImage.trailingAnchor, constant: -20),
+            foodImage.trailingAnchor.constraint(equalTo: additionalBlurView.trailingAnchor, constant: 20),
             additionalBlurView.topAnchor.constraint(equalTo: foodImage.topAnchor, constant: 20),
             
             additionalView.widthAnchor.constraint(equalToConstant: 40),
@@ -148,18 +129,16 @@ extension CustomTableViewCell {
             favoriteButton.widthAnchor.constraint(equalToConstant: 24),
             favoriteButton.heightAnchor.constraint(equalToConstant: 24),
             favoriteButton.topAnchor.constraint(equalTo: additionalView.topAnchor, constant: 12),
-            favoriteButton.bottomAnchor.constraint(equalTo: additionalView.bottomAnchor, constant: -44),
+             additionalView.bottomAnchor.constraint(equalTo: favoriteButton.bottomAnchor, constant: 44),
             favoriteButton.leftAnchor.constraint(equalTo: additionalView.leftAnchor, constant: 8),
-            favoriteButton.rightAnchor.constraint(equalTo: additionalView.rightAnchor, constant: -8),
+            additionalView.rightAnchor.constraint(equalTo: favoriteButton.rightAnchor, constant: 8),
             
             timerButton.widthAnchor.constraint(equalToConstant: 24),
             timerButton.heightAnchor.constraint(equalToConstant: 24),
             timerButton.topAnchor.constraint(equalTo: additionalView.topAnchor, constant: 44),
-            timerButton.bottomAnchor.constraint(equalTo: additionalView.bottomAnchor, constant: -12),
+            additionalView.bottomAnchor.constraint(equalTo: timerButton.bottomAnchor, constant: 12),
             timerButton.leftAnchor.constraint(equalTo: additionalView.leftAnchor, constant: 8),
-            timerButton.rightAnchor.constraint(equalTo: additionalView.rightAnchor, constant: -8)
-    
-            
+            additionalView.rightAnchor.constraint(equalTo:timerButton.rightAnchor , constant: 8)
         ])
     }
 }
