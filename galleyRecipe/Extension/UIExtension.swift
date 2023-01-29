@@ -58,8 +58,9 @@ extension UITableViewDelegate {
             label.text = text
         }
         label.font = UIFont(name: "Poppins-Bold", size: 24)
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
+//        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
+//        label.minimumScaleFactor = 0.5
         
         //MARK: - blurEffect
         let blurEffect = UIBlurEffect(style: .light)

@@ -9,16 +9,21 @@ import UIKit
 
 class TimerListViewController: GradientViewController {
 
-//    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
+    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
-    private var data = [String]()
+//    private var data: [String] = []
     
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TimerListCell.self, forCellReuseIdentifier: TimerListCell.identifier)
         tableView.separatorStyle = .none
-        if #available(iOS 15.0, *) { tableView.sectionHeaderTopPadding = 2.0 }
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0.0
+        }
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        
         return tableView
     }()
     
@@ -31,7 +36,6 @@ class TimerListViewController: GradientViewController {
         tableView.delegate = self
         
         if data.isEmpty {
-//            setupTableView()
             setupEmptyView()
         } else {
             setupTableView()
@@ -42,7 +46,7 @@ class TimerListViewController: GradientViewController {
 
 extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,17 +59,18 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         var text = "There are no timers here yet"
-            
+
         if data.count == 1 {
             text = "You have \(data.count) timer"
-            
         } else if data.count > 1 {
-            text = "You have \(data.count) timers" }
-        
+            text = "You have \(data.count) timers"
+        }
         let headerView: UIView = setTableViewHeader(width: tableView.frame.width,
-                                                    height: 52,
-                                                    text: text)
+                                                            height: 52,
+                                                            text: text)
+    
         return headerView
     }
     
@@ -101,31 +106,38 @@ extension TimerListViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
         ])
         
+        emptyStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emptyStackView)
         
         
         let charecterLabel = UILabel()
         charecterLabel.text = "⏱️"
         charecterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
-        charecterLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        
+        charecterLabel.textAlignment = .center
+//        charecterLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+
         let textLabel = UILabel()
         textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
         textLabel.text = "Add timers for your recipes here by pressing the timer button on the recipe"
+        textLabel.adjustsFontSizeToFitWidth = true
+        textLabel.textAlignment = .center
         textLabel.numberOfLines = 5
+        textLabel.lineBreakMode = .byWordWrapping
         textLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 60)
-        
-        
+
+
         emptyStackView.axis = .vertical
         emptyStackView.distribution = .fillEqually
-        emptyStackView.spacing = 20
+        emptyStackView.spacing = 0
         emptyStackView.addArrangedSubview(charecterLabel)
         emptyStackView.addArrangedSubview(textLabel)
-        
+
         NSLayoutConstraint.activate([
             emptyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            emptyStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            emptyStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 }

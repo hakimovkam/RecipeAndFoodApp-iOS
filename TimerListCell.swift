@@ -14,9 +14,9 @@ class TimerListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        
         self.setupViews()
         self.setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -25,17 +25,15 @@ class TimerListCell: UITableViewCell {
     
     //MARK: - UI Components
     
+    let stackView = UIStackView()
+    
     var descriptionLabel: UILabel = {
         let label = UILabel()
-        
         label.font = UIFont(name: "Poppins-Regular", size: 14)
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.7
+        label.minimumScaleFactor = 0.5
         label.numberOfLines = 5
-        
-        label.frame = CGRect(x: 0, y: 0, width: 178, height: 60)
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -43,36 +41,30 @@ class TimerListCell: UITableViewCell {
         let image = UIImage(named: ImageConstant.noImage)
         let imageView = UIImageView(image: image!)
         imageView.contentMode = .scaleAspectFill
-        
-//        imageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
-        
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     var timerLabel: UILabel = {
         let label = UILabel()
+        label.layer.masksToBounds = false
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor(red: 0.775, green: 0.775, blue: 0.775, alpha: 1).cgColor
+        label.layer.cornerRadius = 12
+        label.clipsToBounds = true
         label.text = "10:33"
         label.font = UIFont(name: "Poppins-Bold", size: 14)
         label.textColor = .customGreen
-        label.frame = CGRect(x: 0, y: 0, width: 36, height: 20)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
         label.numberOfLines = 1
-        label.minimumScaleFactor = 0.5
-        
-        let layer = CALayer()
-        layer.frame = CGRect(x: -12, y: -2.5, width: 60, height: 24)
-        layer.borderWidth = 1
-        label.layer.addSublayer(layer)
-    
-        layer.borderColor = UIColor(red: 0.775, green: 0.775, blue: 0.775, alpha: 1).cgColor
-        layer.cornerRadius = 12
-
-        
         
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
 }
@@ -80,11 +72,9 @@ class TimerListCell: UITableViewCell {
 extension TimerListCell {
     
     func setupViews() {
-        contentView.addSubview(descriptionLabel)
         contentView.addSubview(foodImage)
+        contentView.addSubview(descriptionLabel)
         contentView.addSubview(timerLabel)
-        
-        print(timerLabel.frame)
     }
     
     func setupConstraints() {
@@ -94,17 +84,16 @@ extension TimerListCell {
             foodImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             foodImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 24),
             
-            descriptionLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             descriptionLabel.leftAnchor.constraint(equalTo: foodImage.rightAnchor, constant: 16),
-            descriptionLabel.rightAnchor.constraint(equalTo: timerLabel.leftAnchor, constant: -28),
+            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            contentView.bottomAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
+            timerLabel.leftAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 16),
             
-//            timerLabel.heightAnchor.constraint(equalToConstant: 24),
-//            timerLabel.widthAnchor.constraint(equalToConstant: 60),
+            contentView.rightAnchor.constraint(equalTo: timerLabel.rightAnchor, constant: 24),
             timerLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            timerLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -24),
-            timerLabel.leftAnchor.constraint(equalTo: descriptionLabel.rightAnchor, constant: 28)
+            
+            timerLabel.widthAnchor.constraint(equalToConstant: 60),
+            timerLabel.heightAnchor.constraint(equalToConstant: 24)
             
             
         ])
