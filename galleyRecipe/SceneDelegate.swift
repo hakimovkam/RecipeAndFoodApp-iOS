@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         router.setupTabBarController()
         
         window?.backgroundColor = .white
-        window?.rootViewController = tabBarController
+        window?.rootViewController = IngredientsViewController()
         window?.makeKeyAndVisible()
     }
 

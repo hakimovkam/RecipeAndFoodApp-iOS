@@ -16,7 +16,6 @@ class IngredientsViewController: UIViewController {
     let imageOnTop: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "imageOnTop")
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -27,7 +26,6 @@ class IngredientsViewController: UIViewController {
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 20.0
 //        view.clipsToBounds = true //что ето такое
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -45,7 +43,7 @@ class IngredientsViewController: UIViewController {
         return label
     }()
     
-    var stackView: UIStackView = {
+    let stackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
@@ -55,13 +53,36 @@ class IngredientsViewController: UIViewController {
         return stackView
     }()
     
+    let grayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray
+        view.layer.cornerRadius = 20.0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let ingredientsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Ingredients", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let instructionsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Instructions", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageOnTopConstraints()
-        viewFromBottomConstraints()
-        labelConstraints()
-        stackViewConstraints()
+        setupConstraints()
         addSublabelsToStackView()
     }
     
@@ -80,13 +101,11 @@ class IngredientsViewController: UIViewController {
         stackView.addArrangedSubview(waitingTime)
         stackView.addArrangedSubview(servings)
         stackView.addArrangedSubview(calories)
-        
-        
     }
     
     // MARK: - Constraints
     
-    func imageOnTopConstraints() {
+    func setupConstraints() {
         view.addSubview(imageOnTop)
         NSLayoutConstraint.activate([
             imageOnTop.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
@@ -94,9 +113,7 @@ class IngredientsViewController: UIViewController {
             imageOnTop.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             imageOnTop.heightAnchor.constraint(equalToConstant: 300)
         ])
-    }
-    
-    func viewFromBottomConstraints() {
+        
         view.addSubview(viewFromBottom)
         NSLayoutConstraint.activate([
             viewFromBottom.topAnchor.constraint(equalTo: imageOnTop.bottomAnchor),
@@ -104,9 +121,7 @@ class IngredientsViewController: UIViewController {
             viewFromBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             viewFromBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
-    }
-    
-    func labelConstraints() {
+        
         imageOnTop.addSubview(ingredientLabel)
         NSLayoutConstraint.activate([
             ingredientLabel.bottomAnchor.constraint(equalTo: imageOnTop.bottomAnchor, constant: -40),
@@ -114,14 +129,32 @@ class IngredientsViewController: UIViewController {
             imageOnTop.trailingAnchor.constraint(equalTo: ingredientLabel.trailingAnchor, constant: 10),
             ingredientLabel.centerXAnchor.constraint(equalTo: imageOnTop.centerXAnchor)
         ])
-    }
-    
-    func stackViewConstraints() {
+        
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
-        stackView.topAnchor.constraint(equalTo: ingredientLabel.bottomAnchor, constant: 5),
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            stackView.topAnchor.constraint(equalTo: ingredientLabel.bottomAnchor, constant: 5),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+        ])
+        
+        viewFromBottom.addSubview(grayView)
+        NSLayoutConstraint.activate([
+            grayView.topAnchor.constraint(equalTo: viewFromBottom.topAnchor, constant: 20),
+            grayView.leadingAnchor.constraint(equalTo: viewFromBottom.leadingAnchor, constant: 15),
+            viewFromBottom.trailingAnchor.constraint(equalTo: grayView.trailingAnchor, constant: 15),
+            grayView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        viewFromBottom.addSubview(ingredientsButton)
+        NSLayoutConstraint.activate([
+            ingredientsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 20),
+            ingredientsButton.leadingAnchor.constraint(equalTo: viewFromBottom.leadingAnchor, constant: 50)
+        ])
+        
+        viewFromBottom.addSubview(instructionsButton)
+        NSLayoutConstraint.activate([
+            instructionsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 20),
+            viewFromBottom.trailingAnchor.constraint(equalTo: instructionsButton.trailingAnchor, constant: 50)
         ])
     }
 }

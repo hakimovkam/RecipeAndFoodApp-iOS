@@ -126,7 +126,7 @@ extension CustomTableViewCell {
         
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             
             recipeDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
