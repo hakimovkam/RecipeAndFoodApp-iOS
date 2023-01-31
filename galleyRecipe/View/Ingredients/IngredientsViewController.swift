@@ -14,22 +14,21 @@ class IngredientsViewController: UIViewController {
 
     // MARK: - UI
     
-    let ingredientsTableView: UITableView = {
+    private let ingredientsTableView: UITableView = {
         let tableView = UITableView.init(frame: .zero, style: UITableView.Style.plain)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-       return tableView
+        return tableView
     }()
-    //image
-    let imageOnTop: UIImageView = {
+
+    private let imageOnTop: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "imageOnTop")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    //bol'shaya vyuha
-    let viewFromBottom: UIView = {
+    private let viewFromBottom: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 20.0
@@ -37,20 +36,18 @@ class IngredientsViewController: UIViewController {
         return view
     }()
     
-    let ingredientLabel: UILabel = {
+    private let ingredientLabel: UILabel = {
         let label = UILabel()
         label.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
         label.configureLabels()
-//        label.font = UIFont(name: "Poppins-Bold", size: 50.0) найти как добавить фонт
         label.font = UIFont(name: "ArialRoundedMTBold", size: 24)
         label.shadowOffset = CGSize(width: 20, height: 20)
-            //сделать градиент вместо тени
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -59,7 +56,7 @@ class IngredientsViewController: UIViewController {
         return stackView
     }()
     
-    let grayView: UIView = {
+    private let grayView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
         view.layer.cornerRadius = 20.0
@@ -67,7 +64,7 @@ class IngredientsViewController: UIViewController {
         return view
     }()
     
-    let ingredientsButton: UIButton = {
+    private let ingredientsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Ingredients", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -75,7 +72,7 @@ class IngredientsViewController: UIViewController {
         return button
     }()
     
-    let instructionsButton: UIButton = {
+    private let instructionsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Instructions", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -83,7 +80,7 @@ class IngredientsViewController: UIViewController {
         return button
     }()
     
-    let backbutton: UIButton = {
+    private let backbutton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "arrowLeft.png"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +99,7 @@ class IngredientsViewController: UIViewController {
         ingredientsTableView.backgroundColor = .white
     }
     
-    func addSublabelsToStackView() {
+    private func addSublabelsToStackView() {
         let waitingTime = UILabel()
         let servings = UILabel()
         let calories = UILabel()
@@ -130,7 +127,7 @@ extension UILabel {
 // MARK: - Constraints
 extension IngredientsViewController {
 
-    func setupConstraints() {
+    private func setupConstraints() {
         view.addSubview(imageOnTop)
         NSLayoutConstraint.activate([
             imageOnTop.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
@@ -207,8 +204,11 @@ extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idOptionalTableViewCell, for: indexPath)
-        cell.textLabel?.text = "Cell"
         
         return cell
+    }
+    //высота ячейки
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 }
