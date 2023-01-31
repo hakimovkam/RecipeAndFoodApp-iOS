@@ -14,7 +14,7 @@ protocol FavoriteViewProtocol: AnyObject {
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
     init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-//    func getCharacterList()
+    func tapOnTheRecipe()
 }
 
 class FavoritePresenter: FavoriteViewPresenterProtocol {
@@ -22,6 +22,16 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
     weak var view: FavoriteViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
+    
+    required init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+        self.view = view
+        self.networkService = networkService
+        self.router = router
+    }
+    
+    func tapOnTheRecipe() {
+        router?.showIngredients()
+    }
     
     /* Через презентер обращаемся к networkService и вытаскиваем список Characters */
 //    func getCharacterList() {
@@ -39,12 +49,7 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
 //        }
 //    }
     
-    required init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
-        self.networkService = networkService
-        self.router = router
-//        getCharacterList()
-    }
+
     
     
 }
