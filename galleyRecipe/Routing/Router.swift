@@ -18,7 +18,9 @@ protocol RouterMain {
 protocol RouterProtocol: RouterMain {
     func setupTabBarController()
     func showIngredients()
+    func goBackToFavoriteView()
     func showTimer()
+    func goBackToTimerList()
 }
 
 class Router: RouterProtocol {
@@ -34,7 +36,10 @@ class Router: RouterProtocol {
     lazy private var networkService: NetworkServiceProtocol = NetworkService()
     
     /* Иницилизация TabBarController */
-    init(tabBarController: CustomTabBarController, builder: BuilderProtocol, favoriteNavigationController: UINavigationController, detailIngredNavigationController: UINavigationController,
+    init(tabBarController: CustomTabBarController,
+         builder: BuilderProtocol,
+         favoriteNavigationController: UINavigationController,
+         detailIngredNavigationController: UINavigationController,
          timerNavigationController: UINavigationController) {
         self.tabBarController = tabBarController
         self.favoriteNavigationController = favoriteNavigationController
@@ -48,9 +53,21 @@ class Router: RouterProtocol {
         favoriteNavigationController?.pushViewController(ingredientsViewController,  animated: true)
     }
     
+    func goBackToFavoriteView() {
+        if let favoriteNavigationController = favoriteNavigationController {
+            favoriteNavigationController.popToRootViewController(animated: true)
+        }
+    }
+    
     func showTimer() {
         guard let timerViewController = builder?.showTimerViewController(router: self, networkService: networkService) else { return }
         timerNavigationController?.pushViewController(timerViewController, animated: true)
+    }
+    
+    func goBackToTimerList() {
+        if let timerNavigationController = timerNavigationController {
+            timerNavigationController.popToRootViewController(animated: true)
+        }
     }
     
     /* Заполняем TabBarController вкладками */

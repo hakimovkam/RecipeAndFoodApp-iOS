@@ -13,9 +13,11 @@ protocol TimerViewProtocol: AnyObject {
 
 protocol TimerViewPresenterProtocol: AnyObject {
     init (view: TimerViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    func backButtonInTimerWasPressed()
 }
 
 class TimerPresenter: TimerViewPresenterProtocol {
+    
     
     weak var view: TimerViewProtocol?
     var router: RouterProtocol?
@@ -25,5 +27,9 @@ class TimerPresenter: TimerViewPresenterProtocol {
         self.view = view
         self.networkService = networkService
         self.router = router
+    }
+    
+    func backButtonInTimerWasPressed() {
+        router?.goBackToTimerList()
     }
 }
