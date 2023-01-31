@@ -8,7 +8,7 @@ import AVFoundation
 import AudioToolbox
 import UIKit
 
-final class TimerViewController: UIViewController {
+final class TimerViewController: GradientViewController {
 
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
