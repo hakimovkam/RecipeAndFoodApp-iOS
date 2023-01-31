@@ -9,9 +9,17 @@ import UIKit
 
 
 class IngredientsViewController: UIViewController {
+    
+    private let idOptionalTableViewCell = "idOptionalTableViewCell"
 
     // MARK: - UI
     
+    let ingredientsTableView: UITableView = {
+        let tableView = UITableView.init(frame: .zero, style: UITableView.Style.plain)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+       return tableView
+    }()
     //image
     let imageOnTop: UIImageView = {
         let imageView = UIImageView()
@@ -25,7 +33,6 @@ class IngredientsViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 20.0
-//        view.clipsToBounds = true //что ето такое
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -45,7 +52,6 @@ class IngredientsViewController: UIViewController {
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
-        
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +71,6 @@ class IngredientsViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Ingredients", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -74,9 +79,13 @@ class IngredientsViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Instructions", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let backbutton: UIButton = {
+        let button = UIButton()
+        button.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
     }()
     
     override func viewDidLoad() {
@@ -84,6 +93,11 @@ class IngredientsViewController: UIViewController {
 
         setupConstraints()
         addSublabelsToStackView()
+        
+        ingredientsTableView.delegate = self
+        ingredientsTableView.dataSource = self
+        ingredientsTableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: idOptionalTableViewCell)
+        ingredientsTableView.backgroundColor = .white
     }
     
     func addSublabelsToStackView() {
@@ -102,9 +116,18 @@ class IngredientsViewController: UIViewController {
         stackView.addArrangedSubview(servings)
         stackView.addArrangedSubview(calories)
     }
-    
-    // MARK: - Constraints
-    
+}
+
+// MARK: - Extensions
+extension UILabel {
+    func configureLabels() {
+        self.textColor = .white
+    }
+}
+
+// MARK: - Constraints
+extension IngredientsViewController {
+
     func setupConstraints() {
         view.addSubview(imageOnTop)
         NSLayoutConstraint.activate([
@@ -147,20 +170,37 @@ class IngredientsViewController: UIViewController {
         
         viewFromBottom.addSubview(ingredientsButton)
         NSLayoutConstraint.activate([
-            ingredientsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 20),
+            ingredientsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 10),
             ingredientsButton.leadingAnchor.constraint(equalTo: viewFromBottom.leadingAnchor, constant: 50)
         ])
         
         viewFromBottom.addSubview(instructionsButton)
         NSLayoutConstraint.activate([
-            instructionsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 20),
+            instructionsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 10),
             viewFromBottom.trailingAnchor.constraint(equalTo: instructionsButton.trailingAnchor, constant: 50)
+        ])
+        
+        viewFromBottom.addSubview(ingredientsTableView)
+        NSLayoutConstraint.activate([
+            ingredientsTableView.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 55),
+            ingredientsTableView.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 2),
+            grayView.trailingAnchor.constraint(equalTo: ingredientsTableView.trailingAnchor, constant: 2),
+            ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
 }
 
-extension UILabel {
-    func configureLabels() {
-        self.textColor = .white
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: idOptionalTableViewCell, for: indexPath)
+        cell.textLabel?.text = "Cell"
+        
+        return cell
     }
 }
