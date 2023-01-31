@@ -29,7 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             favoriteNavigationController: favoriteNavigationController,
                             detailIngredNavigationController: detailIngredNavigationController,
                             timerNavigationController: timerNavigationController)
-        router.setupTabBarController()
+//        router.setupTabBarController()
+        
         
         window?.backgroundColor = .white
         window?.rootViewController = tabBarController

@@ -32,5 +32,4 @@ class TimerListPresenter: TimerListViewPresenterProtocol {
         router?.showTimer()
     }
     
-    
 }

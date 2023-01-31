@@ -14,6 +14,7 @@ protocol IngridientViewProtocol: AnyObject {
 
 protocol IngridientViewPresenterProtocol: AnyObject {
     init(view: IngridientViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) // в иницилизацию еще нужно опрокинуть модельку
+    func backButtonInIngredientWasPressed()
 }
 
 class IngridientPresenter: IngridientViewPresenterProtocol {
@@ -29,5 +30,8 @@ class IngridientPresenter: IngridientViewPresenterProtocol {
         
     }
     
+    func backButtonInIngredientWasPressed() {
+        router?.goBackToFavoriteView()
+    }
     
 }
