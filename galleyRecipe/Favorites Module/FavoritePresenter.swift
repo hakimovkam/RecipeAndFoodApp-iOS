@@ -15,6 +15,7 @@ protocol FavoriteViewProtocol: AnyObject {
 protocol FavoriteViewPresenterProtocol: AnyObject {
     init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     func tapOnTheRecipe()
+    func tapOnTheBackButton()
 }
 
 class FavoritePresenter: FavoriteViewPresenterProtocol {
@@ -31,6 +32,10 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
     
     func tapOnTheRecipe() {
         router?.showIngredients()
+    }
+    
+    func tapOnTheBackButton() {
+        router
     }
     
     /* Через презентер обращаемся к networkService и вытаскиваем список Characters */

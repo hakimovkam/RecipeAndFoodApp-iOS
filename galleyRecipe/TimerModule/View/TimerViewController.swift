@@ -60,6 +60,15 @@ final class TimerViewController: GradientViewController {
         setConstraints()
         pauseButton.isEnabled = false
     }
+    
+    
+    /* Функция которая будет возвращать к рутовой вьюшки
+     возможность проверить пока нет, так как экран еще не готов по дизайну
+     
+    @objc func backButtonWasPressed() {
+        presenter.backButtonInTimerWasPressed()
+    }
+    */
 }
 
 // MARK: - Create Timer
