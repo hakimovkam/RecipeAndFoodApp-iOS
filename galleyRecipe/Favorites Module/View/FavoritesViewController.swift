@@ -90,6 +90,8 @@ final class FavoritesViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self

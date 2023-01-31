@@ -8,7 +8,16 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
+    /* тут интернет прослойка нужно сделать функции запроса
+     getRicipes(completion: @escaping (Result<*моделька даты с JSON*?, Error>) -> Void))
+     *RecipeModel*
+     */
 }
 
-class NetworkService: NetworkServiceProtocol {  
+class NetworkService: NetworkServiceProtocol {
+    
 }
+
+
+//api key "?apiKey=997ced0c82834e24a3a3290f8123f2b5"
+//urlString "https://api.spoonacular.com/recipes/complexSearch?apiKey=997ced0c82834e24a3a3290f8123f2b5"
