@@ -8,8 +8,10 @@
 import UIKit
 
 
-class IngredientsViewController: UIViewController {
+class IngredientViewController: GradientViewController {
 
+    var presenter: IngridientViewPresenterProtocol!
+    
     // MARK: - UI
     
     //image
@@ -130,4 +132,9 @@ extension UILabel {
     func configureLabels() {
         self.textColor = .white
     }
+}
+
+// extension presenter
+extension IngredientViewController: IngridientViewProtocol {
+    
 }

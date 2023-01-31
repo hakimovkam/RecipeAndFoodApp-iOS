@@ -31,7 +31,7 @@ extension UIColor {
 
 extension UITableViewDelegate {
     func setTableViewHeader(width: CGFloat, height: CGFloat, text: String) -> UIView {
-        let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         
         var checkInt = 0
 
@@ -58,9 +58,6 @@ extension UITableViewDelegate {
             label.text = text
         }
         label.font = UIFont(name: "Poppins-Bold", size: 24)
-//        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 2
-//        label.minimumScaleFactor = 0.5
         
         //MARK: - blurEffect
         let blurEffect = UIBlurEffect(style: .light)
@@ -74,7 +71,6 @@ extension UITableViewDelegate {
             view.backgroundColor = .white
             view.alpha = 0.7
             view.translatesAutoresizingMaskIntoConstraints = false
-
             return view
         }()
         
@@ -109,7 +105,7 @@ extension CALayer {
 
     func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
 
-        var border = CALayer()
+        let border = CALayer()
 
         switch edge {
         case UIRectEdge.top:
