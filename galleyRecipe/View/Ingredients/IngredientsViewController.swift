@@ -85,7 +85,9 @@ class IngredientsViewController: UIViewController {
     
     let backbutton: UIButton = {
         let button = UIButton()
-        button.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+        button.setImage(UIImage(named: "arrowLeft.png"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override func viewDidLoad() {
@@ -186,6 +188,12 @@ extension IngredientsViewController {
             ingredientsTableView.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 2),
             grayView.trailingAnchor.constraint(equalTo: ingredientsTableView.trailingAnchor, constant: 2),
             ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        ])
+        
+        view.addSubview(backbutton)
+        NSLayoutConstraint.activate([
+            backbutton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backbutton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
         ])
     }
 }
