@@ -13,7 +13,7 @@ import UIKit
     3.1 возможно можно реализовать адекватную работу поисковой строки через search сontroller и тогда поведение будет таким, каким я его описал выше. пока что через search controller происходит какая ерунда.x
  */
 
-class FavoritesViewController: GradientViewController {
+final class FavoritesViewController: GradientViewController {
     
     var presenter: FavoriteViewPresenterProtocol!
     
