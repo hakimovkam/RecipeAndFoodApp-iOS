@@ -13,13 +13,14 @@ import UIKit
     3.1 возможно можно реализовать адекватную работу поисковой строки через search сontroller и тогда поведение будет таким, каким я его описал выше. пока что через search controller происходит какая ерунда.x
  */
 
-class FavoritesViewController: GradientViewController {
+final class FavoritesViewController: GradientViewController {
     
     var presenter: FavoriteViewPresenterProtocol!
     
     private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
 //    private var data: [String] = []
+    private var lastContentOffset: CGFloat = 0
     
     private let textLabel: UILabel = {
         let textLabel = UILabel()
@@ -82,6 +83,12 @@ class FavoritesViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
+         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
+         функция неактивна, чтоб в навбаре была возможность вернуться назад
+         */
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+        
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
@@ -91,18 +98,6 @@ class FavoritesViewController: GradientViewController {
         } else {
             setupTableView()
         }
-    }
-    
-    @objc func favoriteButtonPressed(sender: UIButton) {
-        let rowIndex:Int = sender.tag
-        print(rowIndex)
-        print("favoriteButtonPressed")
-    }
-    
-    @objc func timerButtonPressed(sender: UIButton) {
-        let rowIndex:Int = sender.tag
-        print(rowIndex)
-        print("timerButtonPressed")
     }
 }
 
@@ -116,11 +111,13 @@ extension FavoritesViewController: UITableViewDataSource {
         cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
         cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
         
+        /*
         cell.favoriteButton.tag = indexPath.row
         cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonPressed(sender: )), for: .touchUpInside)
         
         cell.timerButton.tag = indexPath.row
         cell.timerButton.addTarget(self, action: #selector(timerButtonPressed(sender: )), for: .touchUpInside)
+         */
         
         return cell
     }
@@ -131,9 +128,7 @@ extension FavoritesViewController: UITableViewDataSource {
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let detailVC = IngredientsViewController()
-        print("next")
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        presenter.tapOnTheRecipe()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
@@ -145,6 +140,30 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return 52 }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        //Анимация исчезновения search bar при скролле
+        if (self.lastContentOffset > scrollView.contentOffset.y) {
+            if lastContentOffset < 50 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.04)
+            }
+        }
+        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+           // move down
+            if lastContentOffset < 50 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.04)
+            }
+        }
+        // update the new position acquired
+        self.lastContentOffset = scrollView.contentOffset.y
+        
+        
+    }
 }
 //MARK: - SearchResultsUpdate
 extension FavoritesViewController: UISearchBarDelegate {
@@ -167,6 +186,7 @@ extension FavoritesViewController {
         view.addSubview(tableView)
         view.addSubview(searchBar)
         
+        navigationController?.navigationBar.showsLargeContentViewer = false
         tableView.tableHeaderView = searchBar
  
         NSLayoutConstraint.activate([

@@ -21,8 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let builder: BuilderProtocol = Builder()
         let tabBarController = CustomTabBarController()
-        let router = Router(tabBarController: tabBarController, builder: builder)
+        let favoriteNavigationController = UINavigationController()
+        let detailIngredNavigationController = UINavigationController()
+        let timerNavigationController = UINavigationController()
+        let router = Router(tabBarController: tabBarController,
+                            builder: builder,
+                            favoriteNavigationController: favoriteNavigationController,
+                            detailIngredNavigationController: detailIngredNavigationController,
+                            timerNavigationController: timerNavigationController)
         router.setupTabBarController()
+        
         
         window?.backgroundColor = .white
         window?.rootViewController = tabBarController

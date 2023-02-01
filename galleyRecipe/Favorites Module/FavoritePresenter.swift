@@ -14,7 +14,7 @@ protocol FavoriteViewProtocol: AnyObject {
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
     init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-//    func getCharacterList()
+    func tapOnTheRecipe()
 }
 
 class FavoritePresenter: FavoriteViewPresenterProtocol {
@@ -23,7 +23,19 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
-    /* Через презентер обращаемся к networkService и вытаскиваем список Characters */
+    required init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+        self.view = view
+        self.networkService = networkService
+        self.router = router
+    }
+    
+    func tapOnTheRecipe() {
+        router?.showIngredients()
+    }
+    
+    
+    /* пример кода как обращаться к сетевому слою на будущее */
+    /* Через презентер обращаемся к networkService и вытаскиваем список моделей */
 //    func getCharacterList() {
 //        networkService.getCharactersList { [weak self] result in
 //            guard let self = self else { return }
@@ -39,12 +51,7 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
 //        }
 //    }
     
-    required init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
-        self.networkService = networkService
-        self.router = router
-//        getCharacterList()
-    }
+
     
     
 }

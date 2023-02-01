@@ -7,8 +7,10 @@
 
 import UIKit
 
-class TimerListViewController: GradientViewController {
+final class TimerListViewController: GradientViewController {
 
+    var presenter: TimerListViewPresenterProtocol!
+    
     private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
 //    private var data: [String] = []
@@ -61,6 +63,12 @@ class TimerListViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
+         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
+         функция неактивна, чтоб в навбаре была возможность вернуться назад
+         */
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -76,6 +84,7 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { data.count }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.tapOnTheTimer()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,6 +115,14 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 76 }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 52 }
+}
+
+extension TimerListViewController: TimerListViewProtocol {
+    func didFailWithError(error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    
 }
 
 extension TimerListViewController {

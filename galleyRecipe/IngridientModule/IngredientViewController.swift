@@ -8,8 +8,10 @@
 import UIKit
 
 
-class IngredientsViewController: UIViewController {
+final class IngredientViewController: GradientViewController {
 
+    var presenter: IngridientViewPresenterProtocol!
+    
     // MARK: - UI
     
     //image
@@ -84,6 +86,14 @@ class IngredientsViewController: UIViewController {
         
     }
     
+    /* Функция которая будет возвращать к рутовой вьюшки
+     возможность проверить пока нет, так как экран еще не готов по дизайну
+    
+    @objc func backButtonWasPressed() {
+        presenter.backButtonInIngredientWasPressed()
+    }
+     */
+    
     // MARK: - Constraints
     
     func imageOnTopConstraints() {
@@ -130,4 +140,9 @@ extension UILabel {
     func configureLabels() {
         self.textColor = .white
     }
+}
+
+// extension presenter
+extension IngredientViewController: IngridientViewProtocol {
+    
 }
