@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TimerListViewController: GradientViewController {
+final class TimerListViewController: GradientViewController {
 
     var presenter: TimerListViewPresenterProtocol!
     

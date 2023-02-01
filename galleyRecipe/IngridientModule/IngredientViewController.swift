@@ -8,7 +8,7 @@
 import UIKit
 
 
-class IngredientViewController: GradientViewController {
+final class IngredientViewController: GradientViewController {
 
     var presenter: IngridientViewPresenterProtocol!
     
