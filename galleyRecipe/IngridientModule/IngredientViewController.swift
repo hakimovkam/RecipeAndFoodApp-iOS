@@ -89,7 +89,8 @@ final class IngredientViewController: GradientViewController {
     /* Функция которая будет возвращать к рутовой вьюшки
      возможность проверить пока нет, так как экран еще не готов по дизайну
     
-    @objc func backButtonWasPressed() {
+    @objc
+    func backButtonWasPressed() {
         presenter.backButtonInIngredientWasPressed()
     }
      */
