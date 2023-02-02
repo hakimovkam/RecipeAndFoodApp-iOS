@@ -20,9 +20,10 @@ final class FavoritesViewController: GradientViewController {
     private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
 //    private var data: [String] = []
+    
     private var lastContentOffset: CGFloat = 0
     
-    private let textLabel: UILabel = {
+    private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
@@ -35,7 +36,7 @@ final class FavoritesViewController: GradientViewController {
         return textLabel
     }()
     
-    private let characterLabel: UILabel = {
+    private lazy var characterLabel: UILabel = {
         let characterLabel = UILabel()
         characterLabel.text = "⭐"
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
@@ -44,7 +45,7 @@ final class FavoritesViewController: GradientViewController {
         return characterLabel
     }()
     
-    private let headerLabel: UILabel = {
+    private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.text = "Favorites"
@@ -161,8 +162,6 @@ extension FavoritesViewController: UITableViewDelegate {
         }
         // update the new position acquired
         self.lastContentOffset = scrollView.contentOffset.y
-        
-        
     }
 }
 //MARK: - SearchResultsUpdate
@@ -219,7 +218,7 @@ extension FavoritesViewController {
             
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)

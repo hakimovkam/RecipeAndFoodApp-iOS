@@ -55,6 +55,7 @@
 		EB62A79D2986DF1900FD420C /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79A2986DF1900FD420C /* TimerListCell.swift */; };
 		EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79B2986DF1900FD420C /* TimerListViewController.swift */; };
 		EB62A79F2986DF1900FD420C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79C2986DF1900FD420C /* TimerViewController.swift */; };
+		EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */; };
 		EBE8F3D0298870BC00AD5870 /* IngridientPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */; };
 		EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* UIExtension.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +83,7 @@
 		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = galleyRecipe/Routing/Builder.swift; sourceTree = SOURCE_ROOT; };
 		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = "galleyRecipe/Favorites Module/FavoritePresenter.swift"; sourceTree = SOURCE_ROOT; };
 		EB26277B29786942002B8924 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
-		EB29D8182982A4EB00F5740E /* GradientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientViewController.swift; path = galleyRecipe/CustomViews/GradientViewController.swift; sourceTree = SOURCE_ROOT; };
+		EB29D8182982A4EB00F5740E /* GradientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientViewController.swift; path = galleyRecipe/CustomViews/Effects/GradientViewController.swift; sourceTree = SOURCE_ROOT; };
 		EB29F37D297E8064002F74BD /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		EB29F37E297E8064002F74BD /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		EB29F37F297E8064002F74BD /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -105,13 +106,14 @@
 		EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkBlurEffectView.swift; sourceTree = "<group>"; };
 		EB29F3A4297E80BB002F74BD /* ImageConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageConstant.swift; sourceTree = "<group>"; };
 		EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = galleyRecipe/View/CustomTabBarController.swift; sourceTree = SOURCE_ROOT; };
+		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = "galleyRecipe/CustomViews/UI Elements/CustomTabBarController.swift"; sourceTree = SOURCE_ROOT; };
 		EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBlurEffectView.swift; sourceTree = "<group>"; };
 		EB62A79A2986DF1900FD420C /* TimerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = "<group>"; };
 		EB62A79B2986DF1900FD420C /* TimerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
 		EB62A79C2986DF1900FD420C /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChipsCollectionViewCell.swift; path = "galleyRecipe/CustomViews/UI Elements/ChipsCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngridientPresenter.swift; path = galleyRecipe/IngridientPresenter.swift; sourceTree = SOURCE_ROOT; };
-		EBFDB1FE297957A700CA0084 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIExtension.swift; path = galleyRecipe/Extension/UIExtension.swift; sourceTree = SOURCE_ROOT; };
+		EBFDB1FE297957A700CA0084 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIExtension.swift; path = galleyRecipe/CustomViews/Extension/UIExtension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +150,6 @@
 				9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */,
 				9EE1F66929858CEF006B5F28 /* NetworkManager */,
 				EB3899CC297BCE2100705344 /* Routing */,
-				EB3899D3297C031F00705344 /* Extension */,
 				EB3899D1297C02CB00705344 /* Favorites Module */,
 				EBE8F3CE2988709A00AD5870 /* IngridientModule */,
 				EB62A7992986DF1900FD420C /* TimerModule */,
@@ -197,7 +198,6 @@
 			children = (
 				EB62A79B2986DF1900FD420C /* TimerListViewController.swift */,
 				EB62A79C2986DF1900FD420C /* TimerViewController.swift */,
-				EB62A79A2986DF1900FD420C /* TimerListCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,11 +259,9 @@
 		EB3899D2297C031600705344 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				EB29D8182982A4EB00F5740E /* GradientViewController.swift */,
-				EB3899CF297BD9E000705344 /* CustomTabBarController.swift */,
-				EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */,
-				EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */,
-				EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */,
+				EB766638298BC60A0044C492 /* Effects */,
+				EB3899D3297C031F00705344 /* Extension */,
+				EB766639298BC62D0044C492 /* UI Elements */,
 				EB29F3A4297E80BB002F74BD /* ImageConstant.swift */,
 			);
 			path = CustomViews;
@@ -284,6 +282,27 @@
 				EB1BD5D029896195009EB706 /* View */,
 			);
 			path = TimerModule;
+			sourceTree = "<group>";
+		};
+		EB766638298BC60A0044C492 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				EB29D8182982A4EB00F5740E /* GradientViewController.swift */,
+				EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */,
+				EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		EB766639298BC62D0044C492 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				EB62A79A2986DF1900FD420C /* TimerListCell.swift */,
+				EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */,
+				EB3899CF297BD9E000705344 /* CustomTabBarController.swift */,
+				EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */,
+			);
+			path = "UI Elements";
 			sourceTree = "<group>";
 		};
 		EBE8F3CE2988709A00AD5870 /* IngridientModule */ = {
@@ -403,6 +422,7 @@
 				EBE8F3D0298870BC00AD5870 /* IngridientPresenter.swift in Sources */,
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
 				EBFDB1FF297957A700CA0084 /* UIExtension.swift in Sources */,
+				EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */,
 				9E7C2F10296B20140006EECF /* DescriptionViewController.swift in Sources */,
 				EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
