@@ -148,12 +148,11 @@ extension FavoritesViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         //Анимация исчезновения search bar при скролле
-        if (self.lastContentOffset > scrollView.contentOffset.y) {
+        if self.lastContentOffset > scrollView.contentOffset.y {
             if lastContentOffset < 50 {
                 searchBar.alpha = 1 - (lastContentOffset * 0.04)
             }
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
            // move down
             if lastContentOffset < 50 {
                 searchBar.alpha = 1 - (lastContentOffset * 0.04)

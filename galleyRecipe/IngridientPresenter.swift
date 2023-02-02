@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol IngridientViewProtocol: AnyObject {
-//    func didUpdate()
-//    func didFailWithError(error: Error)
-}
+protocol IngridientViewProtocol: AnyObject {}
 
 protocol IngridientViewPresenterProtocol: AnyObject {
     init(view: IngridientViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) // в иницилизацию еще нужно опрокинуть модельку
