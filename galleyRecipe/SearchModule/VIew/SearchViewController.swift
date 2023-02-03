@@ -186,6 +186,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             categoryCell.label.text = categoryData[indexPath.item]
             return categoryCell
         }
+        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - ChipsCollectionViewDelegateFlowLayout
