@@ -35,6 +35,7 @@ class CustomTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.7
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -46,6 +47,7 @@ class CustomTableViewCell: UITableViewCell {
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 30
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
   
@@ -57,6 +59,7 @@ class CustomTableViewCell: UITableViewCell {
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
@@ -68,6 +71,7 @@ class CustomTableViewCell: UITableViewCell {
         view.alpha = 0
         view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
         
@@ -78,6 +82,7 @@ class CustomTableViewCell: UITableViewCell {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -88,6 +93,7 @@ class CustomTableViewCell: UITableViewCell {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
 }

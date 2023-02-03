@@ -13,8 +13,6 @@ class TimerListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        
         self.setupViews()
         self.setupConstraints()
     }
@@ -34,6 +32,7 @@ class TimerListCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 5
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -45,6 +44,7 @@ class TimerListCell: UITableViewCell {
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     
@@ -62,7 +62,6 @@ class TimerListCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
         label.numberOfLines = 1
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -94,8 +93,6 @@ extension TimerListCell {
             
             timerLabel.widthAnchor.constraint(equalToConstant: 60),
             timerLabel.heightAnchor.constraint(equalToConstant: 24)
-            
-            
         ])
     }
 }

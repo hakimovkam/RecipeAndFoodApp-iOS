@@ -111,19 +111,8 @@ extension FavoritesViewController: UITableViewDataSource {
         
         cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
         cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        
-        /*
-        cell.favoriteButton.tag = indexPath.row
-        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonPressed(sender: )), for: .touchUpInside)
-        
-        cell.timerButton.tag = indexPath.row
-        cell.timerButton.addTarget(self, action: #selector(timerButtonPressed(sender: )), for: .touchUpInside)
-         */
-        
         return cell
     }
-
-    
 }
 
 extension FavoritesViewController: UITableViewDelegate {
@@ -147,20 +136,15 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        //Анимация исчезновения search bar при скролле
         if (self.lastContentOffset > scrollView.contentOffset.y) {
             if lastContentOffset < 50 {
                 searchBar.alpha = 1 - (lastContentOffset * 0.04)
             }
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) {
-           // move down
+        } else if self.lastContentOffset < scrollView.contentOffset.y {
             if lastContentOffset < 50 {
                 searchBar.alpha = 1 - (lastContentOffset * 0.04)
             }
         }
-        // update the new position acquired
         self.lastContentOffset = scrollView.contentOffset.y
     }
 }
