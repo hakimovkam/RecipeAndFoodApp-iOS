@@ -2,6 +2,8 @@ import UIKit
 
 final class SearchViewController: GradientViewController, UISearchBarDelegate {
 
+    var presenter: SearchViewPresenterProtocol!
+    
     private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
 //    private var data: [String] = []
@@ -77,6 +79,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tapToSortButton), for: .touchUpInside)
         return button
     }()
     
@@ -86,12 +89,26 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+//        navigationController?.setNavigationBarHidden(true, animated: true)
         
         if data.isEmpty {
             setupEmptyView()
         } else {
             setupTableView()
         }
+    }
+    
+    @objc
+    func tapToSortButton() {
+        UIView.animate(withDuration: 0.1,
+            animations: {
+                self.sortButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            },
+            completion: { _ in
+                UIView.animate(withDuration: 0.3) {
+                    self.sortButton.transform = CGAffineTransform.identity
+                }
+            })
     }
 }
 
@@ -110,6 +127,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.tapOnTheRecipe()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
@@ -157,6 +175,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension SearchViewController: SearchViewProtocol {
+    func didFailWithError(error: Error) {
+        print(error.localizedDescription)
+    }
+}
+
 extension SearchViewController {
     func setupTableView() {
         
@@ -198,12 +222,12 @@ extension SearchViewController {
             sortButton.heightAnchor.constraint(equalToConstant: 24),
             
 
-            collectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
+            collectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
             collectionView.heightAnchor.constraint(equalToConstant: 32),
 
-            countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
+            countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
             countryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             countryCollectionView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
             countryCollectionView.heightAnchor.constraint(equalToConstant: 32)

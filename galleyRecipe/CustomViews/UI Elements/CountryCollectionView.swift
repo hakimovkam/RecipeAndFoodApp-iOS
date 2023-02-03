@@ -20,7 +20,7 @@ class CountryCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         register(ChipsCollectionViewCell.self, forCellWithReuseIdentifier: ChipsCollectionViewCell.identidierCountry)
-        chipsLayout.minimumInteritemSpacing = 5
+        chipsLayout.minimumInteritemSpacing = 0
         chipsLayout.scrollDirection = .horizontal
         showsHorizontalScrollIndicator = false
     }
@@ -50,7 +50,7 @@ extension CountryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayaut: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
         let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
-        let categoryWidth = countryCategoryArray[indexPath.item].size(withAttributes: categoryAttributes).width + 30
+        let categoryWidth = countryCategoryArray[indexPath.item].size(withAttributes: categoryAttributes).width + 40
         
         return CGSize(width: categoryWidth, height: collectionView.frame.height)
     }

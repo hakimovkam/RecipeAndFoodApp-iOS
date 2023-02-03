@@ -12,7 +12,7 @@ protocol BuilderProtocol {
     func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func createTimerListViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func showTimerViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
-//    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
+    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
 }
 
 class Builder: BuilderProtocol {
@@ -49,12 +49,12 @@ class Builder: BuilderProtocol {
     }
     
     
-//    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-//        let view = SearchViewController()
-//        let presenter = SearchPresenter(view: view, networkService: networkService, router: router)
-//        
-//        view.presenter = presenter
-//        return view
-//    }
+    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
+        let view = SearchViewController()
+        let presenter = SearchPresenter(view: view, networkService: networkService, router: router)
+        
+        view.presenter = presenter
+        return view
+    }
     
 }
