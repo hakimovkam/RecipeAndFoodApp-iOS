@@ -19,7 +19,7 @@ class CategoryCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         register(ChipsCollectionViewCell.self, forCellWithReuseIdentifier: ChipsCollectionViewCell.identifierCategory)
-        chipsLayout.minimumInteritemSpacing = 5
+        chipsLayout.minimumInteritemSpacing = 0
         chipsLayout.scrollDirection = .horizontal
         showsHorizontalScrollIndicator = false
     }

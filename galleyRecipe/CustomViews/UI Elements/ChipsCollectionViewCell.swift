@@ -41,7 +41,7 @@ class ChipsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             label.heightAnchor.constraint(equalToConstant: 32)

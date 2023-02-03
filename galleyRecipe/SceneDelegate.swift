@@ -24,11 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let favoriteNavigationController = UINavigationController()
         let detailIngredNavigationController = UINavigationController()
         let timerNavigationController = UINavigationController()
+        let searchNavigationController = UINavigationController()
         let router = Router(tabBarController: tabBarController,
                             builder: builder,
                             favoriteNavigationController: favoriteNavigationController,
                             detailIngredNavigationController: detailIngredNavigationController,
-                            timerNavigationController: timerNavigationController)
+                            timerNavigationController: timerNavigationController,
+                            searchNavigationController: searchNavigationController)
         router.setupTabBarController()
         
         
