@@ -50,6 +50,7 @@
 		EB29F3A2297E8064002F74BD /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB29F38F297E8064002F74BD /* Poppins-MediumItalic.ttf */; };
 		EB29F3A5297E80BB002F74BD /* DarkBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */; };
 		EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29F3A4297E80BB002F74BD /* ImageConstant.swift */; };
+		EB385F7E298D3F9A00B80749 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB385F7D298D3F9A00B80749 /* SearchPresenter.swift */; };
 		EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */; };
 		EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899CF297BD9E000705344 /* CustomTabBarController.swift */; };
 		EB3995E829951DA400974218 /* TestingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3995E729951DA400974218 /* TestingData.swift */; };
@@ -108,6 +109,7 @@
 		EB29F38F297E8064002F74BD /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkBlurEffectView.swift; sourceTree = "<group>"; };
 		EB29F3A4297E80BB002F74BD /* ImageConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageConstant.swift; sourceTree = "<group>"; };
+		EB385F7D298D3F9A00B80749 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = "galleyRecipe/CustomViews/UI Elements/CustomTabBarController.swift"; sourceTree = SOURCE_ROOT; };
 		EB3995E729951DA400974218 /* TestingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingData.swift; sourceTree = "<group>"; };
@@ -201,7 +203,8 @@
 		EB0EA9C9298CF07F00C643C4 /* SearchModule */ = {
 			isa = PBXGroup;
 			children = (
-				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
+				EB385F7F298D3FBE00B80749 /* Presenter */,
+				EB385F7C298D3F9000B80749 /* VIew */,
 			);
 			path = SearchModule;
 			sourceTree = "<group>";
@@ -288,6 +291,22 @@
 				EB29F38F297E8064002F74BD /* Poppins-MediumItalic.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		EB385F7C298D3F9000B80749 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				9E7C2F11296B22F30006EECF /* SearchViewController.swift */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		EB385F7F298D3FBE00B80749 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EB385F7D298D3F9A00B80749 /* SearchPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		EB3899CC297BCE2100705344 /* Routing */ = {
@@ -460,6 +479,7 @@
 			files = (
 				E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */,
 				EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */,
+				EB385F7E298D3F9A00B80749 /* SearchPresenter.swift in Sources */,
 				9EE1F66C29858D50006B5F28 /* RecipeManager.swift in Sources */,
 				9EE1F67029858DA4006B5F28 /* CookBookRecipes.swift in Sources */,
 				EB3995E829951DA400974218 /* TestingData.swift in Sources */,

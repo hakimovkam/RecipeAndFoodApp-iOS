@@ -75,6 +75,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tapToSortButton), for: .touchUpInside)
         return button
     }()
     
@@ -95,6 +96,19 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
             setupTableView()
         }
     }
+    
+    @objc
+    func tapToSortButton() {
+        UIView.animate(withDuration: 0.1,
+            animations: {
+                self.sortButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            },
+            completion: { _ in
+                UIView.animate(withDuration: 0.3) {
+                    self.sortButton.transform = CGAffineTransform.identity
+                }
+            })
+    }
 }
 //MARK: - TableViewDelegate & TableViewDataSource
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -112,6 +126,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.tapOnTheRecipe()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
@@ -171,6 +186,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             categoryCell.label.text = categoryData[indexPath.item]
             return categoryCell
         }
+        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - ChipsCollectionViewDelegateFlowLayout
