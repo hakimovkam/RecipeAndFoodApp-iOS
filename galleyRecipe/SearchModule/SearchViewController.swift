@@ -7,7 +7,8 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
 //    private var data: [String] = []
 //    var presenter: SearchViewPresenterProtocol!
 
-    private var collectionView: UICollectionView?
+    private var collectionView = CategoryCollectionView()
+    private var countryCollectionView = CountryCollectionView()
 
     private var lastContentOffset: CGFloat = 0
     
@@ -69,35 +70,30 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         return textLabel
     }()
     
+    private let sortButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: ImageConstant.sortButton)
+        button.setImage(image, for: .normal)
+        button.backgroundColor = .clear
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        guard let collectionView = collectionView else {
-            return
-        }
-        
-        collectionView.register(ChipsCollectionViewCell.self, forCellWithReuseIdentifier: ChipsCollectionViewCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
-        view.addSubview(collectionView)
-//        collectionView.frame =
-        
-//        if data.isEmpty {
-//            setupEmptyView()
-//        } else {
-//            setupTableView()
-//        }
+        if data.isEmpty {
+            setupEmptyView()
+        } else {
+            setupTableView()
+        }
     }
 }
-
-
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -142,55 +138,78 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //Анимация исчезновения search bar при скролле
-        if (self.lastContentOffset > scrollView.contentOffset.y) { // move up
-            if lastContentOffset < 50 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.04)
+        if self.lastContentOffset > scrollView.contentOffset.y { // move up
+            if lastContentOffset < 100 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.01)
+                sortButton.alpha = 1 - (lastContentOffset * 0.01)
+                collectionView.alpha = 1 - (lastContentOffset * 0.02)
+                countryCollectionView.alpha = 1 - (lastContentOffset * 0.05)
             }
-        }
-        else if (self.lastContentOffset < scrollView.contentOffset.y) { // move down
-            if lastContentOffset < 50 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.04)
+        } else if self.lastContentOffset < scrollView.contentOffset.y { // move down
+            if lastContentOffset < 100 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.01)
+                sortButton.alpha = 1 - (lastContentOffset * 0.01)
+                collectionView.alpha = 1 - (lastContentOffset * 0.02)
+                countryCollectionView.alpha = 1 - (lastContentOffset * 0.05)
             }
         }
         self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout ,UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 500
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-        
-        return cell
-    }
-    
-    
-}
-
 extension SearchViewController {
     func setupTableView() {
         
+        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 138))
+        tableHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(tableView)
-        view.addSubview(searchBar)
+        tableHeaderView.addSubview(searchBar)
+        tableHeaderView.addSubview(collectionView)
+        tableHeaderView.addSubview(countryCollectionView)
+        tableHeaderView.addSubview(sortButton)
+        view.addSubview(tableHeaderView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        countryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+
         
         navigationController?.navigationBar.showsLargeContentViewer = false
-        tableView.tableHeaderView = searchBar
+        tableView.tableHeaderView = tableHeaderView
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            
+            tableHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableHeaderView.heightAnchor.constraint(equalToConstant: 138),
+            
+            searchBar.leftAnchor.constraint(equalTo: tableHeaderView.leftAnchor, constant: 16),
+            sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 10),
+            searchBar.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: 8),
+            searchBar.heightAnchor.constraint(equalToConstant: 50),
+            
+            sortButton.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: 21),
+            tableHeaderView.rightAnchor.constraint(equalTo: sortButton.rightAnchor, constant: 16),
+            sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 10),
+            sortButton.heightAnchor.constraint(equalToConstant: 24),
+            
 
-            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: 16),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            searchBar.heightAnchor.constraint(equalToConstant: 50)
+            collectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
+            collectionView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
+            collectionView.heightAnchor.constraint(equalToConstant: 32),
+
+            countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
+            countryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            countryCollectionView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
+            countryCollectionView.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
+    
     func setupEmptyView() {
         view.addSubview(searchBar)
         view.addSubview(characterLabel)
