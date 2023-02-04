@@ -7,7 +7,6 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
     
 //    private var data: [String] = []
-//    var presenter: SearchViewPresenterProtocol!
 
     private var collectionView = CategoryCollectionView()
     private var countryCollectionView = CountryCollectionView()
@@ -89,7 +88,6 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-//        navigationController?.setNavigationBarHidden(true, animated: true)
         
         if data.isEmpty {
             setupEmptyView()

@@ -29,6 +29,6 @@ class SearchPresenter: SearchViewPresenterProtocol {
     }
     
     func tapOnTheRecipe() {
-        router?.showIngredients(0)
+        router?.showIngredients()
     }
 }

@@ -84,12 +84,6 @@ final class FavoritesViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-        
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self

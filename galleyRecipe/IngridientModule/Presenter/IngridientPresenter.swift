@@ -31,7 +31,7 @@ class IngridientPresenter: IngridientViewPresenterProtocol {
     }
     
     func backButtonInIngredientWasPressed() {
-        router?.goBackToFavoriteView()
+        router?.goBackToRootView()
     }
     
 }

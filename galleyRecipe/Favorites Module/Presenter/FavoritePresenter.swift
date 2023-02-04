@@ -30,7 +30,7 @@ class FavoritePresenter: FavoriteViewPresenterProtocol {
     }
     
     func tapOnTheRecipe() {
-        router?.showIngredients(1)
+        router?.showIngredients()
     }
     
     

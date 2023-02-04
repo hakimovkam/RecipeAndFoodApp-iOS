@@ -11,9 +11,9 @@ final class TimerListViewController: GradientViewController {
 
     var presenter: TimerListViewPresenterProtocol!
     
-//    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
-    
-    private var data: [String] = []
+    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
+
+//    private var data: [String] = []
     
     private let headerLabel: UILabel = {
         let label = UILabel()
@@ -62,13 +62,7 @@ final class TimerListViewController: GradientViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-        
+
         tableView.dataSource = self
         tableView.delegate = self
         
