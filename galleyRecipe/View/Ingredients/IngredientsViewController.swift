@@ -8,7 +8,7 @@
 import UIKit
 
 
-class IngredientsViewController: UIViewController {
+final class IngredientsViewController: UIViewController {
     
     private let idOptionalTableViewCell = "idOptionalTableViewCell"
 
@@ -16,7 +16,6 @@ class IngredientsViewController: UIViewController {
     
     private let ingredientsTableView: UITableView = {
         let tableView = UITableView.init(frame: .zero, style: UITableView.Style.plain)
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -204,7 +203,6 @@ extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idOptionalTableViewCell, for: indexPath)
-        
         return cell
     }
     //высота ячейки

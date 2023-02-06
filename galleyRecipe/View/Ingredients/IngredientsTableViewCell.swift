@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IngredientsTableViewCell: UITableViewCell {
+final class IngredientsTableViewCell: UITableViewCell {
     
     private let circleImage: UIImageView = {
         let imageView = UIImageView()
