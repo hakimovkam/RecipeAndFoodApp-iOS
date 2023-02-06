@@ -8,23 +8,12 @@
 import UIKit
 
 class TimerProgressView: UIView, CAAnimationDelegate {
-    
-    private var secondsRemain = 5
 
-    private let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+    private let red =
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
     
-    private var startPoint = CGFloat(-Double.pi / 2)
-    private var endPoint = CGFloat(2 * Double.pi)
-    
     private var isAnimationStarted = false
-    
-    var progressColor = UIColor.white {
-        didSet {
-            progressLayer.strokeColor = progressColor.cgColor
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,18 +35,16 @@ extension TimerProgressView {
        
         circleLayer = createShapeLayer(
             lineWidth: 12.0,
-            strokeEnd: 1.0,
             strokeColor: UIColor.systemGray5.cgColor
         )
        
         progressLayer = createShapeLayer(
             lineWidth: 20.0,
-            strokeEnd: 1.0,
-            strokeColor: progressColor.cgColor
+            strokeColor: UIColor.systemGreen.cgColor
         )
     }
     
-    private func createShapeLayer(lineWidth: CGFloat, strokeEnd: CGFloat, strokeColor: CGColor) -> CAShapeLayer {
+    private func createShapeLayer(lineWidth: CGFloat, strokeColor: CGColor) -> CAShapeLayer {
         let startPoint = CGFloat(-Double.pi / 2)
         let endPoint = CGFloat(3 * Double.pi / 2)
         
@@ -75,69 +62,53 @@ extension TimerProgressView {
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = strokeColor
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.strokeEnd = strokeEnd
+        shapeLayer.strokeEnd = 1.0
         shapeLayer.lineCap = .round
         layer.addSublayer(shapeLayer)
         
         return shapeLayer
     }
     
-    func startResumeAnimation() {
-        if !isAnimationStarted {
-            startAnimation(duration: TimeInterval(secondsRemain))
-        } else {
-            resumeAnimation()
-        }
-    }
-    
-     func startAnimation(duration: TimeInterval) {
-        resetAnimation()
-         progressLayer.strokeEnd = 0.0
-        circularProgressAnimation.duration = duration
-         circularProgressAnimation.delegate =  self
-         circularProgressAnimation.fromValue = 1.0
-        circularProgressAnimation.toValue = 0.0
-        circularProgressAnimation.fillMode = .forwards
-        circularProgressAnimation.isRemovedOnCompletion = false
-         circularProgressAnimation.isAdditive = true
+    func startAnimation(currentStep: Int, totalSteps: Int) {
+        let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        let newProgress = 1.0 - Double(currentStep) / Double(totalSteps)
+        circularProgressAnimation.fromValue = progressLayer.strokeEnd
+        circularProgressAnimation.toValue = newProgress
+        progressLayer.strokeEnd = newProgress
         progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
         isAnimationStarted = true
     }
     
+    func changeStrokeColor(currentStep: Int, totalSteps: Int) {
+        let threeQuarter = totalSteps / 4 * 3
+        if currentStep <= threeQuarter {
+            progressLayer.strokeColor = UIColor.systemGreen.cgColor
+        } else {
+            progressLayer.strokeColor = UIColor.systemRed.cgColor
+        }
+    }
+    
     func resetAnimation() {
-        progressLayer.speed = 1.0
-        progressLayer.timeOffset = 0.0
         progressLayer.beginTime = 0.0
-        progressLayer.strokeEnd = 0.0
-//        progressLayer.removeAllAnimations()
+        progressLayer.strokeEnd = 1.0
+        progressLayer.strokeColor = UIColor.systemGreen.cgColor
+        progressLayer.removeAllAnimations() 
         isAnimationStarted = false
     }
     
+    func removeProgressStroke() {
+        progressLayer.strokeColor = UIColor.clear.cgColor
+    }
+   
     func resumeAnimation() {
         let pausedTime = progressLayer.timeOffset
-        progressLayer.speed = 1.0
-        progressLayer.timeOffset = 0.0
-        progressLayer.beginTime = 0.0
         let timeSincePaused = progressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         progressLayer.beginTime = timeSincePaused
     }
     
     func pauseAnimation() {
         let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
-        progressLayer.speed = 0.0
         progressLayer.timeOffset = pausedTime
-    }
-    
-    func stopAnimation() {
-        progressLayer.speed = 1.0
-        progressLayer.timeOffset = 0.0
-        progressLayer.beginTime = 0.0
-        progressLayer.strokeEnd = 1.0
-        progressLayer.removeAllAnimations()
-        isAnimationStarted = false
-    }
-    
-    internal func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        stopAnimation()
+        progressLayer.strokeColor = UIColor.systemGray2.cgColor
     }
 }
