@@ -14,42 +14,36 @@ final class TimerViewController: UIViewController {
     private var timer = Timer()
     
     let totalTime = 5.0
-    private var timeRemains = 5.0
     private let step = 0.01
+    private var timeRemains = 5.0
     private var currentStep = 0
+    private var isTimerStarted = false
     
     private var totalSteps: Int {
         Int(totalTime / step)
     }
-
-    private var isTimerStarted = false
-    
-    private let dishNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 30, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        return label
-    }()
     
     private let timerProgressView = TimerProgressView(
         frame: CGRect(x: 0.0, y: 0.0, width: 160, height: 160)
     )
     
-    private let playImage: UIImage = {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
-        let image = UIImage(systemName: "play.fill", withConfiguration: imageConfig) ?? UIImage()
-        return image
+    private let dishNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 26   , weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
+        return label
+    }()
+  
+    private lazy var playImage: UIImage = {
+        createButtonImage(name: "play.fill")
     }()
     
     
-    private let pauseImage: UIImage = {
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
-        let image = UIImage(systemName: "pause.fill", withConfiguration: imageConfig) ?? UIImage()
-        return image
+    private lazy var pauseImage: UIImage = {
+        createButtonImage(name: "pause.fill")
     }()
     
     private lazy var timerButton: UIButton = {
@@ -163,6 +157,12 @@ extension TimerViewController {
 // MARK: - Setup the View
 extension TimerViewController {
     
+    private func createButtonImage(name: String) -> UIImage {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
+        let image = UIImage(systemName: name, withConfiguration: imageConfig) ?? UIImage()
+        return image
+    }
+    
     private func setupSubviews(_ subviews: UIView...) {
         subviews.forEach { subview in
             view.addSubview(subview)
@@ -170,11 +170,10 @@ extension TimerViewController {
     }
 
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
             dishNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             dishNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            dishNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -70)
+            dishNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -80)
         ])
         
         NSLayoutConstraint.activate([

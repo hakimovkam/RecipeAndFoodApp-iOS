@@ -9,7 +9,10 @@ import UIKit
 
 class TimerProgressView: UIView, CAAnimationDelegate {
 
-    private let red =
+    private let redColor = UIColor.systemRed.cgColor
+    private let greenColor = UIColor.systemGreen.cgColor
+    private let grayColor = UIColor.systemGray2.cgColor
+    
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
     
@@ -35,12 +38,12 @@ extension TimerProgressView {
        
         circleLayer = createShapeLayer(
             lineWidth: 12.0,
-            strokeColor: UIColor.systemGray5.cgColor
+            strokeColor: grayColor
         )
        
         progressLayer = createShapeLayer(
             lineWidth: 20.0,
-            strokeColor: UIColor.systemGreen.cgColor
+            strokeColor: greenColor
         )
     }
     
@@ -82,16 +85,16 @@ extension TimerProgressView {
     func changeStrokeColor(currentStep: Int, totalSteps: Int) {
         let threeQuarter = totalSteps / 4 * 3
         if currentStep <= threeQuarter {
-            progressLayer.strokeColor = UIColor.systemGreen.cgColor
+            progressLayer.strokeColor = greenColor
         } else {
-            progressLayer.strokeColor = UIColor.systemRed.cgColor
+            progressLayer.strokeColor = redColor
         }
     }
     
     func resetAnimation() {
         progressLayer.beginTime = 0.0
         progressLayer.strokeEnd = 1.0
-        progressLayer.strokeColor = UIColor.systemGreen.cgColor
+        progressLayer.strokeColor = greenColor
         progressLayer.removeAllAnimations() 
         isAnimationStarted = false
     }
@@ -109,6 +112,6 @@ extension TimerProgressView {
     func pauseAnimation() {
         let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
         progressLayer.timeOffset = pausedTime
-        progressLayer.strokeColor = UIColor.systemGray2.cgColor
+        progressLayer.strokeColor = grayColor
     }
 }
