@@ -9,6 +9,8 @@ import UIKit
 
 final class IngredientsTableViewCell: UITableViewCell {
     
+    private let idOptionalTableViewCell = "idOptionalTableViewCell"
+    
     private let circleImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Pasta")
@@ -35,6 +37,7 @@ final class IngredientsTableViewCell: UITableViewCell {
         setupConstraints()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

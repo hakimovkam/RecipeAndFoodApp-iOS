@@ -10,8 +10,6 @@ import UIKit
 
 final class IngredientsViewController: UIViewController {
     
-    private let idOptionalTableViewCell = "idOptionalTableViewCell"
-
     // MARK: - UI
     
     private let ingredientsTableView: UITableView = {
