@@ -13,7 +13,7 @@ protocol TimerViewProtocol: AnyObject {
 
 protocol TimerViewPresenterProtocol: AnyObject {
     init (view: TimerViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func backButtonInTimerWasPressed()
+    func backButtonInTimerDidPressed()
 }
 
 class TimerPresenter: TimerViewPresenterProtocol {
@@ -29,7 +29,7 @@ class TimerPresenter: TimerViewPresenterProtocol {
         self.router = router
     }
     
-    func backButtonInTimerWasPressed() {
+    func backButtonInTimerDidPressed() {
         router?.goBackToTimerList()
     }
 }

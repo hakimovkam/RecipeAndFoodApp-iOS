@@ -10,11 +10,9 @@ import UIKit
 final class TimerListViewController: GradientViewController {
 
     var presenter: TimerListViewPresenterProtocol!
+    var testingData = TestingData().data
     
-//    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
-    
-    private var data: [String] = []
-    
+    //MARK: - UI Components
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -63,16 +61,10 @@ final class TimerListViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-        
         tableView.dataSource = self
         tableView.delegate = self
         
-        if data.isEmpty {
+        if testingData.isEmpty {
             setupEmptyView()
         } else {
             setupTableView()
@@ -80,11 +72,12 @@ final class TimerListViewController: GradientViewController {
     }
 }
 
+//MARK: - TableViewDelegate & TableViewDataSource
 extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { data.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { testingData.count }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter.tapOnTheTimer()
+        presenter.didTapOnTimer()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,15 +93,14 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
         
         var text = "There are no timers here yet"
 
-        if data.count == 1 {
-            text = "You have \(data.count) timer"
-        } else if data.count > 1 {
-            text = "You have \(data.count) timers"
+        if testingData.count == 1 {
+            text = "You have \(testingData.count) timer"
+        } else if testingData.count > 1 {
+            text = "You have \(testingData.count) timers"
         }
         let headerView: UIView = setTableViewHeader(width: tableView.frame.width,
                                                             height: 52,
                                                             text: text)
-    
         return headerView
     }
     
@@ -117,14 +109,14 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 52 }
 }
 
+//MARK: - ViewProtocol
 extension TimerListViewController: TimerListViewProtocol {
     func didFailWithError(error: Error) {
         print(error.localizedDescription)
     }
-    
-    
 }
 
+//MARK: - Set up UI
 extension TimerListViewController {
     
     func setupTableView() {
@@ -137,8 +129,6 @@ extension TimerListViewController {
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: 16)
         ])
-        
-    
     }
     
     func setupEmptyView() {
@@ -160,9 +150,5 @@ extension TimerListViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
         ])
-        
-
-
-
     }
 }

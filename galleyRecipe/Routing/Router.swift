@@ -91,9 +91,7 @@ class Router: RouterProtocol {
                                                         image: UIImage(named: ImageConstant.clockOutline),
                                                         selectedImage: nil)], animated: true)
     }
-    
-    /* по возможности функцию выше setupTabBarController нужно перенести в builder */
-    
+
     //MARK: - cusstomize TabBarController
     /* Установка иконок и надписей на бэйджики */
     func generateVC(viewController: UIViewController,
