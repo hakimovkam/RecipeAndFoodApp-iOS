@@ -13,7 +13,7 @@ protocol TimerListViewProtocol: AnyObject {
 
 protocol TimerListViewPresenterProtocol: AnyObject {
     init (view: TimerListViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
-    func tapOnTheTimer()
+    func didTapOnTimer()
 }
 
 class TimerListPresenter: TimerListViewPresenterProtocol {
@@ -28,7 +28,7 @@ class TimerListPresenter: TimerListViewPresenterProtocol {
         self.networkService = networkService
     }
     
-    func tapOnTheTimer() {
+    func didTapOnTimer() {
         router?.showTimer()
     }
     

@@ -7,12 +7,6 @@
 
 import UIKit
 
-
-/*
- смущает момент с шириной ячейки в 23 строчке
- как правильно можно опрокинуть ширину экрана? 
- */
-
 class CustomTableViewCell: UITableViewCell {
 
     static let identifier = "CustomTableViewCell"
@@ -98,6 +92,7 @@ class CustomTableViewCell: UITableViewCell {
     }()
 }
 
+//MARK: - Set up UI
 extension CustomTableViewCell {
     
     func setupViews() {

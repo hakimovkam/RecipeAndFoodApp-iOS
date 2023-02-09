@@ -7,20 +7,12 @@
 
 import UIKit
 
-/*
- - 1. тут необходимо осуществить навигацию на следующий экран через Router
- - 2. пофиксить поведение поисковой строки, как будто бы при скролле наверх, когда она прячется, она должна быть неактивна + на данный момент она просто прячется за блюром, а по хорошему как будто бы должна именно уходить вверх и быть неактивной
-    3.1 возможно можно реализовать адекватную работу поисковой строки через search сontroller и тогда поведение будет таким, каким я его описал выше. пока что через search controller происходит какая ерунда.x
- */
-
 final class FavoritesViewController: GradientViewController {
     
     var presenter: FavoriteViewPresenterProtocol!
-    
-    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
-    
-//    private var data: [String] = []
-    
+    var testingData = TestingData().data
+
+    //MARK: - UI Components
     private var lastContentOffset: CGFloat = 0
     
     private lazy var textLabel: UILabel = {
@@ -84,17 +76,11 @@ final class FavoritesViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-        
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
         
-        if data.isEmpty {
+        if testingData.isEmpty {
             setupEmptyView()
         } else {
             setupTableView()
@@ -104,7 +90,7 @@ final class FavoritesViewController: GradientViewController {
 
 //MARK: - TableViewDelegate and TableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return data.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return testingData.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
@@ -118,7 +104,7 @@ extension FavoritesViewController: UITableViewDataSource {
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter.tapOnTheRecipe()
+        presenter.didTapOnRecipe()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
@@ -208,5 +194,4 @@ extension FavoritesViewController {
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
         ])
     }
-    
 }

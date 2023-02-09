@@ -54,6 +54,7 @@
 		EB385F7E298D3F9A00B80749 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB385F7D298D3F9A00B80749 /* SearchPresenter.swift */; };
 		EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */; };
 		EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899CF297BD9E000705344 /* CustomTabBarController.swift */; };
+		EB3995E829951DA400974218 /* TestingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3995E729951DA400974218 /* TestingData.swift */; };
 		EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */; };
 		EB62A79D2986DF1900FD420C /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79A2986DF1900FD420C /* TimerListCell.swift */; };
 		EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79B2986DF1900FD420C /* TimerListViewController.swift */; };
@@ -113,6 +114,7 @@
 		EB385F7D298D3F9A00B80749 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = "galleyRecipe/CustomViews/UI Elements/CustomTabBarController.swift"; sourceTree = SOURCE_ROOT; };
+		EB3995E729951DA400974218 /* TestingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingData.swift; sourceTree = "<group>"; };
 		EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBlurEffectView.swift; sourceTree = "<group>"; };
 		EB62A79A2986DF1900FD420C /* TimerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = "<group>"; };
 		EB62A79B2986DF1900FD420C /* TimerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				9E7C2F0A296B16D00006EECF /* View */,
 				EB29F37C297E8064002F74BD /* Font */,
 				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
+				EB3995E729951DA400974218 /* TestingData.swift */,
 				9E7C2EFA296AF9F00006EECF /* Info.plist */,
 				9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */,
 			);
@@ -482,6 +485,7 @@
 				EB385F7E298D3F9A00B80749 /* SearchPresenter.swift in Sources */,
 				9EE1F66C29858D50006B5F28 /* RecipeManager.swift in Sources */,
 				9EE1F67029858DA4006B5F28 /* CookBookRecipes.swift in Sources */,
+				EB3995E829951DA400974218 /* TestingData.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
 				9EE1F66E29858D8C006B5F28 /* DetailRecipe.swift in Sources */,
 				EB0EA9C8298C51C000C643C4 /* CountryCollectionView.swift in Sources */,

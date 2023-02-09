@@ -19,10 +19,5 @@ class GradientViewController: UIViewController {
         gradient.colors = [UIColor.white.cgColor, UIColor.clear.cgColor]
         gradient.locations = [0.75, 1]
         view.layer.mask = gradient
-        
     }
-    
-
-    
-
 }

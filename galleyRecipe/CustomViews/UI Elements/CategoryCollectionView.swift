@@ -9,7 +9,7 @@ import UIKit
 
 class CategoryCollectionView: UICollectionView {
 
-    var nameCategoryArray = ["Soup", "Pasta", "Egg", "Apple", "Orange", "Soup", "Pasta", "Egg", "Apple", "Orange", "Soup", "Pasta", "Egg", "Apple", "Orange"] //testing data
+    var testingData = TestingData().nameCategoryArray
     
     private let chipsLayout = UICollectionViewFlowLayout()
     
@@ -27,18 +27,16 @@ class CategoryCollectionView: UICollectionView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
 }
 
 
 //MARK: - Delegate&DataSource
 extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return nameCategoryArray.count }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return testingData.count }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifierCategory, for: indexPath) as! ChipsCollectionViewCell
-        cell.label.text = nameCategoryArray[indexPath.row]
+        cell.label.text = testingData[indexPath.row]
         
         return cell
     }
@@ -49,7 +47,7 @@ extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayaut: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
         let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
-        let categoryWidth = nameCategoryArray[indexPath.item].size(withAttributes: categoryAttributes).width + 40
+        let categoryWidth = testingData[indexPath.item].size(withAttributes: categoryAttributes).width + 40
         
         return CGSize(width: categoryWidth, height: collectionView.frame.height)
     }

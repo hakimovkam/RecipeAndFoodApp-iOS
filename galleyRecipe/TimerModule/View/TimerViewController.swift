@@ -56,27 +56,11 @@ final class TimerViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-        
         view.backgroundColor = .white
         setupSubviews(pauseButton, startButton, resetButton, counterLabel)
         setConstraints()
         pauseButton.isEnabled = false
     }
-    
-    
-    /* Функция которая будет возвращать к рутовой вьюшки
-     возможность проверить пока нет, так как экран еще не готов по дизайну
-     
-    @objc func backButtonWasPressed() {
-        presenter.backButtonInTimerWasPressed()
-    }
-    */
 }
 
 // MARK: - Create Timer
@@ -182,5 +166,3 @@ extension TimerViewController {
         ])
     }
 }
-
-
