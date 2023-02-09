@@ -2,13 +2,9 @@ import UIKit
 
 final class SearchViewController: GradientViewController, UISearchBarDelegate {
 
-    var presenter: SearchViewPresenterProtocol!
-    
-    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
-    
-//    private var data: [String] = []
-//    var presenter: SearchViewPresenterProtocol!
+    var testingData = TestingData().data
 
+    //MARK: - UI Components
     private var collectionView = CategoryCollectionView()
     private var countryCollectionView = CountryCollectionView()
 
@@ -91,7 +87,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         tableView.dataSource = self
 //        navigationController?.setNavigationBarHidden(true, animated: true)
         
-        if data.isEmpty {
+        if testingData.isEmpty {
             setupEmptyView()
         } else {
             setupTableView()
@@ -111,10 +107,10 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
             })
     }
 }
-
+//MARK: - TableViewDelegate & TableViewDataSource
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return data.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return testingData.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
@@ -136,10 +132,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         var text = "No recipes found"
 
-        if data.count == 1 {
-            text = "Found \(data.count) recipe"
-        } else if data.count > 1 {
-            text = "Found \(data.count) recipes"
+        if testingData.count == 1 {
+            text = "Found \(testingData.count) recipe"
+        } else if testingData.count > 1 {
+            text = "Found \(testingData.count) recipes"
         }
         
         let headerView = setTableViewHeader(width: tableView.frame.width,
@@ -175,12 +171,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension SearchViewController: SearchViewProtocol {
-    func didFailWithError(error: Error) {
-        print(error.localizedDescription)
-    }
-}
-
+//MARK: - set up UI
 extension SearchViewController {
     func setupTableView() {
         
@@ -195,7 +186,6 @@ extension SearchViewController {
         view.addSubview(tableHeaderView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         countryCollectionView.translatesAutoresizingMaskIntoConstraints = false
-
         
         navigationController?.navigationBar.showsLargeContentViewer = false
         tableView.tableHeaderView = tableHeaderView
@@ -221,8 +211,7 @@ extension SearchViewController {
             sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 10),
             sortButton.heightAnchor.constraint(equalToConstant: 24),
             
-
-            collectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
             collectionView.heightAnchor.constraint(equalToConstant: 32),
@@ -255,7 +244,6 @@ extension SearchViewController {
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
-        
         ])
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class CountryCollectionView: UICollectionView {
     
-    var countryCategoryArray = ["🏴", "🇦🇱", "🏴‍☠️", "🏁", "🏴", "🇦🇱", "🏴‍☠️", "🏁", "🏴", "🇦🇱", "🏴‍☠️", "🏁"]
+    var testingData = TestingData().countryCategoryArray
     
     private let chipsLayout = UICollectionViewFlowLayout()
     
@@ -28,18 +28,16 @@ class CountryCollectionView: UICollectionView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
 }
 
 
 //MARK: - Delegate&DataSource
 extension CountryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return countryCategoryArray.count }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { return testingData.count }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identidierCountry, for: indexPath) as! ChipsCollectionViewCell
-        cell.label.text = countryCategoryArray[indexPath.row]
+        cell.label.text = testingData[indexPath.row]
         
         return cell
     }
@@ -50,10 +48,8 @@ extension CountryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayaut: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
         let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
-        let categoryWidth = countryCategoryArray[indexPath.item].size(withAttributes: categoryAttributes).width + 40
+        let categoryWidth = testingData[indexPath.item].size(withAttributes: categoryAttributes).width + 30
         
         return CGSize(width: categoryWidth, height: collectionView.frame.height)
     }
 }
-
-

@@ -8,13 +8,12 @@
 import Foundation
 
 protocol IngridientViewProtocol: AnyObject {
-//    func didUpdate()
-//    func didFailWithError(error: Error)
+
 }
 
 protocol IngridientViewPresenterProtocol: AnyObject {
-    init(view: IngridientViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) // в иницилизацию еще нужно опрокинуть модельку
-    func backButtonInIngredientWasPressed()
+    init(view: IngridientViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    func backButtonInIngredientDidPressed()
 }
 
 class IngridientPresenter: IngridientViewPresenterProtocol {
@@ -27,11 +26,9 @@ class IngridientPresenter: IngridientViewPresenterProtocol {
         self.view = view
         self.networkService = networkService
         self.router = router
-        
     }
     
-    func backButtonInIngredientWasPressed() {
+    func backButtonInIngredientDidPressed() {
         router?.goBackToFavoriteView()
     }
-    
 }
