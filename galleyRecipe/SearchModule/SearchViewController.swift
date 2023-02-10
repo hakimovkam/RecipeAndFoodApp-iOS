@@ -3,10 +3,12 @@ import UIKit
 final class SearchViewController: GradientViewController, UISearchBarDelegate {
 
     var testingData = TestingData().data
+    var countryData = TestingData().countryCategoryArray
+    var categoryData = TestingData().nameCategoryArray
 
     //MARK: - UI Components
-    private var collectionView = CategoryCollectionView()
-    private var countryCollectionView = CountryCollectionView()
+    let categoryCollectionView = ChipsCollectionView()
+    let countryCollectionView = ChipsCollectionView()
 
     private var lastContentOffset: CGFloat = 0
     
@@ -84,6 +86,10 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        countryCollectionView.delegate = self
+        countryCollectionView.dataSource = self
+        categoryCollectionView.delegate = self
+        categoryCollectionView.dataSource = self
         
         if testingData.isEmpty {
             setupEmptyView()
@@ -113,7 +119,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         var text = "No recipes found"
 
         if testingData.count == 1 {
@@ -135,26 +140,70 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //Анимация исчезновения search bar при скролле
+        searchBar.alpha = 0
+        sortButton.alpha = 0
+        categoryCollectionView.alpha = 0
+        countryCollectionView.alpha = 0
+        
         if self.lastContentOffset > scrollView.contentOffset.y { // move up
             if lastContentOffset < 100 {
                 searchBar.alpha = 1 - (lastContentOffset * 0.01)
                 sortButton.alpha = 1 - (lastContentOffset * 0.01)
-                collectionView.alpha = 1 - (lastContentOffset * 0.02)
+                categoryCollectionView.alpha = 1 - (lastContentOffset * 0.02)
                 countryCollectionView.alpha = 1 - (lastContentOffset * 0.05)
             }
         } else if self.lastContentOffset < scrollView.contentOffset.y { // move down
             if lastContentOffset < 100 {
                 searchBar.alpha = 1 - (lastContentOffset * 0.01)
                 sortButton.alpha = 1 - (lastContentOffset * 0.01)
-                collectionView.alpha = 1 - (lastContentOffset * 0.02)
+                categoryCollectionView.alpha = 1 - (lastContentOffset * 0.02)
                 countryCollectionView.alpha = 1 - (lastContentOffset * 0.05)
             }
+        } else if self.lastContentOffset == scrollView.contentOffset.y {
+            searchBar.alpha = 1
+            sortButton.alpha = 1
+            categoryCollectionView.alpha = 1
+            countryCollectionView.alpha = 1
         }
         self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
-
+//MARK: - ChipsCollectionViewDelegate&DataSource
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.countryCollectionView {
+            return countryData.count
+        } else {
+            return categoryData.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.countryCollectionView {
+            let countryCell = countryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
+            countryCell.label.text = countryData[indexPath.row]
+            return countryCell
+        } else {
+            let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
+            categoryCell.label.text = categoryData[indexPath.row]
+            return categoryCell
+        }
+    }
+}
+//MARK: - ChipsCollectionViewDelegateFlowLayout
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayaut: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
+        let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
+        if collectionView == self.countryCollectionView {
+            let countryWidth = countryData[indexPath.item].size(withAttributes: categoryAttributes).width + 40
+            return CGSize(width: countryWidth, height: collectionView.frame.height)
+        } else {
+            let categoryWidth = categoryData[indexPath.item].size(withAttributes: categoryAttributes).width + 30
+            return CGSize(width: categoryWidth, height: collectionView.frame.height)
+        }
+    }
+}
 //MARK: - set up UI
 extension SearchViewController {
     func setupTableView() {
@@ -164,11 +213,11 @@ extension SearchViewController {
         
         view.addSubview(tableView)
         tableHeaderView.addSubview(searchBar)
-        tableHeaderView.addSubview(collectionView)
+        tableHeaderView.addSubview(categoryCollectionView)
         tableHeaderView.addSubview(countryCollectionView)
         tableHeaderView.addSubview(sortButton)
         view.addSubview(tableHeaderView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         countryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         navigationController?.navigationBar.showsLargeContentViewer = false
@@ -195,14 +244,14 @@ extension SearchViewController {
             sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 10),
             sortButton.heightAnchor.constraint(equalToConstant: 24),
             
-            collectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
-            collectionView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
-            collectionView.heightAnchor.constraint(equalToConstant: 32),
+            categoryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor),
+            categoryCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
+            categoryCollectionView.heightAnchor.constraint(equalToConstant: 32),
 
-            countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16),
+            countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
             countryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            countryCollectionView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
+            countryCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 8),
             countryCollectionView.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
