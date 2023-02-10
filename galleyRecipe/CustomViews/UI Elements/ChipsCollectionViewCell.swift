@@ -8,8 +8,7 @@
 import UIKit
 
 class ChipsCollectionViewCell: UICollectionViewCell {
-    static let identifierCategory = "CategoryChipsCell"
-    static let identidierCountry = "CountryChipsCell"
+    static let identifier = "ChipsCell"
     
     var label: UILabel = {
         let label = UILabel()
@@ -37,7 +36,7 @@ class ChipsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addView() {
+    private func addView() {
         contentView.addSubview(label)
         
         NSLayoutConstraint.activate([

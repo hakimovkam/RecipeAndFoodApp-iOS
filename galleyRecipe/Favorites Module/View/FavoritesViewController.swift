@@ -122,16 +122,20 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (self.lastContentOffset > scrollView.contentOffset.y) {
-            if lastContentOffset < 50 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.04)
+        searchBar.alpha = 0
+        
+        if self.lastContentOffset > scrollView.contentOffset.y { // move up
+            if lastContentOffset < 100 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.01)
             }
-        } else if self.lastContentOffset < scrollView.contentOffset.y {
-            if lastContentOffset < 50 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.04)
+        } else if self.lastContentOffset < scrollView.contentOffset.y { // move down
+            if lastContentOffset < 100 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.01)
             }
+        } else if self.lastContentOffset == scrollView.contentOffset.y {
+            searchBar.alpha = 1
         }
-        self.lastContentOffset = scrollView.contentOffset.y
+        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - SearchResultsUpdate
