@@ -12,7 +12,6 @@ protocol TimerViewProtocol: AnyObject {
 }
 
 protocol TimerViewPresenterProtocol: AnyObject {
-    var view: TimerViewProtocol? { get set }
     func backButtonInTimerDidPressed()
 }
 

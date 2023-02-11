@@ -12,7 +12,6 @@ protocol TimerListViewProtocol: AnyObject {
 }
 
 protocol TimerListViewPresenterProtocol: AnyObject {
-    var view: TimerListViewProtocol? { get set }
     func didTapOnTimer()
 }
 

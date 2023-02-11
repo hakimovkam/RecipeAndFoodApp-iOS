@@ -13,7 +13,6 @@ protocol FavoriteViewProtocol: AnyObject {
 }
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
-    var view: FavoriteViewProtocol? { get set }
     func didTapOnRecipe()
 }
 
