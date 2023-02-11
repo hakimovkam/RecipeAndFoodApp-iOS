@@ -9,7 +9,7 @@ import UIKit
 
 final class TimerListViewController: GradientViewController {
 
-    var presenter: TimerListViewPresenterProtocol
+    private let presenter: TimerListViewPresenterProtocol
     var testingData = TestingData().emptyData
     
     //MARK: - UI Components

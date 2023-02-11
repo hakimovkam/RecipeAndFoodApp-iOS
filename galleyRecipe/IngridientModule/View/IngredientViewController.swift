@@ -10,7 +10,7 @@ import UIKit
 
 final class IngredientViewController: GradientViewController {
 
-    var presenter: IngridientViewPresenterProtocol
+    private let presenter: IngridientViewPresenterProtocol
     
     // MARK: - UI
     

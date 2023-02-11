@@ -12,7 +12,6 @@ protocol IngridientViewProtocol: AnyObject {
 
 protocol IngridientViewPresenterProtocol: AnyObject {
     var view: IngridientViewProtocol? { get set }
-    init(networkService: NetworkServiceProtocol, router: RouterProtocol)
     func backButtonInIngredientDidPressed()
 }
 
