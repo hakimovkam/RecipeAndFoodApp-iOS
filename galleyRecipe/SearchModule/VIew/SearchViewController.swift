@@ -1,7 +1,9 @@
 import UIKit
 
 final class SearchViewController: GradientViewController, UISearchBarDelegate {
-
+    
+    var presenter: SearchViewPresenterProtocol
+    
     var testingData = TestingData().data
     var countryData = TestingData().countryCategoryArray
     var categoryData = TestingData().nameCategoryArray
@@ -78,6 +80,15 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         button.addTarget(self, action: #selector(tapToSortButton), for: .touchUpInside)
         return button
     }()
+    
+    init(presenter: SearchViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,7 +197,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             categoryCell.label.text = categoryData[indexPath.item]
             return categoryCell
         }
-        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - ChipsCollectionViewDelegateFlowLayout
@@ -206,6 +216,12 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat { return 4 }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return 4 }
+}
+
+extension SearchViewController: SearchViewProtocol {
+    func didFailWithError(error: Error) {
+        print(error.localizedDescription)
+    }
 }
 //MARK: - set up UI
 extension SearchViewController {
