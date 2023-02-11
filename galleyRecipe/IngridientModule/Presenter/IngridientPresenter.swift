@@ -11,7 +11,6 @@ protocol IngridientViewProtocol: AnyObject {
 }
 
 protocol IngridientViewPresenterProtocol: AnyObject {
-    var view: IngridientViewProtocol? { get set }
     func backButtonInIngredientDidPressed()
 }
 

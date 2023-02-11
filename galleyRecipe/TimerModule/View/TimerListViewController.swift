@@ -8,15 +8,21 @@
 import UIKit
 
 final class TimerListViewController: GradientViewController {
-
+    enum Localization {
+        static let textLabelStub: String = "Add timers for your recipes here \nby pressing the timer button \non the recipe"
+        static let textLabelChar: String = "⏱️"
+        static let headerLabelOnEmptyScreen: String = "There are no timers here yet"
+        static let placeholder: String = "UIKit Soup"
+    }
+    
     private let presenter: TimerListViewPresenterProtocol
-    var testingData = TestingData().emptyData
+    var testingData = TestingData().data
     
     //MARK: - UI Components
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.text = "There are no timers here yet"
+        label.text = Localization.headerLabelOnEmptyScreen
         label.font = UIFont(name: "Poppins-Bold", size: 24)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -27,9 +33,9 @@ final class TimerListViewController: GradientViewController {
     
     private let textLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
+        textLabel.textColor = .textColor
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
-        textLabel.text = "Add timers for your recipes here \nby pressing the timer button \non the recipe"
+        textLabel.text = Localization.textLabelStub
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
@@ -40,7 +46,7 @@ final class TimerListViewController: GradientViewController {
     
     private let characterLabel: UILabel = {
         let characterLabel = UILabel()
-        characterLabel.text = "⏱️"
+        characterLabel.text = Localization.textLabelChar
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
         characterLabel.textAlignment = .center
         characterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +99,7 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
         cell.descriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        cell.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red: 0.775, green: 0.775, blue: 0.775, alpha: 1), thickness: 0.5)
+        cell.layer.addBorder(edge: UIRectEdge.bottom, color: .textColor, thickness: 0.5)
         return cell
     }
     
@@ -107,14 +113,14 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
             text = "You have \(testingData.count) timers"
         }
         let headerView: UIView = setTableViewHeader(width: tableView.frame.width,
-                                                            height: 52,
+                                                    height: .tableViewHeader,
                                                             text: text)
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 76 }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .timerTableViewCellHeigh }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 52 }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return .tableViewHeader }
 }
 //MARK: - ViewProtocol
 extension TimerListViewController: TimerListViewProtocol {
@@ -132,8 +138,8 @@ extension TimerListViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: 16)
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
+            view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: .mediemLeftRightInset)
         ])
     }
     
@@ -144,12 +150,12 @@ extension TimerListViewController {
         view.addSubview(textLabel)
         
         NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: .mediemLeftRightInset),
+            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .headerLabelTopAnchor),
             headerLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            headerLabel.heightAnchor.constraint(equalToConstant: 52),
+            headerLabel.heightAnchor.constraint(equalToConstant: .tableViewHeader),
             
-            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
+            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

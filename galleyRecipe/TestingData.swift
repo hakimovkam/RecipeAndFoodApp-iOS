@@ -14,4 +14,5 @@ struct TestingData {
     
     var countryCategoryArray = ["🏴", "🇦🇱", "🏴‍☠️", "🏁", "🏴", "🇦🇱", "🏴‍☠️", "🏁", "🏴", "🇦🇱", "🏴‍☠️", "🏁"]
     var emptyData: [String] = []
+    var recipeDescription: String = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
 }
