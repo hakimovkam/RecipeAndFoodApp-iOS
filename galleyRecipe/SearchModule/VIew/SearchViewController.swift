@@ -1,12 +1,19 @@
 import UIKit
 
 final class SearchViewController: GradientViewController, UISearchBarDelegate {
+    enum Localization {
+        static let textLabelStub: String = "Try changing some\nsearch parameters"
+        static let textLabelChar: String = "🤷️"
+        static let headerLabelOnEmptyScreen: String = "No recipes found"
+        static let placeholder: String = "UIKit Soup"
+    }
     
     var presenter: SearchViewPresenterProtocol
     
     var testingData = TestingData().data
     var countryData = TestingData().countryCategoryArray
     var categoryData = TestingData().nameCategoryArray
+    var testingDescription = TestingData().recipeDescription
 
     //MARK: - UI Components
     let categoryCollectionView = ChipsCollectionView()
@@ -15,7 +22,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.sizeToFit()
-        searchBar.placeholder = "UIKit Soup"
+        searchBar.placeholder = Localization.placeholder
         searchBar.searchBarStyle = .minimal
         searchBar.searchTextField.font = UIFont(name: "Poppins-Regular", size: 16)
         searchBar.setImage(UIImage(named: "Union"), for: UISearchBar.Icon.search, state: .normal)
@@ -25,7 +32,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         searchBar.backgroundColor = .clear
         searchBar.layer.cornerRadius = 16
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1).cgColor
+        searchBar.layer.borderColor = UIColor.customBorderColor.cgColor
         return searchBar
     }()
     
@@ -42,7 +49,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.text = "No recipes found"
+        label.text = Localization.headerLabelOnEmptyScreen
         label.font = UIFont(name: "Poppins-Bold", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -50,7 +57,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     
     private lazy var characterLabel: UILabel = {
         let characterLabel = UILabel()
-        characterLabel.text = "🤷️"
+        characterLabel.text = Localization.textLabelChar
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
         characterLabel.textAlignment = .center
         characterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -59,9 +66,9 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     
     private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
+        textLabel.textColor = .textColor
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
-        textLabel.text = "Try changing some\nsearch parameters"
+        textLabel.text = Localization.textLabelStub
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
@@ -129,9 +136,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
-        cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        
+        cell.configure(recipeDescription: testingDescription, recipeImageName: ImageConstant.cookImage)
         return cell
     }
     
@@ -140,7 +145,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         presenter.tapOnTheRecipe()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .recipeTableViewCellHeigh }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var text = "No recipes found"
@@ -152,12 +157,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let headerView = setTableViewHeader(width: tableView.frame.width,
-                                            height: 52,
+                                            height: .tableViewHeader,
                                             text: text)
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return 52 }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return .tableViewHeader }
 //MARK: - scrollView Methods
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
@@ -190,11 +195,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.countryCollectionView {
             let countryCell = countryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            countryCell.label.text = countryData[indexPath.item]
+            countryCell.configure(with: countryData[indexPath.item])
             return countryCell
         } else {
             let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            categoryCell.label.text = categoryData[indexPath.item]
+            categoryCell.configure(with: categoryData[indexPath.item])
             return categoryCell
         }
     }
@@ -205,17 +210,17 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
         let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
         if collectionView == self.countryCollectionView {
-            let countryWidth = countryData[indexPath.item].size(withAttributes: categoryAttributes).width + 32
+            let countryWidth = countryData[indexPath.item].size(withAttributes: categoryAttributes).width + .collectionViewCellHeigh
             return CGSize(width: countryWidth, height: collectionView.frame.height)
         } else {
-            let categoryWidth = categoryData[indexPath.item].size(withAttributes: categoryAttributes).width + 32
+            let categoryWidth = categoryData[indexPath.item].size(withAttributes: categoryAttributes).width + .collectionViewCellHeigh
             return CGSize(width: categoryWidth, height: collectionView.frame.height)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat { return 4 }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat { return .spaceBetweenCollectionCell }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return 4 }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return .spaceBetweenCollectionCell }
 }
 
 extension SearchViewController: SearchViewProtocol {
@@ -227,7 +232,7 @@ extension SearchViewController: SearchViewProtocol {
 extension SearchViewController {
     func setupTableView() {
         
-        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 138))
+        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: CGFloat.advancedTableViewHeader))
         tableHeaderView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(tableView)
@@ -243,7 +248,7 @@ extension SearchViewController {
         tableView.tableHeaderView = tableHeaderView
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
@@ -251,27 +256,27 @@ extension SearchViewController {
             tableHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableHeaderView.heightAnchor.constraint(equalToConstant: 138),
+            tableHeaderView.heightAnchor.constraint(equalToConstant: .advancedTableViewHeader),
             
-            searchBar.leftAnchor.constraint(equalTo: tableHeaderView.leftAnchor, constant: 16),
-            sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 10),
-            searchBar.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: 8),
-            searchBar.heightAnchor.constraint(equalToConstant: 50),
+            searchBar.leftAnchor.constraint(equalTo: tableHeaderView.leftAnchor, constant: .mediemLeftRightInset),
+            sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: .sortButtonLeftAnchor),
+            searchBar.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: .smallTopAndBottomInset),
+            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeigh),
             
-            sortButton.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: 21),
-            tableHeaderView.rightAnchor.constraint(equalTo: sortButton.rightAnchor, constant: 16),
-            sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 10),
-            sortButton.heightAnchor.constraint(equalToConstant: 24),
+            sortButton.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: .headerLabelTopAnchor),
+            tableHeaderView.rightAnchor.constraint(equalTo: sortButton.rightAnchor, constant: .mediemLeftRightInset),
+            sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: .sortButtonLeftAnchor),
+            sortButton.heightAnchor.constraint(equalToConstant: .sortButtonHeighAnchor),
             
             categoryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
             categoryCollectionView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor),
-            categoryCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
-            categoryCollectionView.heightAnchor.constraint(equalToConstant: 32),
+            categoryCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: .smallTopAndBottomInset),
+            categoryCollectionView.heightAnchor.constraint(equalToConstant: .collectionViewCellHeigh),
 
             countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
             countryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            countryCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 8),
-            countryCollectionView.heightAnchor.constraint(equalToConstant: 32)
+            countryCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: .smallTopAndBottomInset),
+            countryCollectionView.heightAnchor.constraint(equalToConstant: .collectionViewCellHeigh)
         ])
     }
     
@@ -282,15 +287,15 @@ extension SearchViewController {
         view.addSubview(headerLabel)
         
         NSLayoutConstraint.activate([
-            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: 16),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            searchBar.heightAnchor.constraint(equalToConstant: 50),
+            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
+            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: .mediemLeftRightInset),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
+            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeigh),
             
-            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            headerLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
+            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: .mediemLeftRightInset),
+            headerLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: .headerLabelTopAnchor ),
             
-            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
+            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
