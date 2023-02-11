@@ -17,8 +17,12 @@ class GradientViewController: UIViewController {
         return gradient
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.layer.mask = gradient
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.mask = gradient
     }
 }
