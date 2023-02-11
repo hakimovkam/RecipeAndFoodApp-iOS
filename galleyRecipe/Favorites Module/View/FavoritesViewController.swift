@@ -9,8 +9,8 @@ import UIKit
 
 final class FavoritesViewController: GradientViewController {
     
-    var presenter: FavoriteViewPresenterProtocol!
-    var testingData = TestingData().data
+    var presenter: FavoriteViewPresenterProtocol
+    var testingData = TestingData().emptyData
 
     //MARK: - UI Components
     private var lastContentOffset: CGFloat = 0
@@ -71,7 +71,15 @@ final class FavoritesViewController: GradientViewController {
         searchBar.layer.borderColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1).cgColor
         return searchBar
     }()
-
+    
+    init(presenter: FavoriteViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +95,6 @@ final class FavoritesViewController: GradientViewController {
         }
     }
 }
-
 //MARK: - TableViewDelegate and TableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return testingData.count }
@@ -143,6 +150,8 @@ extension FavoritesViewController: UISearchBarDelegate {
 }
 //MARK: - View protocol
 extension FavoritesViewController: FavoriteViewProtocol {
+
+    
     func didUpdate() {
         print("didUpdate")
     }

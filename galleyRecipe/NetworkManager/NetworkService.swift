@@ -10,6 +10,5 @@ import Foundation
 protocol NetworkServiceProtocol {
 }
 
-class NetworkService: NetworkServiceProtocol {
-    
+class NetworkService: NetworkServiceProtocol {  
 }

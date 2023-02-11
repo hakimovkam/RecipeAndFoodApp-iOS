@@ -8,22 +8,21 @@
 import Foundation
 
 protocol IngridientViewProtocol: AnyObject {
-
 }
 
 protocol IngridientViewPresenterProtocol: AnyObject {
-    init(view: IngridientViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    var view: IngridientViewProtocol? { get set }
+    init(networkService: NetworkServiceProtocol, router: RouterProtocol)
     func backButtonInIngredientDidPressed()
 }
 
-class IngridientPresenter: IngridientViewPresenterProtocol {
+final class IngridientPresenter: IngridientViewPresenterProtocol {
     
     weak var view: IngridientViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
-    required init(view: IngridientViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
     }

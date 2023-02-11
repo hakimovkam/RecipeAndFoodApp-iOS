@@ -9,8 +9,8 @@ import UIKit
 
 final class TimerListViewController: GradientViewController {
 
-    var presenter: TimerListViewPresenterProtocol!
-    var testingData = TestingData().data
+    var presenter: TimerListViewPresenterProtocol
+    var testingData = TestingData().emptyData
     
     //MARK: - UI Components
     private let headerLabel: UILabel = {
@@ -58,6 +58,15 @@ final class TimerListViewController: GradientViewController {
         return tableView
     }()
     
+    init(presenter: TimerListViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +80,6 @@ final class TimerListViewController: GradientViewController {
         }
     }
 }
-
 //MARK: - TableViewDelegate & TableViewDataSource
 extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { testingData.count }
@@ -108,14 +116,12 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 52 }
 }
-
 //MARK: - ViewProtocol
 extension TimerListViewController: TimerListViewProtocol {
     func didFailWithError(error: Error) {
         print(error.localizedDescription)
     }
 }
-
 //MARK: - Set up UI
 extension TimerListViewController {
     
