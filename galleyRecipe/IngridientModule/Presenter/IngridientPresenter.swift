@@ -27,6 +27,6 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
     }
     
     func backButtonInIngredientDidPressed() {
-        router?.goBackToFavoriteView()
+        router?.goBackToRootView()
     }
 }

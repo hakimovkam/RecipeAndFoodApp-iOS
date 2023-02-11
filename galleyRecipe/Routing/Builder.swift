@@ -49,12 +49,10 @@ final class Builder: BuilderProtocol {
     }
     
     func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let view = SearchViewController()
-    
+        let presenter = SearchPresenter(networkService: networkService, router: router)
+        let view = SearchViewController(presenter: presenter)
         
-    }
-    
-        view.presenter = presenter
+        presenter.view = view
         return view
-        let presenter = SearchPresenter(view: view, networkService: networkService, router: router)
+    }
 }

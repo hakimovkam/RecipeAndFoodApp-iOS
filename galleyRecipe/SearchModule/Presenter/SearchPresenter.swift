@@ -12,7 +12,8 @@ protocol SearchViewProtocol: AnyObject {
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
-    init (view: SearchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    var view: SearchViewProtocol? { get set }
+    init (networkService: NetworkServiceProtocol, router: RouterProtocol)
     func tapOnTheRecipe()
 }
 
@@ -22,13 +23,12 @@ class SearchPresenter: SearchViewPresenterProtocol {
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
-    required init(view: SearchViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.router = router
         self.networkService = networkService
     }
     
     func tapOnTheRecipe() {
-        router?.showIngredients(0)
+        router?.showIngredients()
     }
 }

@@ -29,6 +29,6 @@ final class TimerPresenter: TimerViewPresenterProtocol {
     }
     
     func backButtonInTimerDidPressed() {
-        router?.goBackToTimerList()
+        router?.goBackToRootView()
     }
 }
