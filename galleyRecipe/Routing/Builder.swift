@@ -14,7 +14,7 @@ protocol BuilderProtocol {
     func showTimerViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
 }
 
-class Builder: BuilderProtocol {
+final class Builder: BuilderProtocol {
     func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
         let presenter = FavoritePresenter(networkService: networkService, router: router)
         let view = FavoritesViewController(presenter: presenter)

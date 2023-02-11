@@ -13,7 +13,6 @@ protocol TimerViewProtocol: AnyObject {
 
 protocol TimerViewPresenterProtocol: AnyObject {
     var view: TimerViewProtocol? { get set }
-    init (networkService: NetworkServiceProtocol, router: RouterProtocol)
     func backButtonInTimerDidPressed()
 }
 
