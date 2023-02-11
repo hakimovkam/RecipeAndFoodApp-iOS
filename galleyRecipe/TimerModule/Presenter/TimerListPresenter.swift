@@ -12,18 +12,18 @@ protocol TimerListViewProtocol: AnyObject {
 }
 
 protocol TimerListViewPresenterProtocol: AnyObject {
-    init (view: TimerListViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    var view: TimerListViewProtocol? { get set }
+    init (networkService: NetworkServiceProtocol, router: RouterProtocol)
     func didTapOnTimer()
 }
 
-class TimerListPresenter: TimerListViewPresenterProtocol {
+final class TimerListPresenter: TimerListViewPresenterProtocol {
     
     weak var view: TimerListViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
-    required init(view: TimerListViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.router = router
         self.networkService = networkService
     }
@@ -31,5 +31,4 @@ class TimerListPresenter: TimerListViewPresenterProtocol {
     func didTapOnTimer() {
         router?.showTimer()
     }
-    
 }

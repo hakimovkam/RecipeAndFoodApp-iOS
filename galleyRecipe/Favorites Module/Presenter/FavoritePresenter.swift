@@ -13,18 +13,18 @@ protocol FavoriteViewProtocol: AnyObject {
 }
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
-    init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    var view: FavoriteViewProtocol? { get set }
+    init(networkService: NetworkServiceProtocol, router: RouterProtocol)
     func didTapOnRecipe()
 }
 
-class FavoritePresenter: FavoriteViewPresenterProtocol {
+final class FavoritePresenter: FavoriteViewPresenterProtocol {
     
     weak var view: FavoriteViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
-    required init(view: FavoriteViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
     }

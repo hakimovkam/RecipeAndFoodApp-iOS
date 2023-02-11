@@ -9,8 +9,6 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     //MARK: - UI Components
     let categoryCollectionView = ChipsCollectionView()
     let countryCollectionView = ChipsCollectionView()
-
-    private var lastContentOffset: CGFloat = 0
     
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -134,7 +132,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return 52 }
-    
+//MARK: - scrollView Methods
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
@@ -145,27 +143,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         categoryCollectionView.alpha = 0
         countryCollectionView.alpha = 0
         
-        if self.lastContentOffset > scrollView.contentOffset.y { // move up
-            if lastContentOffset < 100 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.01)
-                sortButton.alpha = 1 - (lastContentOffset * 0.01)
-                categoryCollectionView.alpha = 1 - (lastContentOffset * 0.02)
-                countryCollectionView.alpha = 1 - (lastContentOffset * 0.05)
-            }
-        } else if self.lastContentOffset < scrollView.contentOffset.y { // move down
-            if lastContentOffset < 100 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.01)
-                sortButton.alpha = 1 - (lastContentOffset * 0.01)
-                categoryCollectionView.alpha = 1 - (lastContentOffset * 0.02)
-                countryCollectionView.alpha = 1 - (lastContentOffset * 0.05)
-            }
-        } else if self.lastContentOffset == scrollView.contentOffset.y {
-            searchBar.alpha = 1
-            sortButton.alpha = 1
-            categoryCollectionView.alpha = 1
-            countryCollectionView.alpha = 1
+        if scrollView.contentOffset.y < 100 {
+            searchBar.alpha = 1 - (scrollView.contentOffset.y * 0.01)
+            sortButton.alpha = 1 - (scrollView.contentOffset.y * 0.01)
+            categoryCollectionView.alpha = 1 - (scrollView.contentOffset.y * 0.02)
+            countryCollectionView.alpha = 1 - (scrollView.contentOffset.y * 0.05)
         }
-        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - ChipsCollectionViewDelegate&DataSource
@@ -181,11 +164,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.countryCollectionView {
             let countryCell = countryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            countryCell.label.text = countryData[indexPath.row]
+            countryCell.label.text = countryData[indexPath.item]
             return countryCell
         } else {
             let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            categoryCell.label.text = categoryData[indexPath.row]
+            categoryCell.label.text = categoryData[indexPath.item]
             return categoryCell
         }
     }
@@ -196,13 +179,17 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
         let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
         if collectionView == self.countryCollectionView {
-            let countryWidth = countryData[indexPath.item].size(withAttributes: categoryAttributes).width + 40
+            let countryWidth = countryData[indexPath.item].size(withAttributes: categoryAttributes).width + 32
             return CGSize(width: countryWidth, height: collectionView.frame.height)
         } else {
-            let categoryWidth = categoryData[indexPath.item].size(withAttributes: categoryAttributes).width + 30
+            let categoryWidth = categoryData[indexPath.item].size(withAttributes: categoryAttributes).width + 32
             return CGSize(width: categoryWidth, height: collectionView.frame.height)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat { return 4 }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return 4 }
 }
 //MARK: - set up UI
 extension SearchViewController {
@@ -250,7 +237,7 @@ extension SearchViewController {
             categoryCollectionView.heightAnchor.constraint(equalToConstant: 32),
 
             countryCollectionView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor),
-            countryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            countryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             countryCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 8),
             countryCollectionView.heightAnchor.constraint(equalToConstant: 32)
         ])
