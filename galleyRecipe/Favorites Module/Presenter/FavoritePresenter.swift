@@ -14,7 +14,6 @@ protocol FavoriteViewProtocol: AnyObject {
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
     var view: FavoriteViewProtocol? { get set }
-    init(networkService: NetworkServiceProtocol, router: RouterProtocol)
     func didTapOnRecipe()
 }
 

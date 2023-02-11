@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChipsCollectionViewCell: UICollectionViewCell {
+final class ChipsCollectionViewCell: UICollectionViewCell {
     static let identifier = "ChipsCell"
     
     var label: UILabel = {
