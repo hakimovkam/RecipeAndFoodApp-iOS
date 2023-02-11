@@ -10,7 +10,7 @@ import UIKit
 
 final class IngredientViewController: GradientViewController {
 
-    var presenter: IngridientViewPresenterProtocol!
+    var presenter: IngridientViewPresenterProtocol
     
     // MARK: - UI
     
@@ -57,6 +57,15 @@ final class IngredientViewController: GradientViewController {
         return stackView
     }()
     
+    init(presenter: IngridientViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,15 +94,15 @@ final class IngredientViewController: GradientViewController {
         
         
     }
-    
+    //TODO: раскоментить когда будет готова таска #COOKIT-42
     /* Функция которая будет возвращать к рутовой вьюшки
      возможность проверить пока нет, так как экран еще не готов по дизайну
     
-    @objc func backButtonWasPressed() {
+    @objc
+    func backButtonWasPressed() {
         presenter.backButtonInIngredientWasPressed()
     }
      */
-    
     // MARK: - Constraints
     
     func imageOnTopConstraints() {
@@ -144,5 +153,4 @@ extension UILabel {
 
 // extension presenter
 extension IngredientViewController: IngridientViewProtocol {
-    
 }

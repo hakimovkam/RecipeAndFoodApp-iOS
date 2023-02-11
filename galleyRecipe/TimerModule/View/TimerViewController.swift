@@ -10,7 +10,7 @@ import UIKit
 
 final class TimerViewController: GradientViewController {
 
-    var presenter: TimerViewPresenterProtocol!
+    var presenter: TimerViewPresenterProtocol
     
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
@@ -52,6 +52,15 @@ final class TimerViewController: GradientViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    init(presenter: TimerViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

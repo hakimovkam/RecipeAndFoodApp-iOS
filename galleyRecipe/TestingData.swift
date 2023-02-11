@@ -13,4 +13,5 @@ struct TestingData {
     var nameCategoryArray = ["Soup", "Pasta", "Egg", "Apple", "Orange", "Soup", "Pasta", "Egg", "Apple", "Orange", "Soup", "Pasta", "Egg", "Apple", "Orange"]
     
     var countryCategoryArray = ["🏴", "🇦🇱", "🏴‍☠️", "🏁", "🏴", "🇦🇱", "🏴‍☠️", "🏁", "🏴", "🇦🇱", "🏴‍☠️", "🏁"]
+    var emptyData: [String] = []
 }

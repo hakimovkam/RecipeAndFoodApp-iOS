@@ -11,14 +11,19 @@ final class ChipsCollectionView: UICollectionView {
 
     var testingData = TestingData().nameCategoryArray
     
-    private let chipsLayout = UICollectionViewFlowLayout()
+    private let chipsLayout: UICollectionViewFlowLayout = {
+        var layout = UICollectionViewFlowLayout()
+        let insertLeft: CGFloat = 16
+        let insertRight: CGFloat = 16
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: insertLeft, bottom: 0, right: insertRight)
+        return layout
+    }()
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: .zero, collectionViewLayout: chipsLayout)
         backgroundColor = .clear
         register(ChipsCollectionViewCell.self, forCellWithReuseIdentifier: ChipsCollectionViewCell.identifier)
-        chipsLayout.minimumInteritemSpacing = 5
-        chipsLayout.scrollDirection = .horizontal
         showsHorizontalScrollIndicator = false
     }
     

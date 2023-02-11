@@ -12,19 +12,19 @@ protocol TimerViewProtocol: AnyObject {
 }
 
 protocol TimerViewPresenterProtocol: AnyObject {
-    init (view: TimerViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    var view: TimerViewProtocol? { get set }
+    init (networkService: NetworkServiceProtocol, router: RouterProtocol)
     func backButtonInTimerDidPressed()
 }
 
-class TimerPresenter: TimerViewPresenterProtocol {
+final class TimerPresenter: TimerViewPresenterProtocol {
     
     
     weak var view: TimerViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
-    required init(view: TimerViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
-        self.view = view
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
     }
