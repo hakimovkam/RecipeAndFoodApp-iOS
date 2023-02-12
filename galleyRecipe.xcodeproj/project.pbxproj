@@ -484,7 +484,6 @@
 				9EE1F67029858DA4006B5F28 /* CookBookRecipes.swift in Sources */,
 				EB3995E829951DA400974218 /* TestingData.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
-				E7C05308298850C300F9B794 /* IngredientsTableViewCell.swift in Sources */,
 				9EE1F66E29858D8C006B5F28 /* DetailRecipe.swift in Sources */,
 				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
 				EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */,
