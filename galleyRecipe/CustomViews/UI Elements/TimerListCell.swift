@@ -66,6 +66,12 @@ class TimerListCell: UITableViewCell {
         
         return label
     }()
+    
+    func configure(foodImageName: String, timer: String, descriptionLabelText: String) {
+        foodImage.image = UIImage(named: foodImageName)
+        timerLabel.text =  timer
+        descriptionLabel.text = descriptionLabelText
+    }
 }
 
 extension TimerListCell {

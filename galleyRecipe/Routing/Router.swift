@@ -13,7 +13,7 @@ protocol RouterMain {
     var timerViewController: UIViewController? { get set }
     var searchViewController: UIViewController? { get set }
     var tabBarController: CustomTabBarController? { get set }
-    var builder: BuilderProtocol? { get set }
+    var builder: BuilderProtocol { get set }
 }
 
 protocol RouterProtocol: RouterMain {
@@ -25,7 +25,7 @@ protocol RouterProtocol: RouterMain {
 
 class Router: RouterProtocol {
     
-    var  builder: BuilderProtocol?
+    var  builder: BuilderProtocol
      
     weak var favoriteViewController: UIViewController?
     weak var timerViewController: UIViewController?
@@ -53,7 +53,7 @@ class Router: RouterProtocol {
     }
     
     func showIngredients() {
-            guard let ingredientsViewController = builder?.showIngredientsViewController(router: self, networkService: networkService) else { return }
+            let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService)
             rootController?.pushViewController(ingredientsViewController, animated: true)
     }
     
@@ -64,15 +64,15 @@ class Router: RouterProtocol {
     }
     
     func showTimer() {
-        guard let timerViewController = builder?.showTimerViewController(router: self, networkService: networkService) else { return }
+        let timerViewController = builder.showTimerViewController(router: self, networkService: networkService)
         rootController?.pushViewController(timerViewController, animated: true)
     }
     
     /* Заполняем TabBarController вкладками */
     func setupTabBarController() {
-        guard let favoriteView = builder?.createFavoriteViewController(router: self, networkService: networkService) else { return }
-        guard let timerView = builder?.createTimerListViewController(router: self, networkService: networkService) else { return }
-        guard let searchView = builder?.createSearchViewController(router: self, networkService: networkService) else { return }
+        let favoriteView = builder.createFavoriteViewController(router: self, networkService: networkService)
+        let timerView = builder.createTimerListViewController(router: self, networkService: networkService)
+        let searchView = builder.createSearchViewController(router: self, networkService: networkService)
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
         tabBarController?.setViewControllers([generateVC(viewController: favoriteView,

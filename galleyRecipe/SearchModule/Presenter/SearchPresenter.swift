@@ -21,7 +21,7 @@ class SearchPresenter: SearchViewPresenterProtocol {
     
     weak var view: SearchViewProtocol?
     var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol!
+    let networkService: NetworkServiceProtocol
     
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.router = router

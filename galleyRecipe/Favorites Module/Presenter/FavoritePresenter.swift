@@ -20,7 +20,7 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
     
     weak var view: FavoriteViewProtocol?
     var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol!
+    let networkService: NetworkServiceProtocol
     
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
