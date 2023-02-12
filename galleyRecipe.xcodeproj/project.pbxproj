@@ -60,7 +60,6 @@
 		EB62A79F2986DF1900FD420C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79C2986DF1900FD420C /* TimerViewController.swift */; };
 		EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */; };
 		EBE8F3D0298870BC00AD5870 /* IngridientPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */; };
-		EBF326E32997E6F200B54561 /* TextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF326E22997E6F200B54561 /* TextConstants.swift */; };
 		EBFDB1FF297957A700CA0084 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,7 +119,6 @@
 		EB62A79C2986DF1900FD420C /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChipsCollectionViewCell.swift; path = "galleyRecipe/CustomViews/UI Elements/ChipsCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngridientPresenter.swift; path = galleyRecipe/IngridientModule/Presenter/IngridientPresenter.swift; sourceTree = SOURCE_ROOT; };
-		EBF326E22997E6F200B54561 /* TextConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConstants.swift; sourceTree = "<group>"; };
 		EBFDB1FE297957A700CA0084 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = galleyRecipe/CustomViews/Extension/Extension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -337,7 +335,6 @@
 				EB3899D3297C031F00705344 /* Extension */,
 				EB766639298BC62D0044C492 /* UI Elements */,
 				EB29F3A4297E80BB002F74BD /* ImageConstant.swift */,
-				EBF326E22997E6F200B54561 /* TextConstants.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -508,7 +505,6 @@
 				EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */,
 				EB62A79F2986DF1900FD420C /* TimerViewController.swift in Sources */,
 				EB1BD5CF29895A30009EB706 /* TimerListPresenter.swift in Sources */,
-				EBF326E32997E6F200B54561 /* TextConstants.swift in Sources */,
 				EB1BD5D2298961B2009EB706 /* TimerPresenter.swift in Sources */,
 				9EE1F67229858DC0006B5F28 /* SearchRecipe.swift in Sources */,
 				9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */,
