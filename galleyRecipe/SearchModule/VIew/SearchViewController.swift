@@ -178,7 +178,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return countryCell
         } else {
             let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            categoryCell.configure(with: countryData[indexPath.item])
+            categoryCell.configure(with: categoryData[indexPath.item])
             return categoryCell
         }
     }
