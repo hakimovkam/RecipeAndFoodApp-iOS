@@ -103,7 +103,7 @@ extension CustomTableViewCell {
         foodImage.addSubview(timerButton)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             
             contentView.bottomAnchor.constraint(equalTo: recipeDescriptionLabel.bottomAnchor, constant: 8),
