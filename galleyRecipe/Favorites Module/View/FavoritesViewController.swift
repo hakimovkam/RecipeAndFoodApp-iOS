@@ -7,22 +7,16 @@
 
 import UIKit
 
-/*
- - 1. тут необходимо осуществить навигацию на следующий экран через Router
- - 2. пофиксить поведение поисковой строки, как будто бы при скролле наверх, когда она прячется, она должна быть неактивна + на данный момент она просто прячется за блюром, а по хорошему как будто бы должна именно уходить вверх и быть неактивной
-    3.1 возможно можно реализовать адекватную работу поисковой строки через search сontroller и тогда поведение будет таким, каким я его описал выше. пока что через search controller происходит какая ерунда.x
- */
-
 final class FavoritesViewController: GradientViewController {
     
-    var presenter: FavoriteViewPresenterProtocol!
-    
-    private var data = ["Pasta", "q", "Pasta", "3", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta", "Pasta"] // testing data
-    
-//    private var data: [String] = []
+    private let presenter: FavoriteViewPresenterProtocol
+    var testingData = TestingData().data
+    var testingDescription = TestingData().recipeDescription
+
+    //MARK: - UI Components
     private var lastContentOffset: CGFloat = 0
     
-    private let textLabel: UILabel = {
+    private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
@@ -35,7 +29,7 @@ final class FavoritesViewController: GradientViewController {
         return textLabel
     }()
     
-    private let characterLabel: UILabel = {
+    private lazy var characterLabel: UILabel = {
         let characterLabel = UILabel()
         characterLabel.text = "⭐"
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
@@ -44,7 +38,7 @@ final class FavoritesViewController: GradientViewController {
         return characterLabel
     }()
     
-    private let headerLabel: UILabel = {
+    private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.text = "Favorites"
@@ -78,57 +72,46 @@ final class FavoritesViewController: GradientViewController {
         searchBar.layer.borderColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1).cgColor
         return searchBar
     }()
-
+    
+    init(presenter: FavoriteViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
         
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
         
-        if data.isEmpty {
+        if testingData.isEmpty {
             setupEmptyView()
         } else {
             setupTableView()
         }
     }
 }
-
 //MARK: - TableViewDelegate and TableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return data.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return testingData.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
-        cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        
-        /*
-        cell.favoriteButton.tag = indexPath.row
-        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonPressed(sender: )), for: .touchUpInside)
-        
-        cell.timerButton.tag = indexPath.row
-        cell.timerButton.addTarget(self, action: #selector(timerButtonPressed(sender: )), for: .touchUpInside)
-         */
-        
+        cell.configure(recipeDescription: testingDescription, recipeImageName: ImageConstant.cookImage)
         return cell
     }
-
-    
 }
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter.tapOnTheRecipe()
+        presenter.didTapOnRecipe()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
@@ -146,22 +129,11 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.alpha = 0
         
-        //Анимация исчезновения search bar при скролле
-        if self.lastContentOffset > scrollView.contentOffset.y {
-            if lastContentOffset < 50 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.04)
-            }
-        } else if self.lastContentOffset < scrollView.contentOffset.y {
-           // move down
-            if lastContentOffset < 50 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.04)
-            }
+        if scrollView.contentOffset.y < 100 {
+            searchBar.alpha = 1 - (scrollView.contentOffset.y * 0.01)
         }
-        // update the new position acquired
-        self.lastContentOffset = scrollView.contentOffset.y
-        
-        
     }
 }
 //MARK: - SearchResultsUpdate
@@ -169,6 +141,8 @@ extension FavoritesViewController: UISearchBarDelegate {
 }
 //MARK: - View protocol
 extension FavoritesViewController: FavoriteViewProtocol {
+
+    
     func didUpdate() {
         print("didUpdate")
     }
@@ -218,11 +192,10 @@ extension FavoritesViewController {
             
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
         ])
     }
-    
 }

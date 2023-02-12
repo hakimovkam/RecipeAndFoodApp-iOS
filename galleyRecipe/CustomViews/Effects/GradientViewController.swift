@@ -9,20 +9,20 @@ import UIKit
 
 class GradientViewController: UIViewController {
 
-    private var gradient: CAGradientLayer!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        gradient = CAGradientLayer()
+    private lazy var gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [UIColor.white.cgColor, UIColor.clear.cgColor]
         gradient.locations = [0.75, 1]
+        return gradient
+    }()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         view.layer.mask = gradient
-        
     }
     
-
-    
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

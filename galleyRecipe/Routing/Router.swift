@@ -8,92 +8,83 @@
 import UIKit
 
 protocol RouterMain {
+    var rootController: UINavigationController? { get set }
+    var favoriteViewController : UIViewController? { get set }
+    var timerViewController: UIViewController? { get set }
+    var searchViewController: UIViewController? { get set }
     var tabBarController: CustomTabBarController? { get set }
-    var favoriteNavigationController : UINavigationController? { get set }
-    var detailIngredNavigationController: UINavigationController? { get set }
-    var timerNavigationController: UINavigationController? { get set }
     var builder: BuilderProtocol? { get set }
 }
 
 protocol RouterProtocol: RouterMain {
     func setupTabBarController()
     func showIngredients()
-    func goBackToFavoriteView()
+    func goBackToRootView()
     func showTimer()
-    func goBackToTimerList()
 }
 
 class Router: RouterProtocol {
     
     var  builder: BuilderProtocol?
      
-    weak var favoriteNavigationController: UINavigationController?
-    weak var detailIngredNavigationController: UINavigationController?
-    weak var timerNavigationController: UINavigationController?
+    weak var favoriteViewController: UIViewController?
+    weak var timerViewController: UIViewController?
+    weak var searchViewController: UIViewController?
+    weak var rootController: UINavigationController?
     weak var tabBarController: CustomTabBarController?
     
     /* Иницилизация интернет прослойки в единственном экземпляре для передачи по модулям MVP */
     lazy private var networkService: NetworkServiceProtocol = NetworkService()
     
     /* Иницилизация TabBarController */
-    init(tabBarController: CustomTabBarController,
+    init(rootController: UINavigationController,
          builder: BuilderProtocol,
-         favoriteNavigationController: UINavigationController,
-         detailIngredNavigationController: UINavigationController,
-         timerNavigationController: UINavigationController) {
-        self.tabBarController = tabBarController
-        self.favoriteNavigationController = favoriteNavigationController
-        self.detailIngredNavigationController = detailIngredNavigationController
-        self.timerNavigationController = timerNavigationController
+         favoriteViewController: UIViewController,
+         timerViewController: UIViewController,
+         searchViewController: UIViewController,
+         tabBarController: CustomTabBarController) {
+        
+        self.favoriteViewController = favoriteViewController
+        self.timerViewController = timerViewController
+        self.searchViewController = searchViewController
+        self.rootController = rootController
         self.builder = builder
+        self.tabBarController = tabBarController
     }
     
     func showIngredients() {
-        guard let ingredientsViewController = builder?.showIngredientsViewController(router: self, networkService: networkService) else { return }
-        favoriteNavigationController?.pushViewController(ingredientsViewController,  animated: true)
+            guard let ingredientsViewController = builder?.showIngredientsViewController(router: self, networkService: networkService) else { return }
+            rootController?.pushViewController(ingredientsViewController, animated: true)
     }
     
-    func goBackToFavoriteView() {
-        if let favoriteNavigationController = favoriteNavigationController {
-            favoriteNavigationController.popToRootViewController(animated: true)
+    func goBackToRootView() {
+        if let rootController = rootController {
+            rootController.popToRootViewController(animated: true)
         }
     }
     
     func showTimer() {
         guard let timerViewController = builder?.showTimerViewController(router: self, networkService: networkService) else { return }
-        timerNavigationController?.pushViewController(timerViewController, animated: true)
-    }
-    
-    func goBackToTimerList() {
-        if let timerNavigationController = timerNavigationController {
-            timerNavigationController.popToRootViewController(animated: true)
-        }
+        rootController?.pushViewController(timerViewController, animated: true)
     }
     
     /* Заполняем TabBarController вкладками */
     func setupTabBarController() {
-        /* иницилизирууем NavigationController для каждой вкладочки на TabBar */
-        guard let favoriteViewController = builder?.createFavoriteViewController(router: self, networkService: networkService) else { return }
-        favoriteNavigationController?.viewControllers = [favoriteViewController]
-        
-        guard let timerListViewController = builder?.createTimerListViewController(router: self, networkService: networkService) else { return }
-        timerNavigationController?.viewControllers = [timerListViewController]
-        
+        guard let favoriteView = builder?.createFavoriteViewController(router: self, networkService: networkService) else { return }
+        guard let timerView = builder?.createTimerListViewController(router: self, networkService: networkService) else { return }
+        guard let searchView = builder?.createSearchViewController(router: self, networkService: networkService) else { return }
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
-        tabBarController?.setViewControllers([generateVC(viewController: favoriteNavigationController!,
+        tabBarController?.setViewControllers([generateVC(viewController: favoriteView,
                                                          image: UIImage(named: ImageConstant.savedOutline),
                                                         selectedImage: UIImage(named: ImageConstant.savedFilled)),
-                                             generateVC(viewController: SearchViewController(),
+                                             generateVC(viewController: searchView,
                                                         image: UIImage(named: ImageConstant.recipeOutline),
                                                         selectedImage: UIImage(named: ImageConstant.recipeFilled)),
-                                             generateVC(viewController: timerNavigationController!,
+                                             generateVC(viewController: timerView ,
                                                         image: UIImage(named: ImageConstant.clockOutline),
                                                         selectedImage: nil)], animated: true)
     }
-    
-    /* по возможности функцию выше setupTabBarController нужно перенести в builder */
-    
     //MARK: - cusstomize TabBarController
     /* Установка иконок и надписей на бэйджики */
     func generateVC(viewController: UIViewController,

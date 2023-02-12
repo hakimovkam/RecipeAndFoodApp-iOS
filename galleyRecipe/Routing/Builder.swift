@@ -12,49 +12,47 @@ protocol BuilderProtocol {
     func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func createTimerListViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func showTimerViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
-//    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
+    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
 }
 
-class Builder: BuilderProtocol {
+struct  Builder: BuilderProtocol {
     func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let view = FavoritesViewController()
-        let presenter = FavoritePresenter(view: view, networkService: networkService, router: router)
+        let presenter = FavoritePresenter(networkService: networkService, router: router)
+        let view = FavoritesViewController(presenter: presenter)
         
-        view.presenter = presenter
+        presenter.view = view
         return view
     }
     
     func createTimerListViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let view = TimerListViewController()
-        let presenter = TimerListPresenter(view: view, networkService: networkService, router: router)
+        let presenter = TimerListPresenter(networkService: networkService, router: router)
+        let view = TimerListViewController(presenter: presenter)
         
-        view.presenter = presenter
+        presenter.view = view
         return view
     }
         
     func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let view = IngredientViewController()
-        let presenter = IngridientPresenter(view: view, networkService: networkService, router: router)
+        let presenter = IngridientPresenter(networkService: networkService, router: router)
+        let view = IngredientViewController(presenter: presenter)
         
-        view.presenter = presenter
+        presenter.view = view
         return view
     }
     
     func showTimerViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let view = TimerViewController()
-        let presenter = TimerPresenter(view: view, networkService: networkService, router: router)
+        let presenter = TimerPresenter(networkService: networkService, router: router)
+        let view = TimerViewController(presenter: presenter)
         
-        view.presenter = presenter
+        presenter.view = view
         return view
     }
     
-    
-//    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-//        let view = SearchViewController()
-//        let presenter = SearchPresenter(view: view, networkService: networkService, router: router)
-//        
-//        view.presenter = presenter
-//        return view
-//    }
-    
+    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
+        let presenter = SearchPresenter(networkService: networkService, router: router)
+        let view = SearchViewController(presenter: presenter)
+        
+        presenter.view = view
+        return view
+    }
 }

@@ -97,8 +97,6 @@ extension UITableViewDelegate {
         return headerView
     }
     
-//    func setTitleForHeaderTableView(width: CGFloat, height: CGFloat, text: String
-    
 }
 
 extension CALayer {
@@ -128,5 +126,4 @@ extension CALayer {
 
         self.addSublayer(border)
     }
-
 }

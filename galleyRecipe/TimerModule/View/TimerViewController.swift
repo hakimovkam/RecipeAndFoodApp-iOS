@@ -10,7 +10,7 @@ import UIKit
 
 final class TimerViewController: GradientViewController {
 
-    var presenter: TimerViewPresenterProtocol!
+    private let presenter: TimerViewPresenterProtocol
     
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
@@ -52,32 +52,24 @@ final class TimerViewController: GradientViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    init(presenter: TimerViewPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        /*
-         функция которая скрывает navigation bar, так как пока экраны без кастомных кнопок назад
-         функция неактивна, чтоб в навбаре была возможность вернуться назад
-         */
-//        navigationController?.setNavigationBarHidden(true, animated: true)
         
         view.backgroundColor = .white
         setupSubviews(pauseButton, startButton, resetButton, counterLabel)
         setConstraints()
         pauseButton.isEnabled = false
     }
-    
-    
-    /* Функция которая будет возвращать к рутовой вьюшки
-     возможность проверить пока нет, так как экран еще не готов по дизайну
-     
-    @objc
-    func backButtonWasPressed() {
-        presenter.backButtonInTimerWasPressed()
-    }
-    */
 }
 
 // MARK: - Create Timer
@@ -183,5 +175,3 @@ extension TimerViewController {
         ])
     }
 }
-
-

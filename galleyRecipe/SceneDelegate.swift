@@ -21,19 +21,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let builder: BuilderProtocol = Builder()
         let tabBarController = CustomTabBarController()
-        let favoriteNavigationController = UINavigationController()
-        let detailIngredNavigationController = UINavigationController()
-        let timerNavigationController = UINavigationController()
-        let router = Router(tabBarController: tabBarController,
+        let rootController = UINavigationController(rootViewController: tabBarController)
+        let favoriteViewController = UIViewController()
+        let timerViewController = UIViewController()
+        let searchViewController = UIViewController()
+        
+        let router = Router(rootController: rootController,
                             builder: builder,
-                            favoriteNavigationController: favoriteNavigationController,
-                            detailIngredNavigationController: detailIngredNavigationController,
-                            timerNavigationController: timerNavigationController)
+                            favoriteViewController: favoriteViewController,
+                            timerViewController: timerViewController,
+                            searchViewController: searchViewController,
+                            tabBarController: tabBarController)
         router.setupTabBarController()
         
-        
         window?.backgroundColor = .white
-        window?.rootViewController = tabBarController
+        window?.rootViewController = rootController
         window?.makeKeyAndVisible()
     }
 
@@ -67,4 +69,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

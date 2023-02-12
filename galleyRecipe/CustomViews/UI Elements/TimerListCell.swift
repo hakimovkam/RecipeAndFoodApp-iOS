@@ -13,8 +13,6 @@ class TimerListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        
         self.setupViews()
         self.setupConstraints()
     }
@@ -25,8 +23,6 @@ class TimerListCell: UITableViewCell {
     
     //MARK: - UI Components
     
-    let stackView = UIStackView()
-    
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Regular", size: 14)
@@ -34,6 +30,7 @@ class TimerListCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 5
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -45,6 +42,7 @@ class TimerListCell: UITableViewCell {
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     
@@ -62,11 +60,16 @@ class TimerListCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
         label.numberOfLines = 1
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
+    
+    func configure(foodImageName: String, timer: String, descriptionLabelText: String) {
+        foodImage.image = UIImage(named: foodImageName)
+        timerLabel.text =  timer
+        descriptionLabel.text = descriptionLabelText
+    }
 }
 
 extension TimerListCell {
@@ -94,8 +97,6 @@ extension TimerListCell {
             
             timerLabel.widthAnchor.constraint(equalToConstant: 60),
             timerLabel.heightAnchor.constraint(equalToConstant: 24)
-            
-            
         ])
     }
 }

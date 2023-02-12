@@ -17,7 +17,6 @@ struct ImageConstant {
     static let savedFilled = "SavedFilled"
     static let noImage = "no available image"
     static let starFilled  = "StarFilled"
-//    static let starOutline = "StarOutline"
     static let timerOutline = "TimerOutline"
-
+    static let sortButton = "ArrowsDownUp"
 }
