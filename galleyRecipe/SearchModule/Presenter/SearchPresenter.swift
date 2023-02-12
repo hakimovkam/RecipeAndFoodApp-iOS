@@ -12,8 +12,6 @@ protocol SearchViewProtocol: AnyObject {
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
-    var view: SearchViewProtocol? { get set }
-    init (networkService: NetworkServiceProtocol, router: RouterProtocol)
     func tapOnTheRecipe()
 }
 

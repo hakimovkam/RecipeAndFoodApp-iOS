@@ -1,5 +1,5 @@
 //
-//  Extension.swift
+//  UIExtension.swift
 //  galleyRecipe
 //
 //  Created by Камиль Хакимов on 19.01.2023.
@@ -8,42 +8,25 @@
 import UIKit
 
 extension UIColor {
-    static var tabBarItemLight: UIColor { .white }
-    static var customGreen: UIColor { #colorLiteral(red: 0.2783429921, green: 0.6952474713, blue: 0.3004440665, alpha: 1) }
-    static var textColor: UIColor { UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1) }
-    static var customBorderColor: UIColor { UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1) }
-    static var additionalBlurViewBackground: UIColor { UIColor(red: 0, green: 0, blue: 0, alpha: 1) }
-    static var additionalViewBackground: UIColor { UIColor(red: 0, green: 0, blue: 0, alpha: 0) }
-}
-
-extension CGFloat {
-    static var tableViewHeader: CGFloat { 52 }
-    static var advancedTableViewHeader: CGFloat { 138 }
-    static var recipeTableViewCellHeigh: CGFloat { 184 }
-    static var timerTableViewCellHeigh: CGFloat { 76 }
-    static var spaceBetweenCollectionCell: CGFloat { 4 }
-    static var collectionViewCellHeigh: CGFloat { 32 }
-    static var searchBarHeigh: CGFloat { 50 }
-    static var characterXAnchor: CGFloat { 50 }
-    static var smallTopAndBottomInset: CGFloat { 8 }
-    static var mediemLeftRightInset: CGFloat { 16 }
-    static var headerLabelTopAnchor: CGFloat { 20 }
+    static var tabBarItemAccent: UIColor {
+        #colorLiteral(red: 1, green: 0.5963680148, blue: 0, alpha: 1)
+    }
     
-    static var sortButtonLeftAnchor: CGFloat { 10 }
-    static var sortButtonTopAnchor: CGFloat { 21 }
-    static var sortButtonHeighAnchor: CGFloat { 24 }
+    static var mainWhite: UIColor {
+        .lightGray
+    }
     
-    static var smallFoodImageWidthHeighAnchoor: CGFloat { 40 }
-    static var smallImageLeftRightAnchor: CGFloat { 24 }
-    static var timerLabelWidthAnchor: CGFloat { 60 }
-    static var mediumHeightAnchor: CGFloat { 24 }
-    static var smallLeftRightInset: CGFloat { 8 }
+    static var tabBarItemLight: UIColor {
+        .white
+    }
     
-    static var blurViewWidthAnchoor: CGFloat { 40 }
-    static var blurViewHeightAnchoor: CGFloat { 80 }
-    static var largeAdditionalViewAnchoor: CGFloat { 44 }
-    static var mediemAdditionalViewAnchoor: CGFloat { 20 }
-    static var smallAdditionalViewAnchoor: CGFloat { 12 }
+    static var alphaImage: UIColor {
+        #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9190072696)
+    }
+    
+    static var customGreen: UIColor {
+        #colorLiteral(red: 0.2783429921, green: 0.6952474713, blue: 0.3004440665, alpha: 1)
+    }
 }
 
 extension UITableViewDelegate {
@@ -113,9 +96,11 @@ extension UITableViewDelegate {
         
         return headerView
     }
+    
 }
 
 extension CALayer {
+
     func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
 
         let border = CALayer()

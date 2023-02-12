@@ -8,23 +8,18 @@
 import UIKit
 
 final class FavoritesViewController: GradientViewController {
-    enum Localization {
-        static let textLabelStub: String = "Save your favorite recipes here\nby pressing the star button"
-        static let textLabelChar: String = "⭐"
-        static let headerLabel: String = "Favorites"
-        static let placeholder: String = "Search recipes"
-    }
     
-    var presenter: FavoriteViewPresenterProtocol
+    private let presenter: FavoriteViewPresenterProtocol
     var testingData = TestingData().emptyData
 
-    //MARK: - UI ComponentsadvancedTableViewHeader
+    //MARK: - UI Components
+    private var lastContentOffset: CGFloat = 0
     
     private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.textColor = .textColor
+        textLabel.textColor = UIColor(red: 0.757, green: 0.757, blue: 0.757, alpha: 1)
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
-        textLabel.text = Localization.textLabelStub
+        textLabel.text = "Save your favorite recipes here\nby pressing the star button"
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
@@ -35,7 +30,7 @@ final class FavoritesViewController: GradientViewController {
     
     private lazy var characterLabel: UILabel = {
         let characterLabel = UILabel()
-        characterLabel.text = Localization.textLabelChar
+        characterLabel.text = "⭐"
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
         characterLabel.textAlignment = .center
         characterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +40,7 @@ final class FavoritesViewController: GradientViewController {
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.text = Localization.headerLabel
+        label.text = "Favorites"
         label.font = UIFont(name: "Poppins-Bold", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -63,7 +58,7 @@ final class FavoritesViewController: GradientViewController {
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.sizeToFit()
-        searchBar.placeholder = Localization.placeholder
+        searchBar.placeholder = "Search recipes"
         searchBar.searchBarStyle = .minimal
         searchBar.searchTextField.font = UIFont(name: "Poppins-Regular", size: 16)
         searchBar.setImage(UIImage(named: "Union"), for: UISearchBar.Icon.search, state: .normal)
@@ -73,7 +68,7 @@ final class FavoritesViewController: GradientViewController {
         searchBar.backgroundColor = .clear
         searchBar.layer.cornerRadius = 16
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor.customBorderColor.cgColor
+        searchBar.layer.borderColor = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1).cgColor
         return searchBar
     }()
     
@@ -107,7 +102,8 @@ extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.configure(recipeDescription: testingDescription, recipeImageName: ImageConstant.cookImage)
+        cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
+        cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
         return cell
     }
 }
@@ -118,15 +114,15 @@ extension FavoritesViewController: UITableViewDelegate {
         presenter.didTapOnRecipe()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .recipeTableViewCellHeigh }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 184 }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = setTableViewHeader(width: tableView.frame.width,
-                                            height: .tableViewHeader, text: Localization.headerLabel)
+                                            height: 52, text: "Favorite")
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return .tableViewHeader }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return 52 }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
@@ -135,18 +131,9 @@ extension FavoritesViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.alpha = 0
         
-        if self.lastContentOffset > scrollView.contentOffset.y { // move up
-            if lastContentOffset < 100 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.01)
-            }
-        } else if self.lastContentOffset < scrollView.contentOffset.y { // move down
-            if lastContentOffset < 100 {
-                searchBar.alpha = 1 - (lastContentOffset * 0.01)
-            }
-        } else if self.lastContentOffset == scrollView.contentOffset.y {
-            searchBar.alpha = 1
+        if scrollView.contentOffset.y < 100 {
+            searchBar.alpha = 1 - (scrollView.contentOffset.y * 0.01)
         }
-        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - SearchResultsUpdate
@@ -176,15 +163,15 @@ extension FavoritesViewController {
         tableView.tableHeaderView = searchBar
  
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
 
-            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
-            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: .mediemLeftRightInset),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
-            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeigh)
+            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: 16),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            searchBar.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -195,15 +182,15 @@ extension FavoritesViewController {
         view.addSubview(headerLabel)
         
         NSLayoutConstraint.activate([
-            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
-            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: .mediemLeftRightInset),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
-            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeigh),
+            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: 16),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            searchBar.heightAnchor.constraint(equalToConstant: 50),
             
-            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: .mediemLeftRightInset),
-            headerLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: .headerLabelTopAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            headerLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
             
-            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
+            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: 50),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
