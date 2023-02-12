@@ -23,7 +23,7 @@ protocol RouterProtocol: RouterMain {
     func showTimer()
 }
 
-class Router: RouterProtocol {
+final class Router: RouterProtocol {
     
     var  builder: BuilderProtocol
      

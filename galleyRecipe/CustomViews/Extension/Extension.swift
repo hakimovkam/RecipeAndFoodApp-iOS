@@ -142,3 +142,9 @@ extension CALayer {
         self.addSublayer(border)
     }
 }
+
+extension UILabel {
+    func configureLabels() {
+        self.textColor = .white
+    }
+}
