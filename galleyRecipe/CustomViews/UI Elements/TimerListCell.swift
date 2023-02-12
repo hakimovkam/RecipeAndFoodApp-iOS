@@ -23,8 +23,6 @@ class TimerListCell: UITableViewCell {
     
     //MARK: - UI Components
     
-    let stackView = UIStackView()
-    
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Regular", size: 14)
