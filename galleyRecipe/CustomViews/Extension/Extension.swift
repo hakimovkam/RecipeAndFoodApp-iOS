@@ -113,10 +113,6 @@ extension UITableViewDelegate {
         
         return headerView
     }
-<<<<<<<< HEAD:galleyRecipe/CustomViews/Extension/Extension.swift
-========
-    
->>>>>>>> b427e31 (Add emptyView for SearchViewController.):galleyRecipe/CustomViews/Extension/UIExtension.swift
 }
 
 extension CALayer {
@@ -145,16 +141,10 @@ extension CALayer {
 
         self.addSublayer(border)
     }
-<<<<<<<< HEAD:galleyRecipe/CustomViews/Extension/Extension.swift
-========
 }
 
-extension String {
-    
-//    func widthOfString(usingFont font: UIFont) -> CGFloat {
-//        let fontAttributes = [NSFontAttributeName: font]
-//        let size = self.size(attributes: fontAttributes)
-//        return size.width
-//    }
->>>>>>>> b427e31 (Add emptyView for SearchViewController.):galleyRecipe/CustomViews/Extension/UIExtension.swift
+extension UILabel {
+    func configureLabels() {
+        self.textColor = .white
+    }
 }

@@ -34,7 +34,7 @@ struct Builder: BuilderProtocol {
         
     func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
         let presenter = IngridientPresenter(networkService: networkService, router: router)
-        let view = IngredientViewController(presenter: presenter)
+        let view = IngredientsViewController(presenter: presenter)
         
         presenter.view = view
         return view
