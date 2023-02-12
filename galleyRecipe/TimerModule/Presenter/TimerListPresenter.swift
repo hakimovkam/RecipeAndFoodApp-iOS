@@ -19,7 +19,7 @@ final class TimerListPresenter: TimerListViewPresenterProtocol {
     
     weak var view: TimerListViewProtocol?
     var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol!
+    let networkService: NetworkServiceProtocol
     
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.router = router
