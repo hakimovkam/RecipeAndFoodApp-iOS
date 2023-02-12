@@ -10,7 +10,9 @@ import UIKit
 final class TimerListViewController: GradientViewController {
 
     private let presenter: TimerListViewPresenterProtocol
-    var testingData = TestingData().emptyData
+    var testingData = TestingData().data
+    let testingTimer = TestingData().timer
+    let testingDescription = TestingData().recipeDescription
     
     //MARK: - UI Components
     private let headerLabel: UILabel = {
@@ -90,9 +92,8 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as! TimerListCell
-        
-        cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
-        cell.descriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
+                
+        cell.configure(foodImageName: ImageConstant.cookImage, timer: testingTimer, descriptionLabelText: testingDescription)
         cell.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red: 0.775, green: 0.775, blue: 0.775, alpha: 1), thickness: 0.5)
         return cell
     }

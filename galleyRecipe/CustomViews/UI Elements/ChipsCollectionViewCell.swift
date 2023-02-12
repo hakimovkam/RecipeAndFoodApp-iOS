@@ -46,4 +46,8 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
             label.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
+    
+    func configure(with text: String) {
+        label.text = text
+    }
 }

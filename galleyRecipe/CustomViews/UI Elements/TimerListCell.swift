@@ -23,8 +23,6 @@ class TimerListCell: UITableViewCell {
     
     //MARK: - UI Components
     
-    let stackView = UIStackView()
-    
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Regular", size: 14)
@@ -66,6 +64,12 @@ class TimerListCell: UITableViewCell {
         
         return label
     }()
+    
+    func configure(foodImageName: String, timer: String, descriptionLabelText: String) {
+        foodImage.image = UIImage(named: foodImageName)
+        timerLabel.text =  timer
+        descriptionLabel.text = descriptionLabelText
+    }
 }
 
 extension TimerListCell {

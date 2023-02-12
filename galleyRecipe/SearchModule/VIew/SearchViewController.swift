@@ -7,6 +7,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     var testingData = TestingData().data
     var countryData = TestingData().countryCategoryArray
     var categoryData = TestingData().nameCategoryArray
+    var testingDescription = TestingData().recipeDescription
 
     //MARK: - UI Components
     let categoryCollectionView = ChipsCollectionView()
@@ -115,9 +116,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
-        cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
-        
+        cell.configure(recipeDescription: testingDescription, recipeImageName: ImageConstant.cookImage)
         return cell
     }
     
@@ -175,11 +174,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.countryCollectionView {
             let countryCell = countryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            countryCell.label.text = countryData[indexPath.item]
+            countryCell.configure(with: countryData[indexPath.item])
             return countryCell
         } else {
             let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            categoryCell.label.text = categoryData[indexPath.item]
+            categoryCell.configure(with: countryData[indexPath.item])
             return categoryCell
         }
     }

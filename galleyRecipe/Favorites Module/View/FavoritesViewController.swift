@@ -10,7 +10,8 @@ import UIKit
 final class FavoritesViewController: GradientViewController {
     
     private let presenter: FavoriteViewPresenterProtocol
-    var testingData = TestingData().emptyData
+    var testingData = TestingData().data
+    var testingDescription = TestingData().recipeDescription
 
     //MARK: - UI Components
     private var lastContentOffset: CGFloat = 0
@@ -102,8 +103,7 @@ extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.foodImage.image = UIImage(named: ImageConstant.cookImage)
-        cell.recipeDescriptionLabel.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
+        cell.configure(recipeDescription: testingDescription, recipeImageName: ImageConstant.cookImage)
         return cell
     }
 }

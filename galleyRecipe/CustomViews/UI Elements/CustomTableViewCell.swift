@@ -90,6 +90,11 @@ class CustomTableViewCell: UITableViewCell {
         
         return button
     }()
+    
+    func configure(recipeDescription: String, recipeImageName: String) {
+        foodImage.image = UIImage(named: recipeImageName)
+        recipeDescriptionLabel.text = recipeDescription
+    }
 }
 
 //MARK: - Set up UI
