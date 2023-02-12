@@ -113,10 +113,6 @@ extension UITableViewDelegate {
         
         return headerView
     }
-<<<<<<<< HEAD:galleyRecipe/CustomViews/Extension/Extension.swift
-========
-    
->>>>>>>> af8f79aa4f6b7a3602739172ecaeeeb6639f1613:galleyRecipe/CustomViews/Extension/UIExtension.swift
 }
 
 extension CALayer {
@@ -147,18 +143,8 @@ extension CALayer {
     }
 }
 
-<<<<<<<< HEAD:galleyRecipe/CustomViews/Extension/Extension.swift
 extension UILabel {
     func configureLabels() {
         self.textColor = .white
     }
-========
-extension String {
-    
-//    func widthOfString(usingFont font: UIFont) -> CGFloat {
-//        let fontAttributes = [NSFontAttributeName: font]
-//        let size = self.size(attributes: fontAttributes)
-//        return size.width
-//    }
->>>>>>>> af8f79aa4f6b7a3602739172ecaeeeb6639f1613:galleyRecipe/CustomViews/Extension/UIExtension.swift
 }

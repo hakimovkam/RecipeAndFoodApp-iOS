@@ -65,7 +65,7 @@ final class TimerViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .red
         setupSubviews(pauseButton, startButton, resetButton, counterLabel)
         setConstraints()
         pauseButton.isEnabled = false

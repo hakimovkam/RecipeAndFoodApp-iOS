@@ -13,7 +13,7 @@ protocol RouterMain {
     var timerViewController: UIViewController? { get set }
     var searchViewController: UIViewController? { get set }
     var tabBarController: CustomTabBarController? { get set }
-    var builder: BuilderProtocol? { get set }
+    var builder: BuilderProtocol { get set }
 }
 
 protocol RouterProtocol: RouterMain {
@@ -23,7 +23,7 @@ protocol RouterProtocol: RouterMain {
     func showTimer()
 }
 
-class Router: RouterProtocol {
+final class Router: RouterProtocol {
     
     var  builder: BuilderProtocol
      
