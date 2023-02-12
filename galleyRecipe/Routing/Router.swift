@@ -13,7 +13,7 @@ protocol RouterMain {
     var timerViewController: UIViewController? { get set }
     var searchViewController: UIViewController? { get set }
     var tabBarController: CustomTabBarController? { get set }
-    var builder: BuilderProtocol { get set }
+    var builder: BuilderProtocol? { get set }
 }
 
 protocol RouterProtocol: RouterMain {

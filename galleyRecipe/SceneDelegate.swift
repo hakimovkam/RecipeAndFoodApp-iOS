@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         router.setupTabBarController()
         rootController.isNavigationBarHidden = false
         
+//        rootController.setNavigationBarHidden(true, animated: true)
         window?.backgroundColor = .white
         window?.rootViewController = rootController
         window?.makeKeyAndVisible()
