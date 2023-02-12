@@ -8,15 +8,9 @@
 import UIKit
 
 final class TimerListViewController: GradientViewController {
-    enum Localization {
-        static let textLabelStub: String = "Add timers for your recipes here \nby pressing the timer button \non the recipe"
-        static let textLabelChar: String = "⏱️"
-        static let headerLabelOnEmptyScreen: String = "There are no timers here yet"
-        static let placeholder: String = "UIKit Soup"
-    }
-    
-    private let presenter: TimerListViewPresenterProtocol
-    var testingData = TestingData().data
+
+    var presenter: TimerListViewPresenterProtocol
+    var testingData = TestingData().emptyData
     
     //MARK: - UI Components
     private let headerLabel: UILabel = {

@@ -15,7 +15,7 @@ protocol BuilderProtocol {
     func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
 }
 
-final class Builder: BuilderProtocol {
+class Builder: BuilderProtocol {
     func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
         let presenter = FavoritePresenter(networkService: networkService, router: router)
         let view = FavoritesViewController(presenter: presenter)

@@ -15,9 +15,8 @@ final class FavoritesViewController: GradientViewController {
         static let placeholder: String = "Search recipes"
     }
     
-    private let presenter: FavoriteViewPresenterProtocol
-    var testingData = TestingData().data
-    var testingDescription = TestingData().recipeDescription
+    var presenter: FavoriteViewPresenterProtocol
+    var testingData = TestingData().emptyData
 
     //MARK: - UI ComponentsadvancedTableViewHeader
     
@@ -136,9 +135,18 @@ extension FavoritesViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.alpha = 0
         
-        if scrollView.contentOffset.y < 100 {
-            searchBar.alpha = 1 - (scrollView.contentOffset.y * 0.01)
+        if self.lastContentOffset > scrollView.contentOffset.y { // move up
+            if lastContentOffset < 100 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.01)
+            }
+        } else if self.lastContentOffset < scrollView.contentOffset.y { // move down
+            if lastContentOffset < 100 {
+                searchBar.alpha = 1 - (lastContentOffset * 0.01)
+            }
+        } else if self.lastContentOffset == scrollView.contentOffset.y {
+            searchBar.alpha = 1
         }
+        self.lastContentOffset = scrollView.contentOffset.y // update the new position acquired
     }
 }
 //MARK: - SearchResultsUpdate

@@ -10,7 +10,7 @@ import UIKit
 
 final class TimerViewController: GradientViewController {
 
-    private let presenter: TimerViewPresenterProtocol
+    var presenter: TimerViewPresenterProtocol
     
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
