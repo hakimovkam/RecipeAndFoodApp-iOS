@@ -14,41 +14,64 @@ final class TimerViewController: GradientViewController {
     
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
-    private var secondsRemain = 5
-
-    private var soundEnabled = true
-    private var isTimerRunning = false
-    private var resumeTapped = false
-
-    private lazy var pauseButton: UIButton = {
-        createButton(
-            withTitle: "Pause",
-            action: UIAction { [unowned self] _ in
-            pauseTimer()
-        })
+    
+    let totalTime = 5.0
+    private let step = 0.01
+    private var timeRemains = 5.0
+    private var currentStep = 0
+    private var isTimerStarted = false
+    
+    private var totalSteps: Int {
+        Int(totalTime / step)
+    }
+    
+    private let timerProgressView = TimerProgressView(
+        frame: CGRect(x: 0.0, y: 0.0, width: 160, height: 160)
+    )
+    
+    private let dishNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 26   , weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
+        return label
+    }()
+  
+    private lazy var playImage: UIImage = {
+        createButtonImage(name: "play.fill")
+    }()
+    
+    
+    private lazy var pauseImage: UIImage = {
+        createButtonImage(name: "pause.fill")
+    }()
+    
+    private lazy var timerButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(playImage, for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(toggleTimer), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
-    private lazy var startButton: UIButton = {
-        createButton(
-            withTitle: "Start",
-            action: UIAction { [unowned self] _ in
-            runTimer()
-        })
-    }()
-
-    private lazy var resetButton: UIButton = {
-        createButton(
-            withTitle: "Reset",
-            action: UIAction { [unowned self] _ in
-            resetTimer()
-        })
+    private let resetButton: UIButton = {
+        let button = UIButton(type:.system)
+        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(TimerViewController.self, action: #selector(resetTimer), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
     private lazy var counterLabel: UILabel = {
         let label = UILabel()
-        label.text = timeString(time: TimeInterval(secondsRemain))
+        label.text = timeString(time: TimeInterval(timeRemains))
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 80, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 70, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -66,9 +89,9 @@ final class TimerViewController: GradientViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        setupSubviews(pauseButton, startButton, resetButton, counterLabel)
+        setupSubviews(resetButton, counterLabel, timerProgressView, timerButton, dishNameLabel)
         setConstraints()
-        pauseButton.isEnabled = false
+        timerProgressView.center = self.view.center
     }
 }
 
@@ -83,50 +106,63 @@ extension TimerViewController {
         audioPlayer?.play()
     }
 
-    private func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
-        self.startButton.isEnabled = false
-        pauseButton.isEnabled = true
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: step, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
+        timerButton.setImage(pauseImage, for: .normal)
     }
 
     @objc private func updateTimer() {
-        if secondsRemain < 1 {
+        if timeRemains < 1e-5 {
+            timerProgressView.removeProgressStroke()
             timer.invalidate()
             playSound()
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            pauseButton.isEnabled = false
         } else {
-            secondsRemain -= 1
-            counterLabel.text = timeString(time: TimeInterval(secondsRemain))
+            timeRemains -= step
+            timerProgressView.startAnimation(currentStep: currentStep, totalSteps: totalSteps)
+            timerProgressView.changeStrokeColor(currentStep: currentStep, totalSteps: totalSteps)
+            currentStep += 1
+            counterLabel.text = timeString(time: TimeInterval(timeRemains))
         }
     }
 
-    private func pauseTimer() {
-        if self.resumeTapped == false {
-            pauseButton.setTitle("Resume", for: .normal)
+    @objc private func toggleTimer() {
+        if !isTimerStarted {
+            timerButton.setImage(pauseImage, for: .normal)
+            startTimer()
+            toggleAnimation()
+            isTimerStarted = true
+        } else {
+            timerProgressView.pauseAnimation()
+            timerButton.setImage(playImage, for: .normal)
+            isTimerStarted = false
             timer.invalidate()
-            self.resumeTapped = true
-        } else {
-            pauseButton.setTitle("Pause", for: .normal)
-            runTimer()
-            self.resumeTapped = false
         }
     }
 
-    private func resetTimer() {
+    @objc private func resetTimer() {
         timer.invalidate()
-        secondsRemain = 5
-        counterLabel.text = timeString(time: TimeInterval(secondsRemain))
-        pauseButton.isEnabled = false
-        startButton.isEnabled = true
+        timerProgressView.resetAnimation()
+        isTimerStarted = false
+        timeRemains = totalTime
+        currentStep = 0
+        counterLabel.text = timeString(time: TimeInterval(timeRemains))
+        timerButton.setImage(playImage, for: .normal)
     }
 
     private func timeString(time: CFTimeInterval) -> String {
-        let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
 
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        return String(format:"%02i:%02i", minutes, seconds)
+    }
+    
+    private func toggleAnimation() {
+        if !isTimerStarted {
+            timerProgressView.resumeAnimation()
+        } else {
+            timerProgressView.resumeAnimation()
+        }
     }
 }
 
@@ -137,41 +173,39 @@ extension TimerViewController: TimerViewProtocol {
 }
 // MARK: - Setup the View
 extension TimerViewController {
+    
+    private func createButtonImage(name: String) -> UIImage {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large)
+        let image = UIImage(systemName: name, withConfiguration: imageConfig) ?? UIImage()
+        return image
+    }
+    
     private func setupSubviews(_ subviews: UIView...) {
         subviews.forEach { subview in
             view.addSubview(subview)
         }
     }
 
-    private func createButton(withTitle title: String, action: UIAction) -> UIButton {
-        let button = UIButton(type:.system, primaryAction: action)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }
-
     private func setConstraints() {
         NSLayoutConstraint.activate([
+            dishNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            dishNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            dishNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
             counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            counterLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            counterLabel.bottomAnchor.constraint(equalTo: timerButton.topAnchor, constant: -60)
         ])
 
         NSLayoutConstraint.activate([
-            pauseButton.topAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 20),
-            pauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-
-        NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 20),
-            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            resetButton.topAnchor.constraint(equalTo: counterLabel.bottomAnchor, constant: 20),
-            resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            resetButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: 40),
+            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }

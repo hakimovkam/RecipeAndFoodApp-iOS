@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CF70A27297FF0BC006F8C54 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF70A26297FF0BC006F8C54 /* TimerProgressView.swift */; };
 		9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */; };
 		9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */; };
 		9E7C2EF6296AF9F00006EECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2EF5296AF9F00006EECF /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6CF70A26297FF0BC006F8C54 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		9E7C2EE9296AF9EF0006EECF /* galleyRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = galleyRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
