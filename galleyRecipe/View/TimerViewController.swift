@@ -55,11 +55,11 @@ final class TimerViewController: UIViewController {
         return button
     }()
 
-    private lazy var resetButton: UIButton = {
+    private let resetButton: UIButton = {
         let button = UIButton(type:.system)
         button.setTitle("Reset", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+        button.addTarget(TimerViewController.self, action: #selector(resetTimer), for: .touchUpInside)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
