@@ -17,7 +17,6 @@ protocol TimerViewPresenterProtocol: AnyObject {
 
 final class TimerPresenter: TimerViewPresenterProtocol {
     
-    
     weak var view: TimerViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol

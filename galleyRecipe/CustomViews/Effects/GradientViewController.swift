@@ -20,7 +20,6 @@ class GradientViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.layer.addSublayer(gradient)
-
     }
     
     override func viewDidLoad() {

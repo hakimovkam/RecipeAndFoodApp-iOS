@@ -166,6 +166,7 @@ extension TimerViewController {
     }
 }
 
+//MARK: - ViewProtocol
 extension TimerViewController: TimerViewProtocol {
     func didFailWithError(error: Error) {
         print(error.localizedDescription)
