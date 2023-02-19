@@ -84,7 +84,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(tapToSortButton), for: .touchUpInside)
+        button.addTarget(SearchViewController.self, action: #selector(tapToSortButton), for: .touchUpInside)
         return button
     }()
     
@@ -113,6 +113,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         } else {
             setupTableView()
         }
+        
     }
     
     @objc
@@ -193,15 +194,23 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        collectionView.allowsMultipleSelection = true
         if collectionView == self.countryCollectionView {
             let countryCell = countryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
+            if countryCell.isSelected == true {
+                // при скроле красит ячейку в оранжевый пока закоментил
+                //countryCell.backgroundColor = UIColor.orange
+            }
             countryCell.configure(with: countryData[indexPath.item])
+            
             return countryCell
         } else {
             let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
             categoryCell.configure(with: categoryData[indexPath.item])
             return categoryCell
         }
+        
+        
     }
 }
 //MARK: - ChipsCollectionViewDelegateFlowLayout
