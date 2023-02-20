@@ -29,5 +29,5 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
     
     func didTapOnRecipe() {
         router?.showIngredients()
-    }   
+    }
 }
