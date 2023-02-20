@@ -7,11 +7,7 @@
 
 import UIKit
 
-class TimerProgressView: UIView, CAAnimationDelegate {
-
-    private let redColor = UIColor.systemRed.cgColor
-    private let greenColor = UIColor.systemGreen.cgColor
-    private let grayColor = UIColor.systemGray2.cgColor
+ final class TimerProgressView: UIView, CAAnimationDelegate {
     
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
@@ -38,13 +34,10 @@ extension TimerProgressView {
        
         circleLayer = createShapeLayer(
             lineWidth: 12.0,
-            strokeColor: grayColor
-        )
-       
+            strokeColor: UIColor.customLightGray.cgColor)
         progressLayer = createShapeLayer(
             lineWidth: 20.0,
-            strokeColor: greenColor
-        )
+            strokeColor: UIColor.customGreen.cgColor)
     }
     
     private func createShapeLayer(lineWidth: CGFloat, strokeColor: CGColor) -> CAShapeLayer {
@@ -85,16 +78,17 @@ extension TimerProgressView {
     func changeStrokeColor(currentStep: Int, totalSteps: Int) {
         let threeQuarter = totalSteps / 4 * 3
         if currentStep <= threeQuarter {
-            progressLayer.strokeColor = greenColor
+            progressLayer.strokeColor = UIColor.customGreen.cgColor
         } else {
-            progressLayer.strokeColor = redColor
+            progressLayer.strokeColor =
+            UIColor.customRed.cgColor
         }
     }
     
     func resetAnimation() {
         progressLayer.beginTime = 0.0
         progressLayer.strokeEnd = 1.0
-        progressLayer.strokeColor = greenColor
+        progressLayer.strokeColor = UIColor.customGreen.cgColor
         progressLayer.removeAllAnimations()
         isAnimationStarted = false
     }
@@ -112,6 +106,6 @@ extension TimerProgressView {
     func pauseAnimation() {
         let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
         progressLayer.timeOffset = pausedTime
-        progressLayer.strokeColor = grayColor
+        progressLayer.strokeColor = UIColor.customGray.cgColor
     }
 }
