@@ -146,14 +146,13 @@ extension FavoritesViewController: UISearchBarDelegate {
 }
 //MARK: - View protocol
 extension FavoritesViewController: FavoriteViewProtocol {
-
-    
+   
     func didUpdate() {
         print("didUpdate")
     }
     
     func didFailWithError(error: Error) {
-        print(error.localizedDescription)
+        print("error")
     }
 }
 
