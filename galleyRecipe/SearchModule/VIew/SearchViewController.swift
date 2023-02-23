@@ -108,11 +108,7 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         
-        if testingData.isEmpty {
-            setupEmptyView()
-        } else {
-            setupTableView()
-        }
+        setLayout()
     }
     
     @objc
@@ -136,7 +132,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        cell.configure(recipeDescription: testingDescription, recipeImageName: ImageConstant.cookImage)
+        cell.configure(recipeDescription: testingDescription, recipeImage: ""  )
         return cell
     }
     
@@ -261,7 +257,7 @@ extension SearchViewController {
             searchBar.leftAnchor.constraint(equalTo: tableHeaderView.leftAnchor, constant: .mediemLeftRightInset),
             sortButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: .sortButtonLeftAnchor),
             searchBar.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: .smallTopAndBottomInset),
-            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeigh),
+            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeight),
             
             sortButton.topAnchor.constraint(equalTo: tableHeaderView.topAnchor, constant: .headerLabelTopAnchor),
             tableHeaderView.rightAnchor.constraint(equalTo: sortButton.rightAnchor, constant: .mediemLeftRightInset),
@@ -290,7 +286,7 @@ extension SearchViewController {
             searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
             view.rightAnchor.constraint(equalTo: searchBar.rightAnchor , constant: .mediemLeftRightInset),
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
-            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeigh),
+            searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeight),
             
             headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: .mediemLeftRightInset),
             headerLabel.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: .headerLabelTopAnchor ),
@@ -302,5 +298,10 @@ extension SearchViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
         ])
+    }
+    
+    func setLayout() {
+        let tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: CGFloat.advancedTableViewHeader))
+        tableHeaderView.translatesAutoresizingMaskIntoConstraints = false
     }
 }
