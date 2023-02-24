@@ -28,11 +28,10 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
     }()
     
     override var isSelected: Bool {
-        
         didSet {
-            
-            label.backgroundColor = self.isSelected ? UIColor.green : UIColor.white
+            label.backgroundColor = self.isSelected ? .customGreen : UIColor.white
             label.textColor = self.isSelected ? .white : .black
+            label.layer.borderColor = self.isSelected ? UIColor.customGreen.cgColor : UIColor.customBorderColor.cgColor
         }
     }
     
