@@ -16,6 +16,7 @@ final class TimerListViewController: GradientViewController {
     }
     
     private let presenter: TimerListViewPresenterProtocol
+    
     var testingData = TestingData().data
     let testingTimer = TestingData().timer
     let testingDescription = TestingData().recipeDescription
@@ -81,11 +82,15 @@ final class TimerListViewController: GradientViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        if testingData.isEmpty {
-            setupEmptyView()
-        } else {
-            setupTableView()
-        }
+        tableView.allowsSelection = false
+        tableView.alwaysBounceVertical = false
+        
+        setLayot()
+        
+        //FIXME: После реализации логики работы данного экрана с моделями таймера нужно будет обработать анимацию перехода из "пустого" состояние в заполненное по аналогии с экраном FovoriteViewController
+        characterLabel.alpha = 0
+        textLabel.alpha = 0
+        
     }
 }
 //MARK: - TableViewDelegate & TableViewDataSource
@@ -132,29 +137,16 @@ extension TimerListViewController: TimerListViewProtocol {
 //MARK: - Set up UI
 extension TimerListViewController {
     
-    func setupTableView() {
-        
+    func setLayot() {
         view.addSubview(tableView)
+        view.addSubview(characterLabel)
+        view.addSubview(textLabel)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
-            view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: .mediemLeftRightInset)
-        ])
-    }
-    
-    func setupEmptyView() {
-        
-        view.addSubview(headerLabel)
-        view.addSubview(characterLabel)
-        view.addSubview(textLabel)
-        
-        NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: .mediemLeftRightInset),
-            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .headerLabelTopAnchor),
-            headerLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            headerLabel.heightAnchor.constraint(equalToConstant: .tableViewHeader),
+            view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: .mediemLeftRightInset),
             
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

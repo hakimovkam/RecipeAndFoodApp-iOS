@@ -50,6 +50,7 @@
 		EB3995E829951DA400974218 /* TestingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3995E729951DA400974218 /* TestingData.swift */; };
 		EB3E0786299FC864002DC891 /* MealCategorys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3E0785299FC864002DC891 /* MealCategorys.swift */; };
 		EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */; };
+		EB47AACD29A62D3600FEAA1F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB47AACC29A62D3600FEAA1F /* Kingfisher */; };
 		EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */; };
 		EB62A79D2986DF1900FD420C /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79A2986DF1900FD420C /* TimerListCell.swift */; };
 		EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79B2986DF1900FD420C /* TimerListViewController.swift */; };
@@ -62,7 +63,6 @@
 		EBB480F129A2674800ACD15E /* DetailRecipeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */; };
 		EBB480F329A2678500ACD15E /* ComplexSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */; };
 		EBB480F529A26D0B00ACD15E /* QueryItemKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */; };
-		EBB480F729A274A100ACD15E /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F629A274A100ACD15E /* ImageRequest.swift */; };
 		EBD74432299A1C220071D454 /* TimerProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD74431299A1C220071D454 /* TimerProgressBarView.swift */; };
 		EBE07358299AABCD00F75826 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE07357299AABCD00F75826 /* ErrorResponse.swift */; };
 		EBE8F3D0298870BC00AD5870 /* IngridientPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */; };
@@ -127,7 +127,6 @@
 		EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeRequest.swift; sourceTree = "<group>"; };
 		EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSearchRequest.swift; sourceTree = "<group>"; };
 		EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItemKeys.swift; sourceTree = "<group>"; };
-		EBB480F629A274A100ACD15E /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		EBD74431299A1C220071D454 /* TimerProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerProgressBarView.swift; path = galleyRecipe/IngridientModule/TimerProgressBarView.swift; sourceTree = SOURCE_ROOT; };
 		EBE07357299AABCD00F75826 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngridientPresenter.swift; path = galleyRecipe/IngridientModule/Presenter/IngridientPresenter.swift; sourceTree = SOURCE_ROOT; };
@@ -139,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB47AACD29A62D3600FEAA1F /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +381,6 @@
 		EBB480F829A274B300ACD15E /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				EBB480F629A274A100ACD15E /* ImageRequest.swift */,
 				EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */,
 				EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */,
 			);
@@ -413,6 +412,9 @@
 			dependencies = (
 			);
 			name = galleyRecipe;
+			packageProductDependencies = (
+				EB47AACC29A62D3600FEAA1F /* Kingfisher */,
+			);
 			productName = galleyRecipe;
 			productReference = 9E7C2EE9296AF9EF0006EECF /* galleyRecipe.app */;
 			productType = "com.apple.product-type.application";
@@ -441,6 +443,9 @@
 				Base,
 			);
 			mainGroup = 9E7C2EE0296AF9EF0006EECF;
+			packageReferences = (
+				EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 9E7C2EEA296AF9EF0006EECF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -494,7 +499,6 @@
 				EBE07358299AABCD00F75826 /* ErrorResponse.swift in Sources */,
 				EB3995E829951DA400974218 /* TestingData.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
-				EBB480F729A274A100ACD15E /* ImageRequest.swift in Sources */,
 				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
 				EBB480F129A2674800ACD15E /* DetailRecipeRequest.swift in Sources */,
 				EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */,
@@ -734,6 +738,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher?ysclid=lefkafbl7y381117228";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB47AACC29A62D3600FEAA1F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9E7C2EE1296AF9EF0006EECF /* Project object */;
 }
