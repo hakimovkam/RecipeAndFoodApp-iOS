@@ -27,7 +27,7 @@ class SearchPresenter: SearchViewPresenterProtocol {
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.router = router
         self.networkService = networkService
-        getRecipes()
+//        getRecipes()
     }
     
     var recipes: [SearchResult]?

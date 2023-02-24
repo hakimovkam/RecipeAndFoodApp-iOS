@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 final class SearchViewController: GradientViewController, UISearchBarDelegate {
     enum Localization {
@@ -11,8 +12,9 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
     var presenter: SearchViewPresenterProtocol
     private var topConstraint: NSLayoutConstraint!
     
-    var testingData = TestingData().data
-    var testingDescription = TestingData().recipeDescription
+    private let realm = try! Realm()
+    var mealTypeItems: Results<ChipsMealType>!
+    var cusinesTypeItems: Results<ChipsCusinesType>!
 
     //MARK: - UI Components
     let categoryCollectionView = ChipsCollectionView()
@@ -44,7 +46,6 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         return tableView
     }()
     
-    //header label for empty screen
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -87,6 +88,28 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         return button
     }()
     
+    func setDefaultChips() {
+        if mealTypeItems.count == 0 {
+            try! realm.write() {
+                let defaultCategories = MealCategorys.mealTypes
+                for category in defaultCategories {
+                    self.realm.add(category)
+                }
+            }
+            mealTypeItems = realm.objects(ChipsMealType.self)
+        }
+        
+        if cusinesTypeItems.count == 0 {
+            try! realm.write() {
+                let defaultCategories = MealCategorys.cusinesTypes
+                for category in defaultCategories {
+                    self.realm.add(category)
+                }
+            }
+            cusinesTypeItems = realm.objects(ChipsCusinesType.self)
+        }
+    }
+    
     init(presenter: SearchViewPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -110,6 +133,11 @@ final class SearchViewController: GradientViewController, UISearchBarDelegate {
         tableView.allowsSelection = false
         tableView.alwaysBounceVertical = false
         setLayout()
+
+        mealTypeItems = realm.objects(ChipsMealType.self)
+        cusinesTypeItems = realm.objects(ChipsCusinesType.self)
+        setDefaultChips()
+        
     }
     
     @objc
@@ -185,22 +213,35 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.countryCollectionView {
-            return MealCategorys.cusines.count
+            return cusinesTypeItems.count
         } else {
-            return MealCategorys.mealTypes.count
+            return mealTypeItems.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.countryCollectionView {
             let countryCell = countryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            countryCell.configure(with: MealCategorys.cusines[indexPath.item])
+            countryCell.configure(with: cusinesTypeItems[indexPath.item].cusinesFlag, isSelected: cusinesTypeItems[indexPath.item].isSelectedCell)
             return countryCell
         } else {
             let categoryCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ChipsCollectionViewCell.identifier, for: indexPath) as! ChipsCollectionViewCell
-            categoryCell.configure(with: MealCategorys.mealTypes[indexPath.item])
+            categoryCell.configure(with: mealTypeItems[indexPath.item].mealType, isSelected: mealTypeItems[indexPath.item].isSelectedCell)
             return categoryCell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        try! realm.write {
+            if collectionView == self.categoryCollectionView {
+                mealTypeItems[indexPath.item].isSelectedCell = !mealTypeItems[indexPath.item].isSelectedCell
+                categoryCollectionView.reloadData()
+            } else {
+                cusinesTypeItems[indexPath.item].isSelectedCell = !cusinesTypeItems[indexPath.item].isSelectedCell
+                countryCollectionView.reloadData()
+            }
+        }
+        
     }
 }
 //MARK: - ChipsCollectionViewDelegateFlowLayout
@@ -209,10 +250,10 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         let categoryFont = UIFont(name: "Poppins-Regular", size: 14)
         let categoryAttributes = [NSAttributedString.Key.font : categoryFont as Any]
         if collectionView == self.countryCollectionView {
-            let countryWidth = MealCategorys.cusines[indexPath.item].size(withAttributes: categoryAttributes).width + .collectionViewCellHeigh
+            let countryWidth = cusinesTypeItems[indexPath.item].cusinesFlag.size(withAttributes: categoryAttributes).width + .collectionViewCellHeigh
             return CGSize(width: countryWidth, height: collectionView.frame.height)
         } else {
-            let categoryWidth = MealCategorys.mealTypes[indexPath.item].size(withAttributes: categoryAttributes).width + .collectionViewCellHeigh
+            let categoryWidth = mealTypeItems[indexPath.item].mealType.size(withAttributes: categoryAttributes).width + .collectionViewCellHeigh
             return CGSize(width: categoryWidth, height: collectionView.frame.height)
         }
     }

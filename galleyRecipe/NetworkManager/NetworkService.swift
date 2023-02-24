@@ -15,7 +15,8 @@ protocol NetworkServiceProtocol {
 final class NetworkService: NetworkServiceProtocol {
     
     private let baseUrl: String = "https://api.spoonacular.com/recipes/"
-    private let apiKey: String = "68dacdce560d4598baf62743ea86a9a7"
+//    private let apiKey: String = "68dacdce560d4598baf62743ea86a9a7"
+        private let apiKey: String = "997ced0c82834e24a3a3290f8123f2b5"
     
     func request<Request: DataRequest>(id : String, requestType : RequestType, queryItemsArray: [URLQueryItem] ,_ request: Request, completion: @escaping (Result<Request.Response, ErrorResponse>) -> Void) {
         
@@ -34,8 +35,6 @@ final class NetworkService: NetworkServiceProtocol {
         queryItems.append(URLQueryItem(name: "apiKey", value: apiKey))
         
         urlComponent.queryItems = queryItems
-        
-        print(urlComponent)
         
         guard let url = urlComponent.url else {
             return completion(.failure(.apiError))

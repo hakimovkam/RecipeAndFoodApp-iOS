@@ -27,14 +27,6 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    override var isSelected: Bool {
-        didSet {
-            label.backgroundColor = self.isSelected ? .customGreen : UIColor.white
-            label.textColor = self.isSelected ? .white : .black
-            label.layer.borderColor = self.isSelected ? UIColor.customGreen.cgColor : UIColor.customBorderColor.cgColor
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addView()
@@ -55,7 +47,17 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with text: String) {
+    func configure(with text: String, isSelected: Bool) {
         label.text = text
+        
+        if isSelected {
+            label.backgroundColor = .customGreen
+            label.layer.borderColor = UIColor.customGreen.cgColor
+            label.textColor = .white
+        } else {
+            label.backgroundColor = .white
+            label.layer.borderColor = UIColor.customBorderColor.cgColor
+            label.textColor = .black
+        }
     }
 }

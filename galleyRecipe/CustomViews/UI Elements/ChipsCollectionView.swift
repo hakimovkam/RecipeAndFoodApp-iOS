@@ -8,8 +8,6 @@
 import UIKit
 
 final class ChipsCollectionView: UICollectionView {
-
-    var testingData = TestingData().nameCategoryArray
     
     private let chipsLayout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
