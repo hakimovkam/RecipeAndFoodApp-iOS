@@ -15,11 +15,8 @@ final class FavoritesViewController: GradientViewController {
         static let headerLabel: String = "Favorites"
         static let placeholder: String = "Search recipes"
     }
-    
-    private let presenter: FavoriteViewPresenterProtocol
-    var testingData = TestingData().data
-    var testingDescription = TestingData().recipeDescription
     private var topConstraint: NSLayoutConstraint!
+    private let presenter: FavoriteViewPresenterProtocol
 
     //MARK: - UI ComponentsadvancedTableViewHeader
     
@@ -98,7 +95,6 @@ final class FavoritesViewController: GradientViewController {
         
         tableView.allowsSelection = false
         tableView.alwaysBounceVertical = false
-        tableView.alpha = 0
         setLayout()
 
     }
@@ -111,8 +107,19 @@ extension FavoritesViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
         guard let model = presenter.recipes?[indexPath.row] else { return UITableViewCell() }
-        cell.configure(recipeDescription: model.title, recipeImage: model.image)
+        cell.configure(recipeDescription: model.title, recipeImageUrl: model.image)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0.01 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+        })
     }
 }
 
@@ -158,7 +165,6 @@ extension FavoritesViewController: FavoriteViewProtocol {
         tableView.alwaysBounceVertical = true
         
         UIView.animate(withDuration: 0.4) {
-            self.tableView.alpha = 1
             self.characterLabel.alpha = 0
             self.textLabel.alpha = 0
         }
@@ -178,11 +184,9 @@ extension FavoritesViewController {
         
         view.addSubview(characterLabel)
         view.addSubview(textLabel)
-//        view.addSubview(headerLabel)
         topConstraint = searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset)
         
         navigationController?.navigationBar.showsLargeContentViewer = false
-//        tableView.tableHeaderView = searchBar
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: .smallTopAndBottomInset),
@@ -195,7 +199,7 @@ extension FavoritesViewController {
             topConstraint,
             searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeight),
             
-            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
+            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor - .tableViewHeader),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

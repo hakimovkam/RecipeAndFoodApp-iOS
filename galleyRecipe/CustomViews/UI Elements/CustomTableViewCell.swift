@@ -91,9 +91,9 @@ class CustomTableViewCell: UITableViewCell {
         return button
     }()
     
-    func configure(recipeDescription: String, recipeImage: String) {
+    func configure(recipeDescription: String, recipeImageUrl: String) {
         
-        foodImage.kf.setImage(with: URL(string: recipeImage))
+        foodImage.kf.setImage(with: URL(string: recipeImageUrl))
         recipeDescriptionLabel.text = recipeDescription
     }
     

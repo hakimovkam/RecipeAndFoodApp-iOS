@@ -33,8 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             searchViewController: searchViewController,
                             tabBarController: tabBarController)
         router.setupTabBarController()
-        //FIXME: delet
-//        rootController.isNavigationBarHidden = trueч
         
         window?.backgroundColor = .white
         window?.rootViewController = rootController
