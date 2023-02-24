@@ -27,6 +27,14 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            label.backgroundColor = self.isSelected ? .customGreen : UIColor.white
+            label.textColor = self.isSelected ? .white : .black
+            label.layer.borderColor = self.isSelected ? UIColor.customGreen.cgColor : UIColor.customBorderColor.cgColor
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addView()
