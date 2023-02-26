@@ -11,4 +11,3 @@ enum RequestType: String {
     case recepts = "complexSearch"
     case detailed = "/information"
 }
-

@@ -28,17 +28,17 @@ extension CGFloat {
     static var smallTopAndBottomInset: CGFloat { 8 }
     static var mediemLeftRightInset: CGFloat { 16 }
     static var headerLabelTopAnchor: CGFloat { 20 }
-    
+
     static var sortButtonLeftAnchor: CGFloat { 10 }
     static var sortButtonTopAnchor: CGFloat { 21 }
     static var sortButtonHeighAnchor: CGFloat { 24 }
-    
+
     static var smallFoodImageWidthHeighAnchoor: CGFloat { 40 }
     static var smallImageLeftRightAnchor: CGFloat { 24 }
     static var timerLabelWidthAnchor: CGFloat { 60 }
     static var mediumHeightAnchor: CGFloat { 24 }
     static var smallLeftRightInset: CGFloat { 8 }
-    
+
     static var blurViewWidthAnchoor: CGFloat { 40 }
     static var blurViewHeightAnchoor: CGFloat { 80 }
     static var largeAdditionalViewAnchoor: CGFloat { 44 }
@@ -49,12 +49,12 @@ extension CGFloat {
 extension UITableViewDelegate {
     func setTableViewHeader(width: CGFloat, height: CGFloat, text: String) -> UIView {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        
+
         var checkInt = 0
 
         let attributedText = NSMutableAttributedString()
            for letter in text.unicodeScalars {
-               let myLetter : NSAttributedString
+               let myLetter: NSAttributedString
                if CharacterSet.decimalDigits.contains(letter) {
                    myLetter = NSAttributedString(string: "\(letter)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.customGreen])
                    checkInt = 1
@@ -63,9 +63,9 @@ extension UITableViewDelegate {
                }
                attributedText.append(myLetter)
            }
-        
+
         /* set custom blur effect in tableViewHeader */
-        //MARK: - label
+        // MARK: - label
         let label = UILabel()
         label.backgroundColor = .clear
         label.frame = CGRect.init(x: 16, y: 14, width: width, height: 24)
@@ -75,23 +75,23 @@ extension UITableViewDelegate {
             label.text = text
         }
         label.font = UIFont(name: "Poppins-Bold", size: 24)
-        
-        //MARK: - blurEffect
+
+        // MARK: - blurEffect
         let blurEffect = UIBlurEffect(style: .light)
         let blurView = LightBlurEffectView(effect: blurEffect, intensity: 0.2)
         blurView.translatesAutoresizingMaskIntoConstraints = false
         blurView.frame = headerView.frame
-        
+
         let additionalView: UIView = {
             let view = UIView()
-            view.frame = CGRect(x: 0, y: 0, width:width, height: height)
+            view.frame = CGRect(x: 0, y: 0, width: width, height: height)
             view.backgroundColor = .white
             view.alpha = 0.7
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
-        
-        //MARK: - gradient
+
+        // MARK: - gradient
         let gradientView: UIView = {
             let view = UIView()
             view.frame = headerView.frame
@@ -103,14 +103,14 @@ extension UITableViewDelegate {
             view.layer.mask = gradient
             return view
         }()
-        
-        //MARK: - added view components to the table view header
-        
+
+        // MARK: - added view components to the table view header
+
         headerView.addSubview(blurView)
         headerView.addSubview(additionalView)
         headerView.addSubview(gradientView)
         headerView.addSubview(label)
-        
+
         return headerView
     }
 }
@@ -121,24 +121,24 @@ extension CALayer {
         let border = CALayer()
 
         switch edge {
+            // swiftlint:disable all
         case UIRectEdge.top:
-            border.frame = CGRectMake(0, 0, CGRectGetHeight(self.frame), thickness)
+            border.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: thickness)
             break
         case UIRectEdge.bottom:
-            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, UIScreen.main.bounds.width, thickness)
+            border.frame = CGRect(x: 0, y: self.frame.height - thickness, width: UIScreen.main.bounds.width, height: thickness)
             break
         case UIRectEdge.left:
-            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
+            border.frame = CGRect(x: 0, y: 0, width: thickness, height: self.frame.height)
             break
         case UIRectEdge.right:
-            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
+            border.frame = CGRect(x: self.frame.width - thickness, y: 0, width: thickness, height: self.frame.height)
             break
         default:
             break
+            // swiftlint:enable all
         }
-
-        border.backgroundColor = color.cgColor;
-
+        border.backgroundColor = color.cgColor
         self.addSublayer(border)
     }
 }
@@ -159,14 +159,5 @@ extension URL {
         if let components = urlComponents.url {
             self = components
         }
-    }
-}
-
-extension UIImageView {
-    func getImageFromUrl(urlString: String) -> UIImageView {
-        let imageView = UIImageView()
-        let url = URL(string: "https://example.com/image.png")
-        imageView.kf.setImage(with: url)
-        return imageView
     }
 }

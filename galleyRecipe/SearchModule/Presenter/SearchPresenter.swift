@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol SearchViewProtocol: AnyObject {
     func success()
@@ -15,31 +16,52 @@ protocol SearchViewProtocol: AnyObject {
 protocol SearchViewPresenterProtocol: AnyObject {
     func tapOnTheRecipe()
     func getRecipes()
-    var recipes: [SearchResult]?  { get set }
+    func setDeafaultChips()
+    func getMealObjs() -> Results<ChipsMealType>
+    func getCuisineObjs() -> Results<ChipsCuisineType>
+    func updateMealItem(indexPath: Int)
+    func updateCuisineItem(indexPath: Int)
+    func updateMealQueryItems(key: QueryItemKeys, itemValue: String, append: Bool)
+
+    var recipes: [SearchResult]? { get set }
+    var queryItems: [URLQueryItem] { get set }
+
 }
 
 class SearchPresenter: SearchViewPresenterProtocol {
-    
+
     weak var view: SearchViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol
-    
-    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    let realmManager: RealManagerProtocol
+
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol, realmManager: RealManagerProtocol) {
         self.router = router
         self.networkService = networkService
-//        getRecipes()
+        self.realmManager = realmManager
+        getRecipes()
     }
-    
+
+    // MARK: - routing
+    func tapOnTheRecipe() { router?.showIngredients() }
+
+    // MARK: - networkService
+
     var recipes: [SearchResult]?
-    
-    func tapOnTheRecipe() {
-        router?.showIngredients()
+    var queryItems: [URLQueryItem] = []
+
+    func updateMealQueryItems(key: QueryItemKeys, itemValue: String, append: Bool) {
+        let queryItem = URLQueryItem(name: key.rawValue, value: itemValue)
+        append ? queryItems.append(queryItem) : queryItems.removeAll(where: { queryItem in // swiftlint:disable:this void_function_in_ternary
+            queryItem.value == itemValue
+        })
+        getRecipes()
     }
-    
+
     func getRecipes() {
         let request = SearchRecipeRequest()
         networkService.request(id: "", requestType: .recepts,
-                               queryItemsArray: [],
+                               queryItemsArray: queryItems,
                                request) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -53,4 +75,15 @@ class SearchPresenter: SearchViewPresenterProtocol {
             }
         }
     }
+
+    // MARK: - realManager
+    func setDeafaultChips() { realmManager.setDefaultValueForChips() }
+
+    func getMealObjs() -> Results<ChipsMealType> { return realmManager.getMealTypeItems() }
+
+    func getCuisineObjs() -> Results<ChipsCuisineType> { return realmManager.getCuisineTypeItems() }
+
+    func updateMealItem(indexPath: Int) { realmManager.updateMealTypeItem(indexPath: indexPath)}
+
+    func updateCuisineItem(indexPath: Int) { realmManager.updateCuisineType(indexPath: indexPath)}
 }

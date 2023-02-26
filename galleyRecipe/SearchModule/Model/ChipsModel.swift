@@ -13,8 +13,8 @@ class ChipsMealType: Object {
     @objc dynamic var isSelectedCell = false
 }
 
-class ChipsCusinesType: Object {
-    @objc dynamic var cisines = ""
-    @objc dynamic var cusinesFlag = ""
+class ChipsCuisineType: Object {
+    @objc dynamic var cuisine = ""
+    @objc dynamic var cuisineFlag = ""
     @objc dynamic var isSelectedCell = false
 }

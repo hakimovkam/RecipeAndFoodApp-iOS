@@ -12,17 +12,17 @@ class TimerProgressView: UIView, CAAnimationDelegate {
     private let redColor = UIColor.systemRed.cgColor
     private let greenColor = UIColor.systemGreen.cgColor
     private let grayColor = UIColor.systemGray2.cgColor
-    
+
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
-    
+
     private var isAnimationStarted = false
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         createCircularPath()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         createCircularPath()
@@ -31,28 +31,28 @@ class TimerProgressView: UIView, CAAnimationDelegate {
 
 // MARK: - Private funcs
 extension TimerProgressView {
-    
+
     private func createCircularPath() {
         self.backgroundColor = .clear
         self.layer.cornerRadius = self.frame.width / 2
-       
+
         circleLayer = createShapeLayer(
             lineWidth: 12.0,
             strokeColor: grayColor
         )
-       
+
         progressLayer = createShapeLayer(
             lineWidth: 20.0,
             strokeColor: greenColor
         )
     }
-    
+
     private func createShapeLayer(lineWidth: CGFloat, strokeColor: CGColor) -> CAShapeLayer {
         let startPoint = CGFloat(-Double.pi / 2)
         let endPoint = CGFloat(3 * Double.pi / 2)
-        
+
         let shapeLayer = CAShapeLayer()
-        
+
         let circularPath = UIBezierPath(
             arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0),
             radius: (frame.size.width - 1.5) / 2,
@@ -68,10 +68,10 @@ extension TimerProgressView {
         shapeLayer.strokeEnd = 1.0
         shapeLayer.lineCap = .round
         layer.addSublayer(shapeLayer)
-        
+
         return shapeLayer
     }
-    
+
     func startAnimation(currentStep: Int, totalSteps: Int) {
         let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
         let newProgress = 1.0 - Double(currentStep) / Double(totalSteps)
@@ -81,7 +81,7 @@ extension TimerProgressView {
         progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
         isAnimationStarted = true
     }
-    
+
     func changeStrokeColor(currentStep: Int, totalSteps: Int) {
         let threeQuarter = totalSteps / 4 * 3
         if currentStep <= threeQuarter {
@@ -90,25 +90,25 @@ extension TimerProgressView {
             progressLayer.strokeColor = redColor
         }
     }
-    
+
     func resetAnimation() {
         progressLayer.beginTime = 0.0
         progressLayer.strokeEnd = 1.0
         progressLayer.strokeColor = greenColor
-        progressLayer.removeAllAnimations() 
+        progressLayer.removeAllAnimations()
         isAnimationStarted = false
     }
-    
+
     func removeProgressStroke() {
         progressLayer.strokeColor = UIColor.clear.cgColor
     }
-   
+
     func resumeAnimation() {
         let pausedTime = progressLayer.timeOffset
         let timeSincePaused = progressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         progressLayer.beginTime = timeSincePaused
     }
-    
+
     func pauseAnimation() {
         let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
         progressLayer.timeOffset = pausedTime

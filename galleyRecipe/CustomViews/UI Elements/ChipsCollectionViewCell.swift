@@ -9,7 +9,7 @@ import UIKit
 
 final class ChipsCollectionViewCell: UICollectionViewCell {
     static let identifier = "ChipsCell"
-    
+
     private let label: UILabel = {
         let label = UILabel()
         label.layer.masksToBounds = false
@@ -23,22 +23,22 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = " "
-        
+
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func addView() {
         contentView.addSubview(label)
-        
+
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -46,11 +46,11 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
             label.heightAnchor.constraint(equalToConstant: .collectionViewCellHeigh)
         ])
     }
-    
-    func configure(with text: String, isSelected: Bool) {
+
+    func configure(with text: String, cellIsselected: Bool) {
         label.text = text
-        
-        if isSelected {
+
+        if cellIsselected {
             label.backgroundColor = .customGreen
             label.layer.borderColor = UIColor.customGreen.cgColor
             label.textColor = .white
@@ -59,5 +59,6 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
             label.layer.borderColor = UIColor.customBorderColor.cgColor
             label.textColor = .black
         }
+
     }
 }

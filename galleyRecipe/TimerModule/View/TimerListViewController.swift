@@ -14,14 +14,14 @@ final class TimerListViewController: GradientViewController {
         static let headerLabelOnEmptyScreen: String = "There are no timers here yet"
         static let placeholder: String = "UIKit Soup"
     }
-    
+
     private let presenter: TimerListViewPresenterProtocol
-    
+
     var testingData = TestingData().data
     let testingTimer = TestingData().timer
     let testingDescription = TestingData().recipeDescription
-    
-    //MARK: - UI Components
+
+    // MARK: - UI Components
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -33,7 +33,7 @@ final class TimerListViewController: GradientViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private let textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.textColor = .textColor
@@ -46,7 +46,7 @@ final class TimerListViewController: GradientViewController {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         return textLabel
     }()
-    
+
     private let characterLabel: UILabel = {
         let characterLabel = UILabel()
         characterLabel.text = Localization.textLabelChar
@@ -55,7 +55,7 @@ final class TimerListViewController: GradientViewController {
         characterLabel.translatesAutoresizingMaskIntoConstraints = false
         return characterLabel
     }()
-    
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TimerListCell.self, forCellReuseIdentifier: TimerListCell.identifier)
@@ -66,7 +66,7 @@ final class TimerListViewController: GradientViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
+
     init(presenter: TimerListViewPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -75,42 +75,40 @@ final class TimerListViewController: GradientViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.dataSource = self
         tableView.delegate = self
-        
-        tableView.allowsSelection = false
-        tableView.alwaysBounceVertical = false
-        
+
+//        tableView.allowsSelection = false
+//        tableView.alwaysBounceVertical = false
+
         setLayot()
-        
-        //FIXME: После реализации логики работы данного экрана с моделями таймера нужно будет обработать анимацию перехода из "пустого" состояние в заполненное по аналогии с экраном FovoriteViewController
         characterLabel.alpha = 0
         textLabel.alpha = 0
-        
+
     }
 }
-//MARK: - TableViewDelegate & TableViewDataSource
+// MARK: - TableViewDelegate & TableViewDataSource
 extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { testingData.count }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         presenter.didTapOnTimer()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as! TimerListCell
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as? TimerListCell else { return UITableViewCell() }
+
         cell.configure(foodImageName: ImageConstant.cookImage, timer: testingTimer, descriptionLabelText: testingDescription)
         cell.layer.addBorder(edge: UIRectEdge.bottom, color: .textColor, thickness: 0.5)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+
         var text = "There are no timers here yet"
 
         if testingData.count == 1 {
@@ -123,34 +121,34 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
                                                             text: text)
         return headerView
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .timerTableViewCellHeigh }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return .tableViewHeader }
 }
-//MARK: - ViewProtocol
+// MARK: - ViewProtocol
 extension TimerListViewController: TimerListViewProtocol {
     func didFailWithError(error: Error) {
         print(error.localizedDescription)
     }
 }
-//MARK: - Set up UI
+// MARK: - Set up UI
 extension TimerListViewController {
-    
+
     func setLayot() {
         view.addSubview(tableView)
         view.addSubview(characterLabel)
         view.addSubview(textLabel)
-        
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
             view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: .mediemLeftRightInset),
-            
+
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor),
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
