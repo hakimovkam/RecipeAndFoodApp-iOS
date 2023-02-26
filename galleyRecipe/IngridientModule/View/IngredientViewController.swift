@@ -78,9 +78,9 @@ final class IngredientsViewController: GradientViewController {
         return button
     }()
     
-    private let backbutton: UIButton = {
+    private let backButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "arrowLeft.png"), for: .normal)
+        button.setImage(UIImage(named: "ArrowLeft"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -207,10 +207,10 @@ extension IngredientsViewController {
             ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
         
-        view.addSubview(backbutton)
+        view.addSubview(backButton)
         NSLayoutConstraint.activate([
-            backbutton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backbutton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
         ])
     }
 }
