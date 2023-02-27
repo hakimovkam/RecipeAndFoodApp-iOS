@@ -25,7 +25,7 @@ protocol RouterProtocol: RouterMain {
 
 final class Router: RouterProtocol {
 
-    var  builder: BuilderProtocol
+    var builder: BuilderProtocol
 
     weak var favoriteViewController: UIViewController?
     weak var timerViewController: UIViewController?

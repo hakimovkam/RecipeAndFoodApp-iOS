@@ -251,9 +251,9 @@
 		EB1BD5D029896195009EB706 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EB62A79C2986DF1900FD420C /* TimerViewController.swift */,
 				EBD74431299A1C220071D454 /* TimerProgressBarView.swift */,
 				EB62A79B2986DF1900FD420C /* TimerListViewController.swift */,
-				EB62A79C2986DF1900FD420C /* TimerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
