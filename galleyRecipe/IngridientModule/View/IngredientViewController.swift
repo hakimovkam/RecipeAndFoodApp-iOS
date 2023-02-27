@@ -81,7 +81,7 @@ final class IngredientsViewController: GradientViewController {
     private let backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "ArrowLeft"), for: .normal)
-        button.addTarget(IngredientsViewController.self, action: #selector(tapBackButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -125,7 +125,7 @@ final class IngredientsViewController: GradientViewController {
     }
     
     @objc private func tapBackButton() {
-        
+        presenter.backButtonInIngredientDidPressed()
     }
 }
 // MARK: - UITableViewDelegate, UITableViewDataSource
