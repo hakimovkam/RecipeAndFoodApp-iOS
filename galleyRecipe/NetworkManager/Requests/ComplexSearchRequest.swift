@@ -13,10 +13,10 @@ struct SearchRecipeRequest: DataRequest {
         .get
     }
 
-    func decode(_ data: Data) throws -> [SearchResult] {
+    func decode(_ data: Data) throws -> SearchRecipeModel {
         let decoder = JSONDecoder()
 
         let response = try decoder.decode(SearchRecipeModel.self, from: data)
-        return response.results
+        return response
     }
 }

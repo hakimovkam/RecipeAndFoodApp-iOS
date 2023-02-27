@@ -1,7 +1,14 @@
+//
+//  Presenter.swift
+//  galleyRecipe
+//
+//  Created by Камиль Хакимов on 03.02.2023.
+//
+
 import UIKit
 import RealmSwift
 
-final class SearchViewController: GradientViewController, UISearchBarDelegate {
+final class SearchViewController: GradientViewController {
     enum Localization {
         static let textLabelStub: String = "Try changing some\nsearch parameters"
         static let textLabelChar: String = "🤷️"
@@ -145,13 +152,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .recipeTableViewCellHeigh }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let recipesCount = presenter.recipes?.count ?? 0
+        let totalResults = presenter.totalResults ?? 0
         var text = "No recipes found"
 
-        if recipesCount == 1 {
-            text = "Found \(recipesCount) recipe"
-        } else if recipesCount > 1 {
-            text = "Found \(recipesCount) recipes"
+        if totalResults == 1 {
+            text = "Found \(totalResults) recipe"
+        } else if totalResults > 1 {
+            text = "Found \(totalResults) recipes"
         }
 
         let headerView = setTableViewHeader(width: tableView.frame.width,
@@ -166,8 +173,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.alpha = 0
 
         UIView.animate(
-            withDuration: 0.2,
-            delay: 0.001 * Double(indexPath.row),
+            withDuration: 0.1,
+            delay: 0.0001 * Double(indexPath.row),
             animations: {
                 cell.alpha = 1
         })
@@ -245,7 +252,9 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return .spaceBetweenCollectionCell }
 }
-
+extension SearchViewController: UISearchBarDelegate {
+    
+}
 // MARK: - View Protocol
 extension SearchViewController: SearchViewProtocol {
     func success() {

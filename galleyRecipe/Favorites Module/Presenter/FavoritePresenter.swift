@@ -43,7 +43,7 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recipe):
-                    self.recipes = recipe
+                    self.recipes = recipe.results
                     self.view?.success()
                 case .failure(let error):
                     self.view?.failure(error: error)

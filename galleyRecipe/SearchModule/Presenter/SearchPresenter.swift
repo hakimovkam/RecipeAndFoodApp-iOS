@@ -24,6 +24,7 @@ protocol SearchViewPresenterProtocol: AnyObject {
     func updateMealQueryItems(key: QueryItemKeys, itemValue: String, append: Bool)
 
     var recipes: [SearchResult]? { get set }
+    var totalResults: Int? { get set }
     var queryItems: [URLQueryItem] { get set }
 
 }
@@ -48,6 +49,8 @@ class SearchPresenter: SearchViewPresenterProtocol {
     // MARK: - networkService
 
     var recipes: [SearchResult]?
+    var totalResults: Int?
+
     var queryItems: [URLQueryItem] = []
 
     func updateMealQueryItems(key: QueryItemKeys, itemValue: String, append: Bool) {
@@ -67,7 +70,8 @@ class SearchPresenter: SearchViewPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recipe):
-                    self.recipes = recipe
+                    self.totalResults = recipe.totalResults
+                    self.recipes = recipe.results
                     self.view?.success()
                 case .failure(let error):
                     self.view?.failure(error: error)
