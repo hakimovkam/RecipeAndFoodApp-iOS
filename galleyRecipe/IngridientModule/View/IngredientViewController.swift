@@ -78,9 +78,10 @@ final class IngredientsViewController: GradientViewController {
         return button
     }()
     
-    private let backbutton: UIButton = {
+    private let backButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "arrowLeft.png"), for: .normal)
+        button.setImage(UIImage(named: "ArrowLeft"), for: .normal)
+        button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -122,6 +123,10 @@ final class IngredientsViewController: GradientViewController {
         stackView.addArrangedSubview(servings)
         stackView.addArrangedSubview(calories)
     }
+    
+    @objc private func tapBackButton() {
+        presenter.backButtonInIngredientDidPressed()
+    }
 }
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
@@ -150,18 +155,18 @@ extension IngredientsViewController {
     private func setupConstraints() {
         view.addSubview(imageOnTop)
         NSLayoutConstraint.activate([
-            imageOnTop.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            imageOnTop.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            imageOnTop.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            imageOnTop.topAnchor.constraint(equalTo: view.topAnchor),
+            imageOnTop.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageOnTop.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageOnTop.heightAnchor.constraint(equalToConstant: 300)
         ])
         
         view.addSubview(viewFromBottom)
         NSLayoutConstraint.activate([
             viewFromBottom.topAnchor.constraint(equalTo: imageOnTop.bottomAnchor),
-            viewFromBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            viewFromBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            viewFromBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            viewFromBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            viewFromBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            viewFromBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         imageOnTop.addSubview(ingredientLabel)
@@ -204,13 +209,13 @@ extension IngredientsViewController {
             ingredientsTableView.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 55),
             ingredientsTableView.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 2),
             grayView.trailingAnchor.constraint(equalTo: ingredientsTableView.trailingAnchor, constant: 2),
-            ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        view.addSubview(backbutton)
+        view.addSubview(backButton)
         NSLayoutConstraint.activate([
-            backbutton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backbutton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
         ])
     }
 }
