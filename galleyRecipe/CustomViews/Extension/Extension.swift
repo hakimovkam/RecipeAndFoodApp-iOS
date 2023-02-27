@@ -26,7 +26,7 @@ extension CGFloat {
     static var timerTableViewCellHeigh: CGFloat { 76 }
     static var spaceBetweenCollectionCell: CGFloat { 4 }
     static var collectionViewCellHeigh: CGFloat { 32 }
-    static var searchBarHeigh: CGFloat { 50 }
+    static var searchBarHeight: CGFloat { 50 }
     static var characterXAnchor: CGFloat { 50 }
     static var smallTopAndBottomInset: CGFloat { 8 }
     static var mediemLeftRightInset: CGFloat { 16 }
@@ -161,7 +161,27 @@ extension UIImage {
     func resize(targetSize: CGSize) -> UIImage {
         return UIGraphicsImageRenderer(size: targetSize).image { _ in
             self.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+      }
+}
+extension URL {
+    mutating func appendQueryItem(name: String, value: String?) {
+        guard var urlComponents = URLComponents(string: absoluteString) else { return }
+        var queryItems: [URLQueryItem] = urlComponents.queryItems ??  []
+        let queryItem = URLQueryItem(name: name, value: value)
+        queryItems.append(queryItem)
+        urlComponents.queryItems = queryItems
+        if let components = urlComponents.url {
+            self = components
         }
     }
 }
 
+extension UIImageView {
+    func getImageFromUrl(urlString: String) -> UIImageView {
+        let imageView = UIImageView()
+        let url = URL(string: "https://example.com/image.png")
+        imageView.kf.setImage(with: url)
+        return imageView
+    }
+}

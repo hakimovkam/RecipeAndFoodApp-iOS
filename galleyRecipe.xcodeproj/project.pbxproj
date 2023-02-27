@@ -14,10 +14,6 @@
 		9E7C2F09296AFCFD0006EECF /* alarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */; };
 		9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */; };
 		9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F11296B22F30006EECF /* SearchViewController.swift */; };
-		9EE1F66C29858D50006B5F28 /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1F66B29858D50006B5F28 /* RecipeManager.swift */; };
-		9EE1F66E29858D8C006B5F28 /* DetailRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1F66D29858D8C006B5F28 /* DetailRecipe.swift */; };
-		9EE1F67029858DA4006B5F28 /* CookBookRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1F66F29858DA4006B5F28 /* CookBookRecipes.swift */; };
-		9EE1F67229858DC0006B5F28 /* SearchRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1F67129858DC0006B5F28 /* SearchRecipe.swift */; };
 		E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7463D372980512500A4C54F /* IngredientViewController.swift */; };
 		EB0EA9C6298BEB6000C643C4 /* ChipsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */; };
 		EB1BD5CF29895A30009EB706 /* TimerListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */; };
@@ -26,7 +22,6 @@
 		EB262773297817FF002B8924 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB262772297817FF002B8924 /* NetworkService.swift */; };
 		EB26277529782CDF002B8924 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277429782CDF002B8924 /* Builder.swift */; };
 		EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB262776297868EA002B8924 /* FavoritePresenter.swift */; };
-		EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB26277B29786942002B8924 /* FavoriteModel.swift */; };
 		EB29D8192982A4EB00F5740E /* GradientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29D8182982A4EB00F5740E /* GradientViewController.swift */; };
 		EB29F390297E8064002F74BD /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB29F37D297E8064002F74BD /* Poppins-ExtraLight.ttf */; };
 		EB29F391297E8064002F74BD /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB29F37E297E8064002F74BD /* Poppins-ThinItalic.ttf */; };
@@ -53,13 +48,23 @@
 		EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */; };
 		EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899CF297BD9E000705344 /* CustomTabBarController.swift */; };
 		EB3995E829951DA400974218 /* TestingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3995E729951DA400974218 /* TestingData.swift */; };
+		EB3E0786299FC864002DC891 /* MealCategorys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3E0785299FC864002DC891 /* MealCategorys.swift */; };
 		EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */; };
+		EB47AACD29A62D3600FEAA1F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB47AACC29A62D3600FEAA1F /* Kingfisher */; };
 		EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */; };
 		EB62A79D2986DF1900FD420C /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79A2986DF1900FD420C /* TimerListCell.swift */; };
 		EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79B2986DF1900FD420C /* TimerListViewController.swift */; };
 		EB62A79F2986DF1900FD420C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB62A79C2986DF1900FD420C /* TimerViewController.swift */; };
 		EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */; };
+		EB890F5A299CFB1B00D20131 /* DetailRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */; };
+		EB890F5C299CFB4100D20131 /* SearchRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB890F5B299CFB4100D20131 /* SearchRecipeModel.swift */; };
+		EBB480ED29A24A2A00ACD15E /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480EC29A24A2A00ACD15E /* RequestType.swift */; };
+		EBB480EF29A2655600ACD15E /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480EE29A2655600ACD15E /* DataRequest.swift */; };
+		EBB480F129A2674800ACD15E /* DetailRecipeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */; };
+		EBB480F329A2678500ACD15E /* ComplexSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */; };
+		EBB480F529A26D0B00ACD15E /* QueryItemKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */; };
 		EBD74432299A1C220071D454 /* TimerProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD74431299A1C220071D454 /* TimerProgressBarView.swift */; };
+		EBE07358299AABCD00F75826 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE07357299AABCD00F75826 /* ErrorResponse.swift */; };
 		EBE8F3D0298870BC00AD5870 /* IngridientPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */; };
 		EBFDB1FF297957A700CA0084 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* Extension.swift */; };
 /* End PBXBuildFile section */
@@ -74,10 +79,6 @@
 		9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarmSound.mp3; sourceTree = "<group>"; };
 		9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		9EE1F66B29858D50006B5F28 /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
-		9EE1F66D29858D8C006B5F28 /* DetailRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipe.swift; sourceTree = "<group>"; };
-		9EE1F66F29858DA4006B5F28 /* CookBookRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookBookRecipes.swift; sourceTree = "<group>"; };
-		9EE1F67129858DC0006B5F28 /* SearchRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipe.swift; sourceTree = "<group>"; };
 		E7463D372980512500A4C54F /* IngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewController.swift; sourceTree = "<group>"; };
 		EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsCollectionView.swift; sourceTree = "<group>"; };
 		EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerListPresenter.swift; path = galleyRecipe/TimerModule/Presenter/TimerListPresenter.swift; sourceTree = SOURCE_ROOT; };
@@ -86,7 +87,6 @@
 		EB262772297817FF002B8924 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = galleyRecipe/NetworkManager/NetworkService.swift; sourceTree = SOURCE_ROOT; };
 		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = galleyRecipe/Routing/Builder.swift; sourceTree = SOURCE_ROOT; };
 		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = "galleyRecipe/Favorites Module/Presenter/FavoritePresenter.swift"; sourceTree = SOURCE_ROOT; };
-		EB26277B29786942002B8924 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		EB29D8182982A4EB00F5740E /* GradientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientViewController.swift; path = galleyRecipe/CustomViews/Effects/GradientViewController.swift; sourceTree = SOURCE_ROOT; };
 		EB29F37D297E8064002F74BD /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		EB29F37E297E8064002F74BD /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
@@ -113,13 +113,22 @@
 		EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = "galleyRecipe/CustomViews/UI Elements/CustomTabBarController.swift"; sourceTree = SOURCE_ROOT; };
 		EB3995E729951DA400974218 /* TestingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingData.swift; sourceTree = "<group>"; };
+		EB3E0785299FC864002DC891 /* MealCategorys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MealCategorys.swift; path = galleyRecipe/MealCategorys.swift; sourceTree = SOURCE_ROOT; };
 		EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngredientsTableViewCell.swift; path = galleyRecipe/IngridientModule/View/IngredientsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBlurEffectView.swift; sourceTree = "<group>"; };
 		EB62A79A2986DF1900FD420C /* TimerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = "<group>"; };
 		EB62A79B2986DF1900FD420C /* TimerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
 		EB62A79C2986DF1900FD420C /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChipsCollectionViewCell.swift; path = "galleyRecipe/CustomViews/UI Elements/ChipsCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRecipeModel.swift; path = galleyRecipe/NetworkManager/Models/DetailRecipeModel.swift; sourceTree = SOURCE_ROOT; };
+		EB890F5B299CFB4100D20131 /* SearchRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeModel.swift; sourceTree = "<group>"; };
+		EBB480EC29A24A2A00ACD15E /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
+		EBB480EE29A2655600ACD15E /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
+		EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeRequest.swift; sourceTree = "<group>"; };
+		EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSearchRequest.swift; sourceTree = "<group>"; };
+		EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItemKeys.swift; sourceTree = "<group>"; };
 		EBD74431299A1C220071D454 /* TimerProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerProgressBarView.swift; path = galleyRecipe/IngridientModule/TimerProgressBarView.swift; sourceTree = SOURCE_ROOT; };
+		EBE07357299AABCD00F75826 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		EBE8F3CF298870BC00AD5870 /* IngridientPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngridientPresenter.swift; path = galleyRecipe/IngridientModule/Presenter/IngridientPresenter.swift; sourceTree = SOURCE_ROOT; };
 		EBFDB1FE297957A700CA0084 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = galleyRecipe/CustomViews/Extension/Extension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -129,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB47AACD29A62D3600FEAA1F /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,9 +174,10 @@
 				EB62A7992986DF1900FD420C /* TimerModule */,
 				EB3899D2297C031600705344 /* CustomViews */,
 				EB29F37C297E8064002F74BD /* Font */,
+				EB3E0785299FC864002DC891 /* MealCategorys.swift */,
+				EB3995E729951DA400974218 /* TestingData.swift */,
 				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
 				9E7C2EF5296AF9F00006EECF /* Assets.xcassets */,
-				EB3995E729951DA400974218 /* TestingData.swift */,
 				9E7C2EFA296AF9F00006EECF /* Info.plist */,
 				9E7C2F08296AFCFD0006EECF /* alarmSound.mp3 */,
 			);
@@ -177,20 +188,14 @@
 			isa = PBXGroup;
 			children = (
 				EB262772297817FF002B8924 /* NetworkService.swift */,
-				9EE1F66B29858D50006B5F28 /* RecipeManager.swift */,
-				9EE1F66A29858D21006B5F28 /* JSONModel */,
+				EBB480EE29A2655600ACD15E /* DataRequest.swift */,
+				EBE07357299AABCD00F75826 /* ErrorResponse.swift */,
+				EBB480EC29A24A2A00ACD15E /* RequestType.swift */,
+				EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */,
+				EBB480F829A274B300ACD15E /* Requests */,
+				EB890F5D299CFB6600D20131 /* Models */,
 			);
 			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		9EE1F66A29858D21006B5F28 /* JSONModel */ = {
-			isa = PBXGroup;
-			children = (
-				9EE1F66D29858D8C006B5F28 /* DetailRecipe.swift */,
-				9EE1F66F29858DA4006B5F28 /* CookBookRecipes.swift */,
-				9EE1F67129858DC0006B5F28 /* SearchRecipe.swift */,
-			);
-			path = JSONModel;
 			sourceTree = "<group>";
 		};
 		EB0EA9C9298CF07F00C643C4 /* SearchModule */ = {
@@ -224,14 +229,6 @@
 				9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		EB0EA9CD298CF0EE00C643C4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				EB26277B29786942002B8924 /* FavoriteModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		EB0EA9CE298CF0F600C643C4 /* Presenter */ = {
@@ -315,7 +312,6 @@
 		EB3899D1297C02CB00705344 /* Favorites Module */ = {
 			isa = PBXGroup;
 			children = (
-				EB0EA9CD298CF0EE00C643C4 /* Model */,
 				EB0EA9CC298CF0E500C643C4 /* View */,
 				EB0EA9CE298CF0F600C643C4 /* Presenter */,
 			);
@@ -373,6 +369,24 @@
 			path = "UI Elements";
 			sourceTree = "<group>";
 		};
+		EB890F5D299CFB6600D20131 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */,
+				EB890F5B299CFB4100D20131 /* SearchRecipeModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EBB480F829A274B300ACD15E /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */,
+				EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		EBE8F3CE2988709A00AD5870 /* IngridientModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +412,9 @@
 			dependencies = (
 			);
 			name = galleyRecipe;
+			packageProductDependencies = (
+				EB47AACC29A62D3600FEAA1F /* Kingfisher */,
+			);
 			productName = galleyRecipe;
 			productReference = 9E7C2EE9296AF9EF0006EECF /* galleyRecipe.app */;
 			productType = "com.apple.product-type.application";
@@ -426,6 +443,9 @@
 				Base,
 			);
 			mainGroup = 9E7C2EE0296AF9EF0006EECF;
+			packageReferences = (
+				EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 9E7C2EEA296AF9EF0006EECF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -472,21 +492,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB890F5A299CFB1B00D20131 /* DetailRecipeModel.swift in Sources */,
 				E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */,
 				EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */,
 				EB385F7E298D3F9A00B80749 /* SearchPresenter.swift in Sources */,
-				9EE1F66C29858D50006B5F28 /* RecipeManager.swift in Sources */,
-				9EE1F67029858DA4006B5F28 /* CookBookRecipes.swift in Sources */,
+				EBE07358299AABCD00F75826 /* ErrorResponse.swift in Sources */,
 				EB3995E829951DA400974218 /* TestingData.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
-				9EE1F66E29858D8C006B5F28 /* DetailRecipe.swift in Sources */,
 				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
+				EBB480F129A2674800ACD15E /* DetailRecipeRequest.swift in Sources */,
 				EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */,
+				EBB480ED29A24A2A00ACD15E /* RequestType.swift in Sources */,
+				EB3E0786299FC864002DC891 /* MealCategorys.swift in Sources */,
 				EB62A79D2986DF1900FD420C /* TimerListCell.swift in Sources */,
 				EB26277529782CDF002B8924 /* Builder.swift in Sources */,
 				EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */,
-				EB26277C29786942002B8924 /* FavoriteModel.swift in Sources */,
+				EB890F5C299CFB4100D20131 /* SearchRecipeModel.swift in Sources */,
+				EBB480F329A2678500ACD15E /* ComplexSearchRequest.swift in Sources */,
 				EB29D8192982A4EB00F5740E /* GradientViewController.swift in Sources */,
+				EBB480F529A26D0B00ACD15E /* QueryItemKeys.swift in Sources */,
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				EB26277129781728002B8924 /* Router.swift in Sources */,
 				EBE8F3D0298870BC00AD5870 /* IngridientPresenter.swift in Sources */,
@@ -494,6 +518,7 @@
 				EBFDB1FF297957A700CA0084 /* Extension.swift in Sources */,
 				EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */,
 				EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */,
+				EBB480EF29A2655600ACD15E /* DataRequest.swift in Sources */,
 				EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
 				EB0EA9C6298BEB6000C643C4 /* ChipsCollectionView.swift in Sources */,
@@ -502,7 +527,6 @@
 				EB62A79F2986DF1900FD420C /* TimerViewController.swift in Sources */,
 				EB1BD5CF29895A30009EB706 /* TimerListPresenter.swift in Sources */,
 				EB1BD5D2298961B2009EB706 /* TimerPresenter.swift in Sources */,
-				9EE1F67229858DC0006B5F28 /* SearchRecipe.swift in Sources */,
 				9E7C2EEF296AF9EF0006EECF /* SceneDelegate.swift in Sources */,
 				EB29F3A5297E80BB002F74BD /* DarkBlurEffectView.swift in Sources */,
 			);
@@ -714,6 +738,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher?ysclid=lefkafbl7y381117228";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB47AACC29A62D3600FEAA1F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9E7C2EE1296AF9EF0006EECF /* Project object */;
 }
