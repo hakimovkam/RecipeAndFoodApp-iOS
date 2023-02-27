@@ -13,8 +13,8 @@ class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         setTabBarApperance()
     }
-    
-    //MARK: - cusstomize TabBarController
+
+    // MARK: - cusstomize TabBarController
 
     /* Кастомизация TabBarControllera */
     func setTabBarApperance() {
@@ -24,7 +24,7 @@ class CustomTabBarController: UITabBarController {
         let height = tabBar.bounds.height + positionOnY * 2 * 15
 
         let rounderLayer = CAShapeLayer()
-        let bezierPath =  UIBezierPath(roundedRect: CGRect(x:  positionOnX,
+        let bezierPath =  UIBezierPath(roundedRect: CGRect(x: positionOnX,
                                                            y: tabBar.bounds.minY - positionOnY - 20,
                                                            width: width,
                                                            height: height),
@@ -44,7 +44,7 @@ class CustomTabBarController: UITabBarController {
         tabBar.layer.shadowOpacity = 1
         tabBar.layer.shadowOffset = CGSize.zero
         tabBar.layer.shadowRadius = 0.5
-        
+
         tabBar.backgroundImage = UIImage()
         tabBar.shadowImage = UIImage()
     }

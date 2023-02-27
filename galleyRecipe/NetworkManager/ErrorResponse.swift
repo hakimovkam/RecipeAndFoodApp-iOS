@@ -13,7 +13,7 @@ enum ErrorResponse: String, Error {
     case invalidResponse
     case noData
     case serializationError
-    
+
     public var description: String {
         switch self {
         case .apiError: return "Ooops, there is something problem with the api"

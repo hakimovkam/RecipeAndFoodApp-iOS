@@ -15,16 +15,16 @@ protocol IngridientViewPresenterProtocol: AnyObject {
 }
 
 final class IngridientPresenter: IngridientViewPresenterProtocol {
-    
+
     weak var view: IngridientViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol
-    
+
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
     }
-    
+
     func backButtonInIngredientDidPressed() {
         router?.goBackToRootView()
     }

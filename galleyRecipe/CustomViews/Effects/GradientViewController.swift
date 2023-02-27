@@ -16,12 +16,12 @@ class GradientViewController: UIViewController {
         gradient.locations = [0.75, 1]
         return gradient
     }()
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.layer.addSublayer(gradient)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol RouterMain {
     var rootController: UINavigationController? { get set }
-    var favoriteViewController : UIViewController? { get set }
+    var favoriteViewController: UIViewController? { get set }
     var timerViewController: UIViewController? { get set }
     var searchViewController: UIViewController? { get set }
     var tabBarController: CustomTabBarController? { get set }
@@ -24,26 +24,25 @@ protocol RouterProtocol: RouterMain {
 }
 
 final class Router: RouterProtocol {
-    
+
     var builder: BuilderProtocol
-     
+
     weak var favoriteViewController: UIViewController?
     weak var timerViewController: UIViewController?
     weak var searchViewController: UIViewController?
     weak var rootController: UINavigationController?
     weak var tabBarController: CustomTabBarController?
-    
-    /* Иницилизация интернет прослойки в единственном экземпляре для передачи по модулям MVP */
-    lazy private var networkService: NetworkServiceProtocol = NetworkService()
-    
-    /* Иницилизация TabBarController */
+
+    private lazy var networkService: NetworkServiceProtocol = NetworkService()
+    private lazy var realmManager: RealManagerProtocol = RealmManager()
+
     init(rootController: UINavigationController,
          builder: BuilderProtocol,
          favoriteViewController: UIViewController,
          timerViewController: UIViewController,
          searchViewController: UIViewController,
          tabBarController: CustomTabBarController) {
-        
+
         self.favoriteViewController = favoriteViewController
         self.timerViewController = timerViewController
         self.searchViewController = searchViewController
@@ -51,28 +50,27 @@ final class Router: RouterProtocol {
         self.builder = builder
         self.tabBarController = tabBarController
     }
-    
+
     func showIngredients() {
             let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService)
             rootController?.pushViewController(ingredientsViewController, animated: true)
     }
-    
+
     func goBackToRootView() {
         if let rootController = rootController {
             rootController.popToRootViewController(animated: true)
         }
     }
-    
+
     func showTimer() {
         let timerViewController = builder.showTimerViewController(router: self, networkService: networkService)
         rootController?.pushViewController(timerViewController, animated: true)
     }
-    
-    /* Заполняем TabBarController вкладками */
+
     func setupTabBarController() {
         let favoriteView = builder.createFavoriteViewController(router: self, networkService: networkService)
         let timerView = builder.createTimerListViewController(router: self, networkService: networkService)
-        let searchView = builder.createSearchViewController(router: self, networkService: networkService)
+        let searchView = builder.createSearchViewController(router: self, networkService: networkService, realmManager: realmManager)
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
         tabBarController?.setViewControllers([generateVC(viewController: favoriteView,
@@ -81,14 +79,13 @@ final class Router: RouterProtocol {
                                              generateVC(viewController: searchView,
                                                         image: UIImage(named: ImageConstant.recipeOutline),
                                                         selectedImage: UIImage(named: ImageConstant.recipeFilled)),
-                                             generateVC(viewController: timerView ,
+                                             generateVC(viewController: timerView,
                                                         image: UIImage(named: ImageConstant.clockOutline),
                                                         selectedImage: nil)], animated: true)
     }
-    //MARK: - cusstomize TabBarController
-    /* Установка иконок и надписей на бэйджики */
-    func generateVC(viewController: UIViewController,
-                            image: UIImage?, selectedImage: UIImage?) -> UIViewController {
+
+    func generateVC(viewController: UIViewController, image: UIImage?,
+                    selectedImage: UIImage?) -> UIViewController {
         viewController.tabBarItem.image = image
         viewController.tabBarItem.selectedImage = selectedImage
         return viewController

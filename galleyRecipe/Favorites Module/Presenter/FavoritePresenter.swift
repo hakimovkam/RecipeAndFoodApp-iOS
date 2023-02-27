@@ -7,11 +7,13 @@
 
 import Foundation
 
+// output
 protocol FavoriteViewProtocol: AnyObject {
     func success()
     func failure(error: Error)
 }
 
+// input
 protocol FavoriteViewPresenterProtocol: AnyObject {
     func didTapOnRecipe()
     func getRecipes()
@@ -19,19 +21,19 @@ protocol FavoriteViewPresenterProtocol: AnyObject {
 }
 
 final class FavoritePresenter: FavoriteViewPresenterProtocol {
-    
+
     weak var view: FavoriteViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol
-    
+
     var recipes: [SearchResult]?
-    
+
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
         getRecipes()
     }
-    
+
     func getRecipes() {
         let request = SearchRecipeRequest()
         networkService.request(id: "", requestType: .recepts,
@@ -41,7 +43,7 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recipe):
-                    self.recipes = recipe
+                    self.recipes = recipe.results
                     self.view?.success()
                 case .failure(let error):
                     self.view?.failure(error: error)
@@ -49,7 +51,7 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
             }
         }
     }
-    
+
     func didTapOnRecipe() {
         router?.showIngredients()
     }

@@ -16,16 +16,16 @@ protocol TimerViewPresenterProtocol: AnyObject {
 }
 
 final class TimerPresenter: TimerViewPresenterProtocol {
-    
+
     weak var view: TimerViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol
-    
+
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
     }
-    
+
     func backButtonInTimerDidPressed() {
         router?.goBackToRootView()
     }

@@ -12,7 +12,7 @@ final class TimerViewController: GradientViewController {
     let testingData = TestingData()
     
     private let presenter: TimerViewPresenterProtocol
-    
+
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
 
@@ -23,12 +23,13 @@ final class TimerViewController: GradientViewController {
     private let step = timerConstants.step
     private lazy var timeRemains = totalTime
     private var currentStep = timerConstants.currentStep
+
     private var isTimerStarted = false
-    
+
     private var totalSteps: Int {
         Int(totalTime / step)
     }
-    
+
     private let timerProgressView = TimerProgressView(
         frame: CGRect(x: .zero, y: .zero, width: .timerProgressViewWidth, height: .timerProgressViewWidth)
     )
@@ -49,12 +50,11 @@ final class TimerViewController: GradientViewController {
         label.text = testingData.recipeDescription
         return label
     }()
-  
+
     private lazy var playImage: UIImage = {
         createButtonImage(name: ImageConstant.playButton)
     }()
-    
-    
+
     private lazy var pauseImage: UIImage = {
         createButtonImage(name: ImageConstant.pauseButonc)
     }()
@@ -74,9 +74,11 @@ final class TimerViewController: GradientViewController {
         return button
     }()
 
+
     private lazy var resetButton: UIButton = {
         let button = UIButton(type:.system)
         button.setTitle(.resetButton, for: .normal)
+
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
         button.titleLabel?.font = UIFont(name: .poppinsRegular, size: .buttonFontSixe)
@@ -92,7 +94,7 @@ final class TimerViewController: GradientViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     init(presenter: TimerViewPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -104,6 +106,7 @@ final class TimerViewController: GradientViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .white
         timerProgressView.center = self.view.center
         setupSubviews(resetButton, counterLabel, timerProgressView,
@@ -177,7 +180,7 @@ extension TimerViewController {
 
         return String(format:.stringFormat, minutes, seconds)
     }
-    
+
     private func toggleAnimation() {
         if !isTimerStarted {
             timerProgressView.resumeAnimation()
@@ -187,7 +190,7 @@ extension TimerViewController {
     }
 }
 
-//MARK: - ViewProtocol
+// MARK: - ViewProtocol
 extension TimerViewController: TimerViewProtocol {
     func didFailWithError(error: Error) {
         print(error.localizedDescription)
@@ -206,7 +209,7 @@ extension TimerViewController {
             backbutton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             backbutton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .backButtonLeftAnchor)
         ])
-      
+
         NSLayoutConstraint.activate([
             dishNameLabel.topAnchor.constraint(equalTo: backbutton.bottomAnchor),
             dishNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .backButtonLeftAnchor),
@@ -215,10 +218,9 @@ extension TimerViewController {
    
         NSLayoutConstraint.activate([
             timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-     
+
         NSLayoutConstraint.activate([
             counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             counterLabel.bottomAnchor.constraint(equalTo: timerButton.topAnchor, constant: .counterLabelBottomAnchor)
