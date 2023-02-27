@@ -32,8 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             searchViewController: searchViewController,
                             tabBarController: tabBarController)
         router.setupTabBarController()
-//        rootController.isNavigationBarHidden = true
-
+        rootController.isNavigationBarHidden = true
+        
         window?.backgroundColor = .white
         window?.rootViewController = rootController
         window?.makeKeyAndVisible()
