@@ -47,6 +47,11 @@ extension CGFloat {
     static var largeAdditionalViewAnchoor: CGFloat { 44 }
     static var mediemAdditionalViewAnchoor: CGFloat { 20 }
     static var smallAdditionalViewAnchoor: CGFloat { 12 }
+    
+    static var backButtonLeftAnchor: CGFloat { 20 }
+    static var dishNameLabelRigthAnchor: CGFloat { -80 }
+    static var counterLabelBottomAnchor: CGFloat { -60 }
+    static var resetButtonTopAnchor: CGFloat { 40 }
 }
 
 extension UITableViewDelegate {
@@ -151,3 +156,12 @@ extension UILabel {
         self.textColor = .white
     }
 }
+
+extension UIImage {
+    func resize(targetSize: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: targetSize).image { _ in
+            self.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+    }
+}
+

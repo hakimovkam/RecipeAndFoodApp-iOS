@@ -7,7 +7,7 @@
 
 import UIKit
 
- final class TimerProgressView: UIView, CAAnimationDelegate {
+final class TimerProgressView: UIView {
     
     private var circleLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
