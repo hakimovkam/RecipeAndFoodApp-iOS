@@ -1,5 +1,5 @@
 //
-//  TimerPresenter.swift
+//  IngridientPresenter.swift
 //  galleyRecipe
 //
 //  Created by Камиль Хакимов on 31.01.2023.
@@ -7,17 +7,16 @@
 
 import Foundation
 
-protocol TimerViewProtocol: AnyObject {
-    func didFailWithError(error: Error)
+protocol IngridientViewProtocol: AnyObject {
 }
 
-protocol TimerViewPresenterProtocol: AnyObject {
-    func backButtonInTimerDidPressed()
+protocol IngridientViewPresenterProtocol: AnyObject {
+    func backButtonDidPressed()
 }
 
-final class TimerPresenter: TimerViewPresenterProtocol {
+final class IngridientPresenter: IngridientViewPresenterProtocol {
 
-    weak var view: TimerViewProtocol?
+    weak var view: IngridientViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol
 
@@ -26,7 +25,7 @@ final class TimerPresenter: TimerViewPresenterProtocol {
         self.router = router
     }
 
-    func backButtonInTimerDidPressed() {
+    func backButtonDidPressed() {
         router?.goBackToRootView()
     }
 }

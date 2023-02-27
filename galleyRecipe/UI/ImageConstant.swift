@@ -22,4 +22,5 @@ struct ImageConstant {
     static let playButton = "play"
     static let pauseButonc = "pause"
     static let arrowLeft = "ArrowLeft"
+    static let arrowLeftBlack = "ArrowLeftBlack"
 }

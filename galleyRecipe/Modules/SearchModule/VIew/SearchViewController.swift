@@ -253,7 +253,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return .spaceBetweenCollectionCell }
 }
 extension SearchViewController: UISearchBarDelegate {
-    
+
 }
 // MARK: - View Protocol
 extension SearchViewController: SearchViewProtocol {

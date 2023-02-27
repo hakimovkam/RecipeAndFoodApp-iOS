@@ -10,7 +10,7 @@ import UIKit
 final class TimerViewController: GradientViewController {
 
     let testingData = TestingData()
-    
+
     private let presenter: TimerViewPresenterProtocol
 
     private var audioPlayer: AVAudioPlayer?
@@ -19,10 +19,10 @@ final class TimerViewController: GradientViewController {
     private var totalTime: Double {
         Double("5") ?? 0
     }
-    
-    private let step = timerConstants.step
+
+    private let step = TimerConstants.step
     private lazy var timeRemains = totalTime
-    private var currentStep = timerConstants.currentStep
+    private var currentStep = TimerConstants.currentStep
 
     private var isTimerStarted = false
 
@@ -33,14 +33,15 @@ final class TimerViewController: GradientViewController {
     private let timerProgressView = TimerProgressView(
         frame: CGRect(x: .zero, y: .zero, width: .timerProgressViewWidth, height: .timerProgressViewWidth)
     )
-    
-    private let backbutton: UIButton = {
+
+    private lazy var backbutton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: ImageConstant.arrowLeft), for: .normal)
+        button.setImage(UIImage(named: ImageConstant.arrowLeftBlack), for: .normal)
+        button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     private lazy var dishNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -58,13 +59,13 @@ final class TimerViewController: GradientViewController {
     private lazy var pauseImage: UIImage = {
         createButtonImage(name: ImageConstant.pauseButonc)
     }()
-    
+
     private func createButtonImage(name: String) -> UIImage {
         guard let image = UIImage(named: name) else { return UIImage() }
         let resizedImage = image.resize(targetSize: CGSize(width: .imageWidth, height: .imageHeigth))
         return resizedImage
     }
-    
+
     private lazy var timerButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(playImage, for: .normal)
@@ -74,9 +75,8 @@ final class TimerViewController: GradientViewController {
         return button
     }()
 
-
     private lazy var resetButton: UIButton = {
-        let button = UIButton(type:.system)
+        let button = UIButton(type: .system)
         button.setTitle(.resetButton, for: .normal)
 
         button.setTitleColor(.black, for: .normal)
@@ -112,6 +112,10 @@ final class TimerViewController: GradientViewController {
         setupSubviews(resetButton, counterLabel, timerProgressView,
                       timerButton, dishNameLabel, backbutton)
         setConstraints()
+    }
+
+    @objc private func tapBackButton() {
+        presenter.backButtonDidPressed()
     }
 }
 // MARK: - Create Timer
@@ -178,7 +182,7 @@ extension TimerViewController {
         let minutes = Int(time) / .sixty % .sixty
         let seconds = Int(time) % .sixty
 
-        return String(format:.stringFormat, minutes, seconds)
+        return String(format: .stringFormat, minutes, seconds)
     }
 
     private func toggleAnimation() {
@@ -215,7 +219,7 @@ extension TimerViewController {
             dishNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .backButtonLeftAnchor),
             dishNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: .dishNameLabelRigthAnchor)
         ])
-   
+
         NSLayoutConstraint.activate([
             timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -236,11 +240,11 @@ extension TimerViewController {
 extension String {
     static var poppinsRegular: String { "Poppins-Regular" }
     static var poppinsBold: String { "Poppins-Bold" }
-    
+
     static var alarmSound: String { "alarmSound" }
     static var alarmSoundExtension: String { "mp3" }
     static var resetButton: String { "Reset" }
-    
+
     static var stringFormat: String { "%02i:%02i" }
 }
 
@@ -251,12 +255,12 @@ extension Int {
 
 extension Double {
     static var tenPowFive: Double { 1e-5 }
-    
+
     static var imageWidth: Double { 46.0 }
     static var imageHeigth: Double { 67.0 }
-    
+
     static var step: Double { 0.01 }
-    
+
     static var timerProgressViewWidth: Double { 160 }
 }
 
@@ -265,7 +269,7 @@ extension CGFloat {
     static var buttonFontSixe: CGFloat { 24 }
 }
 
-struct timerConstants {
+struct TimerConstants {
     static var step = 0.01
     static var currentStep = 0
 }

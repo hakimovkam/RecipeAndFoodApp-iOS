@@ -77,9 +77,9 @@ final class IngredientsViewController: GradientViewController {
         return button
     }()
 
-    private let backButton: UIButton = {
+    private lazy var backButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "ArrowLeft"), for: .normal)
+        button.setImage(UIImage(named: ImageConstant.arrowLeft), for: .normal)
         button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -122,9 +122,9 @@ final class IngredientsViewController: GradientViewController {
         stackView.addArrangedSubview(servings)
         stackView.addArrangedSubview(calories)
     }
-    
+
     @objc private func tapBackButton() {
-        presenter.backButtonInIngredientDidPressed()
+        presenter.backButtonDidPressed()
     }
 }
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -210,7 +210,7 @@ extension IngredientsViewController {
             grayView.trailingAnchor.constraint(equalTo: ingredientsTableView.trailingAnchor, constant: 2),
             ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
+
         view.addSubview(backButton)
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
