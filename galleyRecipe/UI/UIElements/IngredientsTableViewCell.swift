@@ -13,21 +13,21 @@ final class IngredientsTableViewCell: UITableViewCell {
 
     private let circleImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "Pasta")
+        imageView.image = UIImage(named: TestingData.circleImageText)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
     let foodNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Pasta"
+        label.text = TestingData.foodNameLabel
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     let foodWeightLabel: UILabel = {
         let label = UILabel()
-        label.text = "400 g"
+        label.text = TestingData.foodNameLabel
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -46,21 +46,21 @@ final class IngredientsTableViewCell: UITableViewCell {
         self.addSubview(circleImage)
         NSLayoutConstraint.activate([
             circleImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            circleImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            circleImage.widthAnchor.constraint(equalToConstant: 35),
-            circleImage.heightAnchor.constraint(equalToConstant: 35)
+            circleImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: .ingredientsCellCircleImageLeadingAnchor),
+            circleImage.widthAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
+            circleImage.heightAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth)
         ])
 
         self.addSubview(foodNameLabel)
         NSLayoutConstraint.activate([
             foodNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            foodNameLabel.leftAnchor.constraint(equalTo: circleImage.rightAnchor, constant: 30)
+            foodNameLabel.leftAnchor.constraint(equalTo: circleImage.rightAnchor, constant: .ingredientsCellFoodNameLabelLeftAnchor)
         ])
 
         self.addSubview(foodWeightLabel)
         NSLayoutConstraint.activate([
             foodWeightLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.rightAnchor.constraint(equalTo: foodWeightLabel.rightAnchor, constant: 30)
+            self.rightAnchor.constraint(equalTo: foodWeightLabel.rightAnchor, constant: .ingredientsCellFoodWeightLabelLeftAnchor)
         ])
     }
 }
