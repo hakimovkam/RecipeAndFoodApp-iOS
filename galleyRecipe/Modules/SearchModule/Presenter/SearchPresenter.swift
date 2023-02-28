@@ -62,10 +62,8 @@ class SearchPresenter: SearchViewPresenterProtocol {
     }
 
     func getRecipes() {
-        let request = SearchRecipeRequest()
-        networkService.request(id: "", requestType: .recepts,
-                               queryItemsArray: queryItems,
-                               request) { [weak self] result in
+        let request = SearchRecipeRequest(requestType: .recepts, queryItems: queryItems)
+        networkService.request(request) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {

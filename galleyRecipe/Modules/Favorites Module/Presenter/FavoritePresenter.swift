@@ -31,14 +31,12 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
     required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.networkService = networkService
         self.router = router
-        getRecipes()
+//        getRecipes()
     }
 
     func getRecipes() {
-        let request = SearchRecipeRequest()
-        networkService.request(id: "", requestType: .recepts,
-                               queryItemsArray: [],
-                               request) { [weak self] result in
+        let request = SearchRecipeRequest(requestType: .recepts, queryItems: [])
+        networkService.request(request) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {

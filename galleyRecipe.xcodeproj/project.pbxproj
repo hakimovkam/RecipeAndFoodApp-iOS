@@ -16,6 +16,7 @@
 		9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F11296B22F30006EECF /* SearchViewController.swift */; };
 		E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7463D372980512500A4C54F /* IngredientViewController.swift */; };
 		EB0EA9C6298BEB6000C643C4 /* ChipsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */; };
+		EB14C96829AD39BD002590E5 /* FavoriteRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14C96729AD39BD002590E5 /* FavoriteRecipeModel.swift */; };
 		EB1BD5CF29895A30009EB706 /* TimerListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */; };
 		EB1BD5D2298961B2009EB706 /* TimerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BD5D1298961B2009EB706 /* TimerPresenter.swift */; };
 		EB206ED829A8F8D6007D626C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EB206ED729A8F8D6007D626C /* Realm */; };
@@ -90,6 +91,7 @@
 		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E7463D372980512500A4C54F /* IngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewController.swift; sourceTree = "<group>"; };
 		EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsCollectionView.swift; sourceTree = "<group>"; };
+		EB14C96729AD39BD002590E5 /* FavoriteRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipeModel.swift; sourceTree = "<group>"; };
 		EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerListPresenter.swift; path = galleyRecipe/Modules/TimerModule/Presenter/TimerListPresenter.swift; sourceTree = SOURCE_ROOT; };
 		EB1BD5D1298961B2009EB706 /* TimerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerPresenter.swift; path = galleyRecipe/Modules/TimerModule/Presenter/TimerPresenter.swift; sourceTree = SOURCE_ROOT; };
 		EB206EDB29A8FA39007D626C /* ChipsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsModel.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				EB206EDB29A8FA39007D626C /* ChipsModel.swift */,
+				EB14C96729AD39BD002590E5 /* FavoriteRecipeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,8 +465,8 @@
 		EBB480F829A274B300ACD15E /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */,
 				EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */,
+				EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				EB3995E829951DA400974218 /* TestingData.swift in Sources */,
 				EB653FF229AD035600E07AC0 /* CGFloatExtension.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
+				EB14C96829AD39BD002590E5 /* FavoriteRecipeModel.swift in Sources */,
 				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
 				EBB480F129A2674800ACD15E /* DetailRecipeRequest.swift in Sources */,
 				EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */,

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ClockFilled.png",
+      "filename" : "StarOutline.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ClockFilled@2x.png",
+      "filename" : "StarOutline@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ClockFilled@3x.png",
+      "filename" : "StarOutline@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -71,7 +71,7 @@ class CustomTableViewCell: UITableViewCell {
 
     let favoriteButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(named: ImageConstant.starFilled)
+        let image = UIImage(named: ImageConstant.starOutline)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: .smallImageLeftRightAnchor, height: .smallImageLeftRightAnchor)

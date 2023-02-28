@@ -13,12 +13,10 @@ struct DetailRecipe: Decodable {
     let extendedIngredients: [Ingredients]
     let readyInMinutes: Int
     let servings: Int
+    let analyzedInstructions: [Instruction]
 }
 
 struct Ingredients: Decodable {
-    let id: Int
-    let image: String
-    let nameClean: String
     let originalName: String
     let amount: Double
     let measures: Measures
@@ -31,4 +29,13 @@ struct Measures: Decodable {
 struct Metric: Decodable {
     let amount: Double
     let unitShort: String
+}
+
+struct Instruction: Decodable {
+    let steps: [InstructionSteps]
+}
+
+struct InstructionSteps: Decodable {
+    let number: Int
+    let step: String
 }

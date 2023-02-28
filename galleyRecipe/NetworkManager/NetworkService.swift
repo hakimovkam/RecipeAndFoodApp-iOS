@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func request<Request: DataRequest>(id: String, requestType: RequestType, queryItemsArray: [URLQueryItem], _ request: Request, completion: @escaping (Result<Request.Response, ErrorResponse>) -> Void)
+    func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<Request.Response, ErrorResponse>) -> Void)
 }
 
 final class NetworkService: NetworkServiceProtocol {
@@ -21,28 +21,20 @@ final class NetworkService: NetworkServiceProtocol {
         session = URLSession(configuration: configuraation)
     }
 
-    private let baseUrl: String = "https://api.spoonacular.com/recipes/"
-//    private let apiKey: String = "68dacdce560d4598baf62743ea86a9a7"
-        private let apiKey: String = "997ced0c82834e24a3a3290f8123f2b5"
+    func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<Request.Response, ErrorResponse>) -> Void) {
 
-    func request<Request: DataRequest>(id: String, requestType: RequestType, queryItemsArray: [URLQueryItem], _ request: Request, completion: @escaping (Result<Request.Response, ErrorResponse>) -> Void) {
-
-        let finalUrl: String = self.baseUrl + id + requestType.rawValue
-
-        guard var urlComponent = URLComponents(string: finalUrl) else {
+        guard var urlComponent = URLComponents(string: request.url) else {
             return completion(.failure(.apiError))
         }
 
         var queryItems: [URLQueryItem] = []
 
-        queryItemsArray.forEach {
-            let urlQueryItem = URLQueryItem(name: $0.name, value: $0.value)
+        request.defaultQueryItems.forEach {
+            let urlQueryItem = $0
             queryItems.append(urlQueryItem)
         }
-        queryItems.append(URLQueryItem(name: "apiKey", value: apiKey))
 
         urlComponent.queryItems = queryItems
-
         print(urlComponent)
 
         guard let url = urlComponent.url else {

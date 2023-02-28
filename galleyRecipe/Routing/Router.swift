@@ -81,7 +81,7 @@ final class Router: RouterProtocol {
                                                         selectedImage: UIImage(named: ImageConstant.recipeFilled)),
                                              generateVC(viewController: timerView,
                                                         image: UIImage(named: ImageConstant.clockOutline),
-                                                        selectedImage: nil)], animated: true)
+                                                        selectedImage: UIImage(named: ImageConstant.clockFilled))], animated: true)
     }
 
     func generateVC(viewController: UIViewController, image: UIImage?,
