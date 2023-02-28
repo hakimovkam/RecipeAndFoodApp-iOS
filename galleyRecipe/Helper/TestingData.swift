@@ -18,4 +18,14 @@ struct TestingData {
     var emptyData: [String] = []
     var recipeDescription: String = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
     var timer: String = "10:33"
+
+    static let ingredientLabelText = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs"
+    static let ingredientsButtonText = "Ingredients"
+    static let instructionsButtonText = "Instructions"
+    static let waitingTimeText = "15 min"
+    static let servingsText = "2 servings"
+    static let caloriesText = "250 calories"
+    static let circleImageText = "Pasta"
+    static let foodNameLabel = "Pasta"
+    static let foodWeightLabel = "400 g"
 }

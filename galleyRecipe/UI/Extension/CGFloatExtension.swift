@@ -40,4 +40,25 @@ extension CGFloat {
     static var dishNameLabelRigthAnchor: CGFloat { -80 }
     static var counterLabelBottomAnchor: CGFloat { -60 }
     static var resetButtonTopAnchor: CGFloat { 40 }
+
+    static var ingredientsImageOnTopHeightAnchor: CGFloat { 300 }
+    static var ingredientsIngredientLabelAnchor: CGFloat { -40 }
+    static var ingredientLabelTrailingAndLeadingAnchors: CGFloat { 10 }
+    static var ingredientsStackViewTopAnchor: CGFloat { 5 }
+    static var ingredientsStackViewTrailingAndLeadingAnchors: CGFloat { 50 } // swiftlint:disable:this identifier_name
+    static var ingredientsGrayViewTopAnchor: CGFloat { 20 }
+    static var ingredientsGrayViewTrailingAndLeadingAnchors: CGFloat { 15 } // swiftlint:disable:this identifier_name
+    static var ingredientsGrayViewHeightAnchor: CGFloat { 100 }
+    static var ingredientsButtonTopAnchor: CGFloat { 10 }
+    static var ingredientsLeadingAnchor: CGFloat { 50 }
+    static var instructionsButtonTopAnchor: CGFloat { 10 }
+    static var instructionsButtonTrailingAnchor: CGFloat { 50 }
+    static var ingredientsTableViewTopAnchor: CGFloat { 55 }
+    static var ingredientsTableViewLeadingAndTrailingAnchors: CGFloat { 2 } // swiftlint:disable:this identifier_name
+    static var ingredientsBackButtonLeftAnchor: CGFloat { 20 }
+
+    static var ingredientsCellCircleImageLeadingAnchor: CGFloat { 25 }
+    static var ingredientsCellcircleImageHeightAndWeigth: CGFloat { 35 } // swiftlint:disable:this identifier_name
+    static var ingredientsCellFoodNameLabelLeftAnchor: CGFloat { 30 }
+    static var ingredientsCellFoodWeightLabelLeftAnchor: CGFloat { 30 }
 }
