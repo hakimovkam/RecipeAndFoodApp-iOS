@@ -36,6 +36,8 @@ extension CGFloat {
     static var mediemAdditionalViewAnchoor: CGFloat { 20 }
     static var smallAdditionalViewAnchoor: CGFloat { 12 }
 
+    static var foodImageCell: CGFloat { 120 }
+
     static var backButtonLeftAnchor: CGFloat { 20 }
     static var dishNameLabelRigthAnchor: CGFloat { -80 }
     static var counterLabelBottomAnchor: CGFloat { -60 }

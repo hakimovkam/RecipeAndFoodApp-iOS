@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
+import RealmSwift
 
 final class FavoritesViewController: GradientViewController {
     enum Localization {
@@ -15,7 +15,7 @@ final class FavoritesViewController: GradientViewController {
         static let headerLabel: String = "Favorites"
         static let placeholder: String = "Search recipes"
     }
-    private var topConstraint: NSLayoutConstraint!
+
     private let presenter: FavoriteViewPresenterProtocol
 
     // MARK: - UI ComponentsadvancedTableViewHeader
@@ -40,15 +40,6 @@ final class FavoritesViewController: GradientViewController {
         characterLabel.textAlignment = .center
         characterLabel.translatesAutoresizingMaskIntoConstraints = false
         return characterLabel
-    }()
-
-    private lazy var headerLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.text = Localization.headerLabel
-        label.font = UIFont(name: "Poppins-Bold", size: 24)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
 
     private let tableView: UITableView = {
@@ -93,39 +84,63 @@ final class FavoritesViewController: GradientViewController {
         tableView.delegate = self
         searchBar.delegate = self
 
-        tableView.allowsSelection = false
-        tableView.alwaysBounceVertical = false
         setLayout()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkRecipesCount()
+    }
 
+    func checkRecipesCount() {
+        if !presenter.getFavoriteObjs().isEmpty {
+
+            tableView.allowsSelection = true
+            tableView.alwaysBounceVertical = true
+
+            UIView.animate(withDuration: 0.1) {
+                self.characterLabel.alpha = 0
+                self.textLabel.alpha = 0
+            }
+        } else {
+            tableView.allowsSelection = false
+            tableView.alwaysBounceVertical = false
+
+            UIView.animate(withDuration: 0.1) {
+                self.characterLabel.alpha = 1
+                self.textLabel.alpha = 1
+            }
+        }
+        tableView.beginUpdates()
+        tableView.reloadSections(.init(integer: 0), with: .automatic)
+        tableView.endUpdates()
     }
 }
 // MARK: - TableViewDelegate and TableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return presenter.recipes?.count ?? 0}
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return presenter.getFavoriteObjs().count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
 
-        guard let model = presenter.recipes?[indexPath.row] else { return UITableViewCell() }
-        cell.configure(recipeDescription: model.title, recipeImageUrl: model.image)
+        let model = presenter.getFavoriteObjs()[indexPath.row]
+        cell.selectionStyle = .none
+
+        let favoriteButton = { [weak self] in
+            guard let self = self else { return }
+            self.presenter.saveOrDeleteFavoriteRecipe(id: model.id)
+            self.checkRecipesCount()
+        }
+
+        let timerButton = {
+        }
+
+        cell.configure(recipeDescription: model.title, imageUrlString: model.image, favoriteButton: favoriteButton, timerButotn: timerButton, isFavorite: true)
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.alpha = 0
-
-        UIView.animate(
-            withDuration: 0.5,
-            delay: 0.001 * Double(indexPath.row),
-            animations: {
-                cell.alpha = 1
-        })
     }
 }
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         presenter.didTapOnRecipe()
     }
 
@@ -146,10 +161,8 @@ extension FavoritesViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.alpha = 0
 
-        if scrollView.contentOffset.y - .tableViewHeader < .searchBarHeight {
-            let offset = max(0, scrollView.contentOffset.y - .tableViewHeader)
-            searchBar.alpha = 1 - (offset / .searchBarHeight * 1)
-            topConstraint.constant = -offset + .smallTopAndBottomInset
+        if scrollView.contentOffset.y < 100 {
+            searchBar.alpha = 1 - (scrollView.contentOffset.y * 0.05)
         }
     }
 }
@@ -159,16 +172,7 @@ extension FavoritesViewController: UISearchBarDelegate {
 // MARK: - View protocol
 extension FavoritesViewController: FavoriteViewProtocol {
 
-    func success() {
-        tableView.reloadData()
-        tableView.allowsSelection = true
-        tableView.alwaysBounceVertical = true
-
-        UIView.animate(withDuration: 0.2) {
-            self.characterLabel.alpha = 0
-            self.textLabel.alpha = 0
-        }
-    }
+    func success() {}
 
     func failure(error: Error) {
         print(error.localizedDescription)
@@ -184,19 +188,19 @@ extension FavoritesViewController {
 
         view.addSubview(characterLabel)
         view.addSubview(textLabel)
-        topConstraint = searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset)
 
         navigationController?.navigationBar.showsLargeContentViewer = false
+        tableView.tableHeaderView = searchBar
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: .smallTopAndBottomInset),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
 
             searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
             view.rightAnchor.constraint(equalTo: searchBar.rightAnchor, constant: .mediemLeftRightInset),
-            topConstraint,
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
             searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeight),
 
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor - .tableViewHeader),
@@ -207,5 +211,4 @@ extension FavoritesViewController {
             textLabel.topAnchor.constraint(equalTo: characterLabel.bottomAnchor)
         ])
     }
-
 }

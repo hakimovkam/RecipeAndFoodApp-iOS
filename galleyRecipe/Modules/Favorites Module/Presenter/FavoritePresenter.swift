@@ -6,17 +6,18 @@
 //
 
 import Foundation
+import RealmSwift
 
-// output
 protocol FavoriteViewProtocol: AnyObject {
     func success()
     func failure(error: Error)
 }
 
-// input
 protocol FavoriteViewPresenterProtocol: AnyObject {
     func didTapOnRecipe()
-    func getRecipes()
+    func checkRecipeInRealm(id: Int) -> Bool
+    func getFavoriteObjs() -> Results<RealmFavoriteRecipe>
+    func saveOrDeleteFavoriteRecipe(id: Int)
     var recipes: [SearchResult]? { get set }
 }
 
@@ -25,32 +26,26 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
     weak var view: FavoriteViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol
+    let realmManager: RealmManagerProtocol
 
     var recipes: [SearchResult]?
 
-    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    required init(networkService: NetworkServiceProtocol, router: RouterProtocol, realmManager: RealmManagerProtocol) {
         self.networkService = networkService
+        self.realmManager = realmManager
         self.router = router
-//        getRecipes()
-    }
-
-    func getRecipes() {
-        let request = SearchRecipeRequest(requestType: .recepts, queryItems: [])
-        networkService.request(request) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let recipe):
-                    self.recipes = recipe.results
-                    self.view?.success()
-                case .failure(let error):
-                    self.view?.failure(error: error)
-                }
-            }
-        }
     }
 
     func didTapOnRecipe() {
         router?.showIngredients()
     }
+
+    func saveOrDeleteFavoriteRecipe(id: Int) {
+        guard let recipe = realmManager.getFavoriteRecipesInRealm().realm?.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) else { return }
+        realmManager.changeFavoriteRecipeInRealm(recipe: DetailRecipe(managedObject: recipe))
+    }
+
+    func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkRecipeInRealmById(id: id)}
+
+    func getFavoriteObjs() -> Results<RealmFavoriteRecipe> { return realmManager.getFavoriteRecipesInRealm() }
 }

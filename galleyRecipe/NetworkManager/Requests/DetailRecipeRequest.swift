@@ -28,9 +28,9 @@ struct DetailResipeRequest: DataRequest {
         .get
     }
 
-    var defaultQueryItems: [String: String] {
+    var defaultQueryItems: [URLQueryItem] {
         [
-            "apiKey": apiKey
+            URLQueryItem(name: "apiKey", value: apiKey)
         ]
 
     }

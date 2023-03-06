@@ -34,7 +34,7 @@ final class Router: RouterProtocol {
     weak var tabBarController: CustomTabBarController?
 
     private lazy var networkService: NetworkServiceProtocol = NetworkService()
-    private lazy var realmManager: RealManagerProtocol = RealmManager()
+    private lazy var realmManager: RealmManagerProtocol = RealmManager()
 
     init(rootController: UINavigationController,
          builder: BuilderProtocol,
@@ -68,7 +68,7 @@ final class Router: RouterProtocol {
     }
 
     func setupTabBarController() {
-        let favoriteView = builder.createFavoriteViewController(router: self, networkService: networkService)
+        let favoriteView = builder.createFavoriteViewController(router: self, networkService: networkService, realmManager: realmManager)
         let timerView = builder.createTimerListViewController(router: self, networkService: networkService)
         let searchView = builder.createSearchViewController(router: self, networkService: networkService, realmManager: realmManager)
 
