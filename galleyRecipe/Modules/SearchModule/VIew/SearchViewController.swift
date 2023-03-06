@@ -281,16 +281,16 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchViewProtocol {
     func success() {
         tableView.reloadData()
-        tableView.allowsSelection = true
-        tableView.alwaysBounceVertical = true
 
         if presenter.recipes?.count != 0 {
             UIView.animate(withDuration: 0.2) {
+                self.tableView.isScrollEnabled = true
                 self.characterLabel.alpha = 0
                 self.textLabel.alpha = 0
             }
         } else {
             UIView.animate(withDuration: 0.2) {
+                self.tableView.isScrollEnabled = false
                 self.characterLabel.alpha = 1
                 self.textLabel.alpha = 1
             }

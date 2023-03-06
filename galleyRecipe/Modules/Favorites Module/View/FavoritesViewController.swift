@@ -93,18 +93,13 @@ final class FavoritesViewController: GradientViewController {
 
     func checkRecipesCount() {
         if !presenter.getFavoriteObjs().isEmpty {
-
-            tableView.allowsSelection = true
-            tableView.alwaysBounceVertical = true
-
+            tableView.isScrollEnabled = true
             UIView.animate(withDuration: 0.1) {
                 self.characterLabel.alpha = 0
                 self.textLabel.alpha = 0
             }
         } else {
-            tableView.allowsSelection = false
-            tableView.alwaysBounceVertical = false
-
+            tableView.isScrollEnabled = false
             UIView.animate(withDuration: 0.1) {
                 self.characterLabel.alpha = 1
                 self.textLabel.alpha = 1
