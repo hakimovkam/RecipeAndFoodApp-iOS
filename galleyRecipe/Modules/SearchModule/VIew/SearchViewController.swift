@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 final class SearchViewController: GradientViewController {
     enum Localization {
@@ -116,6 +117,11 @@ final class SearchViewController: GradientViewController {
         presenter.setDeafaultChips()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+
     @objc
     func tapToSortButton() {
         UIView.animate(withDuration: 0.1,
@@ -130,7 +136,7 @@ final class SearchViewController: GradientViewController {
     }
 }
 // MARK: - TableViewDelegate & TableViewDataSource
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return presenter.recipes?.count ?? 0 }
 
@@ -138,14 +144,29 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier,
                                                        for: indexPath) as?
                 CustomTableViewCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
 
         guard let model = presenter.recipes?[indexPath.row] else { return UITableViewCell() }
-        cell.configure(recipeDescription: model.title, recipeImageUrl: model.image)
+
+        let favoriteButton = { [weak self] in
+            guard let self = self else { return }
+            self.presenter.saveOrDeleteFavoriteRecipe(id: model.id)
+            cell.changeFavoriteButtonIcon(isFavorite: self.presenter.checkRecipeInRealm(id: model.id))
+        }
+
+        let timerButotn = {
+        }
+
+        cell.configure(recipeDescription: model.title,
+                       imageUrlString: model.image,
+                       favoriteButton: favoriteButton,
+                       timerButotn: timerButotn,
+                       isFavorite: presenter.checkRecipeInRealm(id: model.id))
+
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         presenter.tapOnTheRecipe()
     }
 
@@ -252,6 +273,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { return .spaceBetweenCollectionCell }
 }
+// MARK: - SeachBarDelegate
 extension SearchViewController: UISearchBarDelegate {
 
 }
@@ -259,16 +281,16 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchViewProtocol {
     func success() {
         tableView.reloadData()
-        tableView.allowsSelection = true
-        tableView.alwaysBounceVertical = true
 
         if presenter.recipes?.count != 0 {
             UIView.animate(withDuration: 0.2) {
+                self.tableView.isScrollEnabled = true
                 self.characterLabel.alpha = 0
                 self.textLabel.alpha = 0
             }
         } else {
             UIView.animate(withDuration: 0.2) {
+                self.tableView.isScrollEnabled = false
                 self.characterLabel.alpha = 1
                 self.textLabel.alpha = 1
             }

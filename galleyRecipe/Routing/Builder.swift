@@ -8,16 +8,16 @@
 import UIKit
 
 protocol BuilderProtocol {
-    func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
+    func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol) -> UIViewController
     func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func createTimerListViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func showTimerViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
-    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealManagerProtocol) -> UIViewController
+    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol) -> UIViewController
 }
 
 struct Builder: BuilderProtocol {
-    func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let presenter = FavoritePresenter(networkService: networkService, router: router)
+    func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol) -> UIViewController {
+        let presenter = FavoritePresenter(networkService: networkService, router: router, realmManager: realmManager)
         let view = FavoritesViewController(presenter: presenter)
 
         presenter.view = view
@@ -48,7 +48,7 @@ struct Builder: BuilderProtocol {
         return view
     }
 
-    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealManagerProtocol) -> UIViewController {
+    func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol) -> UIViewController {
         let presenter = SearchPresenter(networkService: networkService, router: router, realmManager: realmManager)
         let view = SearchViewController(presenter: presenter)
 

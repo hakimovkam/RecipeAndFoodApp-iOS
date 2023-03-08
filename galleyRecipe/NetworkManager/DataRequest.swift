@@ -18,7 +18,9 @@ enum HTTPMethod: String {
 protocol DataRequest {
     associatedtype Response
 
+    var url: String { get }
     var method: HTTPMethod { get }
+    var defaultQueryItems: [URLQueryItem] { get }
 
     func decode(_ data: Data) throws -> Response
 }
@@ -27,5 +29,11 @@ extension DataRequest where Response: Decodable {
     func decode(_ data: Data) throws -> Response {
         let decoder = JSONDecoder()
         return try decoder.decode(Response.self, from: data)
+    }
+}
+
+extension DataRequest {
+    var defaultQueryItems: [URLQueryItem] {
+        []
     }
 }

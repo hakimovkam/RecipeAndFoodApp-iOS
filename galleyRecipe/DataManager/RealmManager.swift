@@ -8,34 +8,66 @@
 import Foundation
 import RealmSwift
 
-protocol RealManagerProtocol {
-    var mealTypeItems: Results<ChipsMealType>! { get set }
-    var cuisineTypeItems: Results<ChipsCuisineType>! { get set }
+protocol RealmManagerProtocol {
+    var mealTypeItems: Results<RealmChipsMealType>! { get set }
+    var cuisineTypeItems: Results<RealmChipsCuisineType>! { get set }
+    var recipes: Results<RealmFavoriteRecipe>! { get set }
+
     func setDefaultValueForChips()
-    func getMealTypeItems() -> Results<ChipsMealType>
-    func getCuisineTypeItems() -> Results<ChipsCuisineType>
+    func getMealTypeItems() -> Results<RealmChipsMealType>
+    func getCuisineTypeItems() -> Results<RealmChipsCuisineType>
     func updateCuisineType(indexPath: Int)
     func updateMealTypeItem(indexPath: Int)
+    func changeFavoriteRecipeInRealm(recipe: DetailRecipe)
+    func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe>
+    func checkRecipeInRealmById(id: Int) -> Bool
 }
 
-final class RealmManager: RealManagerProtocol {
+final class RealmManager: RealmManagerProtocol {
 
-    private let realm = try! Realm()  // swiftlint:disable:this force_try
-
-    var mealTypeItems: Results<ChipsMealType>!
-    var cuisineTypeItems: Results<ChipsCuisineType>!
+    var realm: Realm = try! Realm()  // swiftlint:disable:this force_try
 
     init() {
-        mealTypeItems = realm.objects(ChipsMealType.self)
-        cuisineTypeItems = realm.objects(ChipsCuisineType.self)
+        mealTypeItems = realm.objects(RealmChipsMealType.self)
+        cuisineTypeItems = realm.objects(RealmChipsCuisineType.self)
+        recipes = realm.objects(RealmFavoriteRecipe.self)
 
         setDefaultValueForChips()
+
         resetChips()
     }
 
-    func getMealTypeItems() -> Results<ChipsMealType> {
-        return mealTypeItems
+// MARK: - favorite recipes manager
+    var recipes: Results<RealmFavoriteRecipe>!
+
+    func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe> { return recipes }
+
+    func checkRecipeInRealmById(id: Int) -> Bool {
+        if realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) != nil {
+            return true
+        }
+        return false
     }
+
+    func changeFavoriteRecipeInRealm(recipe: DetailRecipe) {
+        if let obj = realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: recipe.id) {
+
+            try! realm.write { // swiftlint:disable:this force_try
+                realm.delete(obj)
+            }
+        } else {
+            let realmRecipe = recipe.managedObject()
+            try! realm.write { // swiftlint:disable:this force_try
+                realm.add(realmRecipe)
+            }
+        }
+    }
+
+// MARK: - chips manager
+    var mealTypeItems: Results<RealmChipsMealType>!
+    var cuisineTypeItems: Results<RealmChipsCuisineType>!
+
+    func getMealTypeItems() -> Results<RealmChipsMealType> { return mealTypeItems }
 
     func updateMealTypeItem(indexPath: Int) {
         try! realm.write {  // swiftlint:disable:this force_try
@@ -49,9 +81,7 @@ final class RealmManager: RealManagerProtocol {
         }
     }
 
-    func getCuisineTypeItems() -> Results<ChipsCuisineType> {
-        return cuisineTypeItems
-    }
+    func getCuisineTypeItems() -> Results<RealmChipsCuisineType> { return cuisineTypeItems }
 
     func setDefaultValueForChips() {
 
@@ -62,7 +92,7 @@ final class RealmManager: RealManagerProtocol {
                     self.realm.add(category)
                 }
             }
-            mealTypeItems = realm.objects(ChipsMealType.self)
+            mealTypeItems = realm.objects(RealmChipsMealType.self)
         }
 
         if cuisineTypeItems.count == 0 {
@@ -72,7 +102,7 @@ final class RealmManager: RealManagerProtocol {
                     self.realm.add(category)
                 }
             }
-            cuisineTypeItems = realm.objects(ChipsCuisineType.self)
+            cuisineTypeItems = realm.objects(RealmChipsCuisineType.self)
         }
     }
 

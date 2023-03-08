@@ -123,7 +123,8 @@ final class IngredientsViewController: GradientViewController {
         stackView.addArrangedSubview(calories)
     }
 
-    @objc private func tapBackButton() {
+    @objc
+    private func tapBackButton() {
         presenter.backButtonDidPressed()
     }
 }

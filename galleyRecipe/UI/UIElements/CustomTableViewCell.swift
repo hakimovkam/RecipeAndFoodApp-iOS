@@ -21,6 +21,8 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    var favoriteButtonTapCallback: (() -> Void) = {}
+    var timerButtonTapCallback: (() -> Void) = {}
     // MARK: - UI Components
     private let recipeDescriptionLabel: UILabel = {
         let label = UILabel()
@@ -33,21 +35,22 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
 
-    private let foodImage: UIImageView = {
-        let image = UIImage(named: ImageConstant.noImage)
-        let imageView = UIImageView(image: image!)
-        imageView.contentMode = .scaleAspectFill // эта штука не шакалит картинку
-        imageView.frame = CGRect(x: 0, y: 0, width: 358, height: 120) // размеры окна куда помещается картинка
+    private lazy var foodImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .customLightGray
+        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: .foodImageCell)
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 30
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isShimmering = true
 
         return imageView
     }()
 
     private let additionalBlurView: DarkBlurEffectView = {
         let view = DarkBlurEffectView()
-        view.frame = CGRect(x: 0, y: 0, width: 40, height: 80)
+        view.frame = CGRect(x: 0, y: 0, width: .blurViewWidthAnchoor, height: .blurViewHeightAnchoor)
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         view.backgroundColor = .additionalBlurViewBackground
@@ -69,37 +72,75 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
 
-    let favoriteButton: UIButton = {
+    private lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(named: ImageConstant.starFilled)
+        let image = UIImage(named: ImageConstant.starOutline)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: .smallImageLeftRightAnchor, height: .smallImageLeftRightAnchor)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(favoriteButtonDidPressed), for: .touchUpInside)
 
         return button
     }()
 
-    let timerButton: UIButton = {
+     private lazy var timerButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: ImageConstant.timerOutline)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
         button.frame = CGRect(x: 0, y: 0, width: .smallImageLeftRightAnchor, height: .smallImageLeftRightAnchor)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(timerButtonDidPressed), for: .touchUpInside)
 
         return button
     }()
 
-    func configure(recipeDescription: String, recipeImageUrl: String) {
+    func configure(recipeDescription: String, imageUrlString: String, favoriteButton: @escaping (() -> Void), timerButotn: @escaping (() -> Void), isFavorite: Bool) {
 
-        foodImage.kf.setImage(with: URL(string: recipeImageUrl))
+        checkFavoriteStatus(isFavorite: isFavorite)
+
+        foodImage.isShimmering = true
+        foodImage.kf.setImage(with: URL(string: imageUrlString), options: [.transition(.fade(0.3))], completionHandler: { [weak self] _ in
+            guard let self = self else { return }
+            self.foodImage.isShimmering = false})
+
+        foodImage.kf.setImage(with: URL(string: imageUrlString))
         recipeDescriptionLabel.text = recipeDescription
+        favoriteButtonTapCallback = favoriteButton
+        timerButtonTapCallback = timerButotn
+    }
+
+    func changeFavoriteButtonIcon(isFavorite: Bool) {
+        if isFavorite {
+            favoriteButton.setImage(UIImage(named: ImageConstant.starOutline), for: .normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: ImageConstant.starFilled), for: .normal)
+        }
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        foodImage.image = nil
+        foodImage.image = UIImage(named: ImageConstant.noImage)
+    }
+
+    @objc
+    func favoriteButtonDidPressed() {
+        favoriteButtonTapCallback()
+
+    }
+
+    @objc
+    func timerButtonDidPressed() {
+        timerButtonTapCallback()
+    }
+
+    private func checkFavoriteStatus(isFavorite: Bool) {
+        if isFavorite {
+            favoriteButton.setImage(UIImage(named: ImageConstant.starFilled), for: .normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: ImageConstant.starOutline), for: .normal)
+        }
     }
 }
 
@@ -111,8 +152,8 @@ extension CustomTableViewCell {
         contentView.addSubview(foodImage)
         foodImage.addSubview(additionalBlurView)
         foodImage.addSubview(additionalView)
-        foodImage.addSubview(favoriteButton)
-        foodImage.addSubview(timerButton)
+        contentView.addSubview(favoriteButton)
+        contentView.addSubview(timerButton)
     }
 
     private func setupConstraints() {

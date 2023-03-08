@@ -8,12 +8,12 @@
 import Foundation
 import RealmSwift
 
-class ChipsMealType: Object {
+class RealmChipsMealType: Object {
     @objc dynamic var mealType = ""
     @objc dynamic var isSelectedCell = false
 }
 
-class ChipsCuisineType: Object {
+class RealmChipsCuisineType: Object {
     @objc dynamic var cuisine = ""
     @objc dynamic var cuisineFlag = ""
     @objc dynamic var isSelectedCell = false

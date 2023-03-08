@@ -82,13 +82,9 @@ final class TimerListViewController: GradientViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-//        tableView.allowsSelection = false
-//        tableView.alwaysBounceVertical = false
-
         setLayot()
         characterLabel.alpha = 0
         textLabel.alpha = 0
-
     }
 }
 // MARK: - TableViewDelegate & TableViewDataSource
