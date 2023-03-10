@@ -17,8 +17,10 @@ final class SearchViewController: GradientViewController {
         static let placeholder: String = "UIKit Soup"
     }
 
-    var presenter: SearchViewPresenterProtocol
+    private var presenter: SearchViewPresenterProtocol
     private var keyboardHeightConstraint: NSLayoutConstraint!
+    private var timer: Timer?
+    private var searchBarRequestString: String = ""
 
     // MARK: - UI Components
     let categoryCollectionView: ChipsCollectionView = {
@@ -182,7 +184,7 @@ final class SearchViewController: GradientViewController {
     }
 }
 // MARK: - TableViewDelegate & TableViewDataSource
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return presenter.recipes?.count ?? 0 }
 
@@ -291,11 +293,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if collectionView == self.categoryCollectionView {
             presenter.updateMealItem(indexPath: indexPath.item)
             let item = presenter.getMealObjs()[indexPath.item]
-            presenter.updateMealQueryItems(key: .mealType, itemValue: item.mealType, append: item.isSelectedCell)
+            let append = item.isSelectedCell ? UpdateQueryItemsArray.add : UpdateQueryItemsArray.delete
+            presenter.updateQueryItems(key: .mealType, itemValue: item.mealType, oldItemValue: nil, action: append)
         } else {
             presenter.updateCuisineItem(indexPath: indexPath.item)
             let item = presenter.getCuisineObjs()[indexPath.item]
-            presenter.updateMealQueryItems(key: .countryType, itemValue: item.cuisine, append: item.isSelectedCell)
+            let append = item.isSelectedCell ? UpdateQueryItemsArray.add : UpdateQueryItemsArray.delete
+            presenter.updateQueryItems(key: .countryType, itemValue: item.cuisine, oldItemValue: nil, action: append)
         }
         collectionView.reloadData()
     }
@@ -322,6 +326,19 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - SeachBarDelegate
 extension SearchViewController: UISearchBarDelegate {
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+            guard let self = self else { return }
+            if searchText == "" {
+                self.presenter.updateQueryItems(key: .mealType, itemValue: self.searchBarRequestString, oldItemValue: nil, action: .delete)
+            } else {
+                self.presenter.updateQueryItems(key: .mealType, itemValue: searchText, oldItemValue: self.searchBarRequestString, action: .update)
+                self.searchBarRequestString = searchText
+            }
+        })
+    }
 }
 // MARK: - View Protocol
 extension SearchViewController: SearchViewProtocol {

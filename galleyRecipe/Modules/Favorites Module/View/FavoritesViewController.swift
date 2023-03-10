@@ -198,7 +198,7 @@ extension FavoritesViewController: UITableViewDelegate {
         }
     }
 }
-// MARK: - SearchResultsUpdate
+// MARK: - SeachBarDelegate
 extension FavoritesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {

@@ -21,6 +21,7 @@ protocol RealmManagerProtocol {
     func changeFavoriteRecipeInRealm(recipe: DetailRecipe)
     func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe>
     func checkRecipeInRealmById(id: Int) -> Bool
+    func checkCountryInRealm(country: String) -> Bool
 }
 
 final class RealmManager: RealmManagerProtocol {
@@ -66,6 +67,12 @@ final class RealmManager: RealmManagerProtocol {
 // MARK: - chips manager
     var mealTypeItems: Results<RealmChipsMealType>!
     var cuisineTypeItems: Results<RealmChipsCuisineType>!
+
+    func checkCountryInRealm(country: String) -> Bool {
+        let result = realm.objects(RealmChipsCuisineType.self).filter("cuisine == '\(country)'")
+        print(!result.isEmpty)
+        return !result.isEmpty
+    }
 
     func getMealTypeItems() -> Results<RealmChipsMealType> { return mealTypeItems }
 
