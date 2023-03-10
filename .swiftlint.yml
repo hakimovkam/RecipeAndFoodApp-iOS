@@ -4,3 +4,7 @@ line_length:
   ignores_comments: true
   ignores_interpolated_strings: true
   ignores_urls: true
+
+file_length:
+  warning: 1000
+  error: 1500

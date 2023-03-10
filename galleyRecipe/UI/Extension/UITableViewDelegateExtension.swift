@@ -25,7 +25,6 @@ extension UITableViewDelegate {
                attributedText.append(myLetter)
            }
 
-        /* set custom blur effect in tableViewHeader */
         // MARK: - label
         let label = UILabel()
         label.backgroundColor = .clear

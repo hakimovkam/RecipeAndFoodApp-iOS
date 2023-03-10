@@ -112,6 +112,4 @@ class SearchPresenter: SearchViewPresenterProtocol {
     }
 
     func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkRecipeInRealmById(id: id)}
-
-    //    func getFavoriteObjs() -> Results<RealmFavoriteRecipe> { return realmManager.getFavoriteRecipesInRealm() }
 }
