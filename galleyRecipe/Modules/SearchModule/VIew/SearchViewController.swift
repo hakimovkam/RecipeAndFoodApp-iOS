@@ -7,7 +7,7 @@
 
 import UIKit
 import RealmSwift
-import Kingfisher
+// import Kingfisher
 
 final class SearchViewController: GradientViewController {
     enum Localization {
@@ -21,16 +21,17 @@ final class SearchViewController: GradientViewController {
     private var keyboardHeightConstraint: NSLayoutConstraint!
     private var timer: Timer?
     private var searchBarRequestString: String = ""
+    private var showEmptyTable = false
 
     // MARK: - UI Components
-    let categoryCollectionView: ChipsCollectionView = {
+    private let categoryCollectionView: ChipsCollectionView = {
         let collection = ChipsCollectionView()
         collection.translatesAutoresizingMaskIntoConstraints = false
 
         return collection
     }()
 
-    let countryCollectionView: ChipsCollectionView = {
+    private let countryCollectionView: ChipsCollectionView = {
         let collection = ChipsCollectionView()
         collection.translatesAutoresizingMaskIntoConstraints = false
 
@@ -189,33 +190,43 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return presenter.recipes?.count ?? 0 }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier,
-                                                       for: indexPath) as?
-                CustomTableViewCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
+        if showEmptyTable {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+            cell.configureEmptyCell(isEmpty: true)
+            tableView.isScrollEnabled = false
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier,
+                                                           for: indexPath) as?
+                    CustomTableViewCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
 
-        guard let model = presenter.recipes?[indexPath.row] else { return UITableViewCell() }
+            guard let model = presenter.recipes?[indexPath.row] else { return UITableViewCell() }
 
-        let favoriteButton = { [weak self] in
-            guard let self = self else { return }
-            self.presenter.saveOrDeleteFavoriteRecipe(id: model.id)
-            cell.changeFavoriteButtonIcon(isFavorite: self.presenter.checkRecipeInRealm(id: model.id))
+            let favoriteButton = { [weak self] in
+                guard let self = self else { return }
+                self.presenter.saveOrDeleteFavoriteRecipe(id: model.id)
+                cell.changeFavoriteButtonIcon(isFavorite: self.presenter.checkRecipeInRealm(id: model.id))
+            }
+
+            let timerButotn = {
+            }
+
+            cell.configure(recipeDescription: model.title,
+                           imageUrlString: model.image,
+                           favoriteButton: favoriteButton,
+                           timerButotn: timerButotn,
+                           isFavorite: presenter.checkRecipeInRealm(id: model.id))
+
+            tableView.isScrollEnabled = true
+            return cell
         }
-
-        let timerButotn = {
-        }
-
-        cell.configure(recipeDescription: model.title,
-                       imageUrlString: model.image,
-                       favoriteButton: favoriteButton,
-                       timerButotn: timerButotn,
-                       isFavorite: presenter.checkRecipeInRealm(id: model.id))
-
-        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.tapOnTheRecipe()
+        if !showEmptyTable {
+            presenter.tapOnTheRecipe()
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .recipeTableViewCellHeigh }
@@ -295,11 +306,15 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let item = presenter.getMealObjs()[indexPath.item]
             let append = item.isSelectedCell ? UpdateQueryItemsArray.add : UpdateQueryItemsArray.delete
             presenter.updateQueryItems(key: .mealType, itemValue: item.mealType, oldItemValue: nil, action: append)
+            showEmptyTable = true
+            tableView.reloadData()
         } else {
             presenter.updateCuisineItem(indexPath: indexPath.item)
             let item = presenter.getCuisineObjs()[indexPath.item]
             let append = item.isSelectedCell ? UpdateQueryItemsArray.add : UpdateQueryItemsArray.delete
             presenter.updateQueryItems(key: .countryType, itemValue: item.cuisine, oldItemValue: nil, action: append)
+            showEmptyTable = true
+            tableView.reloadData()
         }
         collectionView.reloadData()
     }
@@ -328,6 +343,9 @@ extension SearchViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
+        showEmptyTable = true
+        tableView.reloadData()
+
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
             guard let self = self else { return }
@@ -343,6 +361,7 @@ extension SearchViewController: UISearchBarDelegate {
 // MARK: - View Protocol
 extension SearchViewController: SearchViewProtocol {
     func success() {
+        showEmptyTable = false
         tableView.reloadData()
 
         if presenter.recipes?.count != 0 {

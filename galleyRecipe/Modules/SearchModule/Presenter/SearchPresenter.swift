@@ -130,7 +130,9 @@ class SearchPresenter: SearchViewPresenterProtocol {
 
     }
 
-    func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkRecipeInRealmById(id: id)}
+    func checkRecipeInRealm(id: Int) -> Bool {
+        return realmManager.checkRecipeInRealmById(id: id)
+    }
 
     func checkCountryInRealm(country: String) -> Bool { return realmManager.checkCountryInRealm(country: country) }
 }

@@ -24,12 +24,17 @@ class CustomTableViewCell: UITableViewCell {
     var favoriteButtonTapCallback: (() -> Void) = {}
     var timerButtonTapCallback: (() -> Void) = {}
     // MARK: - UI Components
-    private let recipeDescriptionLabel: UILabel = {
+    private lazy var recipeDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Medium", size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7
         label.numberOfLines = 2
+        label.text = .emptyString
+        label.backgroundColor = .customLightGray
+        label.layer.cornerRadius = 8
+        label.layer.masksToBounds = true
+        label.isShimmering = true
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -60,10 +65,11 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
 
-    private let additionalView: UIView = {
+    private lazy var additionalView: UIView = {
         let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: .blurViewWidthAnchoor, height: .blurViewHeightAnchoor )
         view.layer.cornerRadius = 20
+        view.clipsToBounds = true
         view.backgroundColor = .additionalViewBackground
         view.alpha = 0
         view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
@@ -101,14 +107,32 @@ class CustomTableViewCell: UITableViewCell {
         checkFavoriteStatus(isFavorite: isFavorite)
 
         foodImage.isShimmering = true
+        additionalView.alpha = 1
+        additionalBlurView.isHidden = true
         foodImage.kf.setImage(with: URL(string: imageUrlString), options: [.transition(.fade(0.3))], completionHandler: { [weak self] _ in
             guard let self = self else { return }
+            self.additionalView.alpha = 0
+            self.additionalBlurView.isHidden = false
             self.foodImage.isShimmering = false})
 
         foodImage.kf.setImage(with: URL(string: imageUrlString))
         recipeDescriptionLabel.text = recipeDescription
         favoriteButtonTapCallback = favoriteButton
         timerButtonTapCallback = timerButotn
+
+        recipeDescriptionLabel.isShimmering = false
+        recipeDescriptionLabel.backgroundColor = .clear
+    }
+
+    func configureEmptyCell(isEmpty: Bool) {
+        favoriteButton.isHidden = isEmpty
+        timerButton.isHidden = isEmpty
+        additionalBlurView.isHidden = isEmpty
+        additionalView.isHidden = isEmpty
+
+        recipeDescriptionLabel.isShimmering = true
+        recipeDescriptionLabel.backgroundColor = .customLightGray
+        recipeDescriptionLabel.text = .emptyString
     }
 
     func changeFavoriteButtonIcon(isFavorite: Bool) {
@@ -121,7 +145,12 @@ class CustomTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        foodImage.image = UIImage(named: ImageConstant.noImage)
+        foodImage.image = UIImage()
+        foodImage.isShimmering = true
+        configureEmptyCell(isEmpty: false)
+        recipeDescriptionLabel.isShimmering = true
+        recipeDescriptionLabel.backgroundColor = .customLightGray
+        recipeDescriptionLabel.text = .emptyString
     }
 
     @objc
@@ -150,8 +179,8 @@ extension CustomTableViewCell {
     func setupViews() {
         contentView.addSubview(recipeDescriptionLabel)
         contentView.addSubview(foodImage)
-        foodImage.addSubview(additionalBlurView)
-        foodImage.addSubview(additionalView)
+        contentView.addSubview(additionalBlurView)
+        contentView.addSubview(additionalView)
         contentView.addSubview(favoriteButton)
         contentView.addSubview(timerButton)
     }

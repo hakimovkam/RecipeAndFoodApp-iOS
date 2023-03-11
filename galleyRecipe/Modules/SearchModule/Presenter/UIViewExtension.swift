@@ -27,7 +27,7 @@ extension UIView {
 
     private func startShimmering() {
         let white = UIColor.white.cgColor
-        let alpha = UIColor.white.withAlphaComponent(0.75).cgColor
+        let alpha = UIColor.white.withAlphaComponent(0.6).cgColor
         let width = bounds.width
         let height = bounds.height
 
