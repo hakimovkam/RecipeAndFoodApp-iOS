@@ -17,6 +17,8 @@ final class FavoritesViewController: GradientViewController {
     }
 
     private let presenter: FavoriteViewPresenterProtocol
+    private lazy var results: Results<RealmFavoriteRecipe> = presenter.getFavoriteObjs()
+    private var keyboardHeightConstraint: NSLayoutConstraint!
 
     // MARK: - UI ComponentsadvancedTableViewHeader
 
@@ -85,14 +87,48 @@ final class FavoritesViewController: GradientViewController {
         searchBar.delegate = self
 
         setLayout()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkRecipesCount()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        view.endEditing(true)
+    }
+
+    // MARK: - keyboardManager
+    @objc
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
+    @objc
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            animateWithKeyboard(notification: notification) { (_) in
+                self.keyboardHeightConstraint.constant = .characterXAnchor - .tableViewHeader + (keyboardSize.height / 2) - self.textLabel.frame.height
+            }
+        }
+    }
+
+    @objc
+    func keyboardWillHide(notification: NSNotification) {
+        animateWithKeyboard(notification: notification) { (_) in
+            self.keyboardHeightConstraint.constant = .characterXAnchor - .tableViewHeader
+        }
+    }
+    // MARK: - results manager
     func checkRecipesCount() {
-        if !presenter.getFavoriteObjs().isEmpty {
+        if !results.isEmpty {
             tableView.isScrollEnabled = true
             UIView.animate(withDuration: 0.1) {
                 self.characterLabel.alpha = 0
@@ -110,14 +146,15 @@ final class FavoritesViewController: GradientViewController {
         tableView.endUpdates()
     }
 }
+
 // MARK: - TableViewDelegate and TableViewDataSource
 extension FavoritesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return presenter.getFavoriteObjs().count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return results.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
 
-        let model = presenter.getFavoriteObjs()[indexPath.row]
+        let model = results[indexPath.row]
         cell.selectionStyle = .none
 
         let favoriteButton = { [weak self] in
@@ -161,8 +198,18 @@ extension FavoritesViewController: UITableViewDelegate {
         }
     }
 }
-// MARK: - SearchResultsUpdate
+// MARK: - SeachBarDelegate
 extension FavoritesViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            results = presenter.getFavoriteObjs()
+            checkRecipesCount()
+        } else {
+            let result = presenter.getResultsByRequestFromSearchBar(request: searchText)
+            results = result
+            checkRecipesCount()
+        }
+    }
 }
 // MARK: - View protocol
 extension FavoritesViewController: FavoriteViewProtocol {
@@ -186,6 +233,7 @@ extension FavoritesViewController {
 
         navigationController?.navigationBar.showsLargeContentViewer = false
         tableView.tableHeaderView = searchBar
+        keyboardHeightConstraint = view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor - .tableViewHeader)
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
@@ -198,7 +246,7 @@ extension FavoritesViewController {
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .smallTopAndBottomInset),
             searchBar.heightAnchor.constraint(equalToConstant: .searchBarHeight),
 
-            view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor - .tableViewHeader),
+            keyboardHeightConstraint, // characterLabel.centerYAcnchor 
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

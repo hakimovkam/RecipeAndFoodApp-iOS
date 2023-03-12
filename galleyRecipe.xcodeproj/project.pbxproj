@@ -15,6 +15,7 @@
 		9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */; };
 		9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7C2F11296B22F30006EECF /* SearchViewController.swift */; };
 		E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7463D372980512500A4C54F /* IngredientViewController.swift */; };
+		EB019A2729BA5B2100274048 /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB019A2629BA5B2100274048 /* SmallButton.swift */; };
 		EB05B09029B39C75003FF24E /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05B08F29B39C75003FF24E /* RealmExtension.swift */; };
 		EB0EA9C6298BEB6000C643C4 /* ChipsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */; };
 		EB14C96829AD39BD002590E5 /* RMFavoriteRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14C96729AD39BD002590E5 /* RMFavoriteRecipeModel.swift */; };
@@ -70,6 +71,7 @@
 		EB65400129AD06FF00E07AC0 /* IngridientPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB65400029AD06FF00E07AC0 /* IngridientPresenter.swift */; };
 		EB65400329AD077300E07AC0 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB65400229AD077300E07AC0 /* SearchPresenter.swift */; };
 		EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */; };
+		EB7825E829B676FD00C1E0FF /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7825E729B676FD00C1E0FF /* UIViewControllerExtension.swift */; };
 		EB890F5A299CFB1B00D20131 /* DetailRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */; };
 		EB890F5C299CFB4100D20131 /* SearchRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB890F5B299CFB4100D20131 /* SearchRecipeModel.swift */; };
 		EBB480ED29A24A2A00ACD15E /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480EC29A24A2A00ACD15E /* RequestType.swift */; };
@@ -93,6 +95,7 @@
 		9E7C2F0D296B188C0006EECF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9E7C2F11296B22F30006EECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E7463D372980512500A4C54F /* IngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewController.swift; sourceTree = "<group>"; };
+		EB019A2629BA5B2100274048 /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
 		EB05B08F29B39C75003FF24E /* RealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = galleyRecipe/NetworkManager/Models/RealmExtension.swift; sourceTree = SOURCE_ROOT; };
 		EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsCollectionView.swift; sourceTree = "<group>"; };
 		EB14C96729AD39BD002590E5 /* RMFavoriteRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFavoriteRecipeModel.swift; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 		EB65400029AD06FF00E07AC0 /* IngridientPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngridientPresenter.swift; sourceTree = "<group>"; };
 		EB65400229AD077300E07AC0 /* SearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChipsCollectionViewCell.swift; path = galleyRecipe/UI/UIElements/ChipsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		EB7825E729B676FD00C1E0FF /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = "galleyRecipe/Modules/Favorites Module/View/UIViewControllerExtension.swift"; sourceTree = SOURCE_ROOT; };
 		EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRecipeModel.swift; path = galleyRecipe/NetworkManager/Models/DetailRecipeModel.swift; sourceTree = SOURCE_ROOT; };
 		EB890F5B299CFB4100D20131 /* SearchRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeModel.swift; sourceTree = "<group>"; };
 		EBB480EC29A24A2A00ACD15E /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
@@ -361,6 +365,7 @@
 		EB3899D3297C031F00705344 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EB7825E729B676FD00C1E0FF /* UIViewControllerExtension.swift */,
 				EB24FBDB29B4FCB500A7BBED /* UIViewExtension.swift */,
 				EB05B08F29B39C75003FF24E /* RealmExtension.swift */,
 				EB653FF529AD039B00E07AC0 /* UIImageExtension.swift */,
@@ -458,6 +463,7 @@
 				EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */,
 				EB3899CF297BD9E000705344 /* CustomTabBarController.swift */,
 				EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */,
+				EB019A2629BA5B2100274048 /* SmallButton.swift */,
 			);
 			path = UIElements;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 				EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */,
 				EBE07358299AABCD00F75826 /* ErrorResponse.swift in Sources */,
 				EB3995E829951DA400974218 /* TestingData.swift in Sources */,
+				EB7825E829B676FD00C1E0FF /* UIViewControllerExtension.swift in Sources */,
 				EB653FF229AD035600E07AC0 /* CGFloatExtension.swift in Sources */,
 				EB24FBDC29B4FCB600A7BBED /* UIViewExtension.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
@@ -640,6 +647,7 @@
 				9E7C2EED296AF9EF0006EECF /* AppDelegate.swift in Sources */,
 				EB65400129AD06FF00E07AC0 /* IngridientPresenter.swift in Sources */,
 				EB56B25C29B20168007CFFB6 /* ObjectAdapterProtocol.swift in Sources */,
+				EB019A2729BA5B2100274048 /* SmallButton.swift in Sources */,
 				EBFDB1FF297957A700CA0084 /* UIColorExtension.swift in Sources */,
 				EB766637298BC5950044C492 /* ChipsCollectionViewCell.swift in Sources */,
 				EB653FF429AD037700E07AC0 /* UITableViewDelegateExtension.swift in Sources */,
@@ -801,8 +809,9 @@
 				INFOPLIST_FILE = galleyRecipe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -829,8 +838,9 @@
 				INFOPLIST_FILE = galleyRecipe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

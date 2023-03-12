@@ -9,6 +9,12 @@ import UIKit
 import RealmSwift
 import Kingfisher
 
+enum UpdateQueryItemsArray {
+    case update
+    case delete
+    case add
+}
+
 protocol SearchViewProtocol: AnyObject {
     func success()
     func failure(error: Error)
@@ -22,9 +28,10 @@ protocol SearchViewPresenterProtocol: AnyObject {
     func getCuisineObjs() -> Results<RealmChipsCuisineType>
     func updateMealItem(indexPath: Int)
     func updateCuisineItem(indexPath: Int)
-    func updateMealQueryItems(key: QueryItemKeys, itemValue: String, append: Bool)
+    func updateQueryItems(key: QueryItemKeys, itemValue: String, oldItemValue: String?, action: UpdateQueryItemsArray)
     func saveOrDeleteFavoriteRecipe(id: Int)
     func checkRecipeInRealm(id: Int) -> Bool
+    func checkCountryInRealm(country: String) -> Bool
 
     var recipes: [SearchResult]? { get set }
     var totalResults: Int? { get set }
@@ -56,11 +63,24 @@ class SearchPresenter: SearchViewPresenterProtocol {
 
     var queryItems: [URLQueryItem] = []
 
-    func updateMealQueryItems(key: QueryItemKeys, itemValue: String, append: Bool) {
+    func updateQueryItems(key: QueryItemKeys, itemValue: String, oldItemValue: String?, action: UpdateQueryItemsArray) {
         let queryItem = URLQueryItem(name: key.rawValue, value: itemValue)
-        append ? queryItems.append(queryItem) : queryItems.removeAll(where: { queryItem in // swiftlint:disable:this void_function_in_ternary
-            queryItem.value == itemValue
-        })
+
+        switch action {
+        case .add:
+            queryItems.append(queryItem)
+        case .update:
+            guard let oldItemValue = oldItemValue else { return }
+            queryItems.removeAll(where: { queryItem in
+                queryItem.value == oldItemValue
+            })
+            queryItems.append(queryItem)
+        case .delete:
+            queryItems.removeAll(where: { queryItem in
+                queryItem.value == itemValue
+            })
+        }
+
         getRecipes()
     }
 
@@ -94,7 +114,6 @@ class SearchPresenter: SearchViewPresenterProtocol {
     func updateCuisineItem(indexPath: Int) { realmManager.updateCuisineType(indexPath: indexPath)}
 
     // MARK: - realFavoriteManager
-
     func saveOrDeleteFavoriteRecipe(id: Int) {
         let request = DetailResipeRequest(id: id, requestType: .detailed)
         networkService.request(request) { [weak self] result in
@@ -113,5 +132,5 @@ class SearchPresenter: SearchViewPresenterProtocol {
 
     func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkRecipeInRealmById(id: id)}
 
-    //    func getFavoriteObjs() -> Results<RealmFavoriteRecipe> { return realmManager.getFavoriteRecipesInRealm() }
+    func checkCountryInRealm(country: String) -> Bool { return realmManager.checkCountryInRealm(country: country) }
 }

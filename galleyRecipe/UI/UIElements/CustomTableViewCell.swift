@@ -72,8 +72,8 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
 
-    private lazy var favoriteButton: UIButton = {
-        let button = UIButton()
+    private lazy var favoriteButton: SmallButon = {
+        let button = SmallButon()
         let image = UIImage(named: ImageConstant.starOutline)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear

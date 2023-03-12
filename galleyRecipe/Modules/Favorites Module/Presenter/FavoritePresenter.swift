@@ -18,6 +18,7 @@ protocol FavoriteViewPresenterProtocol: AnyObject {
     func checkRecipeInRealm(id: Int) -> Bool
     func getFavoriteObjs() -> Results<RealmFavoriteRecipe>
     func saveOrDeleteFavoriteRecipe(id: Int)
+    func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmFavoriteRecipe>
     var recipes: [SearchResult]? { get set }
 }
 
@@ -48,4 +49,17 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
     func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkRecipeInRealmById(id: id)}
 
     func getFavoriteObjs() -> Results<RealmFavoriteRecipe> { return realmManager.getFavoriteRecipesInRealm() }
+
+    func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmFavoriteRecipe> {
+        let recipes = realmManager.getFavoriteRecipesInRealm()
+
+        guard let request = request else {
+            return recipes
+        }
+
+        let lowercaseRequest = request.lowercased()
+        let result = recipes.filter("title CONTAINS[c] %@", lowercaseRequest)
+
+        return result
+    }
 }
