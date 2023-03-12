@@ -56,7 +56,7 @@
 		EB3995E829951DA400974218 /* TestingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3995E729951DA400974218 /* TestingData.swift */; };
 		EB3E0786299FC864002DC891 /* MealCategorys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3E0785299FC864002DC891 /* MealCategorys.swift */; };
 		EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */; };
-		EB47AACD29A62D3600FEAA1F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB47AACC29A62D3600FEAA1F /* Kingfisher */; };
+		EB56110929BCAF8B008359D0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB56110829BCAF8B008359D0 /* Kingfisher */; };
 		EB56B25C29B20168007CFFB6 /* ObjectAdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */; };
 		EB59C82429AA81DA00B1507A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB59C82329AA81DA00B1507A /* RealmManager.swift */; };
 		EB5F3CA8297F206C00D516E1 /* LightBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */; };
@@ -79,6 +79,7 @@
 		EBB480F129A2674800ACD15E /* DetailRecipeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */; };
 		EBB480F329A2678500ACD15E /* ComplexSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */; };
 		EBB480F529A26D0B00ACD15E /* QueryItemKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */; };
+		EBD4350B29BC727000FF99B0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD4350A29BC727000FF99B0 /* StringExtension.swift */; };
 		EBD74432299A1C220071D454 /* TimerProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD74431299A1C220071D454 /* TimerProgressBarView.swift */; };
 		EBE07358299AABCD00F75826 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE07357299AABCD00F75826 /* ErrorResponse.swift */; };
 		EBFDB1FF297957A700CA0084 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFDB1FE297957A700CA0084 /* UIColorExtension.swift */; };
@@ -156,6 +157,7 @@
 		EBB480F029A2674800ACD15E /* DetailRecipeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeRequest.swift; sourceTree = "<group>"; };
 		EBB480F229A2678500ACD15E /* ComplexSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSearchRequest.swift; sourceTree = "<group>"; };
 		EBB480F429A26D0B00ACD15E /* QueryItemKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItemKeys.swift; sourceTree = "<group>"; };
+		EBD4350A29BC727000FF99B0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		EBD74431299A1C220071D454 /* TimerProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerProgressBarView.swift; path = galleyRecipe/Modules/TimerModule/View/TimerProgressBarView.swift; sourceTree = SOURCE_ROOT; };
 		EBE07357299AABCD00F75826 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		EBFDB1FE297957A700CA0084 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = galleyRecipe/UI/Extension/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
@@ -166,9 +168,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB56110929BCAF8B008359D0 /* Kingfisher in Frameworks */,
 				EB206EDA29A8F8D6007D626C /* RealmSwift in Frameworks */,
 				EB206ED829A8F8D6007D626C /* Realm in Frameworks */,
-				EB47AACD29A62D3600FEAA1F /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +373,7 @@
 				EB653FF529AD039B00E07AC0 /* UIImageExtension.swift */,
 				EBFDB1FE297957A700CA0084 /* UIColorExtension.swift */,
 				EB653FF929AD040C00E07AC0 /* UILabelExtension.swift */,
+				EBD4350A29BC727000FF99B0 /* StringExtension.swift */,
 				EB653FF329AD037700E07AC0 /* UITableViewDelegateExtension.swift */,
 				EB653FF729AD03CF00E07AC0 /* CALayerExtension.swift */,
 				EB653FF129AD035600E07AC0 /* CGFloatExtension.swift */,
@@ -513,9 +516,9 @@
 			);
 			name = galleyRecipe;
 			packageProductDependencies = (
-				EB47AACC29A62D3600FEAA1F /* Kingfisher */,
 				EB206ED729A8F8D6007D626C /* Realm */,
 				EB206ED929A8F8D6007D626C /* RealmSwift */,
+				EB56110829BCAF8B008359D0 /* Kingfisher */,
 			);
 			productName = galleyRecipe;
 			productReference = 9E7C2EE9296AF9EF0006EECF /* galleyRecipe.app */;
@@ -546,8 +549,8 @@
 			);
 			mainGroup = 9E7C2EE0296AF9EF0006EECF;
 			packageReferences = (
-				EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				EB206ED629A8F8D6007D626C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				EB56110729BCAF8B008359D0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 9E7C2EEA296AF9EF0006EECF /* Products */;
 			projectDirPath = "";
@@ -624,6 +627,7 @@
 				EB7825E829B676FD00C1E0FF /* UIViewControllerExtension.swift in Sources */,
 				EB653FF229AD035600E07AC0 /* CGFloatExtension.swift in Sources */,
 				EB24FBDC29B4FCB600A7BBED /* UIViewExtension.swift in Sources */,
+				EBD4350B29BC727000FF99B0 /* StringExtension.swift in Sources */,
 				EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */,
 				EB14C96829AD39BD002590E5 /* RMFavoriteRecipeModel.swift in Sources */,
 				EB262773297817FF002B8924 /* NetworkService.swift in Sources */,
@@ -887,7 +891,7 @@
 				minimumVersion = 10.36.0;
 			};
 		};
-		EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		EB56110729BCAF8B008359D0 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher?ysclid=lefkafbl7y381117228";
 			requirement = {
@@ -908,9 +912,9 @@
 			package = EB206ED629A8F8D6007D626C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		EB47AACC29A62D3600FEAA1F /* Kingfisher */ = {
+		EB56110829BCAF8B008359D0 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EB47AACB29A62D3600FEAA1F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = EB56110729BCAF8B008359D0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */

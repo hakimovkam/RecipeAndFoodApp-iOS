@@ -14,7 +14,7 @@ struct DetailRecipe: Decodable {
     let title: String
     let readyInMinutes: Int
     let servings: Int
-    let image: String
+    let image: String?
     let extendedIngredients: [Ingredients]
     let analyzedInstructions: [Instruction]
 }
@@ -50,7 +50,7 @@ extension DetailRecipe: ObjectAdapterProtocol {
         recipe.title = title
         recipe.readyInMinutes = readyInMinutes
         recipe.servings = servings
-        recipe.image = image
+        recipe.image = image ?? ""
         recipe.instruction = {
             let list = List<RealmInstruction>()
             analyzedInstructions.forEach {
