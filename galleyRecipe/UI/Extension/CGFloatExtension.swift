@@ -33,7 +33,7 @@ extension CGFloat {
     static var blurViewWidthAnchoor: CGFloat { 40 }
     static var blurViewHeightAnchoor: CGFloat { 80 }
     static var largeAdditionalViewAnchoor: CGFloat { 44 }
-    static var mediemAdditionalViewAnchoor: CGFloat { 20 }
+    static var mediumAdditionalViewAnchoor: CGFloat { 20 }
     static var smallAdditionalViewAnchoor: CGFloat { 12 }
 
     static var foodImageCell: CGFloat { 120 }
@@ -63,4 +63,9 @@ extension CGFloat {
     static var ingredientsCellcircleImageHeightAndWeigth: CGFloat { 35 } // swiftlint:disable:this identifier_name
     static var ingredientsCellFoodNameLabelLeftAnchor: CGFloat { 30 }
     static var ingredientsCellFoodWeightLabelLeftAnchor: CGFloat { 30 }
+
+    static var numberTogleViewConstraint: CGFloat { 36 }
+    static var ingredientViewHInset: CGFloat { 20 }
+    static var ingredientViewVInset: CGFloat { 16 }
+    static var cookItButtonHeight: CGFloat { 52 }
 }
