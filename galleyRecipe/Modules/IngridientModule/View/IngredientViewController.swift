@@ -7,40 +7,65 @@
 
 import UIKit
 
-final class IngredientsViewController: GradientViewController {
+final class IngredientsViewController: UIViewController {
     private let presenter: IngridientViewPresenterProtocol
 
     // MARK: - UI
 
     private let ingredientsTableView: UITableView = {
-        let tableView = UITableView.init(frame: .zero, style: UITableView.Style.plain)
+        let tableView = UITableView()
+        tableView.layer.borderColor = UIColor.customLightGray.cgColor
+        tableView.layer.borderWidth = 1.5
+        tableView.layer.cornerRadius = 20
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+
         return tableView
+    }()
+
+    private lazy var gradientDark: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.frame = imageOnTop.bounds
+        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor(white: 0, alpha: 1).cgColor]
+        gradient.locations = [0.4, 1]
+
+        return gradient
+    }()
+    
+    private lazy var gradientLight: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+        gradient.locations = [0.75, 1]
+        return gradient
     }()
 
     private let imageOnTop: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: ImageConstant.ingredientsImageOnTop)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+
         return imageView
     }()
 
     private let viewFromBottom: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .white
         view.layer.cornerRadius = 20.0
         view.translatesAutoresizingMaskIntoConstraints = false
+
         return view
     }()
 
-    private let ingredientLabel: UILabel = {
+    private let ingredientDiscriptionLabel: UILabel = {
         let label = UILabel()
         label.text = TestingData.ingredientLabelText
         label.configureLabels()
-        label.font = UIFont(name: "ArialRoundedMTBold", size: 24)
+        label.font = UIFont(name: "Poppins-Bold", size: 24)
         label.shadowOffset = CGSize(width: 20, height: 20)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
 
@@ -50,31 +75,23 @@ final class IngredientsViewController: GradientViewController {
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 1
+
         return stackView
     }()
 
-    private let grayView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.layer.cornerRadius = 20.0
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var numberTogle: NumberTogleView = {
+        let numberTogleView = NumberTogleView()
+        numberTogleView.layer.cornerRadius = 20
+        numberTogleView.translatesAutoresizingMaskIntoConstraints = false
+
+        return numberTogleView
     }()
 
-    private let ingredientsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TestingData.ingredientsButtonText, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let tableSwitcher: InstructionIngredientSwitch = {
+        let switcher = InstructionIngredientSwitch()
+        switcher.translatesAutoresizingMaskIntoConstraints = false
 
-    private let instructionsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(TestingData.ingredientsButtonText, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        return switcher
     }()
 
     private lazy var backButton: UIButton = {
@@ -82,7 +99,20 @@ final class IngredientsViewController: GradientViewController {
         button.setImage(UIImage(named: ImageConstant.arrowLeft), for: .normal)
         button.addTarget(self, action: #selector(tapBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+
         return button
+    }()
+
+    private lazy var cookItButton: UIButton = {
+        let buton = UIButton()
+        buton.backgroundColor = .customGreen
+        buton.layer.cornerRadius = 16
+        buton.setTitle("Cook it!", for: .normal)
+        buton.setTitleColor(.white, for: .normal)
+        buton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 20)
+        buton.translatesAutoresizingMaskIntoConstraints = false
+
+        return buton
     }()
 
     init(presenter: IngridientViewPresenterProtocol) {
@@ -97,6 +127,7 @@ final class IngredientsViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .red
         setupConstraints()
         addSublabelsToStackView()
 
@@ -106,20 +137,31 @@ final class IngredientsViewController: GradientViewController {
         ingredientsTableView.backgroundColor = .white
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        imageOnTop.layer.addSublayer(gradientDark)
+    }
+
     private func addSublabelsToStackView() {
         let waitingTime = UILabel()
         let servings = UILabel()
         let calories = UILabel()
+        let separator = SeparatorView()
+        let separator2 = SeparatorView()
+        stackView.distribution = .equalCentering
 
-        waitingTime.configureLabels()
-        servings.configureLabels()
-        calories.configureLabels()
+        waitingTime.textColor = .white
+        servings.textColor = .white
+        calories.textColor = .white
 
         waitingTime.text = TestingData.waitingTimeText
         servings.text = TestingData.servingsText
         calories.text = TestingData.caloriesText
+
         stackView.addArrangedSubview(waitingTime)
+        stackView.addArrangedSubview(separator)
         stackView.addArrangedSubview(servings)
+        stackView.addArrangedSubview(separator2)
         stackView.addArrangedSubview(calories)
     }
 
@@ -130,7 +172,7 @@ final class IngredientsViewController: GradientViewController {
 }
 // MARK: - UITableViewDelegate, UITableViewDataSource
 
-extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource {
+ extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 30
     }
@@ -143,7 +185,7 @@ extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
-}
+ }
 // MARK: - ViewProtocol
 extension IngredientsViewController: IngridientViewProtocol {
 
@@ -152,70 +194,60 @@ extension IngredientsViewController: IngridientViewProtocol {
 // MARK: - Constraints
 extension IngredientsViewController {
 
-    private func setupConstraints() { // swiftlint:disable:this function_body_length
+    private func setupConstraints() {
         view.addSubview(imageOnTop)
+        view.addSubview(viewFromBottom)
+        view.addSubview(ingredientDiscriptionLabel)
+        view.addSubview(stackView)
+        view.addSubview(numberTogle)
+        viewFromBottom.addSubview(ingredientsTableView)
+        view.addSubview(backButton)
+        view.addSubview(tableSwitcher)
+        view.layer.addSublayer(gradientLight)
+        view.addSubview(cookItButton)
+
         NSLayoutConstraint.activate([
             imageOnTop.topAnchor.constraint(equalTo: view.topAnchor),
             imageOnTop.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageOnTop.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageOnTop.heightAnchor.constraint(equalToConstant: .ingredientsImageOnTopHeightAnchor)
-        ])
+            imageOnTop.heightAnchor.constraint(equalToConstant: .ingredientsImageOnTopHeightAnchor),
 
-        view.addSubview(viewFromBottom)
-        NSLayoutConstraint.activate([
-            viewFromBottom.topAnchor.constraint(equalTo: imageOnTop.bottomAnchor),
-            viewFromBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            viewFromBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            viewFromBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+            viewFromBottom.leftAnchor.constraint(equalTo: view.leftAnchor),
+            viewFromBottom.rightAnchor.constraint(equalTo: view.rightAnchor),
+            viewFromBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            imageOnTop.bottomAnchor.constraint(equalTo: viewFromBottom.topAnchor, constant: .mediumAdditionalViewAnchoor),
 
-        imageOnTop.addSubview(ingredientLabel)
-        NSLayoutConstraint.activate([
-            ingredientLabel.bottomAnchor.constraint(equalTo: imageOnTop.bottomAnchor, constant: .ingredientsIngredientLabelAnchor),
-            ingredientLabel.leadingAnchor.constraint(equalTo: imageOnTop.leadingAnchor, constant: .ingredientLabelTrailingAndLeadingAnchors),
-            imageOnTop.trailingAnchor.constraint(equalTo: ingredientLabel.trailingAnchor, constant: .ingredientLabelTrailingAndLeadingAnchors),
-            ingredientLabel.centerXAnchor.constraint(equalTo: imageOnTop.centerXAnchor)
-        ])
+            ingredientDiscriptionLabel.bottomAnchor.constraint(equalTo: viewFromBottom.topAnchor, constant: .ingredientsIngredientLabelAnchor),
+            ingredientDiscriptionLabel.leadingAnchor.constraint(equalTo: imageOnTop.leadingAnchor, constant: .ingredientLabelTrailingAndLeadingAnchors),
+            imageOnTop.trailingAnchor.constraint(equalTo: ingredientDiscriptionLabel.trailingAnchor, constant: .ingredientLabelTrailingAndLeadingAnchors),
+            ingredientDiscriptionLabel.centerXAnchor.constraint(equalTo: imageOnTop.centerXAnchor),
 
-        view.addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: ingredientLabel.bottomAnchor, constant: .ingredientsStackViewTopAnchor),
+            stackView.topAnchor.constraint(equalTo: ingredientDiscriptionLabel.bottomAnchor, constant: .ingredientsStackViewTopAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .ingredientsStackViewTrailingAndLeadingAnchors),
-            view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: .ingredientsStackViewTrailingAndLeadingAnchors)
-        ])
+            view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: .ingredientsStackViewTrailingAndLeadingAnchors),
 
-        viewFromBottom.addSubview(grayView)
-        NSLayoutConstraint.activate([
-            grayView.topAnchor.constraint(equalTo: viewFromBottom.topAnchor, constant: .ingredientsGrayViewTopAnchor),
-            grayView.leadingAnchor.constraint(equalTo: viewFromBottom.leadingAnchor, constant: .ingredientsGrayViewTrailingAndLeadingAnchors),
-            viewFromBottom.trailingAnchor.constraint(equalTo: grayView.trailingAnchor, constant: .ingredientsGrayViewTrailingAndLeadingAnchors),
-            grayView.heightAnchor.constraint(equalToConstant: .ingredientsGrayViewHeightAnchor)
-        ])
+            numberTogle.topAnchor.constraint(equalTo: viewFromBottom.topAnchor, constant: .ingredientsGrayViewTopAnchor),
+            numberTogle.heightAnchor.constraint(equalToConstant: .ingredientsGrayViewHeightAnchor),
+            numberTogle.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
+            view.rightAnchor.constraint(equalTo: numberTogle.rightAnchor, constant: .mediemLeftRightInset),
 
-        viewFromBottom.addSubview(ingredientsButton)
-        NSLayoutConstraint.activate([
-            ingredientsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: .ingredientsButtonTopAnchor),
-            ingredientsButton.leadingAnchor.constraint(equalTo: viewFromBottom.leadingAnchor, constant: .ingredientsLeadingAnchor)
-        ])
+            tableSwitcher.topAnchor.constraint(equalTo: numberTogle.bottomAnchor, constant: .ingredientViewHInset),
+            tableSwitcher.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
+            view.rightAnchor.constraint(equalTo: tableSwitcher.rightAnchor, constant: .ingredientViewVInset),
+            tableSwitcher.heightAnchor.constraint(equalToConstant: .mediumHeightAnchor),
 
-        viewFromBottom.addSubview(instructionsButton)
-        NSLayoutConstraint.activate([
-            instructionsButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: .instructionsButtonTopAnchor),
-            viewFromBottom.trailingAnchor.constraint(equalTo: instructionsButton.trailingAnchor, constant: .instructionsButtonTrailingAnchor)
-        ])
+            ingredientsTableView.topAnchor.constraint(equalTo: tableSwitcher.bottomAnchor, constant: .ingredientViewHInset),
+            ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            ingredientsTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientViewVInset),
+            view.rightAnchor.constraint(equalTo: ingredientsTableView.rightAnchor, constant: .ingredientViewVInset),
 
-        viewFromBottom.addSubview(ingredientsTableView)
-        NSLayoutConstraint.activate([
-            ingredientsTableView.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: .ingredientsTableViewTopAnchor),
-            ingredientsTableView.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: .ingredientsTableViewLeadingAndTrailingAnchors),
-            grayView.trailingAnchor.constraint(equalTo: ingredientsTableView.trailingAnchor, constant: .ingredientsTableViewLeadingAndTrailingAnchors),
-            ingredientsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-
-        view.addSubview(backButton)
-        NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientsBackButtonLeftAnchor)
+            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientsBackButtonLeftAnchor),
+
+            cookItButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            cookItButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientViewVInset),
+            view.rightAnchor.constraint(equalTo: cookItButton.rightAnchor, constant: .ingredientViewVInset),
+            cookItButton.heightAnchor.constraint(equalToConstant: .cookItButtonHeight)
         ])
     }
 }

@@ -200,13 +200,13 @@ extension CustomTableViewCell {
 
             additionalBlurView.widthAnchor.constraint(equalToConstant: .blurViewWidthAnchoor),
             additionalBlurView.heightAnchor.constraint(equalToConstant: .blurViewHeightAnchoor),
-            foodImage.trailingAnchor.constraint(equalTo: additionalBlurView.trailingAnchor, constant: .mediemAdditionalViewAnchoor),
-            additionalBlurView.topAnchor.constraint(equalTo: foodImage.topAnchor, constant: .mediemAdditionalViewAnchoor),
+            foodImage.trailingAnchor.constraint(equalTo: additionalBlurView.trailingAnchor, constant: .mediumAdditionalViewAnchoor),
+            additionalBlurView.topAnchor.constraint(equalTo: foodImage.topAnchor, constant: .mediumAdditionalViewAnchoor),
 
             additionalView.widthAnchor.constraint(equalToConstant: .blurViewWidthAnchoor),
             additionalView.heightAnchor.constraint(equalToConstant: .blurViewHeightAnchoor),
-            foodImage.trailingAnchor.constraint(equalTo: additionalView.trailingAnchor, constant: .mediemAdditionalViewAnchoor),
-            additionalView.topAnchor.constraint(equalTo: foodImage.topAnchor, constant: .mediemAdditionalViewAnchoor),
+            foodImage.trailingAnchor.constraint(equalTo: additionalView.trailingAnchor, constant: .mediumAdditionalViewAnchoor),
+            additionalView.topAnchor.constraint(equalTo: foodImage.topAnchor, constant: .mediumAdditionalViewAnchoor),
 
             favoriteButton.widthAnchor.constraint(equalToConstant: .mediumHeightAnchor),
             favoriteButton.heightAnchor.constraint(equalToConstant: .mediumHeightAnchor),
