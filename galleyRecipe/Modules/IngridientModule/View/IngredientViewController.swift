@@ -31,7 +31,7 @@ final class IngredientsViewController: UIViewController {
 
         return gradient
     }()
-    
+
     private lazy var gradientLight: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
@@ -105,7 +105,7 @@ final class IngredientsViewController: UIViewController {
 
     private lazy var cookItButton: UIButton = {
         let buton = UIButton()
-        buton.backgroundColor = .customGreen
+        buton.backgroundColor = .customGreen2
         buton.layer.cornerRadius = 16
         buton.setTitle("Cook it!", for: .normal)
         buton.setTitleColor(.white, for: .normal)
@@ -154,9 +154,9 @@ final class IngredientsViewController: UIViewController {
         servings.textColor = .white
         calories.textColor = .white
 
-        waitingTime.text = TestingData.waitingTimeText
-        servings.text = TestingData.servingsText
-        calories.text = TestingData.caloriesText
+        waitingTime.attributedText = attributedStringWithBold(for: TestingData.waitingTimeText)
+        servings.attributedText = attributedStringWithBold(for: TestingData.servingsText)
+        calories.attributedText = attributedStringWithBold(for: TestingData.caloriesText)
 
         stackView.addArrangedSubview(waitingTime)
         stackView.addArrangedSubview(separator)
@@ -168,6 +168,32 @@ final class IngredientsViewController: UIViewController {
     @objc
     private func tapBackButton() {
         presenter.backButtonDidPressed()
+    }
+
+    private func attributedStringWithBold(for string: String) -> NSAttributedString {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 16),
+            .foregroundColor: UIColor.white
+        ]
+
+        let attributedString = NSMutableAttributedString(string: string, attributes: attributes)
+
+        let digitSet = CharacterSet.decimalDigits
+        var searchRange = string.startIndex..<string.endIndex
+        while let range = string.rangeOfCharacter(from: digitSet, options: [], range: searchRange) {
+            let digitStartIndex = string.distance(from: string.startIndex, to: range.lowerBound)
+            let digitEndIndex = string.distance(from: string.startIndex, to: range.upperBound)
+
+            let digitAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont(name: "Poppins-SemiBold", size: 16) ?? UIFont(name: "Poppins-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16)
+            ]
+
+            attributedString.addAttributes(digitAttributes, range: NSRange(location: digitStartIndex, length: digitEndIndex - digitStartIndex))
+
+            searchRange = range.upperBound..<string.endIndex
+        }
+
+        return attributedString
     }
 }
 // MARK: - UITableViewDelegate, UITableViewDataSource

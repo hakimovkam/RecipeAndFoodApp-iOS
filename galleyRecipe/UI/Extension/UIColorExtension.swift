@@ -17,4 +17,5 @@ extension UIColor {
     static var customBorderColor: UIColor { UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1) }
     static var additionalBlurViewBackground: UIColor { UIColor(red: 0, green: 0, blue: 0, alpha: 1) }
     static var additionalViewBackground: UIColor { UIColor(red: 0, green: 0, blue: 0, alpha: 0) }
+    static var customGreen2: UIColor { UIColor(red: 0.397, green: 0.688, blue: 0.349, alpha: 1) }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 final class NumberTogleView: UIView {
 
+    private var servings = 1
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -29,6 +31,7 @@ final class NumberTogleView: UIView {
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 48)
         button.setTitleColor(.customGray, for: .normal)
         button.setTitle("-", for: .normal)
+        button.addTarget(self, action: #selector(minusButtonDidPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
@@ -39,6 +42,7 @@ final class NumberTogleView: UIView {
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 48)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("+", for: .normal)
+        button.addTarget(self, action: #selector(plusButtonDidPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
@@ -48,15 +52,41 @@ final class NumberTogleView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Bold", size: 48)
         label.textAlignment = .center
-        label.text = "0"
-        label.textColor = .customGreen
+        label.text = "\(servings)"
+        label.textColor = .customGreen2
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()
 
-    func configure() {
+    func configure(servings: Int) {
+        number.text = "\(servings)"
+    }
 
+    @objc
+    func plusButtonDidPressed() {
+        servings += 1
+        if servings == 1 {
+            number.text = "\(servings)"
+            minusButton.setTitleColor(.customGray, for: .normal)
+        } else {
+            number.text = "\(servings)"
+            minusButton.setTitleColor(.black, for: .normal)
+        }
+    }
+
+    @objc
+    func minusButtonDidPressed() {
+        if servings != 1 {
+            servings -= 1
+            if servings == 1 {
+                number.text = "\(servings)"
+                minusButton.setTitleColor(.customGray, for: .normal)
+            } else {
+                number.text = "\(servings)"
+                minusButton.setTitleColor(.black, for: .normal)
+            }
+        }
     }
 }
 

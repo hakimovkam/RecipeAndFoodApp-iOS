@@ -9,17 +9,20 @@ import UIKit
 
 final class InstructionIngredientSwitch: UIView {
 
+    private var ingredientIsSelected: Bool = false
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         addSubview(instructionView)
         addSubview(ingredientView)
-        ingredientView.addSubview(ingredientsButton)
-        instructionView.addSubview(instructionButton)
+        addSubview(instructionButton)
+        addSubview(ingredientsButton)
         addSubview(separator)
-        separator.backgroundColor = .customGray
 
+        separator.backgroundColor = .customGray
         setConstraint()
+        toggle()
     }
 
     required init?(coder: NSCoder) {
@@ -45,6 +48,7 @@ final class InstructionIngredientSwitch: UIView {
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
         button.setTitleColor(.customGray, for: .normal)
         button.setTitle("Ingredients", for: .normal)
+        button.addTarget(self, action: #selector(ingredientButtonDidPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
@@ -55,12 +59,41 @@ final class InstructionIngredientSwitch: UIView {
         button.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 20)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Instruction", for: .normal)
+        button.addTarget(self, action: #selector(instructionButtonDidPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
 
     private lazy var separator = SeparatorView()
+
+    @objc
+    func ingredientButtonDidPressed() {
+        ingredientIsSelected = true
+        toggle()
+    }
+
+    @objc
+    func instructionButtonDidPressed() {
+        ingredientIsSelected = false
+        toggle()
+    }
+
+    func toggle() {
+        if ingredientIsSelected {
+            ingredientsButton.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 20)
+            ingredientsButton.setTitleColor(.black, for: .normal)
+
+            instructionButton.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
+            instructionButton.setTitleColor(.customGray, for: .normal)
+        } else {
+            instructionButton.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 20)
+            instructionButton.setTitleColor(.black, for: .normal)
+
+            ingredientsButton.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
+            ingredientsButton.setTitleColor(.customGray, for: .normal)
+        }
+    }
 
     func configure() {
 
