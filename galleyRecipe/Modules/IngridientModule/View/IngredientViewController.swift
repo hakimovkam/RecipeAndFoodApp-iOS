@@ -12,6 +12,16 @@ final class IngredientsViewController: UIViewController {
 
     // MARK: - UI
 
+    private var readyInMinutes = 0
+    private var servings = 0
+    private var cal: Double?
+
+    private lazy var recipeInfoView: RecipeInfoView = {
+        let view = RecipeInfoView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private let ingredientsTableView: UITableView = {
         let tableView = UITableView()
         tableView.layer.borderColor = UIColor.customLightGray.cgColor
@@ -42,7 +52,8 @@ final class IngredientsViewController: UIViewController {
 
     private let imageOnTop: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: ImageConstant.ingredientsImageOnTop)
+        imageView.backgroundColor = .customLightGray
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         return imageView
@@ -57,9 +68,8 @@ final class IngredientsViewController: UIViewController {
         return view
     }()
 
-    private let ingredientDiscriptionLabel: UILabel = {
+    private lazy var ingredientDiscriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = TestingData.ingredientLabelText
         label.configureLabels()
         label.font = UIFont(name: "Poppins-Bold", size: 24)
         label.shadowOffset = CGSize(width: 20, height: 20)
@@ -67,16 +77,6 @@ final class IngredientsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
-    }()
-
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 1
-
-        return stackView
     }()
 
     private lazy var numberTogle: NumberTogleView = {
@@ -127,9 +127,7 @@ final class IngredientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
         setupConstraints()
-        addSublabelsToStackView()
 
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
@@ -142,58 +140,9 @@ final class IngredientsViewController: UIViewController {
         imageOnTop.layer.addSublayer(gradientDark)
     }
 
-    private func addSublabelsToStackView() {
-        let waitingTime = UILabel()
-        let servings = UILabel()
-        let calories = UILabel()
-        let separator = SeparatorView()
-        let separator2 = SeparatorView()
-        stackView.distribution = .equalCentering
-
-        waitingTime.textColor = .white
-        servings.textColor = .white
-        calories.textColor = .white
-
-        waitingTime.attributedText = attributedStringWithBold(for: TestingData.waitingTimeText)
-        servings.attributedText = attributedStringWithBold(for: TestingData.servingsText)
-        calories.attributedText = attributedStringWithBold(for: TestingData.caloriesText)
-
-        stackView.addArrangedSubview(waitingTime)
-        stackView.addArrangedSubview(separator)
-        stackView.addArrangedSubview(servings)
-        stackView.addArrangedSubview(separator2)
-        stackView.addArrangedSubview(calories)
-    }
-
     @objc
     private func tapBackButton() {
         presenter.backButtonDidPressed()
-    }
-
-    private func attributedStringWithBold(for string: String) -> NSAttributedString {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 16),
-            .foregroundColor: UIColor.white
-        ]
-
-        let attributedString = NSMutableAttributedString(string: string, attributes: attributes)
-
-        let digitSet = CharacterSet.decimalDigits
-        var searchRange = string.startIndex..<string.endIndex
-        while let range = string.rangeOfCharacter(from: digitSet, options: [], range: searchRange) {
-            let digitStartIndex = string.distance(from: string.startIndex, to: range.lowerBound)
-            let digitEndIndex = string.distance(from: string.startIndex, to: range.upperBound)
-
-            let digitAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "Poppins-SemiBold", size: 16) ?? UIFont(name: "Poppins-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16)
-            ]
-
-            attributedString.addAttributes(digitAttributes, range: NSRange(location: digitStartIndex, length: digitEndIndex - digitStartIndex))
-
-            searchRange = range.upperBound..<string.endIndex
-        }
-
-        return attributedString
     }
 }
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -207,14 +156,50 @@ final class IngredientsViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTableViewCell.identifier, for: indexPath)
         return cell
     }
-    // высота ячейки
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
  }
 // MARK: - ViewProtocol
 extension IngredientsViewController: IngridientViewProtocol {
+    func setDataToView(recipe: DetailRecipe?) {
+        guard let recipeData = recipe else {
+            failure()
+            return
+        }
 
+        servings = recipeData.servings
+        cal = recipeData.nutrition?.nutrients[0].amount
+        readyInMinutes = recipeData.readyInMinutes
+
+        let minusButton = { [weak self] in
+            guard let self = self else { return }
+            if let previousCal = self.cal {
+                self.cal = previousCal / Double(self.servings) * Double(self.servings - 1)
+            }
+            self.servings -= 1
+            self.recipeInfoView.changeInfo(time: self.readyInMinutes, serving: self.servings, calorie: self.cal)
+        }
+
+        let plusButton = { [weak self] in
+            guard let self = self else { return }
+            if let previousCal = self.cal {
+                self.cal = previousCal / Double(self.servings) * Double(self.servings + 1)
+            }
+            self.servings += 1
+            self.recipeInfoView.changeInfo(time: self.readyInMinutes, serving: self.servings, calorie: self.cal)
+        }
+
+        imageOnTop.kf.setImage(with: URL(string: recipeData.image ?? ""))
+        ingredientDiscriptionLabel.text = recipeData.title
+        numberTogle.configure(servingsInt: servings, minussButton: minusButton, plusButton: plusButton)
+
+        recipeInfoView.configure(time: readyInMinutes, serving: servings, calorie: cal)
+    }
+
+    func failure() {
+        print("fail")
+    }
 }
 
 // MARK: - Constraints
@@ -224,7 +209,7 @@ extension IngredientsViewController {
         view.addSubview(imageOnTop)
         view.addSubview(viewFromBottom)
         view.addSubview(ingredientDiscriptionLabel)
-        view.addSubview(stackView)
+        view.addSubview(recipeInfoView)
         view.addSubview(numberTogle)
         viewFromBottom.addSubview(ingredientsTableView)
         view.addSubview(backButton)
@@ -248,9 +233,9 @@ extension IngredientsViewController {
             imageOnTop.trailingAnchor.constraint(equalTo: ingredientDiscriptionLabel.trailingAnchor, constant: .ingredientLabelTrailingAndLeadingAnchors),
             ingredientDiscriptionLabel.centerXAnchor.constraint(equalTo: imageOnTop.centerXAnchor),
 
-            stackView.topAnchor.constraint(equalTo: ingredientDiscriptionLabel.bottomAnchor, constant: .ingredientsStackViewTopAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .ingredientsStackViewTrailingAndLeadingAnchors),
-            view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: .ingredientsStackViewTrailingAndLeadingAnchors),
+            recipeInfoView.topAnchor.constraint(equalTo: ingredientDiscriptionLabel.bottomAnchor, constant: .ingredientsStackViewTopAnchor),
+            recipeInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: .ingredientsStackViewTrailingAndLeadingAnchors),
+            view.trailingAnchor.constraint(equalTo: recipeInfoView.trailingAnchor,constant: .ingredientsStackViewTrailingAndLeadingAnchors),
 
             numberTogle.topAnchor.constraint(equalTo: viewFromBottom.topAnchor, constant: .ingredientsGrayViewTopAnchor),
             numberTogle.heightAnchor.constraint(equalToConstant: .ingredientsGrayViewHeightAnchor),

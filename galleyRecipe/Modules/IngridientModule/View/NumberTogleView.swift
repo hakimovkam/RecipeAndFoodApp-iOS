@@ -26,10 +26,13 @@ final class NumberTogleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    var minusButtonTapCallback: (() -> Void) = {}
+    var plusButtonTapCallback: (() -> Void) = {}
+
     private lazy var minusButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 48)
-        button.setTitleColor(.customGray, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.setTitle("-", for: .normal)
         button.addTarget(self, action: #selector(minusButtonDidPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -52,15 +55,20 @@ final class NumberTogleView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Bold", size: 48)
         label.textAlignment = .center
-        label.text = "\(servings)"
         label.textColor = .customGreen2
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()
 
-    func configure(servings: Int) {
+    func configure(servingsInt: Int, minussButton: @escaping (() -> Void), plusButton: @escaping (() -> Void)) {
+        servings = servingsInt
+        if servings == 1 {
+            minusButton.setTitleColor(.customGray, for: .normal)
+        }
         number.text = "\(servings)"
+        minusButtonTapCallback = minussButton
+        plusButtonTapCallback = plusButton
     }
 
     @objc
@@ -73,6 +81,7 @@ final class NumberTogleView: UIView {
             number.text = "\(servings)"
             minusButton.setTitleColor(.black, for: .normal)
         }
+        plusButtonTapCallback()
     }
 
     @objc
@@ -86,6 +95,7 @@ final class NumberTogleView: UIView {
                 number.text = "\(servings)"
                 minusButton.setTitleColor(.black, for: .normal)
             }
+            minusButtonTapCallback()
         }
     }
 }

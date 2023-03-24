@@ -18,7 +18,7 @@ protocol RouterMain {
 
 protocol RouterProtocol: RouterMain {
     func setupTabBarController()
-    func showIngredients()
+    func showIngredients(id: Int?)
     func goBackToRootView()
     func showTimer()
 }
@@ -51,9 +51,9 @@ final class Router: RouterProtocol {
         self.tabBarController = tabBarController
     }
 
-    func showIngredients() {
-            let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService)
-            rootController?.pushViewController(ingredientsViewController, animated: true)
+    func showIngredients(id: Int?) {
+        let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService, id: id)
+        rootController?.pushViewController(ingredientsViewController, animated: true)
     }
 
     func goBackToRootView() {

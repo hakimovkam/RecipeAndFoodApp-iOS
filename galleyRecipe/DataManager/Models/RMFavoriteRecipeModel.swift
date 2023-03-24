@@ -14,6 +14,7 @@ class RealmFavoriteRecipe: Object {
     @objc dynamic var readyInMinutes = 0
     @objc dynamic var servings = 0
     @objc dynamic var image = ""
+    @objc dynamic var nutrition: RealmNutrition!
     var ingredients = List<RealmIngredients>()
     var instruction = List<RealmInstruction>()
 
@@ -22,6 +23,16 @@ class RealmFavoriteRecipe: Object {
     override static func primaryKey() -> String? {
             return "id"
         }
+}
+
+class RealmNutrition: Object {
+    var nutrients = List<RealmNutrients>()
+}
+
+class RealmNutrients: Object {
+    @objc dynamic var name = ""
+    @objc dynamic var amount = 0.0
+    @objc dynamic var unit = ""
 }
 
 class RealmIngredients: Object {

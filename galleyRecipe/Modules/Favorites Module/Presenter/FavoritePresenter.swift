@@ -14,7 +14,7 @@ protocol FavoriteViewProtocol: AnyObject {
 }
 
 protocol FavoriteViewPresenterProtocol: AnyObject {
-    func didTapOnRecipe()
+    func didTapOnRecipe(recipe: DetailRecipe)
     func checkRecipeInRealm(id: Int) -> Bool
     func getFavoriteObjs() -> Results<RealmFavoriteRecipe>
     func saveOrDeleteFavoriteRecipe(id: Int)
@@ -37,8 +37,8 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
         self.router = router
     }
 
-    func didTapOnRecipe() {
-        router?.showIngredients()
+    func didTapOnRecipe(recipe: DetailRecipe) {
+//        router?.showIngredients(id: <#T##Int?#>: recipe)
     }
 
     func saveOrDeleteFavoriteRecipe(id: Int) {

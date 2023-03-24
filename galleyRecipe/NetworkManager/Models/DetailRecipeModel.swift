@@ -17,6 +17,7 @@ struct DetailRecipe: Decodable {
     let image: String?
     let extendedIngredients: [Ingredients]
     let analyzedInstructions: [Instruction]
+    let nutrition: Nutrition?
 }
 
 extension DetailRecipe: ObjectAdapterProtocol {
@@ -26,6 +27,7 @@ extension DetailRecipe: ObjectAdapterProtocol {
         readyInMinutes = managedObject.readyInMinutes
         servings = managedObject.servings
         image = managedObject.image
+        nutrition = Nutrition(managedObject: managedObject.nutrition)
         extendedIngredients = {
             var array: [Ingredients] = []
             managedObject.ingredients.forEach {
@@ -51,6 +53,7 @@ extension DetailRecipe: ObjectAdapterProtocol {
         recipe.readyInMinutes = readyInMinutes
         recipe.servings = servings
         recipe.image = image ?? ""
+        recipe.nutrition = nutrition?.managedObject()
         recipe.instruction = {
             let list = List<RealmInstruction>()
             analyzedInstructions.forEach {
@@ -58,7 +61,6 @@ extension DetailRecipe: ObjectAdapterProtocol {
             }
             return list
         }()
-
         recipe.ingredients = {
             let list = List<RealmIngredients>()
             extendedIngredients.forEach {
@@ -71,6 +73,57 @@ extension DetailRecipe: ObjectAdapterProtocol {
     }
 }
 
+// MARK: - Nutrition and Nutrients
+struct Nutrition: Decodable {
+    let nutrients: [Nutrients]
+}
+
+extension Nutrition: ObjectAdapterProtocol {
+    public init(managedObject: RealmNutrition) {
+        nutrients = {
+            var array: [Nutrients] = []
+            if let realmNutrient = managedObject.nutrients.first {
+                array.append(Nutrients(managedObject: realmNutrient))
+            }
+
+            return array
+        }()
+    }
+
+    public func managedObject() -> RealmNutrition {
+        let realmNutrition = RealmNutrition()
+        realmNutrition.nutrients = {
+            let list = List<RealmNutrients>()
+            list.append(nutrients[0] .managedObject())
+            return list
+        }()
+
+        return realmNutrition
+    }
+}
+
+struct Nutrients: Decodable {
+    let name: String
+    let amount: Double
+    let unit: String
+}
+
+extension Nutrients: ObjectAdapterProtocol {
+    public init(managedObject: RealmNutrients) {
+        name = managedObject.name
+        amount = managedObject.amount
+        unit = managedObject.unit
+    }
+
+    public func managedObject() -> RealmNutrients {
+        let realmNutrients = RealmNutrients()
+        realmNutrients.name = name
+        realmNutrients.unit = unit
+        realmNutrients.amount = amount
+
+        return realmNutrients
+    }
+}
 // MARK: - Ingredients
 struct Ingredients: Decodable {
     let originalName: String

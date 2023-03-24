@@ -225,7 +225,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !showEmptyTable {
-            presenter.tapOnTheRecipe()
+            let id = presenter.recipes?[indexPath.row].id
+            presenter.tapOnTheRecipe(id: id)
         }
     }
 

@@ -70,7 +70,6 @@ final class RealmManager: RealmManagerProtocol {
 
     func checkCountryInRealm(country: String) -> Bool {
         let result = realm.objects(RealmChipsCuisineType.self).filter("cuisine == '\(country)'")
-        print(!result.isEmpty)
         return !result.isEmpty
     }
 

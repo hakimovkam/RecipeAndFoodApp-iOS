@@ -21,7 +21,7 @@ protocol SearchViewProtocol: AnyObject {
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
-    func tapOnTheRecipe()
+    func tapOnTheRecipe(id: Int?)
     func getRecipes()
     func setDeafaultChips()
     func getMealObjs() -> Results<RealmChipsMealType>
@@ -54,7 +54,9 @@ class SearchPresenter: SearchViewPresenterProtocol {
     }
 
     // MARK: - routing
-    func tapOnTheRecipe() { router?.showIngredients() }
+    func tapOnTheRecipe(id: Int?) {
+        router?.showIngredients(id: id)
+    }
 
     // MARK: - networkService
 
@@ -80,20 +82,18 @@ class SearchPresenter: SearchViewPresenterProtocol {
                 queryItem.value == itemValue
             })
         }
-
         getRecipes()
     }
 
     func getRecipes() {
-
         let request = SearchRecipeRequest(requestType: .recepts, queryItems: queryItems)
         networkService.request(request) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
-                case .success(let recipe):
-                    self.totalResults = recipe.totalResults
-                    self.recipes = recipe.results
+                case .success(let recipes):
+                    self.totalResults = recipes.totalResults
+                    self.recipes = recipes.results
                     self.view?.success()
                 case .failure(let error):
                     self.view?.failure(error: error)

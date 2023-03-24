@@ -68,4 +68,6 @@ extension CGFloat {
     static var ingredientViewHInset: CGFloat { 20 }
     static var ingredientViewVInset: CGFloat { 16 }
     static var cookItButtonHeight: CGFloat { 52 }
+
+    static var recipeInfoHeight: CGFloat { 20 }
 }

@@ -52,11 +52,13 @@
 		EB29F3A2297E8064002F74BD /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB29F38F297E8064002F74BD /* Poppins-MediumItalic.ttf */; };
 		EB29F3A5297E80BB002F74BD /* DarkBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */; };
 		EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29F3A4297E80BB002F74BD /* ImageConstant.swift */; };
+		EB3102BB29C6E88500C4CEBD /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3102BA29C6E88500C4CEBD /* DoubleExtension.swift */; };
 		EB3899C8297BCCCC00705344 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */; };
 		EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3899CF297BD9E000705344 /* CustomTabBarController.swift */; };
 		EB3995E829951DA400974218 /* TestingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3995E729951DA400974218 /* TestingData.swift */; };
 		EB3E0786299FC864002DC891 /* MealCategorys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3E0785299FC864002DC891 /* MealCategorys.swift */; };
 		EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */; };
+		EB4C6F7729CDC7CA00994AAC /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4C6F7629CDC7CA00994AAC /* RecipeInfoView.swift */; };
 		EB56110929BCAF8B008359D0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB56110829BCAF8B008359D0 /* Kingfisher */; };
 		EB56B25C29B20168007CFFB6 /* ObjectAdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */; };
 		EB59C82429AA81DA00B1507A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB59C82329AA81DA00B1507A /* RealmManager.swift */; };
@@ -134,11 +136,13 @@
 		EB29F38F297E8064002F74BD /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		EB29F3A3297E80BB002F74BD /* DarkBlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkBlurEffectView.swift; sourceTree = "<group>"; };
 		EB29F3A4297E80BB002F74BD /* ImageConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageConstant.swift; sourceTree = "<group>"; };
+		EB3102BA29C6E88500C4CEBD /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = galleyRecipe/Modules/IngridientModule/View/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		EB3899C7297BCCCC00705344 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		EB3899CF297BD9E000705344 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTabBarController.swift; path = galleyRecipe/UI/UIElements/CustomTabBarController.swift; sourceTree = SOURCE_ROOT; };
 		EB3995E729951DA400974218 /* TestingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingData.swift; sourceTree = "<group>"; };
 		EB3E0785299FC864002DC891 /* MealCategorys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MealCategorys.swift; path = galleyRecipe/Modules/SearchModule/Model/MealCategorys.swift; sourceTree = SOURCE_ROOT; };
 		EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngredientsTableViewCell.swift; path = galleyRecipe/Modules/IngridientModule/View/IngredientsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		EB4C6F7629CDC7CA00994AAC /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeInfoView.swift; path = galleyRecipe/Modules/IngridientModule/RecipeInfoView.swift; sourceTree = SOURCE_ROOT; };
 		EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAdapterProtocol.swift; sourceTree = "<group>"; };
 		EB59C82329AA81DA00B1507A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = galleyRecipe/DataManager/RealmManager.swift; sourceTree = SOURCE_ROOT; };
 		EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBlurEffectView.swift; sourceTree = "<group>"; };
@@ -251,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				E7463D372980512500A4C54F /* IngredientViewController.swift */,
+				EB4C6F7629CDC7CA00994AAC /* RecipeInfoView.swift */,
 				EB018ECE29BDD333001FCC1F /* NumberTogleView.swift */,
 				EBE700FA29C3A9EC0045DBD7 /* InstructionIngredientSwitcher.swift */,
 				EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */,
@@ -377,6 +382,7 @@
 		EB3899D3297C031F00705344 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EB3102BA29C6E88500C4CEBD /* DoubleExtension.swift */,
 				EB7825E729B676FD00C1E0FF /* UIViewControllerExtension.swift */,
 				EB24FBDB29B4FCB500A7BBED /* UIViewExtension.swift */,
 				EB05B08F29B39C75003FF24E /* RealmExtension.swift */,
@@ -653,6 +659,7 @@
 				EB05B09029B39C75003FF24E /* RealmExtension.swift in Sources */,
 				EB29D8192982A4EB00F5740E /* GradientViewController.swift in Sources */,
 				EBB480F529A26D0B00ACD15E /* QueryItemKeys.swift in Sources */,
+				EB3102BB29C6E88500C4CEBD /* DoubleExtension.swift in Sources */,
 				EB653FFA29AD040C00E07AC0 /* UILabelExtension.swift in Sources */,
 				9E7C2F12296B22F30006EECF /* SearchViewController.swift in Sources */,
 				EB26277129781728002B8924 /* Router.swift in Sources */,
@@ -673,6 +680,7 @@
 				EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,
 				EB0EA9C6298BEB6000C643C4 /* ChipsCollectionView.swift in Sources */,
+				EB4C6F7729CDC7CA00994AAC /* RecipeInfoView.swift in Sources */,
 				EBD74432299A1C220071D454 /* TimerProgressBarView.swift in Sources */,
 				EB206EDC29A8FA39007D626C /* RMChipsModel.swift in Sources */,
 				EB262777297868EA002B8924 /* FavoritePresenter.swift in Sources */,

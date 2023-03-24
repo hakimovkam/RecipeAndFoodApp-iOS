@@ -9,7 +9,7 @@ import UIKit
 
 protocol BuilderProtocol {
     func createFavoriteViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol) -> UIViewController
-    func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
+    func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, id: Int?) -> UIViewController
     func createTimerListViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func showTimerViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController
     func createSearchViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol) -> UIViewController
@@ -32,8 +32,8 @@ struct Builder: BuilderProtocol {
         return view
     }
 
-    func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol) -> UIViewController {
-        let presenter = IngridientPresenter(networkService: networkService, router: router)
+    func showIngredientsViewController(router: RouterProtocol, networkService: NetworkServiceProtocol, id: Int?) -> UIViewController {
+        let presenter = IngridientPresenter(networkService: networkService, router: router, id: id)
         let view = IngredientsViewController(presenter: presenter)
 
         presenter.view = view
