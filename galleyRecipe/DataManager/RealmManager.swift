@@ -22,6 +22,7 @@ protocol RealmManagerProtocol {
     func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe>
     func checkRecipeInRealmById(id: Int) -> Bool
     func checkCountryInRealm(country: String) -> Bool
+    func getFavoriteRecipeInRealm(id: Int) -> DetailRecipe?
 }
 
 final class RealmManager: RealmManagerProtocol {
@@ -42,6 +43,14 @@ final class RealmManager: RealmManagerProtocol {
     var recipes: Results<RealmFavoriteRecipe>!
 
     func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe> { return recipes }
+
+    func getFavoriteRecipeInRealm(id: Int) -> DetailRecipe? {
+        if let recipe = recipes.filter("id == \(id)").first {
+            return DetailRecipe(managedObject: recipe)
+        } else {
+            return nil
+        }
+    }
 
     func checkRecipeInRealmById(id: Int) -> Bool {
         if realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) != nil {

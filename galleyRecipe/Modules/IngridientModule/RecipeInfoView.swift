@@ -96,13 +96,10 @@ final class RecipeInfoView: UIView {
         var labelWidth: CGFloat = 0
 
         if calories != nil {
-            labelWidth = frame.width / 3
+            labelWidth = frame.width / 3 - 2
         } else {
-            labelWidth = frame.width / 2
+            labelWidth = frame.width / 2 - 1
         }
-
-        print(frame.width)
-        print(frame.width / 3)
 
         let timeView = UIView(frame: CGRect(x: 0, y: 0, width: labelWidth, height: waitingTimeLabel.bounds.height))
         let servingsView = UIView(frame: CGRect(x: 0, y: 0, width: labelWidth, height: servingsLabel.bounds.height))

@@ -13,8 +13,10 @@ protocol IngridientViewProtocol: AnyObject {
 }
 
 protocol IngridientViewPresenterProtocol: AnyObject {
-    func setDataToView()
     func backButtonDidPressed()
+    func saveDeleteFaboriteRecipe(recipe recipeForSaving: DetailRecipe)
+    func checkRecipeInRealm(id: Int) -> Bool
+    var recipe: DetailRecipe? { get set }
 }
 
 final class IngridientPresenter: IngridientViewPresenterProtocol {
@@ -24,9 +26,11 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
     var id: Int?
     var recipe: DetailRecipe?
     let networkService: NetworkServiceProtocol
+    let realmManager: RealmManagerProtocol
 
-    required init(networkService: NetworkServiceProtocol, router: RouterProtocol, id: Int?) {
+    required init(networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol, router: RouterProtocol, id: Int?) {
         self.networkService = networkService
+        self.realmManager = realmManager
         self.router = router
         self.id = id
         getRecipe(id: id)
@@ -36,7 +40,7 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
         router?.goBackToRootView()
     }
 
-    func getRecipe(id: Int?) {
+    func downloadRecipe(id: Int?) {
         let request = DetailResipeRequest(id: id, requestType: .detailed)
         networkService.request(request) { [weak self] result in
             guard let self = self else { return }
@@ -44,16 +48,33 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
                 switch result {
                 case .success(let recipe):
                     self.recipe = recipe
-                    self.setDataToView()
+                    self.view?.setDataToView(recipe: recipe)
                 case .failure(let error):
-                    print(error.description)
-//                    self.view?.failure(error: error)
+                    self.view?.failure()
+                    print(error.localizedDescription)
                 }
             }
         }
     }
 
-    func setDataToView() {
-        self.view?.setDataToView(recipe: recipe)
+    func getRecipe(id: Int?) {
+        if let recipeId  = id {
+            if checkRecipeInRealm(id: recipeId) {
+                recipe = realmManager.getFavoriteRecipeInRealm(id: recipeId)
+                DispatchQueue.main.async {
+                    self.view?.setDataToView(recipe: self.recipe)
+                }
+            } else {
+                downloadRecipe(id: id)
+            }
+        }
+    }
+
+    func saveDeleteFaboriteRecipe(recipe recipeForSaving: DetailRecipe) {
+        realmManager.changeFavoriteRecipeInRealm(recipe: recipeForSaving)
+    }
+
+    func checkRecipeInRealm(id: Int) -> Bool {
+        return realmManager.checkRecipeInRealmById(id: id)
     }
 }

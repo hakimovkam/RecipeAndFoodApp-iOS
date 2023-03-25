@@ -29,4 +29,7 @@ struct ImageConstant {
     static let arrowLeft = "ArrowLeft"
     static let arrowLeftBlack = "ArrowLeftBlack"
     static let ingredientsImageOnTop = "imageOnTop"
+
+    static let starFilled2 = "StarFilled2"
+    static let starOutline2 = "StarOutline2"
 }

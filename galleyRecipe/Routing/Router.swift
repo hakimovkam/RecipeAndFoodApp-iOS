@@ -52,7 +52,7 @@ final class Router: RouterProtocol {
     }
 
     func showIngredients(id: Int?) {
-        let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService, id: id)
+        let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService, realmManager: realmManager, id: id)
         rootController?.pushViewController(ingredientsViewController, animated: true)
     }
 

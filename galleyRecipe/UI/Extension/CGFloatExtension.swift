@@ -70,4 +70,8 @@ extension CGFloat {
     static var cookItButtonHeight: CGFloat { 52 }
 
     static var recipeInfoHeight: CGFloat { 20 }
+
+    static var cycleHeightAndWidth: CGFloat { 45 }
+    
+    static var ingredientHeightForRowAt: CGFloat { 65 }
 }
