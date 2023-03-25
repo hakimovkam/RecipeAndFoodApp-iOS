@@ -72,6 +72,6 @@ extension CGFloat {
     static var recipeInfoHeight: CGFloat { 20 }
 
     static var cycleHeightAndWidth: CGFloat { 45 }
-    
+
     static var ingredientHeightForRowAt: CGFloat { 65 }
 }

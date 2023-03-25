@@ -38,7 +38,7 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
     }
 
     func didTapOnRecipe(recipe: DetailRecipe) {
-//        router?.showIngredients(id: <#T##Int?#>: recipe)
+        router?.showIngredients(id: recipe.id)
     }
 
     func saveOrDeleteFavoriteRecipe(id: Int) {

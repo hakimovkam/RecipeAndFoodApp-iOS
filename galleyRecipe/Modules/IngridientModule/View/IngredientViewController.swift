@@ -16,8 +16,8 @@ final class IngredientsViewController: UIViewController {
     private var servings = 0
     private var cal: Double?
 
-    private lazy var cycleBlurView1 = makeBlurCycle()
-    private lazy var cycleBlurView2 = makeBlurCycle()
+//    private lazy var cycleBlurView1 = makeBlurCycle()
+//    private lazy var cycleBlurView2 = makeBlurCycle()
 
     private lazy var recipeInfoView: RecipeInfoView = {
         let view = RecipeInfoView()
@@ -36,22 +36,22 @@ final class IngredientsViewController: UIViewController {
         return tableView
     }()
 
-    private lazy var gradientDark: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        gradient.frame = imageOnTop.bounds
-        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor(white: 0, alpha: 1).cgColor]
-        gradient.locations = [0.4, 1]
-
-        return gradient
-    }()
-
-    private lazy var gradientLight: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
-        gradient.locations = [0.75, 1]
-        return gradient
-    }()
+//    private lazy var gradientDark: CAGradientLayer = {
+//        let gradient = CAGradientLayer()
+//        gradient.frame = imageOnTop.bounds
+//        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor(white: 0, alpha: 1).cgColor]
+//        gradient.locations = [0.4, 1]
+//
+//        return gradient
+//    }()
+//
+//    private lazy var gradientLight: CAGradientLayer = {
+//        let gradient = CAGradientLayer()
+//        gradient.frame = view.bounds
+//        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor(white: 1, alpha: 1).cgColor]
+//        gradient.locations = [0.75, 1]
+//        return gradient
+//    }()
 
     private let imageOnTop: UIImageView = {
         let imageView = UIImageView()
@@ -152,26 +152,26 @@ final class IngredientsViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        imageOnTop.layer.addSublayer(gradientDark)
+//        imageOnTop.layer.addSublayer(gradientDark)
     }
 
-    func makeBlurCycle() -> DarkBlurEffectView {
-        let view = DarkBlurEffectView()
-        view.frame = CGRect(x: 0, y: 0, width: .cycleHeightAndWidth, height: .cycleHeightAndWidth)
-        view.alpha = 0.8
-        view.layer.cornerRadius = .cycleHeightAndWidth / 2
-        view.clipsToBounds = true
-        view.backgroundColor = .additionalBlurViewBackground
-        view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        return view
-    }
+//    func makeBlurCycle() -> DarkBlurEffectView {
+//        let view = DarkBlurEffectView()
+//        view.frame = CGRect(x: 0, y: 0, width: .cycleHeightAndWidth, height: .cycleHeightAndWidth)
+//        view.alpha = 0.8
+//        view.layer.cornerRadius = .cycleHeightAndWidth / 2
+//        view.clipsToBounds = true
+//        view.backgroundColor = .additionalBlurViewBackground
+//        view.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//
+//        return view
+//    }
 
     @objc private func favoriteButtonTapped() {
         favoriteButton.isSelected = !favoriteButton.isSelected
         guard let recipe = presenter.recipe else { return }
-        presenter.saveDeleteFaboriteRecipe(recipe: recipe)
+        presenter.saveDeleteFavoriteRecipe(recipe: recipe)
     }
 
     @objc
@@ -251,13 +251,13 @@ extension IngredientsViewController {
         view.addSubview(ingredientDiscriptionLabel)
         view.addSubview(recipeInfoView)
         view.addSubview(numberTogle)
-        view.addSubview(cycleBlurView1)
-        view.addSubview(cycleBlurView2)
+//        view.addSubview(cycleBlurView1)
+//        view.addSubview(cycleBlurView2)
         viewFromBottom.addSubview(ingredientsTableView)
         view.addSubview(backButton)
         view.addSubview(favoriteButton)
         view.addSubview(tableSwitcher)
-        view.layer.addSublayer(gradientLight)
+//        view.layer.addSublayer(gradientLight)
         view.addSubview(cookItButton)
 
         NSLayoutConstraint.activate([
@@ -295,23 +295,26 @@ extension IngredientsViewController {
             ingredientsTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientViewVInset),
             view.rightAnchor.constraint(equalTo: ingredientsTableView.rightAnchor, constant: .ingredientViewVInset),
 
-            cycleBlurView1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            cycleBlurView1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientsBackButtonLeftAnchor),
-            cycleBlurView1.heightAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
-            cycleBlurView1.widthAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
-
-            backButton.centerXAnchor.constraint(equalTo: cycleBlurView1.centerXAnchor),
-            backButton.centerYAnchor.constraint(equalTo: cycleBlurView1.centerYAnchor),
-
-            cycleBlurView2.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            view.rightAnchor.constraint(equalTo: cycleBlurView2.rightAnchor, constant: .ingredientsBackButtonLeftAnchor),
-            cycleBlurView2.heightAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
-            cycleBlurView2.widthAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
-
-            favoriteButton.centerXAnchor.constraint(equalTo: cycleBlurView2.centerXAnchor),
-            favoriteButton.centerYAnchor.constraint(equalTo: cycleBlurView2.centerYAnchor),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 32),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 32),
+//            cycleBlurView1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            cycleBlurView1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientsBackButtonLeftAnchor),
+//            cycleBlurView1.heightAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
+//            cycleBlurView1.widthAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
+//
+//            backButton.centerXAnchor.constraint(equalTo: cycleBlurView1.centerXAnchor),
+//            backButton.centerYAnchor.constraint(equalTo: cycleBlurView1.centerYAnchor),
+//
+//            cycleBlurView2.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            view.rightAnchor.constraint(equalTo: cycleBlurView2.rightAnchor, constant: .ingredientsBackButtonLeftAnchor),
+//            cycleBlurView2.heightAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
+//            cycleBlurView2.widthAnchor.constraint(equalToConstant: .cycleHeightAndWidth),
+//
+//            favoriteButton.centerXAnchor.constraint(equalTo: cycleBlurView2.centerXAnchor),
+//            favoriteButton.centerYAnchor.constraint(equalTo: cycleBlurView2.centerYAnchor),
+//            favoriteButton.widthAnchor.constraint(equalToConstant: 32),
+//            favoriteButton.heightAnchor.constraint(equalToConstant: 32),
+            
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 
             cookItButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             cookItButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .ingredientViewVInset),

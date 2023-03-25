@@ -135,7 +135,7 @@ final class RecipeInfoView: UIView {
                 caloriesLabel.centerXAnchor.constraint(equalTo: caloriesView.centerXAnchor),
                 caloriesView.widthAnchor.constraint(equalToConstant: labelWidth)
 
-    ])
+            ])
         }
 
         NSLayoutConstraint.activate([

@@ -56,7 +56,7 @@ final class TimerListViewController: GradientViewController {
         return characterLabel
     }()
 
-    private let tableView: UITableView = {
+    private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TimerListCell.self, forCellReuseIdentifier: TimerListCell.identifier)
         tableView.separatorStyle = .none
@@ -139,8 +139,8 @@ extension TimerListViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .mediemLeftRightInset),
-            view.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: .mediemLeftRightInset),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor/*, constant: .mediemLeftRightInset*/),
+            view.rightAnchor.constraint(equalTo: tableView.rightAnchor /*,constant: .mediemLeftRightInset*/),
 
             view.centerYAnchor.constraint(equalTo: characterLabel.centerYAnchor, constant: .characterXAnchor),
             characterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

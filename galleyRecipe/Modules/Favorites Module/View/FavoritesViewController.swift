@@ -113,6 +113,8 @@ final class FavoritesViewController: GradientViewController {
         super.viewWillAppear(animated)
         if lastNumberOfRecipe == 0 {
             cellWillDisplayAction = true
+        } else if results.count == 0 || lastNumberOfRecipe != 0 {
+            cellWillDisplayAction = true
         }
     }
 
@@ -195,7 +197,7 @@ extension FavoritesViewController: UITableViewDataSource {
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        presenter.didTapOnRecipe()
+        presenter.didTapOnRecipe(recipe: DetailRecipe(managedObject: results[indexPath.row]))
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .recipeTableViewCellHeigh }
