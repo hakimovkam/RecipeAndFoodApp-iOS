@@ -10,6 +10,8 @@ import UIKit
 final class InstructionIngredientSwitch: UIView {
 
     private var ingredientIsSelected: Bool = false
+    var ingredientTapCallback: (() -> Void) = {}
+    var instructionTapCallback: (() -> Void) = {}
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,19 +72,29 @@ final class InstructionIngredientSwitch: UIView {
     @objc
     func ingredientButtonDidPressed() {
         ingredientIsSelected = true
+        ingredientTapCallback()
         toggle()
     }
 
     @objc
     func instructionButtonDidPressed() {
         ingredientIsSelected = false
+        instructionTapCallback()
         toggle()
     }
 
-    func toggle() {
+    func configure(ingredientButton: @escaping (() -> Void),
+                   instructionButton: @escaping (() -> Void)) {
+        instructionTapCallback = instructionButton
+        ingredientTapCallback = ingredientButton
+    }
+
+    private func toggle() {
         if ingredientIsSelected {
             UIView.animate(
-                withDuration: 0.2
+                withDuration: 0.2,
+                delay: 0,
+                options: UIView.AnimationOptions.curveEaseOut
             ) {
                 self.ingredientsButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
                 self.ingredientsButton.setTitleColor(.black, for: .normal)
@@ -92,7 +104,9 @@ final class InstructionIngredientSwitch: UIView {
             }
         } else {
             UIView.animate(
-                withDuration: 0.2
+                withDuration: 0.2,
+                delay: 0,
+                options: UIView.AnimationOptions.curveEaseOut
             ) {
                 self.ingredientsButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 self.ingredientsButton.setTitleColor(.customGray, for: .normal)

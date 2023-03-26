@@ -9,7 +9,7 @@ import UIKit
 
 final class IngredientsViewController: UIViewController {
     private let presenter: IngridientViewPresenterProtocol
-    private var tableViewToggle: Bool = true
+    private var tableViewToggle: Bool = false
     private var showEmptyTable = true
 
     // MARK: - UI
@@ -34,6 +34,7 @@ final class IngredientsViewController: UIViewController {
         tableView.layer.cornerRadius = 20
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.contentInset.bottom = .cookItButtonHeight + .mediemLeftRightInset
 
         return tableView
     }()
@@ -151,9 +152,12 @@ final class IngredientsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: IngredientsTableViewCell.identifier)
+        tableView.register(InstructionTableViewCell.self, forCellReuseIdentifier: InstructionTableViewCell.identifier)
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
+
+        configuretableViewToggle()
 
         checkFavorite()
     }
@@ -163,7 +167,23 @@ final class IngredientsViewController: UIViewController {
         imageOnTop.layer.addSublayer(gradientDark)
     }
 
-    func makeBlurCycle() -> DarkBlurEffectView {
+    private func configuretableViewToggle() {
+        let instructionButton = { [weak self] in
+            guard let self = self else { return }
+            self.tableViewToggle = false
+            self.toogleTableView()
+        }
+
+        let ingredientButton = { [weak self] in
+            guard let self = self else { return }
+            self.tableViewToggle = true
+            self.toogleTableView()
+        }
+
+        tableSwitcher.configure(ingredientButton: ingredientButton, instructionButton: instructionButton)
+    }
+
+    private func makeBlurCycle() -> DarkBlurEffectView {
         let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: .cycleHeightAndWidth, height: .cycleHeightAndWidth)
         view.alpha = 0.8
@@ -176,7 +196,13 @@ final class IngredientsViewController: UIViewController {
         return view
     }
 
-    @objc private func favoriteButtonTapped() {
+    private func toogleTableView() {
+        tableView.setContentOffset(.zero, animated: false)
+        tableView.reloadData()
+    }
+
+    @objc
+    private func favoriteButtonTapped() {
         favoriteButton.isSelected = !favoriteButton.isSelected
         guard let recipe = presenter.recipe else { return }
         presenter.saveDeleteFavoriteRecipe(recipe: recipe)
@@ -199,37 +225,42 @@ final class IngredientsViewController: UIViewController {
         if showEmptyTable {
             return 10
         } else {
-            return presenter.recipe?.extendedIngredients.count ?? 0
+            if tableViewToggle {
+                return presenter.recipe?.extendedIngredients.count ?? 0
+            } else {
+                return presenter.recipe?.analyzedInstructions[0].steps.count ?? 0
+            }
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        if showEmptyTable {
+        if tableViewToggle {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTableViewCell.identifier, for: indexPath) as? IngredientsTableViewCell else {
                 return UITableViewCell() }
-
-            cell.configureEmptyCell()
-
             cell.selectionStyle = .none
-            return cell
+            if showEmptyTable {
+                cell.configureEmptyCell()
+                return cell
+            } else {
+                guard let model = presenter.recipe?.extendedIngredients[indexPath.row] else { return UITableViewCell() }
+                let foodWeight: String = "\(model.measures.metric.amount.rounded(toPlaces: 2)) \(model.measures.metric.unitShort)"
+                cell.configure(imageUrl: model.image, foodName: model.originalName, foodWeight: foodWeight)
+                return cell
+            }
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTableViewCell.identifier, for: indexPath) as? IngredientsTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: InstructionTableViewCell.identifier, for: indexPath) as? InstructionTableViewCell else {
                 return UITableViewCell() }
-            guard let model = presenter.recipe?.extendedIngredients[indexPath.row] else { return UITableViewCell() }
-
-            let foodWeight: String = "\(model.measures.metric.amount.rounded(toPlaces: 2)) \(model.measures.metric.unitShort))"
-            cell.configure(imageUrl: model.image, foodName: model.originalName, foodWeight: foodWeight)
             cell.selectionStyle = .none
-
-            return cell
+            if showEmptyTable {
+                cell.configureEmptyCell()
+                return cell
+            } else {
+                guard let model = presenter.recipe?.analyzedInstructions[0].steps[indexPath.row] else { return UITableViewCell() }
+                cell.configure(number: model.number, stepDescription: model.step)
+                return cell
+            }
         }
-
     }
-     
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return 64
-     }
  }
 // MARK: - ViewProtocol
 extension IngredientsViewController: IngridientViewProtocol {

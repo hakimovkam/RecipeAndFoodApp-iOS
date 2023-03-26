@@ -22,7 +22,7 @@ class IngredientsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let circleImage: UIImageView = {
+    private let foodImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage()
         imageView.contentMode = .scaleAspectFill
@@ -67,33 +67,32 @@ class IngredientsTableViewCell: UITableViewCell {
     }()
 
     func configure(imageUrl: String, foodName: String, foodWeight: String) {
-        circleImage.kf.setImage(with: URL(string: "https://spoonacular.com/cdn/ingredients_100x100/\(imageUrl)"), options: [.transition(.fade(0.3))], completionHandler: { [weak self] _ in
+        foodImage.kf.setImage(with: URL(string: "https://spoonacular.com/cdn/ingredients_100x100/\(imageUrl)"), options: [.transition(.fade(0.3))], completionHandler: { [weak self] _ in
             guard let self = self else { return }
-            self.circleImage.isShimmering = false
+            self.foodImage.isShimmering = false
         })
 
-        var foodWeightString = foodWeight
-        if !foodWeightString.isEmpty && foodWeightString.last == ")" {
-            foodWeightString.remove(at: foodWeightString.index(before: foodWeightString.endIndex))
-        }
         foodNameLabel.text = foodName
-        foodWeightLabel.text = foodWeightString
+        foodWeightLabel.text = foodWeight
 
         foodWeightLabel.backgroundColor = .clear
         foodWeightLabel.isShimmering = false
         foodNameLabel.backgroundColor = .clear
         foodNameLabel.isShimmering = false
+
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 
     func configureEmptyCell() {
-        circleImage.image = UIImage()
-        circleImage.backgroundColor = .customLightGray
+        foodImage.image = UIImage()
+        foodImage.backgroundColor = .customLightGray
         foodNameLabel.text = .emptyString2
         foodWeightLabel.text = .emptyString
         foodNameLabel.backgroundColor = .customLightGray
         foodWeightLabel.backgroundColor = .customLightGray
-        
-        circleImage.isShimmering = true
+
+        foodImage.isShimmering = true
         foodNameLabel.isShimmering = true
         foodWeightLabel.isShimmering = true
     }
@@ -104,19 +103,19 @@ class IngredientsTableViewCell: UITableViewCell {
     }
 
     private func setupConstraints() {
-        contentView.addSubview(circleImage)
+        contentView.addSubview(foodImage)
         contentView.addSubview(foodNameLabel)
         contentView.addSubview(foodWeightLabel)
-        
+
         NSLayoutConstraint.activate([
 
-            circleImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .ingredientsCellCircleImageLeadingAnchor),
-            circleImage.widthAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
-            circleImage.heightAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
-            circleImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: circleImage.heightAnchor, constant: .smallTopAndBottomInset * 2),
+            foodImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .ingredientsCellCircleImageLeadingAnchor),
+            foodImage.widthAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
+            foodImage.heightAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
+            foodImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: foodImage.heightAnchor, constant: .smallTopAndBottomInset * 2),
 
-            foodNameLabel.leftAnchor.constraint(equalTo: circleImage.rightAnchor, constant: .ingredientsCellFoodNameLabelLeftAnchor),
+            foodNameLabel.leftAnchor.constraint(equalTo: foodImage.rightAnchor, constant: .ingredientsCellFoodNameLabelLeftAnchor),
             foodNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .smallTopAndBottomInset),
             contentView.bottomAnchor.constraint(equalTo: foodNameLabel.bottomAnchor, constant: .smallTopAndBottomInset),
             foodWeightLabel.leftAnchor.constraint(equalTo: foodNameLabel.rightAnchor, constant: .ingredientViewVInset),

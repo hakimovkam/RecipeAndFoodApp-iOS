@@ -17,6 +17,7 @@
 		EB018ECF29BDD333001FCC1F /* NumberTogleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB018ECE29BDD333001FCC1F /* NumberTogleView.swift */; };
 		EB019A2729BA5B2100274048 /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB019A2629BA5B2100274048 /* SmallButton.swift */; };
 		EB05B09029B39C75003FF24E /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05B08F29B39C75003FF24E /* RealmExtension.swift */; };
+		EB05DC4F29D08981003DC8F4 /* InstructionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05DC4E29D08981003DC8F4 /* InstructionTableViewCell.swift */; };
 		EB0EA9C6298BEB6000C643C4 /* ChipsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */; };
 		EB14C96829AD39BD002590E5 /* RMFavoriteRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14C96729AD39BD002590E5 /* RMFavoriteRecipeModel.swift */; };
 		EB1BD5CF29895A30009EB706 /* TimerListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */; };
@@ -103,6 +104,7 @@
 		EB018ECE29BDD333001FCC1F /* NumberTogleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTogleView.swift; sourceTree = "<group>"; };
 		EB019A2629BA5B2100274048 /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
 		EB05B08F29B39C75003FF24E /* RealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = galleyRecipe/NetworkManager/Models/RealmExtension.swift; sourceTree = SOURCE_ROOT; };
+		EB05DC4E29D08981003DC8F4 /* InstructionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionTableViewCell.swift; sourceTree = "<group>"; };
 		EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsCollectionView.swift; sourceTree = "<group>"; };
 		EB14C96729AD39BD002590E5 /* RMFavoriteRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFavoriteRecipeModel.swift; sourceTree = "<group>"; };
 		EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerListPresenter.swift; path = galleyRecipe/Modules/TimerModule/Presenter/TimerListPresenter.swift; sourceTree = SOURCE_ROOT; };
@@ -259,6 +261,7 @@
 				EB018ECE29BDD333001FCC1F /* NumberTogleView.swift */,
 				EBE700FA29C3A9EC0045DBD7 /* InstructionIngredientSwitcher.swift */,
 				EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */,
+				EB05DC4E29D08981003DC8F4 /* InstructionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB05DC4F29D08981003DC8F4 /* InstructionTableViewCell.swift in Sources */,
 				EB890F5A299CFB1B00D20131 /* DetailRecipeModel.swift in Sources */,
 				E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */,
 				EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */,
