@@ -48,7 +48,7 @@ final class RecipeInfoView: UIView {
         waitingTimeLabel.attributedText = attributedStringWithBold(for: String(time) + " min")
         servingsLabel.attributedText = attributedStringWithBold(for: String(serving) + " servings")
         if let cal = calorie {
-            caloriesLabel.attributedText = attributedStringWithBold(for: String(cal.rounded(toPlaces: 1)) + " cal")
+            caloriesLabel.attributedText = attributedStringWithBold(for: String(cal.rounded(toPlaces: 2)) + " cal")
         }
     }
 

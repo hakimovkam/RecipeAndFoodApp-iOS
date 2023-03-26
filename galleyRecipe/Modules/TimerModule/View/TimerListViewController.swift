@@ -99,7 +99,7 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as? TimerListCell else { return UITableViewCell() }
 
         cell.configure(foodImageName: ImageConstant.cookImage, timer: testingTimer, descriptionLabelText: testingDescription)
-        cell.layer.addBorder(edge: UIRectEdge.bottom, color: .textColor, thickness: 0.5)
+        cell.layer.addBorder(edge: UIRectEdge.bottom, color: .textColor, thickness: 0.5, offset: 16)
         return cell
     }
 

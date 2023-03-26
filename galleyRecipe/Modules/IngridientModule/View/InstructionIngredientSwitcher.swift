@@ -45,7 +45,7 @@ final class InstructionIngredientSwitch: UIView {
 
     private lazy var ingredientsButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
+        button.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 20)
         button.setTitleColor(.customGray, for: .normal)
         button.setTitle("Ingredients", for: .normal)
         button.addTarget(self, action: #selector(ingredientButtonDidPressed), for: .touchUpInside)
@@ -81,22 +81,26 @@ final class InstructionIngredientSwitch: UIView {
 
     func toggle() {
         if ingredientIsSelected {
-            ingredientsButton.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 20)
-            ingredientsButton.setTitleColor(.black, for: .normal)
+            UIView.animate(
+                withDuration: 0.2
+            ) {
+                self.ingredientsButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.ingredientsButton.setTitleColor(.black, for: .normal)
 
-            instructionButton.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
-            instructionButton.setTitleColor(.customGray, for: .normal)
+                self.instructionButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                self.instructionButton.setTitleColor(.customGray, for: .normal)
+            }
         } else {
-            instructionButton.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 20)
-            instructionButton.setTitleColor(.black, for: .normal)
+            UIView.animate(
+                withDuration: 0.2
+            ) {
+                self.ingredientsButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                self.ingredientsButton.setTitleColor(.customGray, for: .normal)
 
-            ingredientsButton.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
-            ingredientsButton.setTitleColor(.customGray, for: .normal)
+                self.instructionButton.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.instructionButton.setTitleColor(.black, for: .normal)
+            }
         }
-    }
-
-    func configure() {
-
     }
 }
 

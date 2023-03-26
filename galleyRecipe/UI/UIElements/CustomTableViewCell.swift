@@ -44,7 +44,7 @@ class CustomTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .customLightGray
-        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: .foodImageCell)
+//        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: .foodImageCell)
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 30
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -148,9 +148,6 @@ class CustomTableViewCell: UITableViewCell {
         foodImage.image = UIImage()
         foodImage.isShimmering = true
         configureEmptyCell(isEmpty: false)
-        recipeDescriptionLabel.isShimmering = true
-        recipeDescriptionLabel.backgroundColor = .customLightGray
-        recipeDescriptionLabel.text = .emptyString
     }
 
     @objc

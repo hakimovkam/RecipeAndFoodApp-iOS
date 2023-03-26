@@ -128,18 +128,21 @@ extension Nutrients: ObjectAdapterProtocol {
 struct Ingredients: Decodable {
     let originalName: String
     let measures: Measures
+    let image: String
 }
 
 extension Ingredients: ObjectAdapterProtocol {
     public init(managedObject: RealmIngredients) {
         originalName = managedObject.originalName
         measures = Measures(managedObject: managedObject.measures)
+        image = managedObject.image
     }
 
     public func managedObject() -> RealmIngredients {
         let ingredients = RealmIngredients()
         ingredients.originalName = originalName
         ingredients.measures = measures.managedObject()
+        ingredients.image = image
 
         return ingredients
     }

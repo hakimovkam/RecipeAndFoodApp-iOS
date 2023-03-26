@@ -38,6 +38,7 @@ class RealmNutrients: Object {
 class RealmIngredients: Object {
     @objc dynamic var originalName = ""
     @objc dynamic var measures: RealmMeasures!
+    @objc dynamic var image = ""
 }
 
 class RealmMeasures: Object {

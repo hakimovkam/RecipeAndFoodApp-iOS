@@ -8,6 +8,7 @@
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-Bold.ttf</string>
+		<string>Poppins-Light.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
