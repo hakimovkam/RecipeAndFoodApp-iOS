@@ -24,7 +24,7 @@ class CustomTableViewCell: UITableViewCell {
     var favoriteButtonTapCallback: (() -> Void) = {}
     var timerButtonTapCallback: (() -> Void) = {}
     // MARK: - UI Components
-    private lazy var recipeDescriptionLabel: UILabel = {
+    private let recipeDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Medium", size: 14)
         label.adjustsFontSizeToFitWidth = true
@@ -40,11 +40,10 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var foodImage: UIImageView = {
+    private let foodImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .customLightGray
-//        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: .foodImageCell)
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 30
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +64,7 @@ class CustomTableViewCell: UITableViewCell {
         return view
     }()
 
-    private lazy var additionalView: UIView = {
+    private let additionalView: UIView = {
         let view = DarkBlurEffectView()
         view.frame = CGRect(x: 0, y: 0, width: .blurViewWidthAnchoor, height: .blurViewHeightAnchoor )
         view.layer.cornerRadius = 20

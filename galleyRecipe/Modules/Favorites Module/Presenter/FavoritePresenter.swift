@@ -26,14 +26,14 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
 
     weak var view: FavoriteViewProtocol?
     var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol
-    let realmManager: RealmManagerProtocol
+    @Autowired
+    private var networkService: NetworkServiceProtocol
+    @Autowired
+    private var realmManager: RealmManagerProtocol
 
     var recipes: [SearchResult]?
 
-    required init(networkService: NetworkServiceProtocol, router: RouterProtocol, realmManager: RealmManagerProtocol) {
-        self.networkService = networkService
-        self.realmManager = realmManager
+    required init(router: RouterProtocol) {
         self.router = router
     }
 

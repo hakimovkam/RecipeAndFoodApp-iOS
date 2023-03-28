@@ -19,11 +19,11 @@ final class TimerListPresenter: TimerListViewPresenterProtocol {
 
     weak var view: TimerListViewProtocol?
     var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol
+    @Autowired
+    var networkService: NetworkServiceProtocol
 
-    required init(networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    required init(router: RouterProtocol) {
         self.router = router
-        self.networkService = networkService
     }
 
     func didTapOnTimer() {

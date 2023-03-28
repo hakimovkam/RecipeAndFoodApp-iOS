@@ -21,7 +21,7 @@ final class IngredientsViewController: UIViewController {
     private lazy var cycleBlurView1 = makeBlurCycle()
     private lazy var cycleBlurView2 = makeBlurCycle()
 
-    private lazy var recipeInfoView: RecipeInfoView = {
+    private let recipeInfoView: RecipeInfoView = {
         let view = RecipeInfoView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -76,7 +76,7 @@ final class IngredientsViewController: UIViewController {
         return view
     }()
 
-    private lazy var ingredientDiscriptionLabel: UILabel = {
+    private let ingredientDiscriptionLabel: UILabel = {
         let label = UILabel()
         label.configureLabels()
         label.font = UIFont(name: "Poppins-Bold", size: 24)
@@ -87,7 +87,7 @@ final class IngredientsViewController: UIViewController {
         return label
     }()
 
-    private lazy var numberTogle: NumberTogleView = {
+    private let numberTogle: NumberTogleView = {
         let numberTogleView = NumberTogleView()
         numberTogleView.layer.cornerRadius = 20
         numberTogleView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,7 +121,7 @@ final class IngredientsViewController: UIViewController {
         return button
     }()
 
-    private lazy var cookItButton: UIButton = {
+    private let cookItButton: UIButton = {
         let buton = UIButton()
         buton.backgroundColor = .customGreen2
         buton.layer.cornerRadius = 16
@@ -160,6 +160,13 @@ final class IngredientsViewController: UIViewController {
         configuretableViewToggle()
 
         checkFavorite()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let saveServign = servings
+        guard let saveCalorie = cal else { return }
+        presenter.updateRecipeInfo(servings: saveServign, calorie: saveCalorie)
     }
 
     override func viewDidLayoutSubviews() {

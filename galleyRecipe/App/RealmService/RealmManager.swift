@@ -23,6 +23,7 @@ protocol RealmManagerProtocol {
     func checkRecipeInRealmById(id: Int) -> Bool
     func checkCountryInRealm(country: String) -> Bool
     func getFavoriteRecipeInRealm(id: Int) -> DetailRecipe?
+    func updateRecipeInfo(servings: Int, calorie: Double, id: Int)
 }
 
 final class RealmManager: RealmManagerProtocol {
@@ -71,6 +72,21 @@ final class RealmManager: RealmManagerProtocol {
                 realm.add(realmRecipe)
             }
         }
+    }
+
+    func updateRecipeInfo(servings: Int, calorie: Double, id: Int) {
+        guard let realm = try? Realm() else {
+            return
+        }
+
+        realm.beginWrite()
+
+        if let recipe = realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) {
+            recipe.servings = servings
+            recipe.nutrition.nutrients[0].amount = calorie
+        }
+
+        try? realm.commitWrite()
     }
 
 // MARK: - chips manager

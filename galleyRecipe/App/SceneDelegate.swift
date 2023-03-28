@@ -18,6 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
 
+        let networkService = NetworkService()
+        let realmManager = RealmManager()
+
+        ServiceLocator.shared.add(service: networkService)
+        ServiceLocator.shared.add(service: realmManager)
+
         let builder: BuilderProtocol = Builder()
         let tabBarController = CustomTabBarController()
         let rootController = UINavigationController(rootViewController: tabBarController)

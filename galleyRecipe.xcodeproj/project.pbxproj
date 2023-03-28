@@ -60,6 +60,9 @@
 		EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */; };
 		EB4C6F7729CDC7CA00994AAC /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4C6F7629CDC7CA00994AAC /* RecipeInfoView.swift */; };
 		EB4C6F7929CECB7800994AAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB4C6F7829CECB7700994AAC /* Assets.xcassets */; };
+		EB55CCE629D3362F0068BB8B /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB55CCE529D3362F0068BB8B /* ServiceLocator.swift */; };
+		EB55CCE829D336560068BB8B /* Autowired.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB55CCE729D336560068BB8B /* Autowired.swift */; };
+		EB55CCEA29D336620068BB8B /* Lazywired.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB55CCE929D336620068BB8B /* Lazywired.swift */; };
 		EB56110929BCAF8B008359D0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EB56110829BCAF8B008359D0 /* Kingfisher */; };
 		EB56B25C29B20168007CFFB6 /* ObjectAdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */; };
 		EB59C82429AA81DA00B1507A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB59C82329AA81DA00B1507A /* RealmManager.swift */; };
@@ -103,7 +106,7 @@
 		E7463D372980512500A4C54F /* IngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewController.swift; sourceTree = "<group>"; };
 		EB018ECE29BDD333001FCC1F /* NumberTogleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTogleView.swift; sourceTree = "<group>"; };
 		EB019A2629BA5B2100274048 /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
-		EB05B08F29B39C75003FF24E /* RealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = galleyRecipe/NetworkManager/Models/RealmExtension.swift; sourceTree = SOURCE_ROOT; };
+		EB05B08F29B39C75003FF24E /* RealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = galleyRecipe/Extension/RealmExtension.swift; sourceTree = SOURCE_ROOT; };
 		EB05DC4E29D08981003DC8F4 /* InstructionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionTableViewCell.swift; sourceTree = "<group>"; };
 		EB0EA9C5298BEB6000C643C4 /* ChipsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsCollectionView.swift; sourceTree = "<group>"; };
 		EB14C96729AD39BD002590E5 /* RMFavoriteRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFavoriteRecipeModel.swift; sourceTree = "<group>"; };
@@ -112,8 +115,8 @@
 		EB206EDB29A8FA39007D626C /* RMChipsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMChipsModel.swift; sourceTree = "<group>"; };
 		EB24FBDB29B4FCB500A7BBED /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewExtension.swift; path = galleyRecipe/Modules/SearchModule/Presenter/UIViewExtension.swift; sourceTree = SOURCE_ROOT; };
 		EB26277029781728002B8924 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		EB262772297817FF002B8924 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = galleyRecipe/NetworkManager/NetworkService.swift; sourceTree = SOURCE_ROOT; };
-		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = galleyRecipe/Routing/Builder.swift; sourceTree = SOURCE_ROOT; };
+		EB262772297817FF002B8924 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = galleyRecipe/App/NetworkService/NetworkService.swift; sourceTree = SOURCE_ROOT; };
+		EB26277429782CDF002B8924 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = galleyRecipe/App/Routing/Builder.swift; sourceTree = SOURCE_ROOT; };
 		EB262776297868EA002B8924 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritePresenter.swift; path = "galleyRecipe/Modules/Favorites Module/Presenter/FavoritePresenter.swift"; sourceTree = SOURCE_ROOT; };
 		EB29D8182982A4EB00F5740E /* GradientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientViewController.swift; path = galleyRecipe/UI/Effects/GradientViewController.swift; sourceTree = SOURCE_ROOT; };
 		EB29F37D297E8064002F74BD /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -145,8 +148,11 @@
 		EB454ABE2999258C00ADD877 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IngredientsTableViewCell.swift; path = galleyRecipe/Modules/IngridientModule/View/IngredientsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EB4C6F7629CDC7CA00994AAC /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeInfoView.swift; path = galleyRecipe/Modules/IngridientModule/RecipeInfoView.swift; sourceTree = SOURCE_ROOT; };
 		EB4C6F7829CECB7700994AAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB55CCE529D3362F0068BB8B /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		EB55CCE729D336560068BB8B /* Autowired.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autowired.swift; sourceTree = "<group>"; };
+		EB55CCE929D336620068BB8B /* Lazywired.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lazywired.swift; sourceTree = "<group>"; };
 		EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAdapterProtocol.swift; sourceTree = "<group>"; };
-		EB59C82329AA81DA00B1507A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = galleyRecipe/DataManager/RealmManager.swift; sourceTree = SOURCE_ROOT; };
+		EB59C82329AA81DA00B1507A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = galleyRecipe/App/RealmService/RealmManager.swift; sourceTree = SOURCE_ROOT; };
 		EB5F3CA7297F206C00D516E1 /* LightBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBlurEffectView.swift; sourceTree = "<group>"; };
 		EB62A79A2986DF1900FD420C /* TimerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = "<group>"; };
 		EB62A79B2986DF1900FD420C /* TimerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +166,7 @@
 		EB65400229AD077300E07AC0 /* SearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		EB766636298BC5950044C492 /* ChipsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChipsCollectionViewCell.swift; path = galleyRecipe/UI/UIElements/ChipsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		EB7825E729B676FD00C1E0FF /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = "galleyRecipe/Modules/Favorites Module/View/UIViewControllerExtension.swift"; sourceTree = SOURCE_ROOT; };
-		EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRecipeModel.swift; path = galleyRecipe/NetworkManager/Models/DetailRecipeModel.swift; sourceTree = SOURCE_ROOT; };
+		EB890F59299CFB1B00D20131 /* DetailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRecipeModel.swift; path = galleyRecipe/App/NetworkService/Models/DetailRecipeModel.swift; sourceTree = SOURCE_ROOT; };
 		EB890F5B299CFB4100D20131 /* SearchRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeModel.swift; sourceTree = "<group>"; };
 		EBB480EC29A24A2A00ACD15E /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		EBB480EE29A2655600ACD15E /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
@@ -172,7 +178,7 @@
 		EBE07357299AABCD00F75826 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		EBE700F829C39EC90045DBD7 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeparatorView.swift; path = galleyRecipe/UI/UIElements/SeparatorView.swift; sourceTree = SOURCE_ROOT; };
 		EBE700FA29C3A9EC0045DBD7 /* InstructionIngredientSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionIngredientSwitcher.swift; sourceTree = "<group>"; };
-		EBFDB1FE297957A700CA0084 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = galleyRecipe/UI/Extension/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
+		EBFDB1FE297957A700CA0084 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = galleyRecipe/Extension/UIColorExtension.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,11 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				EB653FFC29AD057A00E07AC0 /* App */,
-				EB59C82229AA81B200B1507A /* DataManager */,
-				9EE1F66929858CEF006B5F28 /* NetworkManager */,
-				EB3899CC297BCE2100705344 /* Routing */,
 				EB653FFF29AD059F00E07AC0 /* Modules */,
 				EB3899D2297C031600705344 /* UI */,
+				EB3899D3297C031F00705344 /* Extension */,
 				EB653FFD29AD058900E07AC0 /* Sound */,
 				EB653FFE29AD059300E07AC0 /* Helper */,
 				9E7C2EFA296AF9F00006EECF /* Info.plist */,
@@ -221,7 +225,7 @@
 			path = galleyRecipe;
 			sourceTree = "<group>";
 		};
-		9EE1F66929858CEF006B5F28 /* NetworkManager */ = {
+		9EE1F66929858CEF006B5F28 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				EB262772297817FF002B8924 /* NetworkService.swift */,
@@ -232,7 +236,7 @@
 				EBB480F829A274B300ACD15E /* Requests */,
 				EB890F5D299CFB6600D20131 /* Models */,
 			);
-			path = NetworkManager;
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		EB0EA9C9298CF07F00C643C4 /* SearchModule */ = {
@@ -296,8 +300,8 @@
 		EB1BD5D3298961B7009EB706 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */,
 				EB1BD5D1298961B2009EB706 /* TimerPresenter.swift */,
+				EB1BD5CE29895A30009EB706 /* TimerListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -374,7 +378,6 @@
 			isa = PBXGroup;
 			children = (
 				EB766638298BC60A0044C492 /* Effects */,
-				EB3899D3297C031F00705344 /* Extension */,
 				EB766639298BC62D0044C492 /* UIElements */,
 				EB29F37C297E8064002F74BD /* Font */,
 				EB29F3A4297E80BB002F74BD /* ImageConstant.swift */,
@@ -400,13 +403,23 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		EB59C82229AA81B200B1507A /* DataManager */ = {
+		EB55CCEB29D3368B0068BB8B /* ServiceLocator */ = {
+			isa = PBXGroup;
+			children = (
+				EB55CCE529D3362F0068BB8B /* ServiceLocator.swift */,
+				EB55CCE729D336560068BB8B /* Autowired.swift */,
+				EB55CCE929D336620068BB8B /* Lazywired.swift */,
+			);
+			path = ServiceLocator;
+			sourceTree = "<group>";
+		};
+		EB59C82229AA81B200B1507A /* RealmService */ = {
 			isa = PBXGroup;
 			children = (
 				EB59C82329AA81DA00B1507A /* RealmManager.swift */,
 				EB653FFB29AD047800E07AC0 /* Models */,
 			);
-			path = DataManager;
+			path = RealmService;
 			sourceTree = "<group>";
 		};
 		EB62A7992986DF1900FD420C /* TimerModule */ = {
@@ -433,8 +446,10 @@
 			children = (
 				9E7C2EEC296AF9EF0006EECF /* AppDelegate.swift */,
 				9E7C2EEE296AF9EF0006EECF /* SceneDelegate.swift */,
-				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
-				EB4C6F7829CECB7700994AAC /* Assets.xcassets */,
+				9EE1F66929858CEF006B5F28 /* NetworkService */,
+				EB59C82229AA81B200B1507A /* RealmService */,
+				EB55CCEB29D3368B0068BB8B /* ServiceLocator */,
+				EB3899CC297BCE2100705344 /* Routing */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -450,6 +465,8 @@
 		EB653FFE29AD059300E07AC0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				9E7C2EF7296AF9F00006EECF /* LaunchScreen.storyboard */,
+				EB4C6F7829CECB7700994AAC /* Assets.xcassets */,
 				EB3995E729951DA400974218 /* TestingData.swift */,
 			);
 			path = Helper;
@@ -638,6 +655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB05DC4F29D08981003DC8F4 /* InstructionTableViewCell.swift in Sources */,
+				EB55CCE829D336560068BB8B /* Autowired.swift in Sources */,
 				EB890F5A299CFB1B00D20131 /* DetailRecipeModel.swift in Sources */,
 				E7463D382980512500A4C54F /* IngredientViewController.swift in Sources */,
 				EB62A79E2986DF1900FD420C /* TimerListViewController.swift in Sources */,
@@ -657,6 +675,7 @@
 				EB3E0786299FC864002DC891 /* MealCategorys.swift in Sources */,
 				EB62A79D2986DF1900FD420C /* TimerListCell.swift in Sources */,
 				EB26277529782CDF002B8924 /* Builder.swift in Sources */,
+				EB55CCE629D3362F0068BB8B /* ServiceLocator.swift in Sources */,
 				EB3899D0297BD9E000705344 /* CustomTabBarController.swift in Sources */,
 				EB890F5C299CFB4100D20131 /* SearchRecipeModel.swift in Sources */,
 				EBB480F329A2678500ACD15E /* ComplexSearchRequest.swift in Sources */,
@@ -680,6 +699,7 @@
 				EB653FF429AD037700E07AC0 /* UITableViewDelegateExtension.swift in Sources */,
 				EB454ABF2999258C00ADD877 /* IngredientsTableViewCell.swift in Sources */,
 				EB59C82429AA81DA00B1507A /* RealmManager.swift in Sources */,
+				EB55CCEA29D336620068BB8B /* Lazywired.swift in Sources */,
 				EBB480EF29A2655600ACD15E /* DataRequest.swift in Sources */,
 				EB29F3A6297E80BB002F74BD /* ImageConstant.swift in Sources */,
 				9E7C2F0E296B188C0006EECF /* FavoritesViewController.swift in Sources */,

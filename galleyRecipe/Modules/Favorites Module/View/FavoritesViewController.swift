@@ -24,7 +24,7 @@ final class FavoritesViewController: GradientViewController {
 
     // MARK: - UI ComponentsadvancedTableViewHeader
 
-    private lazy var textLabel: UILabel = {
+    private let textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.textColor = .textColor
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)
@@ -37,7 +37,7 @@ final class FavoritesViewController: GradientViewController {
         return textLabel
     }()
 
-    private lazy var characterLabel: UILabel = {
+    private let characterLabel: UILabel = {
         let characterLabel = UILabel()
         characterLabel.text = Localization.textLabelChar
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
@@ -55,7 +55,7 @@ final class FavoritesViewController: GradientViewController {
         return tableView
     }()
 
-    private lazy var searchBar: UISearchBar = {
+    private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.placeholder = Localization.placeholder
@@ -113,7 +113,7 @@ final class FavoritesViewController: GradientViewController {
         super.viewWillAppear(animated)
         if lastNumberOfRecipe == 0 {
             cellWillDisplayAction = true
-        } else if results.count == 0 || lastNumberOfRecipe != 0 {
+        } else if results.count == 0 {
             cellWillDisplayAction = true
         }
     }

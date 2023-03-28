@@ -124,7 +124,7 @@ final class RecipeInfoView: UIView {
 
         if let cal = calories {
             let caloriesView = UIView()
-            caloriesLabel.attributedText = attributedStringWithBold(for: (String(cal) + " cal"))
+            caloriesLabel.attributedText = attributedStringWithBold(for: (String(cal.rounded(toPlaces: 2)) + " cal"))
 
             stackView.addArrangedSubview(separator2)
             caloriesView.addSubview(caloriesLabel)

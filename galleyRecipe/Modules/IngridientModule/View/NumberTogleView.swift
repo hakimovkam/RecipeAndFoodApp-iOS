@@ -51,7 +51,7 @@ final class NumberTogleView: UIView {
         return button
     }()
 
-    private lazy var number: UILabel = {
+    private let number: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Bold", size: 48)
         label.textAlignment = .center
@@ -72,7 +72,7 @@ final class NumberTogleView: UIView {
     }
 
     @objc
-    func plusButtonDidPressed() {
+    private func plusButtonDidPressed() {
         servings += 1
         if servings == 1 {
             number.text = "\(servings)"
@@ -85,7 +85,7 @@ final class NumberTogleView: UIView {
     }
 
     @objc
-    func minusButtonDidPressed() {
+    private func minusButtonDidPressed() {
         if servings != 1 {
             servings -= 1
             if servings == 1 {

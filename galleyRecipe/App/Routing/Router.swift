@@ -33,9 +33,6 @@ final class Router: RouterProtocol {
     weak var rootController: UINavigationController?
     weak var tabBarController: CustomTabBarController?
 
-    private lazy var networkService: NetworkServiceProtocol = NetworkService()
-    private lazy var realmManager: RealmManagerProtocol = RealmManager()
-
     init(rootController: UINavigationController,
          builder: BuilderProtocol,
          favoriteViewController: UIViewController,
@@ -52,7 +49,7 @@ final class Router: RouterProtocol {
     }
 
     func showIngredients(id: Int?) {
-        let ingredientsViewController = builder.showIngredientsViewController(router: self, networkService: networkService, realmManager: realmManager, id: id)
+        let ingredientsViewController = builder.showIngredientsViewController(router: self, id: id)
         rootController?.pushViewController(ingredientsViewController, animated: true)
     }
 
@@ -63,14 +60,14 @@ final class Router: RouterProtocol {
     }
 
     func showTimer() {
-        let timerViewController = builder.showTimerViewController(router: self, networkService: networkService)
+        let timerViewController = builder.showTimerViewController(router: self)
         rootController?.pushViewController(timerViewController, animated: true)
     }
 
     func setupTabBarController() {
-        let favoriteView = builder.createFavoriteViewController(router: self, networkService: networkService, realmManager: realmManager)
-        let timerView = builder.createTimerListViewController(router: self, networkService: networkService)
-        let searchView = builder.createSearchViewController(router: self, networkService: networkService, realmManager: realmManager)
+        let favoriteView = builder.createFavoriteViewController(router: self)
+        let timerView = builder.createTimerListViewController(router: self)
+        let searchView = builder.createSearchViewController(router: self)
 
         /* добавляем Item на TabBar и задаём картиночку на иконку  */
         tabBarController?.setViewControllers([generateVC(viewController: favoriteView,

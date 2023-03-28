@@ -43,13 +43,13 @@ class SearchPresenter: SearchViewPresenterProtocol {
 
     weak var view: SearchViewProtocol?
     var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol
-    let realmManager: RealmManagerProtocol
+    @Autowired
+    private var networkService: NetworkServiceProtocol
+    @Autowired
+    private var realmManager: RealmManagerProtocol
 
-    required init(networkService: NetworkServiceProtocol, router: RouterProtocol, realmManager: RealmManagerProtocol) {
+    required init(router: RouterProtocol) {
         self.router = router
-        self.networkService = networkService
-        self.realmManager = realmManager
         getRecipes()
     }
 

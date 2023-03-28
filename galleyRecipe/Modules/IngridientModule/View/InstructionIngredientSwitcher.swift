@@ -31,14 +31,14 @@ final class InstructionIngredientSwitch: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private lazy var ingredientView: UIView = {
+    private let ingredientView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
     }()
 
-    private lazy var instructionView: UIView = {
+    private let instructionView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -67,7 +67,7 @@ final class InstructionIngredientSwitch: UIView {
         return button
     }()
 
-    private lazy var separator = SeparatorView()
+    private let separator = SeparatorView()
 
     @objc
     func ingredientButtonDidPressed() {

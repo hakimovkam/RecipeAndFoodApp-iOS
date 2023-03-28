@@ -16,6 +16,7 @@ protocol IngridientViewPresenterProtocol: AnyObject {
     func backButtonDidPressed()
     func saveDeleteFavoriteRecipe(recipe recipeForSaving: DetailRecipe)
     func checkRecipeInRealm(id: Int) -> Bool
+    func updateRecipeInfo(servings: Int, calorie: Double)
     var recipe: DetailRecipe? { get set }
 }
 
@@ -25,12 +26,12 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
     var router: RouterProtocol?
     var id: Int?
     var recipe: DetailRecipe?
-    let networkService: NetworkServiceProtocol
-    let realmManager: RealmManagerProtocol
+    @Autowired
+    var networkService: NetworkServiceProtocol
+    @Autowired
+    var realmManager: RealmManagerProtocol
 
-    required init(networkService: NetworkServiceProtocol, realmManager: RealmManagerProtocol, router: RouterProtocol, id: Int?) {
-        self.networkService = networkService
-        self.realmManager = realmManager
+    required init(router: RouterProtocol, id: Int?) {
         self.router = router
         self.id = id
         getRecipe(id: id)
@@ -76,5 +77,10 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
 
     func checkRecipeInRealm(id: Int) -> Bool {
         return realmManager.checkRecipeInRealmById(id: id)
+    }
+
+    func updateRecipeInfo(servings: Int, calorie: Double) {
+        guard let id = recipe?.id else { return }
+        realmManager.updateRecipeInfo(servings: servings, calorie: calorie, id: id)
     }
 }

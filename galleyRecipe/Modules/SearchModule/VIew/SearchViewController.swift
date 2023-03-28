@@ -65,7 +65,7 @@ final class SearchViewController: GradientViewController {
         return tableView
     }()
 
-    private lazy var headerLabel: UILabel = {
+    private let headerLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.text = Localization.headerLabelOnEmptyScreen
@@ -74,7 +74,7 @@ final class SearchViewController: GradientViewController {
         return label
     }()
 
-    private lazy var characterLabel: UILabel = {
+    private let characterLabel: UILabel = {
         let characterLabel = UILabel()
         characterLabel.text = Localization.textLabelChar
         characterLabel.font = UIFont(name: "Poppins-Bold", size: 100)
@@ -83,7 +83,7 @@ final class SearchViewController: GradientViewController {
         return characterLabel
     }()
 
-    private lazy var textLabel: UILabel = {
+    private let textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.textColor = .textColor
         textLabel.font = UIFont(name: "Poppins-Regular", size: 16)

@@ -36,7 +36,7 @@ class IngredientsTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    private lazy var foodNameLabel: UILabel = {
+    private let foodNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .customLightGray
         label.font = UIFont(name: "Poppins-Medium", size: 14)
@@ -46,11 +46,12 @@ class IngredientsTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private lazy var foodWeightLabel: UILabel = {
+    private let foodWeightLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .customLightGray
         label.font = UIFont(name: "Poppins-Light", size: 14)
@@ -113,6 +114,8 @@ class IngredientsTableViewCell: UITableViewCell {
             foodImage.widthAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
             foodImage.heightAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
             foodImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            foodImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .smallTopAndBottomInset),
+            contentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: .smallTopAndBottomInset),
             contentView.heightAnchor.constraint(greaterThanOrEqualTo: foodImage.heightAnchor, constant: .smallTopAndBottomInset * 2),
 
             foodNameLabel.leftAnchor.constraint(equalTo: foodImage.rightAnchor, constant: .ingredientsCellFoodNameLabelLeftAnchor),
