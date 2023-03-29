@@ -11,10 +11,8 @@ final class ChipsCollectionView: UICollectionView {
 
     private let chipsLayout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
-        let insertLeft: CGFloat = 16
-        let insertRight: CGFloat = 16
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: insertLeft, bottom: 0, right: insertRight)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: .mediemLeftRightInset, bottom: 0, right: .mediemLeftRightInset)
         return layout
     }()
 

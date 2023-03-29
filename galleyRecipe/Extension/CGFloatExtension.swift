@@ -29,6 +29,7 @@ extension CGFloat {
     static var timerLabelWidthAnchor: CGFloat { 60 }
     static var mediumHeightAnchor: CGFloat { 24 }
     static var smallLeftRightInset: CGFloat { 8 }
+    static var mediumLeftRightInset: CGFloat { 16 }
 
     static var blurViewWidthAnchoor: CGFloat { 40 }
     static var blurViewHeightAnchoor: CGFloat { 80 }

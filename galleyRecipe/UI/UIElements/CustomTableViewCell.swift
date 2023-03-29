@@ -186,13 +186,13 @@ extension CustomTableViewCell {
 
             contentView.bottomAnchor.constraint(equalTo: recipeDescriptionLabel.bottomAnchor, constant: .smallTopAndBottomInset),
             recipeDescriptionLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: .smallTopAndBottomInset),
-            recipeDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .smallLeftRightInset),
-            contentView.trailingAnchor.constraint(equalTo: recipeDescriptionLabel.trailingAnchor, constant: .smallLeftRightInset),
+            recipeDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .mediemLeftRightInset),
+            contentView.trailingAnchor.constraint(equalTo: recipeDescriptionLabel.trailingAnchor, constant: .mediemLeftRightInset),
 
             recipeDescriptionLabel.topAnchor.constraint(equalTo: foodImage.bottomAnchor, constant: .smallTopAndBottomInset),
             foodImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .smallTopAndBottomInset),
-            foodImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: .smallLeftRightInset),
-            contentView.rightAnchor.constraint(equalTo: foodImage.rightAnchor, constant: .smallLeftRightInset),
+            foodImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: .mediemLeftRightInset),
+            contentView.rightAnchor.constraint(equalTo: foodImage.rightAnchor, constant: .mediemLeftRightInset),
 
             additionalBlurView.widthAnchor.constraint(equalToConstant: .blurViewWidthAnchoor),
             additionalBlurView.heightAnchor.constraint(equalToConstant: .blurViewHeightAnchoor),
