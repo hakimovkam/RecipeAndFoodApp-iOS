@@ -36,6 +36,8 @@ final class NetworkService: NetworkServiceProtocol {
 
         urlComponent.queryItems = queryItems
 
+        print(urlComponent)
+
         guard let url = urlComponent.url else {
             return completion(.failure(.apiError))
         }

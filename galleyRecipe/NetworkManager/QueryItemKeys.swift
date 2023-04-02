@@ -10,4 +10,5 @@ import Foundation
 enum QueryItemKeys: String {
     case mealType = "query"
     case countryType = "cuisine"
+    case offset = "offset"
 }

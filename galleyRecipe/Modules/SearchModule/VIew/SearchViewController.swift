@@ -22,6 +22,9 @@ final class SearchViewController: GradientViewController {
     private var timer: Timer?
     private var searchBarRequestString: String = ""
     private var showEmptyTable = false
+    private var isFetchingData = false
+    private var startIsFetchingData = false
+    private var cellWillDisplayAction = false
 
     // MARK: - UI Components
     private let categoryCollectionView: ChipsCollectionView = {
@@ -142,6 +145,11 @@ final class SearchViewController: GradientViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startIsFetchingData = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -275,6 +283,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             categoryCollectionView.alpha = 1 - (scrollView.contentOffset.y * 0.02)
             countryCollectionView.alpha = 1 - (scrollView.contentOffset.y * 0.05)
         }
+
+        if startIsFetchingData {
+            if scrollView.contentOffset.y + scrollView.frame.size.height >= scrollView.contentSize.height && !isFetchingData {
+                isFetchingData = true
+                presenter.loadNewRecipes()
+            }
+        }
     }
 }
 // MARK: - ChipsCollectionViewDelegate&DataSource
@@ -363,6 +378,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchViewProtocol {
     func success() {
         showEmptyTable = false
+        isFetchingData = false
         tableView.reloadData()
 
         if presenter.recipes?.count != 0 {
@@ -381,7 +397,14 @@ extension SearchViewController: SearchViewProtocol {
     }
 
     func failure(error: Error) {
+        isFetchingData = false
         print(error.localizedDescription)
+    }
+
+    func loadNewRecipes(dataCount: Int, newDataCount: Int) {
+        let newIndexes = (dataCount)..<newDataCount
+        tableView.insertRows(at: newIndexes.map({ IndexPath(row: $0, section: 0) }), with: .fade)
+        isFetchingData = false
     }
 }
 // MARK: - set up UI
