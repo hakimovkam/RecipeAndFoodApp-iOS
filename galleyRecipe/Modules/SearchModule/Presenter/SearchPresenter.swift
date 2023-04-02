@@ -18,6 +18,7 @@ enum UpdateQueryItemsArray {
 protocol SearchViewProtocol: AnyObject {
     func success()
     func failure(error: Error)
+    func loadNewRecipes(dataCount: Int, newDataCount: Int)
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
@@ -32,10 +33,12 @@ protocol SearchViewPresenterProtocol: AnyObject {
     func saveOrDeleteFavoriteRecipe(id: Int)
     func checkRecipeInRealm(id: Int) -> Bool
     func checkCountryInRealm(country: String) -> Bool
+    func loadNewRecipes()
 
     var recipes: [SearchResult]? { get set }
     var totalResults: Int? { get set }
     var queryItems: [URLQueryItem] { get set }
+    var offset: Int { get set }
 
 }
 
@@ -62,6 +65,7 @@ class SearchPresenter: SearchViewPresenterProtocol {
 
     var recipes: [SearchResult]?
     var totalResults: Int?
+    var offset: Int = 0
 
     var queryItems: [URLQueryItem] = []
 
@@ -82,6 +86,15 @@ class SearchPresenter: SearchViewPresenterProtocol {
                 queryItem.value == itemValue
             })
         }
+
+        if key.rawValue != "offset" {
+            queryItems.removeAll(where: { queryItem in
+                queryItem.name == "offset"
+            })
+            recipes = nil
+            offset = 0
+        }
+
         getRecipes()
     }
 
@@ -93,13 +106,32 @@ class SearchPresenter: SearchViewPresenterProtocol {
                 switch result {
                 case .success(let recipes):
                     self.totalResults = recipes.totalResults
-                    self.recipes = recipes.results
-                    self.view?.success()
+                    if self.offset == recipes.offset && recipes.totalResults >= self.recipes?.count ?? 0 {
+                        if self.recipes != nil {
+                            let dataCount = self.recipes?.count ?? 0
+                            self.recipes?.append(contentsOf: recipes.results)
+                            self.view?.loadNewRecipes(dataCount: dataCount, newDataCount: dataCount + recipes.results.count)
+                        } else {
+                            self.recipes = recipes.results
+                            self.view?.success()
+                        }
+                        if self.recipes?.count ?? 0 <= recipes.totalResults {
+                            self.offset += recipes.number
+                        }
+                    }
                 case .failure(let error):
                     self.view?.failure(error: error)
                 }
             }
         }
+    }
+
+    func loadNewRecipes() {
+        queryItems.removeAll(where: { queryItem in
+            queryItem.name == "offset"
+        })
+        queryItems.append(URLQueryItem(name: "offset", value: String(offset)))
+        getRecipes()
     }
 
     // MARK: - realChipsManager

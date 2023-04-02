@@ -59,6 +59,5 @@ final class ChipsCollectionViewCell: UICollectionViewCell {
             label.layer.borderColor = UIColor.customBorderColor.cgColor
             label.textColor = .black
         }
-
     }
 }

@@ -19,7 +19,7 @@ final class FavoritesViewController: GradientViewController {
     private let presenter: FavoriteViewPresenterProtocol
     private lazy var results: Results<RealmFavoriteRecipe> = presenter.getFavoriteObjs()
     private var keyboardHeightConstraint: NSLayoutConstraint!
-    private var cellWillDisplayAction: Bool = false
+    private var cellWillDisplayAction = false
     private lazy var lastNumberOfRecipe = results.count
 
     // MARK: - UI ComponentsadvancedTableViewHeader
