@@ -151,8 +151,10 @@ final class IngredientsViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+
         tableView.register(IngredientsTableViewCell.self, forCellReuseIdentifier: IngredientsTableViewCell.identifier)
         tableView.register(InstructionTableViewCell.self, forCellReuseIdentifier: InstructionTableViewCell.identifier)
+
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600

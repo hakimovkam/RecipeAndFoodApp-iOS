@@ -46,7 +46,6 @@ class IngredientsTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -114,8 +113,6 @@ class IngredientsTableViewCell: UITableViewCell {
             foodImage.widthAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
             foodImage.heightAnchor.constraint(equalToConstant: .ingredientsCellcircleImageHeightAndWeigth),
             foodImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            foodImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .smallTopAndBottomInset),
-            contentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: .smallTopAndBottomInset),
             contentView.heightAnchor.constraint(greaterThanOrEqualTo: foodImage.heightAnchor, constant: .smallTopAndBottomInset * 2),
 
             foodNameLabel.leftAnchor.constraint(equalTo: foodImage.rightAnchor, constant: .ingredientsCellFoodNameLabelLeftAnchor),

@@ -23,7 +23,6 @@ final class TimerPresenter: TimerViewPresenterProtocol {
     var networkService: NetworkServiceProtocol
 
     required init(router: RouterProtocol) {
-//        self.networkService = networkService
         self.router = router
     }
 

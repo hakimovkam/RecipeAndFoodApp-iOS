@@ -76,13 +76,10 @@ extension TimerProgressView {
     }
 
     func changeStrokeColor(currentStep: Int, totalSteps: Int) {
-        let threeQuarter = totalSteps / 4 * 3
-        if currentStep <= threeQuarter {
-            progressLayer.strokeColor = UIColor.customGreen.cgColor
-        } else {
-            progressLayer.strokeColor =
-            UIColor.customRed.cgColor
-        }
+        let colorHue = 0.30 - (0.30 * CGFloat(currentStep) / CGFloat(totalSteps))
+        let colorSaturation = 0.6 + (0.4 * CGFloat(currentStep) / CGFloat(totalSteps))
+        let colorBrightness = 0.7 + (0.3 * CGFloat(currentStep) / CGFloat(totalSteps))
+        progressLayer.strokeColor = UIColor(hue: colorHue, saturation: colorSaturation, brightness: colorBrightness, alpha: 1).cgColor
     }
 
     func resetAnimation() {

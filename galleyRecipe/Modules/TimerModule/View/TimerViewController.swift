@@ -17,7 +17,7 @@ final class TimerViewController: GradientViewController {
     private var timer = Timer()
 
     private var totalTime: Double {
-        Double("5") ?? 0
+        Double("25") ?? 0
     }
 
     private let step = TimerConstants.step
@@ -211,26 +211,18 @@ extension TimerViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             backbutton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backbutton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .backButtonLeftAnchor)
-        ])
+            backbutton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .backButtonLeftAnchor),
 
-        NSLayoutConstraint.activate([
             dishNameLabel.topAnchor.constraint(equalTo: backbutton.bottomAnchor),
             dishNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: .backButtonLeftAnchor),
-            dishNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: .dishNameLabelRigthAnchor)
-        ])
+            dishNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: .dishNameLabelRigthAnchor),
 
-        NSLayoutConstraint.activate([
             timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+            timerButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
-        NSLayoutConstraint.activate([
             counterLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            counterLabel.bottomAnchor.constraint(equalTo: timerButton.topAnchor, constant: .counterLabelBottomAnchor)
-        ])
+            counterLabel.bottomAnchor.constraint(equalTo: timerButton.topAnchor, constant: .counterLabelBottomAnchor),
 
-        NSLayoutConstraint.activate([
             resetButton.topAnchor.constraint(equalTo: timerProgressView.bottomAnchor, constant: .resetButtonTopAnchor),
             resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])

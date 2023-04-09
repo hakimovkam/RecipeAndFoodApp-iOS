@@ -32,21 +32,11 @@ class InstructionTableViewCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .customGreen2
         view.layer.cornerRadius = .ingredientsCellcircleImageHeightAndWeigth / 2
-
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private lazy var stepDescriptionLabel: UILabel = {
+    private let stepDescriptionLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .customLightGray
         label.font = UIFont(name: "Poppins-Medium", size: 14)
