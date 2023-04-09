@@ -213,17 +213,19 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
             let favoriteButton = { [weak self] in
                 guard let self = self else { return }
-                self.presenter.saveOrDeleteFavoriteRecipe(id: model.id)
+                self.presenter.saveOrDeleteFavoriteRecipe(id: model.id, action: .fromFavorite)
                 cell.changeFavoriteButtonIcon(isFavorite: self.presenter.checkRecipeInRealm(id: model.id))
             }
 
-            let timerButotn = {
+            let timerButton = { [weak self] in
+                guard let self = self else { return }
+                presenter.saveOrDeleteFavoriteRecipe(id: model.id, action: .fromTimer)
             }
 
             cell.configure(recipeDescription: model.title,
                            imageUrlString: model.image,
                            favoriteButton: favoriteButton,
-                           timerButotn: timerButotn,
+                           timerButotn: timerButton,
                            isFavorite: presenter.checkRecipeInRealm(id: model.id))
 
             tableView.isScrollEnabled = true

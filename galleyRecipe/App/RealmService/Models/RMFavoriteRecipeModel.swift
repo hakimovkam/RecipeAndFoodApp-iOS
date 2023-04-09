@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class RealmFavoriteRecipe: Object {
+class RealmRecipe: Object {
     @objc dynamic var id = 0
     @objc dynamic var title = ""
     @objc dynamic var readyInMinutes = 0
@@ -19,6 +19,7 @@ class RealmFavoriteRecipe: Object {
     var instruction = List<RealmInstruction>()
 
     @objc dynamic var status = false
+    @objc dynamic var timerStatus = false
 
     override static func primaryKey() -> String? {
             return "id"

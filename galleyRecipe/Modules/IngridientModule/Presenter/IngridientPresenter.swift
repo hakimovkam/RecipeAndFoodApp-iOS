@@ -14,7 +14,7 @@ protocol IngridientViewProtocol: AnyObject {
 
 protocol IngridientViewPresenterProtocol: AnyObject {
     func backButtonDidPressed()
-    func saveDeleteFavoriteRecipe(recipe recipeForSaving: DetailRecipe)
+    func saveDeleteFavoriteRecipe(recipe recipeForSaving: DetailRecipe, action: RealmCRUDAction)
     func checkRecipeInRealm(id: Int) -> Bool
     func updateRecipeInfo(servings: Int, calorie: Double)
     var recipe: DetailRecipe? { get set }
@@ -71,12 +71,12 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
         }
     }
 
-    func saveDeleteFavoriteRecipe(recipe recipeForSaving: DetailRecipe) {
-        realmManager.changeFavoriteRecipeInRealm(recipe: recipeForSaving)
+    func saveDeleteFavoriteRecipe(recipe recipeForSaving: DetailRecipe, action: RealmCRUDAction) {
+        realmManager.changeFavoriteRecipeInRealm(recipe: recipeForSaving, action: action)
     }
 
     func checkRecipeInRealm(id: Int) -> Bool {
-        return realmManager.checkRecipeInRealmById(id: id)
+        return realmManager.checkFavoriteRecipeInRealmById(id: id)
     }
 
     func updateRecipeInfo(servings: Int, calorie: Double) {

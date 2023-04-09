@@ -17,7 +17,7 @@ final class FavoritesViewController: GradientViewController {
     }
 
     private let presenter: FavoriteViewPresenterProtocol
-    private lazy var results: Results<RealmFavoriteRecipe> = presenter.getFavoriteObjs()
+    private lazy var results: Results<RealmRecipe> = presenter.getFavoriteRecipes()
     private var keyboardHeightConstraint: NSLayoutConstraint!
     private var cellWillDisplayAction = false
     private lazy var lastNumberOfRecipe = results.count
@@ -183,11 +183,14 @@ extension FavoritesViewController: UITableViewDataSource {
 
         let favoriteButton = { [weak self] in
             guard let self = self else { return }
-            self.presenter.saveOrDeleteFavoriteRecipe(id: model.id)
-            self.checkRecipesCount(tableViewUpdateAction: true)
+            presenter.saveOrDeleteFavoriteRecipe(id: model.id, action: .fromFavorite)
+            checkRecipesCount(tableViewUpdateAction: true)
         }
 
-        let timerButton = {
+        let timerButton = { [weak self] in
+            guard let self = self else { return }
+            presenter.saveOrDeleteFavoriteRecipe(id: model.id, action: .fromTimer)
+            checkRecipesCount(tableViewUpdateAction: true)
         }
 
         cell.configure(recipeDescription: model.title, imageUrlString: model.image, favoriteButton: favoriteButton, timerButotn: timerButton, isFavorite: true)
@@ -239,7 +242,7 @@ extension FavoritesViewController: UITableViewDelegate {
 extension FavoritesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
-            results = presenter.getFavoriteObjs()
+            results = presenter.getFavoriteRecipes()
             checkRecipesCount(tableViewUpdateAction: false)
         } else {
             let result = presenter.getResultsByRequestFromSearchBar(request: searchText)

@@ -21,7 +21,7 @@ struct DetailRecipe: Decodable {
 }
 
 extension DetailRecipe: ObjectAdapterProtocol {
-    public init(managedObject: RealmFavoriteRecipe) {
+    public init(managedObject: RealmRecipe) {
         id = managedObject.id
         title = managedObject.title
         readyInMinutes = managedObject.readyInMinutes
@@ -46,8 +46,8 @@ extension DetailRecipe: ObjectAdapterProtocol {
         }()
     }
 
-    public func managedObject() -> RealmFavoriteRecipe {
-        let recipe = RealmFavoriteRecipe()
+    public func managedObject() -> RealmRecipe {
+        let recipe = RealmRecipe()
         recipe.id = id
         recipe.title = title
         recipe.readyInMinutes = readyInMinutes

@@ -67,18 +67,15 @@ class IngredientsTableViewCell: UITableViewCell {
     }()
 
     func configure(imageUrl: String, foodName: String, foodWeight: String) {
-        foodImage.kf.setImage(with: URL(string: "https://spoonacular.com/cdn/ingredients_100x100/\(imageUrl)"), options: [.transition(.fade(0.3))], completionHandler: { [weak self] _ in
-            guard let self = self else { return }
-            self.foodImage.isShimmering = false
-        })
+        foodImage.kf.setImage(with: URL(string: "https://spoonacular.com/cdn/ingredients_100x100/\(imageUrl)"))
 
         foodNameLabel.text = foodName
         foodWeightLabel.text = foodWeight
 
         foodWeightLabel.backgroundColor = .clear
-        foodWeightLabel.isShimmering = false
+//        foodWeightLabel.isShimmering = false
         foodNameLabel.backgroundColor = .clear
-        foodNameLabel.isShimmering = false
+//        foodNameLabel.isShimmering = false
 
         setNeedsLayout()
         layoutIfNeeded()
@@ -92,9 +89,9 @@ class IngredientsTableViewCell: UITableViewCell {
         foodNameLabel.backgroundColor = .customLightGray
         foodWeightLabel.backgroundColor = .customLightGray
 
-        foodImage.isShimmering = true
-        foodNameLabel.isShimmering = true
-        foodWeightLabel.isShimmering = true
+//        foodImage.isShimmering = true
+//        foodNameLabel.isShimmering = true
+//        foodWeightLabel.isShimmering = true
     }
 
     override func prepareForReuse() {

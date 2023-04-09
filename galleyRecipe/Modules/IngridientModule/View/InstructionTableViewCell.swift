@@ -57,8 +57,8 @@ class InstructionTableViewCell: UITableViewCell {
         numberLabel.textColor = .white
         stepDescriptionLabel.backgroundColor = .clear
         numberView.backgroundColor = .customGreen2
-        numberView.isShimmering = false
-        stepDescriptionLabel.isShimmering = false
+//        numberView.isShimmering = false
+//        stepDescriptionLabel.isShimmering = false
     }
 
     func configureEmptyCell() {
@@ -66,8 +66,8 @@ class InstructionTableViewCell: UITableViewCell {
         stepDescriptionLabel.text = .emptyString2
         stepDescriptionLabel.backgroundColor = .customLightGray
 
-        numberView.isShimmering = true
-        stepDescriptionLabel.isShimmering = true
+//        numberView.isShimmering = true
+//        stepDescriptionLabel.isShimmering = true
     }
 
     override func prepareForReuse() {

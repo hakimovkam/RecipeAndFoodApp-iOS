@@ -16,9 +16,9 @@ protocol FavoriteViewProtocol: AnyObject {
 protocol FavoriteViewPresenterProtocol: AnyObject {
     func didTapOnRecipe(recipe: DetailRecipe)
     func checkRecipeInRealm(id: Int) -> Bool
-    func getFavoriteObjs() -> Results<RealmFavoriteRecipe>
-    func saveOrDeleteFavoriteRecipe(id: Int)
-    func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmFavoriteRecipe>
+    func getFavoriteRecipes() -> Results<RealmRecipe>
+    func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction)
+    func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmRecipe>
     var recipes: [SearchResult]? { get set }
 }
 
@@ -41,16 +41,18 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
         router?.showIngredients(id: recipe.id)
     }
 
-    func saveOrDeleteFavoriteRecipe(id: Int) {
-        guard let recipe = realmManager.getFavoriteRecipesInRealm().realm?.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) else { return }
-        realmManager.changeFavoriteRecipeInRealm(recipe: DetailRecipe(managedObject: recipe))
+    func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction) {
+        guard let recipe = realmManager.getFavoriteRecipesInRealm().realm?.object(ofType: RealmRecipe.self, forPrimaryKey: id) else { return }
+        realmManager.changeFavoriteRecipeInRealm(recipe: DetailRecipe(managedObject: recipe), action: action)
     }
 
-    func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkRecipeInRealmById(id: id)}
+    func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkFavoriteRecipeInRealmById(id: id)}
 
-    func getFavoriteObjs() -> Results<RealmFavoriteRecipe> { return realmManager.getFavoriteRecipesInRealm() }
+    func getFavoriteRecipes() -> Results<RealmRecipe> {
+        return realmManager.getFavoriteRecipesInRealm().filter("status == true")
+    }
 
-    func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmFavoriteRecipe> {
+    func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmRecipe> {
         let recipes = realmManager.getFavoriteRecipesInRealm()
 
         guard let request = request else {

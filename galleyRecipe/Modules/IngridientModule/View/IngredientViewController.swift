@@ -214,7 +214,7 @@ final class IngredientsViewController: UIViewController {
     private func favoriteButtonTapped() {
         favoriteButton.isSelected = !favoriteButton.isSelected
         guard let recipe = presenter.recipe else { return }
-        presenter.saveDeleteFavoriteRecipe(recipe: recipe)
+        presenter.saveDeleteFavoriteRecipe(recipe: recipe, action: .fromFavorite)
     }
 
     @objc
@@ -235,9 +235,9 @@ final class IngredientsViewController: UIViewController {
             return 10
         } else {
             if tableViewToggle {
-                return presenter.recipe?.extendedIngredients.count ?? 0
+                return presenter.recipe?.extendedIngredients.count ?? 25
             } else {
-                return presenter.recipe?.analyzedInstructions[0].steps.count ?? 0
+                return presenter.recipe?.analyzedInstructions[0].steps.count ?? 25
             }
         }
     }

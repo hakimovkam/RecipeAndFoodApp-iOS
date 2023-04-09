@@ -7,7 +7,6 @@
 
 import Foundation
 import RealmSwift
-import Kingfisher
 
 enum UpdateQueryItemsArray {
     case update
@@ -30,7 +29,7 @@ protocol SearchViewPresenterProtocol: AnyObject {
     func updateMealItem(indexPath: Int)
     func updateCuisineItem(indexPath: Int)
     func updateQueryItems(key: QueryItemKeys, itemValue: String, oldItemValue: String?, action: UpdateQueryItemsArray)
-    func saveOrDeleteFavoriteRecipe(id: Int)
+    func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction)
     func checkRecipeInRealm(id: Int) -> Bool
     func checkCountryInRealm(country: String) -> Bool
     func loadNewRecipes()
@@ -146,14 +145,14 @@ class SearchPresenter: SearchViewPresenterProtocol {
     func updateCuisineItem(indexPath: Int) { realmManager.updateCuisineType(indexPath: indexPath)}
 
     // MARK: - realFavoriteManager
-    func saveOrDeleteFavoriteRecipe(id: Int) {
+    func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction) {
         let request = DetailResipeRequest(id: id, requestType: .detailed)
         networkService.request(request) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recipe):
-                    self.realmManager.changeFavoriteRecipeInRealm(recipe: recipe)
+                    self.realmManager.changeFavoriteRecipeInRealm(recipe: recipe, action: action)
                 case .failure(let error):
                     self.view?.failure(error: error)
                 }
@@ -163,7 +162,7 @@ class SearchPresenter: SearchViewPresenterProtocol {
     }
 
     func checkRecipeInRealm(id: Int) -> Bool {
-        return realmManager.checkRecipeInRealmById(id: id)
+        return realmManager.checkFavoriteRecipeInRealmById(id: id)
     }
 
     func checkCountryInRealm(country: String) -> Bool { return realmManager.checkCountryInRealm(country: country) }

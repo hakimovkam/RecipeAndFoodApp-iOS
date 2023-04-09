@@ -8,19 +8,24 @@
 import Foundation
 import RealmSwift
 
+enum RealmCRUDAction {
+    case fromTimer
+    case fromFavorite
+}
+
 protocol RealmManagerProtocol {
     var mealTypeItems: Results<RealmChipsMealType>! { get set }
     var cuisineTypeItems: Results<RealmChipsCuisineType>! { get set }
-    var recipes: Results<RealmFavoriteRecipe>! { get set }
+    var recipes: Results<RealmRecipe>! { get set }
 
     func setDefaultValueForChips()
     func getMealTypeItems() -> Results<RealmChipsMealType>
     func getCuisineTypeItems() -> Results<RealmChipsCuisineType>
     func updateCuisineType(indexPath: Int)
     func updateMealTypeItem(indexPath: Int)
-    func changeFavoriteRecipeInRealm(recipe: DetailRecipe)
-    func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe>
-    func checkRecipeInRealmById(id: Int) -> Bool
+    func changeFavoriteRecipeInRealm(recipe: DetailRecipe, action: RealmCRUDAction)
+    func getFavoriteRecipesInRealm() -> Results<RealmRecipe>
+    func checkFavoriteRecipeInRealmById(id: Int) -> Bool
     func checkCountryInRealm(country: String) -> Bool
     func getFavoriteRecipeInRealm(id: Int) -> DetailRecipe?
     func updateRecipeInfo(servings: Int, calorie: Double, id: Int)
@@ -33,7 +38,7 @@ final class RealmManager: RealmManagerProtocol {
     init() {
         mealTypeItems = realm.objects(RealmChipsMealType.self)
         cuisineTypeItems = realm.objects(RealmChipsCuisineType.self)
-        recipes = realm.objects(RealmFavoriteRecipe.self)
+        recipes = realm.objects(RealmRecipe.self)
 
         setDefaultValueForChips()
 
@@ -41,9 +46,9 @@ final class RealmManager: RealmManagerProtocol {
     }
 
 // MARK: - favorite recipes manager
-    var recipes: Results<RealmFavoriteRecipe>!
+    var recipes: Results<RealmRecipe>!
 
-    func getFavoriteRecipesInRealm() -> Results<RealmFavoriteRecipe> { return recipes }
+    func getFavoriteRecipesInRealm() -> Results<RealmRecipe> { return recipes }
 
     func getFavoriteRecipeInRealm(id: Int) -> DetailRecipe? {
         if let recipe = recipes.filter("id == \(id)").first {
@@ -53,23 +58,37 @@ final class RealmManager: RealmManagerProtocol {
         }
     }
 
-    func checkRecipeInRealmById(id: Int) -> Bool {
-        if realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) != nil {
-            return true
+    func checkFavoriteRecipeInRealmById(id: Int) -> Bool {
+        if let recipe = realm.object(ofType: RealmRecipe.self, forPrimaryKey: id) {
+            return recipe.status
         }
         return false
     }
 
-    func changeFavoriteRecipeInRealm(recipe: DetailRecipe) {
-        if let obj = realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: recipe.id) {
+    func changeFavoriteRecipeInRealm(recipe: DetailRecipe, action: RealmCRUDAction) {
+
+        if let obj = realm.object(ofType: RealmRecipe.self, forPrimaryKey: recipe.id) {
 
             try! realm.write { // swiftlint:disable:this force_try
-                realm.delete(obj)
+                if action == .fromFavorite {
+                    obj.status = !obj.status
+                } else if action == .fromTimer {
+                    obj.timerStatus = !obj.timerStatus
+                }
+
+                if obj.status == false && obj.timerStatus == false {
+                    realm.delete(obj)
+                }
             }
         } else {
             let realmRecipe = recipe.managedObject()
             try! realm.write { // swiftlint:disable:this force_try
                 realm.add(realmRecipe)
+                if action == .fromFavorite {
+                    realmRecipe.status = true
+                } else if action == .fromTimer {
+                    realmRecipe.timerStatus = true
+                }
             }
         }
     }
@@ -81,7 +100,7 @@ final class RealmManager: RealmManagerProtocol {
 
         realm.beginWrite()
 
-        if let recipe = realm.object(ofType: RealmFavoriteRecipe.self, forPrimaryKey: id) {
+        if let recipe = realm.object(ofType: RealmRecipe.self, forPrimaryKey: id) {
             recipe.servings = servings
             recipe.nutrition.nutrients[0].amount = calorie
         }

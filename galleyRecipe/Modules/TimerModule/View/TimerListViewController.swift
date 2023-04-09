@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class TimerListViewController: GradientViewController {
     enum Localization {
@@ -16,10 +17,9 @@ final class TimerListViewController: GradientViewController {
     }
 
     private let presenter: TimerListViewPresenterProtocol
-
-    var testingData = TestingData().data
-    let testingTimer = TestingData().timer
-    let testingDescription = TestingData().recipeDescription
+    private lazy var results: Results<RealmRecipe> = presenter.getTimerRecipes()
+    private lazy var lastNumberOfRecipe = results.count
+    private var cellWillDisplayAction = false
 
     // MARK: - UI Components
     private let headerLabel: UILabel = {
@@ -83,34 +83,83 @@ final class TimerListViewController: GradientViewController {
         tableView.delegate = self
 
         setLayot()
+
         characterLabel.alpha = 0
         textLabel.alpha = 0
+
+        cellWillDisplayAction = true
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkRecipesCount(tableViewUpdateAction: false)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.cellWillDisplayAction = false
+        }
+    }
+    // MARK: - results manager
+    func checkRecipesCount(tableViewUpdateAction: Bool) {
+        if !results.isEmpty {
+            tableView.isScrollEnabled = true
+            UIView.animate(withDuration: 0.1) {
+                self.characterLabel.alpha = 0
+                self.textLabel.alpha = 0
+            }
+        } else {
+            tableView.isScrollEnabled = false
+            UIView.animate(withDuration: 0.1) {
+                self.characterLabel.alpha = 1
+                self.textLabel.alpha = 1
+            }
+        }
+
+        if tableViewUpdateAction {
+            tableView.beginUpdates()
+            tableView.reloadSections(.init(integer: 0), with: .automatic)
+            tableView.endUpdates()
+        } else {
+            tableView.reloadData()
+        }
     }
 }
 // MARK: - TableViewDelegate & TableViewDataSource
-extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { testingData.count }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter.didTapOnTimer()
-    }
+extension TimerListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return results.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TimerListCell.identifier, for: indexPath) as? TimerListCell else { return UITableViewCell() }
 
-        cell.configure(foodImageName: ImageConstant.cookImage, timer: testingTimer, descriptionLabelText: testingDescription)
+        let model = results[indexPath.row]
+        cell.selectionStyle = .none
+
+        cell.configure(imageUrlString: model.image, timer: model.readyInMinutes, descriptionLabelText: model.title)
         cell.layer.addBorder(edge: UIRectEdge.bottom, color: .textColor, thickness: 0.5, offset: 16)
         return cell
+    }
+}
+
+extension TimerListViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter.saveOrDeleteFavoriteRecipe(id: results[indexPath.row].id, action: .fromTimer)
+            checkRecipesCount(tableViewUpdateAction: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         var text = "There are no timers here yet"
 
-        if testingData.count == 1 {
-            text = "You have \(testingData.count) timer"
-        } else if testingData.count > 1 {
-            text = "You have \(testingData.count) timers"
+        if results.count == 1 {
+            text = "You have \(results.count) timer"
+        } else if results.count > 1 {
+            text = "You have \(results.count) timers"
         }
         let headerView: UIView = setTableViewHeader(width: tableView.frame.width,
                                                     height: .tableViewHeader,
@@ -121,6 +170,10 @@ extension TimerListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return .timerTableViewCellHeigh }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return .tableViewHeader }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.didTapOnTimer()
+    }
 }
 // MARK: - ViewProtocol
 extension TimerListViewController: TimerListViewProtocol {

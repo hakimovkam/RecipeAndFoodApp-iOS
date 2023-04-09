@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TimerListCell: UITableViewCell {
 
@@ -65,9 +66,9 @@ class TimerListCell: UITableViewCell {
         return label
     }()
 
-    func configure(foodImageName: String, timer: String, descriptionLabelText: String) {
-        foodImage.image = UIImage(named: foodImageName)
-        timerLabel.text =  timer
+    func configure(imageUrlString: String, timer: Int, descriptionLabelText: String) {
+        foodImage.kf.setImage(with: URL(string: imageUrlString))
+        timerLabel.text =  "\(timer):00"
         descriptionLabel.text = descriptionLabelText
     }
 }

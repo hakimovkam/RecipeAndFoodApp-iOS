@@ -417,6 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				EB59C82329AA81DA00B1507A /* RealmManager.swift */,
+				EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */,
 				EB653FFB29AD047800E07AC0 /* Models */,
 			);
 			path = RealmService;
@@ -434,9 +435,8 @@
 		EB653FFB29AD047800E07AC0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EB206EDB29A8FA39007D626C /* RMChipsModel.swift */,
 				EB14C96729AD39BD002590E5 /* RMFavoriteRecipeModel.swift */,
-				EB56B25B29B20168007CFFB6 /* ObjectAdapterProtocol.swift */,
+				EB206EDB29A8FA39007D626C /* RMChipsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
