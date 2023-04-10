@@ -20,7 +20,7 @@ protocol RouterProtocol: RouterMain {
     func setupTabBarController()
     func showIngredients(id: Int?)
     func goBackToRootView()
-    func showTimer()
+    func showTimer(id: Int)
 }
 
 final class Router: RouterProtocol {
@@ -59,8 +59,8 @@ final class Router: RouterProtocol {
         }
     }
 
-    func showTimer() {
-        let timerViewController = builder.showTimerViewController(router: self)
+    func showTimer(id: Int) {
+        let timerViewController = builder.showTimerViewController(router: self, id: id)
         rootController?.pushViewController(timerViewController, animated: true)
     }
 

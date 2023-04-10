@@ -13,7 +13,7 @@ protocol TimerListViewProtocol: AnyObject {
 }
 
 protocol TimerListViewPresenterProtocol: AnyObject {
-    func didTapOnTimer()
+    func didTapOnTimer(id: Int)
     func getTimerRecipes() -> Results<RealmRecipe>
     func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction)
 
@@ -35,8 +35,8 @@ final class TimerListPresenter: TimerListViewPresenterProtocol {
 
     var recipes: [SearchResult]?
 
-    func didTapOnTimer() {
-        router?.showTimer()
+    func didTapOnTimer(id: Int) {
+        router?.showTimer(id: id)
     }
 
     func getTimerRecipes() -> Results<RealmRecipe> {

@@ -9,16 +9,11 @@ import UIKit
 
 final class TimerViewController: GradientViewController {
 
-    let testingData = TestingData()
-
     private let presenter: TimerViewPresenterProtocol
 
     private var audioPlayer: AVAudioPlayer?
     private var timer = Timer()
-
-    private var totalTime: Double {
-        Double("25") ?? 0
-    }
+    private lazy var totalTime: Double = Double(presenter.recipe?.readyInMinutes ?? 0) * 60
 
     private let step = TimerConstants.step
     private lazy var timeRemains = totalTime
@@ -48,7 +43,7 @@ final class TimerViewController: GradientViewController {
         label.numberOfLines = .zero
         label.font = UIFont(name: .poppinsRegular, size: .buttonFontSixe)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = testingData.recipeDescription
+        label.text = presenter.recipe?.title ?? ""
         return label
     }()
 

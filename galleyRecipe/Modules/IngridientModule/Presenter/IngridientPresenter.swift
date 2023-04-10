@@ -61,7 +61,7 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
     func getRecipe(id: Int?) {
         if let recipeId  = id {
             if checkRecipeInRealm(id: recipeId) {
-                recipe = realmManager.getFavoriteRecipeInRealm(id: recipeId)
+                recipe = realmManager.getRecipeByIdFromRealm(id: recipeId)
                 DispatchQueue.main.async {
                     self.view?.setDataToView(recipe: self.recipe)
                 }

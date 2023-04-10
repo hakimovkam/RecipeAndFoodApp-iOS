@@ -11,7 +11,7 @@ protocol BuilderProtocol {
     func createFavoriteViewController(router: RouterProtocol) -> UIViewController
     func showIngredientsViewController(router: RouterProtocol, id: Int?) -> UIViewController
     func createTimerListViewController(router: RouterProtocol) -> UIViewController
-    func showTimerViewController(router: RouterProtocol) -> UIViewController
+    func showTimerViewController(router: RouterProtocol, id: Int) -> UIViewController
     func createSearchViewController(router: RouterProtocol) -> UIViewController
 }
 
@@ -40,8 +40,8 @@ struct Builder: BuilderProtocol {
         return view
     }
 
-    func showTimerViewController(router: RouterProtocol) -> UIViewController {
-        let presenter = TimerPresenter(router: router)
+    func showTimerViewController(router: RouterProtocol, id: Int) -> UIViewController {
+        let presenter = TimerPresenter(router: router, id: id)
         let view = TimerViewController(presenter: presenter)
 
         presenter.view = view

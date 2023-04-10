@@ -172,7 +172,8 @@ extension TimerListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { return .tableViewHeader }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.didTapOnTimer()
+        let id = results[indexPath.row].id
+        presenter.didTapOnTimer(id: id)
     }
 }
 // MARK: - ViewProtocol
