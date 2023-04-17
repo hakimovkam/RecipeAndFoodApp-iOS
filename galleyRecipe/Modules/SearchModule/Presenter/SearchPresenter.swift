@@ -152,7 +152,7 @@ class SearchPresenter: SearchViewPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recipe):
-                    self.realmManager.changeFavoriteRecipeInRealm(recipe: recipe, action: action)
+                    self.realmManager.recipeRealmInteraction(recipe: recipe, action: action)
                 case .failure(let error):
                     self.view?.failure(error: error)
                 }

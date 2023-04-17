@@ -43,13 +43,13 @@ final class FavoritePresenter: FavoriteViewPresenterProtocol {
 
     func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction) {
         guard let recipe = realmManager.getFavoriteRecipesInRealm().realm?.object(ofType: RealmRecipe.self, forPrimaryKey: id) else { return }
-        realmManager.changeFavoriteRecipeInRealm(recipe: DetailRecipe(managedObject: recipe), action: action)
+        realmManager.recipeRealmInteraction(recipe: DetailRecipe(managedObject: recipe), action: action)
     }
 
     func checkRecipeInRealm(id: Int) -> Bool { return realmManager.checkFavoriteRecipeInRealmById(id: id)}
 
     func getFavoriteRecipes() -> Results<RealmRecipe> {
-        return realmManager.getFavoriteRecipesInRealm().filter("status == true")
+        return realmManager.getFavoriteRecipesInRealm().filter("isRecipeFavorite == true")
     }
 
     func getResultsByRequestFromSearchBar(request: String?) -> Results<RealmRecipe> {

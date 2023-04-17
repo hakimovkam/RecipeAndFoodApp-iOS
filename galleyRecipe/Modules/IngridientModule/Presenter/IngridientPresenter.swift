@@ -72,7 +72,7 @@ final class IngridientPresenter: IngridientViewPresenterProtocol {
     }
 
     func saveDeleteFavoriteRecipe(recipe recipeForSaving: DetailRecipe, action: RealmCRUDAction) {
-        realmManager.changeFavoriteRecipeInRealm(recipe: recipeForSaving, action: action)
+        realmManager.recipeRealmInteraction(recipe: recipeForSaving, action: action)
     }
 
     func checkRecipeInRealm(id: Int) -> Bool {

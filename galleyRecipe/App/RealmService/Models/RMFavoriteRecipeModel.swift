@@ -18,8 +18,9 @@ class RealmRecipe: Object {
     var ingredients = List<RealmIngredients>()
     var instruction = List<RealmInstruction>()
 
-    @objc dynamic var status = false
-    @objc dynamic var timerStatus = false
+    @objc dynamic var isRecipeFavorite = false
+    @objc dynamic var isRecipeInTimerList = false
+    @objc dynamic var isTimerStarted = false
 
     override static func primaryKey() -> String? {
             return "id"

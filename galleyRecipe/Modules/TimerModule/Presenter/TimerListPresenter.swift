@@ -40,11 +40,11 @@ final class TimerListPresenter: TimerListViewPresenterProtocol {
     }
 
     func getTimerRecipes() -> Results<RealmRecipe> {
-        return realmManager.getFavoriteRecipesInRealm().filter("timerStatus == true")
+        return realmManager.getFavoriteRecipesInRealm().filter("isRecipeInTimerList == true")
     }
 
     func saveOrDeleteFavoriteRecipe(id: Int, action: RealmCRUDAction) {
         guard let recipe = realmManager.getFavoriteRecipesInRealm().realm?.object(ofType: RealmRecipe.self, forPrimaryKey: id) else { return }
-        realmManager.changeFavoriteRecipeInRealm(recipe: DetailRecipe(managedObject: recipe), action: action)
+        realmManager.recipeRealmInteraction(recipe: DetailRecipe(managedObject: recipe), action: action)
     }
 }

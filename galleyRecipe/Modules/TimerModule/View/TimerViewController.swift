@@ -19,7 +19,7 @@ final class TimerViewController: GradientViewController {
     private lazy var timeRemains = totalTime
     private var currentStep = TimerConstants.currentStep
 
-    private var isTimerStarted = false
+    private lazy var isTimerStarted = false
 
     private var totalSteps: Int {
         Int(totalTime / step)
@@ -106,7 +106,17 @@ final class TimerViewController: GradientViewController {
         timerProgressView.center = self.view.center
         setupSubviews(resetButton, counterLabel, timerProgressView,
                       timerButton, dishNameLabel, backbutton)
+        
+        isTimerStarted = presenter.getTimerStatus()
         setConstraints()
+        print("view Did Load \(isTimerStarted)")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter.updateTimerStatus(timerStatus: isTimerStarted)
+        
+        print("view will Disappear \(isTimerStarted)")
     }
 
     @objc private func tapBackButton() {

@@ -23,12 +23,14 @@ protocol RealmManagerProtocol {
     func getCuisineTypeItems() -> Results<RealmChipsCuisineType>
     func updateCuisineType(indexPath: Int)
     func updateMealTypeItem(indexPath: Int)
-    func changeFavoriteRecipeInRealm(recipe: DetailRecipe, action: RealmCRUDAction)
+    func recipeRealmInteraction(recipe: DetailRecipe, action: RealmCRUDAction)
     func getFavoriteRecipesInRealm() -> Results<RealmRecipe>
     func checkFavoriteRecipeInRealmById(id: Int) -> Bool
     func checkCountryInRealm(country: String) -> Bool
     func getRecipeByIdFromRealm(id: Int) -> DetailRecipe?
     func updateRecipeInfo(servings: Int, calorie: Double, id: Int)
+    func updateTimerStatus(id: Int, timerStatus: Bool)
+    func getTimerStatus(id: Int) -> Bool
 }
 
 final class RealmManager: RealmManagerProtocol {
@@ -41,7 +43,6 @@ final class RealmManager: RealmManagerProtocol {
         recipes = realm.objects(RealmRecipe.self)
 
         setDefaultValueForChips()
-
         resetChips()
     }
 
@@ -60,23 +61,23 @@ final class RealmManager: RealmManagerProtocol {
 
     func checkFavoriteRecipeInRealmById(id: Int) -> Bool {
         if let recipe = realm.object(ofType: RealmRecipe.self, forPrimaryKey: id) {
-            return recipe.status
+            return recipe.isRecipeFavorite
         }
         return false
     }
 
-    func changeFavoriteRecipeInRealm(recipe: DetailRecipe, action: RealmCRUDAction) {
+    func recipeRealmInteraction(recipe: DetailRecipe, action: RealmCRUDAction) {
 
         if let obj = realm.object(ofType: RealmRecipe.self, forPrimaryKey: recipe.id) {
 
             try! realm.write { // swiftlint:disable:this force_try
                 if action == .fromFavorite {
-                    obj.status = !obj.status
+                    obj.isRecipeFavorite = !obj.isRecipeFavorite
                 } else if action == .fromTimer {
-                    obj.timerStatus = !obj.timerStatus
+                    obj.isRecipeInTimerList = !obj.isRecipeInTimerList
                 }
 
-                if obj.status == false && obj.timerStatus == false {
+                if obj.isRecipeFavorite == false && obj.isRecipeInTimerList == false {
                     realm.delete(obj)
                 }
             }
@@ -85,27 +86,38 @@ final class RealmManager: RealmManagerProtocol {
             try! realm.write { // swiftlint:disable:this force_try
                 realm.add(realmRecipe)
                 if action == .fromFavorite {
-                    realmRecipe.status = true
+                    realmRecipe.isRecipeFavorite = true
                 } else if action == .fromTimer {
-                    realmRecipe.timerStatus = true
+                    realmRecipe.isRecipeInTimerList = true
                 }
             }
         }
     }
 
     func updateRecipeInfo(servings: Int, calorie: Double, id: Int) {
-        guard let realm = try? Realm() else {
-            return
-        }
+        guard let realm = try? Realm() else { return }
 
         realm.beginWrite()
-
         if let recipe = realm.object(ofType: RealmRecipe.self, forPrimaryKey: id) {
             recipe.servings = servings
             recipe.nutrition.nutrients[0].amount = calorie
         }
-
         try? realm.commitWrite()
+    }
+    
+    func updateTimerStatus(id: Int, timerStatus: Bool) {
+        try! realm.write { // swiftlint:disable:this force_try
+            if let recipe = realm.object(ofType: RealmRecipe.self, forPrimaryKey: id) {
+                recipe.isTimerStarted = timerStatus
+            }
+        }
+    }
+    
+    func getTimerStatus(id: Int) -> Bool {
+        if let obj = realm.object(ofType: RealmRecipe.self, forPrimaryKey: id) {
+            return obj.isTimerStarted
+        }
+        return false
     }
 
 // MARK: - chips manager

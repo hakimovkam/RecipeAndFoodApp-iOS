@@ -14,7 +14,10 @@ protocol TimerViewProtocol: AnyObject {
 
 protocol TimerViewPresenterProtocol: AnyObject {
     func backButtonDidPressed()
-    func getRecipeById(id: Int)
+    func getRecipe(id: Int)
+    func getTimerStatus() -> Bool
+    func updateTimerStatus(timerStatus: Bool)
+
     var id: Int { get }
     var recipe: DetailRecipe? { get set }
 }
@@ -31,14 +34,24 @@ final class TimerPresenter: TimerViewPresenterProtocol {
     var recipe: DetailRecipe?
 
     required init(router: RouterProtocol, id: Int) {
-        self.id = id
         self.router = router
-  
-        getRecipeById(id: id)
+        self.id = id
+
+        getRecipe(id: id)
     }
 
-    func getRecipeById(id: Int) {
+    func getRecipe(id: Int) {
         recipe = realmManager.getRecipeByIdFromRealm(id: id)
+    }
+
+    func getTimerStatus() -> Bool {
+        guard let id = recipe?.id else { return false }
+        return realmManager.getTimerStatus(id: id)
+    }
+
+    func updateTimerStatus(timerStatus: Bool) {
+        guard let id = recipe?.id else { return }
+        realmManager.updateTimerStatus(id: id, timerStatus: timerStatus)
     }
 
     func backButtonDidPressed() {
